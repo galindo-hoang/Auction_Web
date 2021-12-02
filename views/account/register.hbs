@@ -1,0 +1,87 @@
+{{#section 'header'}}
+    <link rel="stylesheet" href="public/register.css">
+{{/section}}
+
+<form id="formRegister" method="post">
+    <div class="body-register">
+        <div class="container-register">
+            <div class="content-register">
+                <div class="title">
+                    <h1>
+                        Sign up
+                    </h1>
+                </div>
+                <div class="container-information">
+                    <div>
+                        <div class="grid">
+                            <label for="username">Username</label>
+                        </span>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control input-sm" id="username" type="text" name="username" autofocus>
+                        </div>
+
+                        <div class="grid">
+                            <label for="password">Password</label>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control input-sm" id="password" type="password" name="password">
+                        </div>
+
+                        <div class="grid">
+                            <label for="password">Confirm Password</label>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control input-sm" id="Conpassword" type="password" name="ConPassword">
+                        </div>
+
+
+                        <div class="grid"></div>
+
+                        <div class="btn-register">
+                            <input class="text-register" type="submit" value="Register">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid container-forgot">
+                    <a href="/">
+                        <div class="content-forgot">
+                            Forgot password?
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+{{#section 'footer'}}
+    <script>
+        $('#formRegister').on('submit',function (e){
+            e.preventDefault();
+
+            const username = $('#username').val();
+            if(username.length === 0 ){
+                alert('Email invalid!');
+                return;
+            }
+
+            const pass = $('#password').val();
+            const conpass = $('#Conpassword').val();
+            if(pass !== conpass){
+                alert('Confirm your password');
+                return;
+            }
+            $.getJSON(`/register/check?username=${username}`,function (data){
+                if(data === true){
+                    $('#formRegister').off('submit').submit();
+                }else{
+                    alert('Username exists');
+                }
+            });
+
+
+        });
+    </script>
+{{/section}}

@@ -1,0 +1,58 @@
+.logo{
+    width: 60px;
+    height: 60px;
+}
+.navbar-logo{
+}
+
+.back-ground{
+    text-align: center;
+    color: #fff;
+    background-image: url(./imgs/background/background.png);
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center center;
+    background-size: cover;
+}
+
+
+.card-layout{
+    margin: auto 20px;
+}
+
+.justify-content-between{
+    margin: auto 50px;
+}
+
+.carousel-control-prev-icon {
+    background-image: url(public/imgs/detail.png);
+    width: 32px;
+    height: 32px;
+}
+.carousel-control-next-icon {
+    background-image: url(public/imgs/detail.png);
+    width: 32px;
+    height: 32px;
+}
+
+.row{
+    padding-left: 0;
+}
+
+.current_price{
+    display: flex;
+    justify-content: left;
+}
+
+.container-information{
+    display: flex;
+    justify-content: center;
+}
+
+.information{
+    width: 700px;
+}
+
+a{
+    text-decoration: none !important;
+}

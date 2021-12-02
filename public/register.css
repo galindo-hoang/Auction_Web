@@ -1,0 +1,59 @@
+
+.body-register{
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-register{
+    padding: 48px;
+    border-radius: 15px;
+    border: 2px solid darkgrey;
+}
+
+.title{
+    font-size: 30px;
+}
+
+.form-group{
+    width: 380px;
+}
+
+.text-register{
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2FDD92;
+    color: black;
+    border-radius: 30px;
+
+}
+
+.grid{
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    align-items: end;
+    position: relative;
+}
+
+label{
+    margin: 30px 0 0;
+}
+
+.content-forgot{
+    color: black;
+    font-size: 12px;
+}
+
+.container-forgot{
+    align-items: center;
+    justify-content: center;
+}
+
+input[type=submit]{
+    width: 380px;
+    border: 2px gray solid;
+}

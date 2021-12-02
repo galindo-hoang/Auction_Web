@@ -1,0 +1,77 @@
+{{#section 'header'}}
+    <link rel="stylesheet" href="public/register.css">
+{{/section}}
+
+<form id="formLogin" method="post">
+    <div class="body-register">
+        <div class="container-register">
+            <div class="content-register">
+                <div class="title">
+                    <h1>
+                        Login
+                    </h1>
+                </div>
+                <div class="container-information">
+                    <div>
+                        <div class="grid">
+                            <label for="username">Username</label>
+                            <span>
+                            Need an account?
+                            <a href="/register">
+                                sign up
+                            </a>
+                        </span>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control input-sm" id="username" type="text" name="username" autofocus>
+                        </div>
+
+                        <div class="grid">
+                            <label for="password">Password</label>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control input-sm" id="password" type="password" name="password">
+                        </div>
+
+                        <div class="grid"></div>
+
+                        <div class="btn-register">
+                            <input class="text-register" type="submit" value="Register">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid container-forgot">
+                    <a href="/">
+                        <div class="content-forgot">
+                            Forgot password?
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+{{#section 'footer'}}
+    <script>
+        $('#formLogin').on('submit',function (e){
+            e.preventDefault();
+
+            const username = $('#username').val();
+            if(username.length === 0 ){
+                alert('Username invalid!');
+                return;
+            }
+            $.getJSON(`/login/check?username=${username}&password=${$('#password').val()}`,function (data){
+                if(data === true){
+                    $('#formLogin').off('submit').submit();
+                }else{
+                    alert('Username not exists');
+                }
+            });
+
+
+        });
+    </script>
+{{/section}}
