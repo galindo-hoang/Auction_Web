@@ -63,7 +63,7 @@
                 alert('Username invalid!');
                 return;
             }
-            $.getJSON(`/login/check?username=${username}&password=${$('#password').val()}`,function (data){
+            $.getJSON(`/account/login/check?username=${username}&password=${$('#password').val()}`,function (data){
                 if(data === true){
                     $('#formLogin').off('submit').submit();
                 }else{

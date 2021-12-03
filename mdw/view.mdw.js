@@ -1,8 +1,8 @@
 import {engine} from "express-handlebars";
 import hbs_sections from "express-handlebars-sections";
 
-export default function (app){
 
+export default function (app){
     app.engine('hbs',engine({
         defaultLayout:'main.hbs',
         helpers:{

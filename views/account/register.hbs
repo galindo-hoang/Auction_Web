@@ -73,7 +73,7 @@
                 alert('Confirm your password');
                 return;
             }
-            $.getJSON(`/register/check?username=${username}`,function (data){
+            $.getJSON(`/account/register/check?username=${username}`,function (data){
                 if(data === true){
                     $('#formRegister').off('submit').submit();
                 }else{

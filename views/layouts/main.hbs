@@ -10,71 +10,130 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand navbar-logo" href="/"><img class="logo" src="/public/imgs/logo/logo.png"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarSupportedContent">
-                <ul class="navbar-nav mb-2 mb-lg-0 d-flex justify-content-between">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Smart Phone
+            <ul class="navbar-nav mb-2 mb-lg-0 text-center">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                        Điện tử</b>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/account/profile">
+                            Action
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Laptop
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/signout">
+                            Another action
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-                <div>
-                    {{#if IdAuth}}
-                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-                            Hi, <b>{{IdAuth}}!</b>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/account/profile">
+                            Action
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/account/profile">
-                                <i class="fa fa-user" aria-hidden="true"></i>
-                                Profile
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/signout">
-                                <i class="fa fa-sign-out" aria-hidden="true"></i>
-                                Sign Out
-                            </a>
-                        </div>
-                    {{else}}
-                        <a href="register" class="text-dark">
-                            Register
-                        </a>/
-                        <a href="login" class="text-dark">
-                            Login
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/signout">
+                            Another action
                         </a>
-                    {{/if}}
-                </div>
-    <!--            <a href="/"><i class="btn btn-grey fas fa-2x fa-user-circle  "></i></a>-->
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                        Gia dụng
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/account/profile">
+                            Action
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/signout">
+                            Another action
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/account/profile">
+                            Action
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/signout">
+                            Another action
+                        </a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                        Làm đẹp
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/account/profile">
+                            Action
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/signout">
+                            Another action
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/account/profile">
+                            Action
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/signout">
+                            Another action
+                        </a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                        Thời trang
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/account/profile">
+                            Action
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/signout">
+                            Another action
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/account/profile">
+                            Action
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/signout">
+                            Another action
+                        </a>
+                    </div>
+                </li>
+            </ul>
+            <form class="d-flex">
+                <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            <div>
+                {{#if IdAuth}}
+                    <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                        Hi, <b>{{IdAuth}}!</b>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/account/profile">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            Profile
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/signout">
+                            <i class="fa fa-sign-out" aria-hidden="true"></i>
+                            Sign Out
+                        </a>
+                    </div>
+                {{else}}
+                    <a href="/account/register" class="text-dark">
+                        Register
+                    </a>/
+                    <a href="/account/login" class="text-dark">
+                        Login
+                    </a>
+                {{/if}}
             </div>
         </div>
     </nav>

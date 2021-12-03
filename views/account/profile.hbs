@@ -1,0 +1,66 @@
+<div class="container-fluid mt-4">
+    <div class="row">
+
+        <div class="col-sm-3 ml-5">
+            <div class="card">
+                <div class="card-header">
+                    Quản lý hồ sơ
+                </div>
+                <div class="card-body">
+                    <div class="list-group">
+                        <a href="javascript:;" class="list-group-item list-group-item-action">Thông tin tài khoản</a>
+                        <a href="/account/purchased" class="list-group-item list-group-item-action">Sản phẩm đã thắng</a>
+                        <a href="/account/tracking" class="list-group-item list-group-item-action">Theo dõi sản phẩm</a>
+                        <a href="/account/favorite" class="list-group-item list-group-item-action">Sản phẩm yêu thích</a>
+                        <a href="/account/review" class="list-group-item list-group-item-action">Đánh giá về tôi</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header">
+                    Thông tin cá nhân
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="idname" class="form-label">Họ tên</label>
+                            <input type="text" class="form-control" id="idname" name="name" value="{{#if user}}{{user.username}}{{/if}}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="CurPassword" class="form-label">Mật khẩu hiện tại</label>
+                            <input type="password" class="form-control" id="CurPassword" name="CurPassword">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="NewPassword" class="form-label">Mật khẩu mới</label>
+                            <input type="password" class="form-control" id="NewPassword" name="NewPassword">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="ConPassword" class="form-label">Xác thực mật khẩu</label>
+                            <input type="password" class="form-control" id="ConPassword" name="ConPassword">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <div class="card">
+                <div class="card-header">
+                    Email
+                </div>
+                <div class="card-body">
+                    <div class="list-group">
+                        <a href="#" class="list-group-item list-group-item-action">abc@gmail.com</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -8,7 +8,8 @@ const entity = {
         return knex.table('users').where('username',username);
     },
     findByID: async function (ID) {
-        return (await knex.table('users').where('id', ID))[0];
+        if(ID !== undefined) return (await knex.table('users').where('id', ID))[0];
+        return undefined;
     }
 }
 
