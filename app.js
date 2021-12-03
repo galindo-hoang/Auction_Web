@@ -4,10 +4,7 @@ import bcrypt from 'bcryptjs';
 import local_mdw from "./mdw/local.mdw.js";
 import view_mdw from "./mdw/view.mdw.js";
 
-
-
 const app = express();
-
 
 app.use('/public', express.static('public'));
 // to get data from user (app.post)
@@ -16,19 +13,13 @@ app.use(express.urlencoded({extended:true}));
 local_mdw(app);
 view_mdw(app);
 
-
-
-
-
 app.get('/',async (req, res) => {
     res.render('home');
 })
 
-
 app.get('/views',(req,res)=>{
     res.render('product/index');
 })
-
 
 app.get('/detail',(req,res)=>{
     res.render('product/detail');
@@ -37,7 +28,6 @@ app.get('/detail',(req,res)=>{
 app.get("/register", (req,res)=>{
     res.render('account/register');
 })
-
 
 app.post("/register", (req,res)=>{
     var salt = bcrypt.genSaltSync(10);
@@ -76,8 +66,6 @@ app.get('/login/check',async (req, res) => {
     else return res.json(bcrypt.compareSync(req.query.password,data[0].password));
 });
 
-
-
 app.get("/signout",(req,res)=>{
     req.session.destroy(function (err) {
         res.redirect("/");
@@ -87,6 +75,3 @@ app.get("/signout",(req,res)=>{
 app.listen(300,()=>{
     console.log(`Example app listening at http://localhost:${300}`);
 })
-
-
-

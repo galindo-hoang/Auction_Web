@@ -2,7 +2,6 @@ import cookieParser from "cookie-parser";
 import session from "express-session";
 import Users from '../models/user.js';
 
-
 const oneDay = 1000 * 60 * 60 * 24;
 
 export default function (app){
@@ -21,6 +20,4 @@ export default function (app){
         }
         next();
     });
-
 }
-
