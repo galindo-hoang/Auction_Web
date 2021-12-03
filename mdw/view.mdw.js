@@ -4,7 +4,8 @@ import hbs_sections from "express-handlebars-sections";
 
 export default function (app){
     app.engine('hbs',engine({
-        defaultLayout:'main.hbs',
+        defaultLayout:'main',
+        extname: 'hbs',
         helpers:{
             section: hbs_sections()
         }
