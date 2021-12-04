@@ -1,0 +1,50 @@
+{{#section 'header'}}
+    <link rel="stylesheet" href="/public/register.css">
+{{/section}}
+
+<form id="formVerify" method="post">
+    <div class="body-register">
+        <div class="container-register">
+            <div class="content-register">
+                <div class="title">
+                    <h1>
+                        Login
+                    </h1>
+                </div>
+                <div>
+                    <div class="text-center">
+                        <div>Chúng tôi đã gửi mã OTP đến mail</div>
+                        <div><strong>{{email}}</strong></div>
+                    </div>
+                    </div>
+                        <div class="grid">
+                            <label for="otp">Mã OTP:</label>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control input-sm" id="otp" type="text" name="otp" autofocus>
+                        </div>
+                        <div style="height: 20px;"></div>
+                        <div class="btn-register">
+                            <input class="text-register" type="submit" id="Submit" value="Submit">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+{{#section 'footer'}}
+    <script>
+        $('#formVerify').on('submit', function(e){
+            e.preventDefault();
+            const otp = $('#otp').val();
+            $.getJSON(`/account/register/check/verify/submit?otp=${otp}`,function (data){
+                if(data === true){
+                    console.log("hello");
+                    $('#formVerify').off('submit').submit();
+                }else alert('OTP invalid');
+            })
+        })
+    </script>
+{{/section}}

@@ -14,12 +14,22 @@
                 <div class="container-information">
                     <div>
                         <div class="grid">
-                            <label for="username">Username</label>
+                            <label for="email">Email</label>
                         </span>
                         </div>
                         <div class="form-group">
-                            <input class="form-control input-sm" id="username" type="text" name="username" autofocus>
+                            <input class="form-control input-sm" id="email" type="email" name="email" autofocus>
                         </div>
+
+
+                        <div class="grid">
+                            <label for="name">Name</label>
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control input-sm" id="name" type="text" name="name">
+                        </div>
+
 
                         <div class="grid">
                             <label for="password">Password</label>
@@ -35,15 +45,16 @@
                             <input class="form-control input-sm" id="Conpassword" type="password" name="ConPassword">
                         </div>
 
+                        <div class="grid"></div>
+                        <div class="g-recaptcha" data-sitekey="6Le6CncdAAAAAGRBfTfdUzVKeTguRz1Q9lojjCfh"></div>
+
 
                         <div class="grid"></div>
-
                         <div class="btn-register">
                             <input class="text-register" type="submit" value="Register">
                         </div>
                     </div>
                 </div>
-
                 <div class="grid container-forgot">
                     <a href="/">
                         <div class="content-forgot">
@@ -57,13 +68,19 @@
 </form>
 
 {{#section 'footer'}}
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script>
         $('#formRegister').on('submit',function (e){
             e.preventDefault();
 
-            const username = $('#username').val();
-            if(username.length === 0 ){
+            const formData = new FormData(document.getElementById("formRegister"))
+            const captchaResponse = formData.get("g-recaptcha-response");
+
+            console.log([...formData]);
+            const email = $('#email').val();
+            if(email.length === 0 ){
                 alert('Email invalid!');
+                location.reload();
                 return;
             }
 
@@ -71,13 +88,18 @@
             const conpass = $('#Conpassword').val();
             if(pass !== conpass){
                 alert('Confirm your password');
+                location.reload();
                 return;
             }
-            $.getJSON(`/account/register/check?username=${username}`,function (data){
+            $.getJSON(`/account/register/check?email=${email}&recaptcha=`+encodeURI(captchaResponse),function (data){
                 if(data === true){
                     $('#formRegister').off('submit').submit();
+                }else if(data === 1){
+                    alert('Please ReCaptcha');
+                    location.reload();
                 }else{
-                    alert('Username exists');
+                    alert('Email exists');
+                    location.reload();
                 }
             });
 

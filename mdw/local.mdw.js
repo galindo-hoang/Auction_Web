@@ -16,7 +16,7 @@ export default function (app){
 
     app.use(async function (req, res, next) {
         if (req.session.isAuth) {
-            res.locals.IdAuth = (await Users.findByID(req.session.isAuth)).username;
+            res.locals.IdAuth = (await Users.findByID(req.session.isAuth)).email;
         }
         next();
     });

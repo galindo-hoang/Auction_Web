@@ -4,8 +4,8 @@ const entity = {
     addUser: function(object){
         knex.table('users').insert(object).then(()=>{});
     },
-    findByUserName: function (username){
-        return knex.table('users').where('username',username);
+    findByEmail: function (email){
+        return knex.table('users').where('email',email);
     },
     findByID: async function (ID) {
         if(ID !== undefined) return (await knex.table('users').where('id', ID))[0];

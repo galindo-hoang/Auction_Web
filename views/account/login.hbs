@@ -14,7 +14,7 @@
                 <div class="container-information">
                     <div>
                         <div class="grid">
-                            <label for="username">Username</label>
+                            <label for="email">Email</label>
                             <span>
                             Need an account?
                             <a href="/register">
@@ -23,7 +23,7 @@
                         </span>
                         </div>
                         <div class="form-group">
-                            <input class="form-control input-sm" id="username" type="text" name="username" autofocus>
+                            <input class="form-control input-sm" id="email" type="text" name="email" autofocus>
                         </div>
 
                         <div class="grid">
@@ -58,16 +58,16 @@
         $('#formLogin').on('submit',function (e){
             e.preventDefault();
 
-            const username = $('#username').val();
-            if(username.length === 0 ){
-                alert('Username invalid!');
+            const email = $('#email').val();
+            if(email.length === 0 ){
+                alert('email invalid!');
                 return;
             }
-            $.getJSON(`/account/login/check?username=${username}&password=${$('#password').val()}`,function (data){
+            $.getJSON(`/account/login/check?email=${email}&password=${$('#password').val()}`,function (data){
                 if(data === true){
                     $('#formLogin').off('submit').submit();
                 }else{
-                    alert('Username not exists');
+                    alert('email not exists');
                 }
             });
 
