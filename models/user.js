@@ -5,10 +5,10 @@ const entity = {
         knex.table('users').insert(object).then(()=>{});
     },
     findByEmail: function (email){
-        return knex.table('users').where('email',email);
+        return knex.table('users').where('UserEmail',email);
     },
     findByID: async function (ID) {
-        if(ID !== undefined) return (await knex.table('users').where('id', ID))[0];
+        if(ID !== undefined) return (await knex.table('users').where('UserID', ID))[0];
         return undefined;
     }
 }
