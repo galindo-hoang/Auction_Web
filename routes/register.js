@@ -6,12 +6,10 @@ import Users from '../models/user.js';
 
 const router = express.Router();
 
-
 let object = {
     admin: false,
     seller: false
 }
-
 
 const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -49,7 +47,6 @@ router.post("/account/register", async (req, res) => {
     res.redirect('/account/register/check/verify');
 });
 
-
 router.get("/account/register/check",async (req, res) => {
     const captcha = await fetch(`https://www.google.com/recaptcha/api/siteverify?secret=6Le6CncdAAAAAOzSwB7zdJszhDbO9SjFxpQ11Fnf&response=${req.query.recaptcha}`,{
         method: "POST"
@@ -60,7 +57,6 @@ router.get("/account/register/check",async (req, res) => {
         else res.json(false);
     }else res.json(1)
 });
-
 
 router.get("/account/register/check/verify", (req, res) => {
     res.render("account/verify", {email: object.email});
@@ -76,6 +72,5 @@ router.post("/account/register/check/verify",(req,res)=>{
     object = {}
     res.redirect('/account/login');
 })
-
 
 export default router;

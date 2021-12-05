@@ -56,3 +56,11 @@
 a{
     text-decoration: none !important;
 }
+
+a.ProTittle{
+    color: black;
+}
+
+a.ProTittle:hover{
+    color: blue;
+}
