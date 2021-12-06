@@ -1,26 +1,29 @@
-import cookieParser from "cookie-parser";
 import session from "express-session";
 import Users from '../models/user.js';
 import Category from "../models/category.js";
 import CategoriesDetail from '../models/categories_detail.js';
+import fnMySQLStore from 'express-mysql-session';
+import {ConnectInfor} from "../utils/db.js";
 
-
-const oneDay = 1000 * 60 * 60 * 24;
 
 export default function (app){
 
-    app.use(cookieParser());
+    const MySQLStore = fnMySQLStore(session);
+    const SessionStore = new MySQLStore(ConnectInfor);
+    app.set('trust proxy', 1) // trust first proxy
     app.use(session({
-        secret: "qwee",
-        saveUninitialized:false,
-        cookie: { maxAge: oneDay },
+        secret: "secret",
+        saveUninitialized: true,
+        store: SessionStore,
         resave: false
     }));
 
     app.use(async function (req, res, next) {
-        if (req.session.isAuth) {
-            res.locals.IdAuth = (await Users.findByID(req.session.isAuth)).email;
+        if(typeof (req.session.isLogin) === 'undefined'){
+            req.session.isLogin = false;
         }
+        res.locals.account = req.session.account;
+        res.locals.isLogin = req.session.isLogin;
         next();
     });
 
@@ -37,7 +40,6 @@ export default function (app){
             model.CatID = Cate[i].CatID;
         }
         res.locals.LclCate = data;
-        console.log(res.locals.LclCate);
         next();
     });
 }
