@@ -20,6 +20,7 @@
     "express-handlebars-sections": "^1.0.1",
     "express-session": "^1.17.2",
     "knex": "^0.95.14",
+    "moment": "^2.29.1",
     "mysql2": "^2.3.3",
     "node-fetch": "^3.1.0",
     "nodemailer": "^6.7.2"

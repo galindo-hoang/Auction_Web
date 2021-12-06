@@ -20,7 +20,9 @@ app.use('/',register_route);
 
 
 app.get('/',async (req, res) => {
-    res.render('home');
+    const topPrice = await viewByProduct.findTop5Price();
+    const topExp = await viewByProduct.findTop5Exp();
+    res.render('home',{price:topPrice,expire:topExp});
 });
 
 app.get('/views/byCat/:id',async (req,res)=>{

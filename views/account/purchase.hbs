@@ -11,21 +11,21 @@
                 <table class="table table-hover">
                     <thead>
                     <tr>
-                        <th scope="col" class="text-center">Mã đơn hàng</th>
-                        <th scope="col" class="text-center">Ngày tháng</th>
+                        <th scope="col" class="text-center"></th>
                         <th scope="col" class="text-center">Sản phẩm</th>
                         <th scope="col" class="text-center">Tổng tiền</th>
-                        <th scope="col" class="text-center">Trạng thái thanh toán</th>
+                        <th scope="col" class="text-center">Ngày thắng</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="align-middle">
-                        <th scope="row" class="text-center"><a href="#">01234</a></th>
-                        <td>3/12/2021</td>
-                        <td>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</td>
-                        <td class="text-center">1.000.000 đ</td>
-                        <td class="text-center"><i class="fas fa-hourglass-start"></i></td>
-                    </tr>
+                    {{#each products}}
+                        <tr class="align-middle">
+                            <th scope="row" class="text-center"><img src="/public/imgs/products/{{this.ProID}}/account.jpg"></th>
+                            <td>{{this.TinyDes}}</td>
+                            <td class="text-center text-danger">{{this.CurPrice}}</td>
+                            <td class="text-center">{{this.EndDate}}</td>
+                        </tr>
+                    {{/each}}
 
 
                     <tr class="align-middle">

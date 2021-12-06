@@ -10,15 +10,25 @@
                 </h4>
                 <table class="table table-hover">
                     <tbody>
-                    <tr class="align-middle">
-                        <th scope="row" class="text-center"><img src="/public/imgs/detail.png"></th>
-                        <td>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</td>
-                        <td>
-                            <div>Nguyen Van A</div>
-                            <div>3/12/2001</div>
-                        </td>
-                        <td><i class="far fa-trash-alt"></i></td>
-                    </tr>
+                    {{#each products}}
+                        <tr class="align-middle">
+                            <th scope="row" class="text-center"><img src="/public/imgs/products/{{this.ProID}}/account.jpg"></th>
+                            <td>{{this.TinyDes}}</td>
+                            <td>
+                                <div>{{this.CurPrice}}</div>
+                                {{#if this.Status}}
+                                    <div>
+                                        <strong>Đang đấu giá</strong>
+                                    </div>
+                                {{else}}
+                                    <div>
+                                        <strong>Hết đấu giá</strong>
+                                    </div>
+                                {{/if}}
+                            </td>
+                            <td><i class="far fa-trash-alt"></i></td>
+                        </tr>
+                    {{/each}}
 
                     <tr class="align-middle">
                         <th scope="row" class="text-center"><img src="/public/imgs/detail.png"></th>

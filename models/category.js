@@ -1,6 +1,9 @@
 import knex from "../utils/db.js";
 
 export default {
+    findAll(){
+        return knex('categories').select('*');
+    },
     async countByCatId(ID) {
         const list = await knex.raw(`select COUNT(ProID) AS ProductCount
                                     FROM products p, categories_detail cd, categories c

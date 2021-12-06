@@ -10,7 +10,7 @@
                     <form>
                         <div class="mb-3">
                             <label for="idname" class="form-label">Họ tên</label>
-                            <input type="text" class="form-control" id="idname" name="name" value="{{#if user}}{{user.email}}{{/if}}">
+                            <input type="text" class="form-control" id="idname" name="name" value="{{users.UserName}}">
                         </div>
                         <div class="mb-3">
                             <label for="CurPassword" class="form-label">Mật khẩu hiện tại</label>
@@ -39,7 +39,7 @@
                 </div>
                 <div class="card-body">
                     <div class="list-group">
-                        <a href="#" class="list-group-item list-group-item-action">abc@gmail.com</a>
+                        <a href="#" class="list-group-item list-group-item-action">{{users.UserEmail}}</a>
                     </div>
                 </div>
             </div>

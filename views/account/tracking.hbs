@@ -19,13 +19,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="align-middle">
-                        <th scope="row" class="text-center"><a href="#">01234</a></th>
-                        <td>3/12/2021</td>
-                        <td>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</td>
-                        <td class="text-center">1.000.000 đ</td>
-                        <td class="text-center">Còn 234859 giây</td>
-                    </tr>
+                    {{#each products_history}}
+                        <tr class="align-middle">
+                            <th scope="row" class="text-center"><a href="#">{{this.BidID}}</a></th>
+                            <td>{{this.BidDate}}</td>
+                            <td>{{this.TinyDes}}</td>
+                            <td class="text-center">{{this.Price}}</td>
+                            <td class="text-center">{{this.EndDate}}</td>
+                        </tr>
+
+                    {{/each}}
 
 
                     <tr class="align-middle">

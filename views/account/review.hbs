@@ -17,50 +17,58 @@
                     </tr>
                     </thead>
                     <tbody>
+                    {{#each rating_list}}
                         <tr class="align-middle">
-                            <th scope="row" class="text-center"><i class="fas fa-thumbs-up" style="color: blue"></i></th>
-                            <td>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</td>
+                            <th scope="row" class="text-center">
+                                {{#if this.Rate}}
+                                    <i class="fas fa-thumbs-up" style="color: blue"></i>
+                                {{else}}
+                                    <i class="fas fa-thumbs-down" style="color: red"></i>
+                                {{/if}}
+                            </th>
+                            <td>{{this.Comment}}</td>
                             <td class="text-center">
                                 <div>Nguyen Van A</div>
                                 <div>3/12/2001</div>
                             </td>
                         </tr>
+                    {{/each}}
 
-                        <tr class="align-middle">
-                            <th scope="row" class="text-center"><i class="fas fa-thumbs-up" style="color: blue"></i></th>
-                            <td>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</td>
-                            <td class="text-center">
-                                <div>Nguyen Van A</div>
-                                <div>3/12/2001</div>
-                            </td>
-                        </tr>
+                    <tr class="align-middle">
+                        <th scope="row" class="text-center"><i class="fas fa-thumbs-up" style="color: blue"></i></th>
+                        <td>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</td>
+                        <td class="text-center">
+                            <div>Nguyen Van A</div>
+                            <div>3/12/2001</div>
+                        </td>
+                    </tr>
 
-                        <tr class="align-middle">
-                            <th scope="row" class="text-center"><i class="fas fa-thumbs-down" style="color: red"></i></th>
-                            <td>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</td>
-                            <td class="text-center">
-                                <div>Nguyen Van A</div>
-                                <div>3/12/2001</div>
-                            </td>
-                        </tr>
+                    <tr class="align-middle">
+                        <th scope="row" class="text-center"></th>
+                        <td>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</td>
+                        <td class="text-center">
+                            <div>Nguyen Van A</div>
+                            <div>3/12/2001</div>
+                        </td>
+                    </tr>
 
-                        <tr class="align-middle">
-                            <th scope="row" class="text-center"><i class="fas fa-thumbs-down" style="color: red"></i></th>
-                            <td>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</td>
-                            <td class="text-center">
-                                <div>Nguyen Van A</div>
-                                <div>3/12/2001</div>
-                            </td>
-                        </tr>
+                    <tr class="align-middle">
+                        <th scope="row" class="text-center"><i class="fas fa-thumbs-down" style="color: red"></i></th>
+                        <td>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</td>
+                        <td class="text-center">
+                            <div>Nguyen Van A</div>
+                            <div>3/12/2001</div>
+                        </td>
+                    </tr>
 
-                        <tr class="align-middle">
-                            <th scope="row" class="text-center"><i class="fas fa-thumbs-up" style="color: blue"></i></th>
-                            <td>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</td>
-                            <td class="text-center">
-                                <div>Nguyen Van A</div>
-                                <div>3/12/2001</div>
-                            </td>
-                        </tr>
+                    <tr class="align-middle">
+                        <th scope="row" class="text-center"><i class="fas fa-thumbs-up" style="color: blue"></i></th>
+                        <td>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</td>
+                        <td class="text-center">
+                            <div>Nguyen Van A</div>
+                            <div>3/12/2001</div>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>

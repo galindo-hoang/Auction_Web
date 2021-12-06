@@ -2,76 +2,47 @@
     <h4 class="text-center mb-3">
         Top 5 sản phẩm gần kết thúc
     </h4>
+
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-5">
-        <div class="col">
-            <div class="card">
-                <a href="#"><img src="/public/assets/img/portfolio/1.jpg" class="card-img-top" alt="..."></a>
-                <div class="card-body text-center">
-                    <h5 class="card-title"><a href="#" class="ProTittle">Card title</a></h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="/detail" class="btn btn-sm btn-outline-primary">
-                        <i class="fa fa-magnifying-glass" aria-hidden="true"></i>
-                        Xem chi tiết
-                    </a>
+        {{#each expire}}
+            <div class="col">
+                <div class="card h-100">
+                    <a href="#"><img src="/public/imgs/products/{{this.ProID}}/thumb.jpg" class="card-img-top" alt={{this.ProName}}></a>
+                    <div class="card-body text-center">
+                        <h5 class="card-title"><a href="" class="ProTittle">{{this.ProName}}</a></h5>
+                        <p class="mb-0 text-success">{{format_number this.CurPrice}}</p>
+                        <p class="mb-0 text-danger">{{format_number this.BuyNowPrice}}</p>
+                        <p class="mb-0">{{format_date this.StartDate}}</p>
+                        <p class="mb-0">{{this.remaining}}</p>
+                        <p class="card-text">{{this.TinyDes}}</p>
+                    </div>
                 </div>
             </div>
-        </div>
+        {{/each}}
+    </div>
+</div>
 
-        <div class="col">
-            <div class="card">
-                <a href="#"><img src="/public/assets/img/portfolio/1.jpg" class="card-img-top" alt="..."></a>
-                <div class="card-body text-center">
-                    <h5 class="card-title"><a href="#" class="ProTittle">Card title</a></h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="/detail" class="btn btn-sm btn-outline-primary">
-                        <i class="fa fa-magnifying-glass" aria-hidden="true"></i>
-                        Xem chi tiết
-                    </a>
-                </div>
-            </div>
-        </div>
+<div class="container mt-5 mb-5">
+    <h4 class="text-center mb-3">
+        Top 5 sản phẩm có giá cao nhất
+    </h4>
 
-        <div class="col">
-            <div class="card">
-                <a href="#"><img src="/public/assets/img/portfolio/1.jpg" class="card-img-top" alt="..."></a>
-                <div class="card-body text-center">
-                    <h5 class="card-title"><a href="#" class="ProTittle">Card title</a></h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="/detail" class="btn btn-sm btn-outline-primary">
-                        <i class="fa fa-magnifying-glass" aria-hidden="true"></i>
-                        Xem chi tiết
-                    </a>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-5">
+        {{#each price}}
+            <div class="col">
+                <div class="card h-100">
+                    <a href="#"><img src="/public/imgs/products/{{this.ProID}}/thumb.jpg" class="card-img-top" alt={{this.ProName}}></a>
+                    <div class="card-body text-center">
+                        <h5 class="card-title"><a href="/products" class="ProTittle">{{this.ProName}}</a></h5>
+                        <p class="mb-0 text-success">{{format_number this.CurPrice}}</p>
+                        <p class="mb-0 text-danger">{{format_number this.BuyNowPrice}}</p>
+                        <p class="mb-0">{{format_date this.StartDate}}</p>
+                        <p class="mb-0">{{this.remaining}}</p>
+                        <p class="card-text">{{this.TinyDes}}</p>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div class="col">
-            <div class="card">
-                <a href="#"><img src="/public/assets/img/portfolio/1.jpg" class="card-img-top" alt="..."></a>
-                <div class="card-body text-center">
-                    <h5 class="card-title"><a href="#" class="ProTittle">Card title</a></h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="/detail" class="btn btn-sm btn-outline-primary">
-                        <i class="fa fa-magnifying-glass" aria-hidden="true"></i>
-                        Xem chi tiết
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card">
-                <a href="#"><img src="/public/assets/img/portfolio/1.jpg" class="card-img-top" alt="..."></a>
-                <div class="card-body text-center">
-                    <h5 class="card-title"><a href="#" class="ProTittle">Card title</a></h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="/detail" class="btn btn-sm btn-outline-primary">
-                        <i class="fa fa-magnifying-glass" aria-hidden="true"></i>
-                        Xem chi tiết
-                    </a>
-                </div>
-            </div>
-        </div>
+        {{/each}}
     </div>
 </div>
 
@@ -87,7 +58,7 @@
                 <div class="card-body text-center">
                     <h5 class="card-title"><a href="#" class="ProTittle">Card title</a></h5>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="/detail" class="btn btn-sm btn-outline-primary">
+                    <a href="#" class="btn btn-sm btn-outline-primary">
                         <i class="fa fa-magnifying-glass" aria-hidden="true"></i>
                         Xem chi tiết
                     </a>
@@ -101,7 +72,7 @@
                 <div class="card-body text-center">
                     <h5 class="card-title"><a href="#" class="ProTittle">Card title</a></h5>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="/detail" class="btn btn-sm btn-outline-primary">
+                    <a href="#" class="btn btn-sm btn-outline-primary">
                         <i class="fa fa-magnifying-glass" aria-hidden="true"></i>
                         Xem chi tiết
                     </a>
@@ -115,7 +86,7 @@
                 <div class="card-body text-center">
                     <h5 class="card-title"><a href="#" class="ProTittle">Card title</a></h5>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="/detail" class="btn btn-sm btn-outline-primary">
+                    <a href="#" class="btn btn-sm btn-outline-primary">
                         <i class="fa fa-magnifying-glass" aria-hidden="true"></i>
                         Xem chi tiết
                     </a>
@@ -129,7 +100,7 @@
                 <div class="card-body text-center">
                     <h5 class="card-title"><a href="#" class="ProTittle">Card title</a></h5>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="/detail" class="btn btn-sm btn-outline-primary">
+                    <a href="#" class="btn btn-sm btn-outline-primary">
                         <i class="fa fa-magnifying-glass" aria-hidden="true"></i>
                         Xem chi tiết
                     </a>
@@ -143,85 +114,7 @@
                 <div class="card-body text-center">
                     <h5 class="card-title"><a href="#" class="ProTittle">Card title</a></h5>
                     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="/detail" class="btn btn-sm btn-outline-primary">
-                        <i class="fa fa-magnifying-glass" aria-hidden="true"></i>
-                        Xem chi tiết
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="container mt-5 mb-5">
-    <h4 class="text-center mb-3">
-        Top 5 sản phẩm có giá cao nhất
-    </h4>
-
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-5">
-        <div class="col">
-            <div class="card">
-                <a href="#"><img src="/public/assets/img/portfolio/1.jpg" class="card-img-top" alt="..."></a>
-                <div class="card-body text-center">
-                    <h5 class="card-title"><a href="#" class="ProTittle">Card title</a></h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="/detail" class="btn btn-sm btn-outline-primary">
-                        <i class="fa fa-magnifying-glass" aria-hidden="true"></i>
-                        Xem chi tiết
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card">
-                <a href="#"><img src="/public/assets/img/portfolio/1.jpg" class="card-img-top" alt="..."></a>
-                <div class="card-body text-center">
-                    <h5 class="card-title"><a href="#" class="ProTittle">Card title</a></h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="/detail" class="btn btn-sm btn-outline-primary">
-                        <i class="fa fa-magnifying-glass" aria-hidden="true"></i>
-                        Xem chi tiết
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card">
-                <a href="#"><img src="/public/assets/img/portfolio/1.jpg" class="card-img-top" alt="..."></a>
-                <div class="card-body text-center">
-                    <h5 class="card-title"><a href="#" class="ProTittle">Card title</a></h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="/detail" class="btn btn-sm btn-outline-primary">
-                        <i class="fa fa-magnifying-glass" aria-hidden="true"></i>
-                        Xem chi tiết
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card">
-                <a href="#"><img src="/public/assets/img/portfolio/1.jpg" class="card-img-top" alt="..."></a>
-                <div class="card-body text-center">
-                    <h5 class="card-title"><a href="#" class="ProTittle">Card title</a></h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="/detail" class="btn btn-sm btn-outline-primary">
-                        <i class="fa fa-magnifying-glass" aria-hidden="true"></i>
-                        Xem chi tiết
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="card">
-                <a href="#"><img src="/public/assets/img/portfolio/1.jpg" class="card-img-top" alt="..."></a>
-                <div class="card-body text-center">
-                    <h5 class="card-title"><a href="#" class="ProTittle">Card title</a></h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="/detail" class="btn btn-sm btn-outline-primary">
+                    <a href="#" class="btn btn-sm btn-outline-primary">
                         <i class="fa fa-magnifying-glass" aria-hidden="true"></i>
                         Xem chi tiết
                     </a>

@@ -16,80 +16,24 @@
             <a class="navbar-brand navbar-logo" href="/"><img class="logo" src="/public/imgs/logo/logo.png"></a>
 
             <ul class="navbar-nav mb-2 mb-lg-0 text-center">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-                        Điện tử
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/views/byCatDe/1">
-                            Điện thoại
+                {{#each LclCate}}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                            {{this.CatName}}
                         </a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/views/byCatDe/2">
-                            Laptop
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/views/byCat/1">
-                            Xem tất cả
-                        </a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-                        Gia dụng
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/views/byCatDe/3">
-                            Bàn ghế
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/views/byCatDe/4">
-                            Thiết bị nhà bếp
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/views/byCat/2">
-                            Xem tất cả
-                        </a>
-                    </div>
-                </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-                        Làm đẹp
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/views/byCatDe/5">
-                            Mặt
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/views/byCatDe/6">
-                            Tóc
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/views/byCat/3">
-                            Xem tất cả
-                        </a>
-                    </div>
-                </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-                        Thời trang
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/views/byCatDe/7">
-                            Quần áo
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/views/byCatDe/8">
-                            Giày
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/views/byCat/4">
-                            Xem tất cả
-                        </a>
-                    </div>
-                </li>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            {{#each this.CDList}}
+                                <a class="dropdown-item" href="/views/byCatDe/{{this.CatDeID}}">
+                                    {{this.CatDeName}}
+                                </a>
+                                <div class="dropdown-divider"></div>
+                            {{/each}}
+                            <a class="dropdown-item" href="/views/byCat/{{this.CatID}}">
+                                Xem tất cả
+                            </a>
+                        </div>
+                    </li>
+                {{/each}}
             </ul>
             <form class="d-flex">
                 <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search">
