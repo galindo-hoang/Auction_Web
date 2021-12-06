@@ -1,0 +1,55 @@
+<div class="card mt-4 d-flex">
+    <h4 class="card-header d-flex justify-content-between">
+        {{this.CatName}}
+    </h4>
+    <div class="card-body">
+        {{#if this.empty}}
+            <h5 class="card-title">Không có dữ liệu</h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        {{else}}
+            <div class="row">
+                {{#each this.products}}
+                    <div class="col-sm-3 mb-3">
+                        <div class="card h-100">
+                            <img class="card-img-top" src="/public/assets/img/portfolio/5.jpg" alt="{{ProName}}" title="{{ProName}}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ProName}}</h5>
+                                <h5 class="card-title text-info">{{format_number CurPrice}}</h5>
+                                <p class="card-text">{{TinyDes}}</p>
+                            </div>
+                            <div class="card-footer text-center">
+                                <a href="/detail" class="btn btn-sm btn-outline-primary">
+                                    <i class="fa fa-magnifying-glass" aria-hidden="true"></i>
+                                    Xem chi tiết
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-end">
+                    <li class="page-item">
+                        <a class="page-link" href="#">Previous</a>
+                    </li>
+                    {{#each this.pageNumbers}}
+                        {{#if isCurrent}}
+                            <li class="page-item active">
+                                <a class="page-link" href="javascript:;">{{value}}</a>
+                            </li>
+                        {{else}}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{value}}">{{value}}</a>
+                            </li>
+                        {{/if}}
+                    {{/each}}
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        {{/if}}
+    </div>
+    <div class="card-footer text-muted">
+    </div>
+</div>
