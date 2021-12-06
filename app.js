@@ -6,7 +6,7 @@ import view_mdw from "./mdw/view.mdw.js";
 import register_route from "./routes/register.js";
 import viewByCategories from './models/category.js';
 import viewByProduct from './models/product.js';
-import asyncErrors from 'express-async-errors';
+
 
 const app = express();
 
@@ -88,44 +88,56 @@ app.get('/detail',(req,res)=>{
 });
 
 app.get("/account/login",(req,res)=>{
+    req.session.retUrl = req.headers.referer;
     res.render('account/login');
 });
 
 app.post("/account/login",async (req, res) => {
-    req.session.isAuth = (await Users.findByEmail(req.body.email))[0].id;
-    res.redirect('/');
+    const url = req.session.retUrl || '/';
+    res.redirect(url);
 });
 
 app.get('/account/login/check',async (req, res) => {
     const data = await Users.findByEmail(req.query.email);
     if (data.length === 0) res.json(false);
-    else return res.json(bcrypt.compareSync(req.query.password,data[0].password));
+    else {
+        if(bcrypt.compareSync(req.query.password,data[0].UserPassword)){
+            req.session.isLogin = true;
+            req.session.account = data[0];
+            delete req.session.account.UserPassword;
+            return res.json(true);
+        }
+    } return res.json(false);
 });
 
-app.get("/account/signOut",(req,res)=>{
-    req.session.destroy(function (err) {
-        res.redirect("/");
-    })
+app.post("/account/signout",(req,res)=>{
+    req.session.isLogin = false;
+    req.session.account = null;
+    const url = req.headers.referer || '/';
+    res.redirect(url);
 });
 
-app.get("/account/profile",async (req, res) => {
-    const data = await Users.findByID(req.session.isAuth);
+
+import auth from "./mdw/auth.mdw.js";
+
+app.get("/account/profile",auth,async (req, res) => {
+    const data = await Users.findByID(req.session.isLogin);
     res.render("account/profile", {user: data});
 });
 
-app.get("/account/review",(req,res)=>{
+app.get("/account/review",auth,(req,res)=>{
     res.render("account/review");
 });
 
-app.get("/account/tracking",(req,res)=>{
+app.get("/account/tracking",auth,(req,res)=>{
     res.render("account/tracking");
 });
 
-app.get("/account/favorite",(req,res)=>{
+app.get("/account/favorite",auth,(req,res)=>{
     res.render("account/favorite");
 });
 
-app.get("/account/purchased",(req,res)=>{
+app.get("/account/purchased",auth,(req,res)=>{
     res.render("account/purchase");
 });
 

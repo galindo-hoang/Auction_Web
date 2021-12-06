@@ -7,8 +7,9 @@ import Users from '../models/user.js';
 const router = express.Router();
 
 let object = {
-    admin: false,
-    seller: false
+    UserRole: 2,
+    UserRating: 0,
+    DOB: null
 }
 
 const transporter = nodemailer.createTransport({
@@ -30,9 +31,9 @@ router.get("/account/register", (req,res)=>{
 router.post("/account/register", async (req, res) => {
     var salt = bcrypt.genSaltSync(10);
     const password = bcrypt.hashSync(req.body.password, salt);
-    object.email = req.body.email;
-    object.password = password;
-    object.name = req.body.name;
+    object.UserEmail = req.body.email;
+    object.UserPassword = password;
+    object.UserName = req.body.name;
 
     var otp = Math.random();
     otp = otp * 100000;
@@ -59,7 +60,7 @@ router.get("/account/register/check",async (req, res) => {
 });
 
 router.get("/account/register/check/verify", (req, res) => {
-    res.render("account/verify", {email: object.email});
+    res.render("account/verify", {email: object.UserEmail});
 })
 
 

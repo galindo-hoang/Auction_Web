@@ -40,9 +40,9 @@
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
             <div>
-                {{#if IdAuth}}
+                {{#if isLogin}}
                     <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-                        Hi, <b>{{IdAuth}}!</b>
+                        Hi, <b>{{account.UserName}}!</b>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/account/profile">
@@ -50,7 +50,8 @@
                             Profile
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/account/signOut">
+                        <form id="frmLogout" action="/account/signout" method="post"></form>
+                        <a class="dropdown-item" href="javascript: $('#frmLogout').submit();">
                             <i class="fa fa-sign-out" aria-hidden="true"></i>
                             Sign Out
                         </a>
