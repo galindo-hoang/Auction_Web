@@ -46,22 +46,24 @@ app.get('/views/byCat/:id',async (req,res)=>{
     }
 
     const products = await viewByCategories.findPageByCatId(CatID, limit, offset);
+    const name = await viewByCategories.findCatName(CatID);
+
     res.render('product/viewByCat', {
         products: products,
         empty: products.length === 0,
         pageNumbers,
-        CatName: products[0].CatName
+        CatName: name[0].CatName
     });
 });
 
 app.get('/views/byCatDe/:id',async (req,res)=>{
-    const CatID = req.params.id || 0;
+    const CatDeID = req.params.id || 0;
 
     const limit = 8;
     const page = req.query.page || 1;
     const offset = (page - 1) * limit;
 
-    const total = await viewByProduct.countByProId(CatID);
+    const total = await viewByProduct.countByProId(CatDeID);
 
     let nPages = Math.floor(total / limit);
     if (total % limit > 0) nPages++;
@@ -73,13 +75,14 @@ app.get('/views/byCatDe/:id',async (req,res)=>{
             isCurrent: +page === i
         });
     }
-    const products = await viewByProduct.findPageByProId(CatID, limit, offset);
-    const CatDeName = await viewByProduct.findCatDeName(products[0].CatDeID);
+    const products = await viewByProduct.findPageByProId(CatDeID, limit, offset);
+    const name = await viewByProduct.findCatDeName(CatDeID);
+
     res.render('product/viewByCatDetail', {
         products: products,
         empty: products.length === 0,
         pageNumbers,
-        CatDeName: CatDeName[0].CatDeName
+        CatDeName: name[0].CatDeName
     });
 });
 

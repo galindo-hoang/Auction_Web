@@ -62,7 +62,6 @@ router.get("/account/register/check/verify", (req, res) => {
     res.render("account/verify", {email: object.email});
 })
 
-
 router.get("/account/register/check/verify/submit",(req,res)=>{
     res.json((check.otp+"" === req.query.otp));
 })

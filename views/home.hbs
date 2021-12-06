@@ -7,9 +7,9 @@
         {{#each expire}}
             <div class="col">
                 <div class="card h-100">
-                    <a href="#"><img src="/public/imgs/products/{{this.ProID}}/thumb.jpg" class="card-img-top" alt={{this.ProName}}></a>
+                    <a href="/detail"><img src="/public/imgs/products/{{this.ProID}}/thumb.jpg" class="card-img-top" alt={{this.ProName}}></a>
                     <div class="card-body text-center">
-                        <h5 class="card-title"><a href="" class="ProTittle">{{this.ProName}}</a></h5>
+                        <h5 class="card-title"><a href="/detail" class="ProTittle">{{this.ProName}}</a></h5>
                         <p class="mb-0 text-success">{{format_number this.CurPrice}}</p>
                         <p class="mb-0 text-danger">{{format_number this.BuyNowPrice}}</p>
                         <p class="mb-0">{{format_date this.StartDate}}</p>
@@ -31,9 +31,9 @@
         {{#each price}}
             <div class="col">
                 <div class="card h-100">
-                    <a href="#"><img src="/public/imgs/products/{{this.ProID}}/thumb.jpg" class="card-img-top" alt={{this.ProName}}></a>
+                    <a href="/detail"><img src="/public/imgs/products/{{this.ProID}}/thumb.jpg" class="card-img-top" alt={{this.ProName}}></a>
                     <div class="card-body text-center">
-                        <h5 class="card-title"><a href="/products" class="ProTittle">{{this.ProName}}</a></h5>
+                        <h5 class="card-title"><a href="/detail" class="ProTittle">{{this.ProName}}</a></h5>
                         <p class="mb-0 text-success">{{format_number this.CurPrice}}</p>
                         <p class="mb-0 text-danger">{{format_number this.BuyNowPrice}}</p>
                         <p class="mb-0">{{format_date this.StartDate}}</p>

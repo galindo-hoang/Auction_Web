@@ -4,7 +4,6 @@ import Users from '../models/user.js';
 import Category from "../models/category.js";
 import CategoriesDetail from '../models/categories_detail.js';
 
-
 const oneDay = 1000 * 60 * 60 * 24;
 
 export default function (app){
@@ -24,8 +23,6 @@ export default function (app){
         next();
     });
 
-
-
     app.use(async function (req, res, next) {
         const Cate = await Category.findAll();
         const data = [];
@@ -37,7 +34,7 @@ export default function (app){
             model.CatID = Cate[i].CatID;
         }
         res.locals.LclCate = data;
-        console.log(res.locals.LclCate);
+        // console.log(res.locals.LclCate);
         next();
     });
 }
