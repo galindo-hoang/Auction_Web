@@ -16,5 +16,8 @@ export default {
                     where c.CatID = cd.CatID AND cd.CatDeID = p.CatDeID AND c.CatID = ?
                     LIMIT ?, ?`, [ID, offset, limit]);
         return list[0];
-    }
+    },
+    findCatName(ID){
+        return knex.select('CatName').from('categories').where('CatID', ID);
+    },
 }

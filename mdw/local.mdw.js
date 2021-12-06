@@ -5,7 +5,6 @@ import CategoriesDetail from '../models/categories_detail.js';
 import fnMySQLStore from 'express-mysql-session';
 import {ConnectInfor} from "../utils/db.js";
 
-
 export default function (app){
 
     const MySQLStore = fnMySQLStore(session);
@@ -26,8 +25,6 @@ export default function (app){
         res.locals.isLogin = req.session.isLogin;
         next();
     });
-
-
 
     app.use(async function (req, res, next) {
         const Cate = await Category.findAll();
