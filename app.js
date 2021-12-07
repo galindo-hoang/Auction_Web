@@ -205,4 +205,5 @@ app.get('/views/:query',async (req, res) => {
 
 app.listen(300,()=>{
     console.log(`Example app listening at http://localhost:${300}`);
+    // console.log("TEST");
 });
