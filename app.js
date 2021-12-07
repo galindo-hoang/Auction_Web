@@ -13,7 +13,7 @@ const app = express();
 app.use('/public', express.static('public'));
 // to get data from user (app.post)
 app.use(express.urlencoded({extended:true}));
-
+console.log("check-git");
 local_mdw(app);
 view_mdw(app);
 app.use('/',register_route);
