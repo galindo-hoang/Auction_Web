@@ -20,9 +20,14 @@ app.use('/',register_route);
 
 
 app.get('/',async (req, res) => {
-    const topPrice = await viewByProduct.findTop5Price();
-    const topExp = await viewByProduct.findTop5Exp();
-    res.render('home',{price:topPrice,expire:topExp});
+    const data = [];
+    data.push({},{},{});
+    data[0].product = (await viewByProduct.findTop5Price());
+    data[1].product = (await viewByProduct.findTop5Exp());
+    data[0].title = 'Top 5 sản phẩm có giá cao nhất';
+    data[1].title = 'Top 5 sản phẩm gần kết thúc';
+    data[2].title = 'Top 5 sản phẩm có nhiều lượt ra giá nhất';
+    res.render('home',{data});
 });
 
 app.get('/views/byCat/:id',async (req,res)=>{
@@ -143,6 +148,26 @@ app.get("/account/favorite",auth,(req,res)=>{
 app.get("/account/purchased",auth,(req,res)=>{
     res.render("account/purchase");
 });
+app.post('/views',async (req, res) => {
+    res.redirect('/views/'+req.body.query+"?sort="+req.body.sort+"&page="+req.body.page)
+})
+
+app.get('/views/:query',async (req, res) => {
+    const totalProduct = await viewByProduct.countFTS(req.params.query);
+    const limit = 8;
+    let totalPage = Math.floor(totalProduct / limit);
+    if (totalProduct % limit > 0) ++totalPage;
+    const offset = (req.query.page - 1) * limit;
+    const data = await viewByProduct.FTS(req.params.query, limit, offset,req.query.sort);
+    const pageNumbers = [];
+    for (let i = 1; i <= totalPage; ++i) {
+        pageNumbers.push({
+            value: i,
+            isCurrent: +req.query.page === i
+        });
+    }
+    res.render('product/viewByQuery',{products:data,query:req.params.query,pageNumbers,sort:req.query.sort});
+})
 
 app.listen(300,()=>{
     console.log(`Example app listening at http://localhost:${300}`);

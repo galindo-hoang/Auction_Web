@@ -35,8 +35,10 @@
                     </li>
                 {{/each}}
             </ul>
-            <form class="d-flex">
-                <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search">
+            <form class="d-flex" action="/views" method="post">
+                <input class="form-control me-2 " type="search" placeholder="Search" aria-label="Search" name="query">
+                <input class="form-control me-2 " type="hidden" placeholder="Search" aria-label="Search" name="page" value="1">
+                <input class="form-control me-2 " type="hidden" placeholder="Search" aria-label="Search" name="sort" value="1">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
             <div>
@@ -50,11 +52,12 @@
                             Profile
                         </a>
                         <div class="dropdown-divider"></div>
-                        <form id="frmLogout" action="/account/signout" method="post"></form>
-                        <a class="dropdown-item" href="javascript: $('#frmLogout').submit();">
-                            <i class="fa fa-sign-out" aria-hidden="true"></i>
-                            Sign Out
-                        </a>
+                        <form id="frmLogout" action="/account/signout" method="post">
+                            <a class="dropdown-item" href="javascript: $('#frmLogout').submit();">
+                                <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                Sign Out
+                            </a>
+                        </form>
                     </div>
                 {{else}}
                     <a href="/account/register" class="text-dark">

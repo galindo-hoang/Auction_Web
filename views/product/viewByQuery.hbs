@@ -1,0 +1,82 @@
+{{#section 'header'}}
+    <style>
+       .btn-light{
+           border-radius: 20px;
+       }
+    </style>
+{{/section}}
+
+<div class="card mt-4 d-flex">
+    <div class="d-flex justify-content-between align-middle">
+        <h4 class="d-flex">
+            {{query}}
+        </h4>
+        <div>
+            <a class="btn btn-light" href="/views/{{query}}?sort=1&page=1">
+                <i class="fas fa-sort-amount-down"></i>
+                giá giảm
+            </a>
+            <a class="btn btn-light" href="/views/{{query}}?sort=2&page=1">
+                <i class="fas fa-sort-amount-down-alt"></i>
+                giá tăng
+            </a>
+            <a class="btn btn-light" href="/views/{{query}}?sort=3&page=1">
+                <i class="fas fa-sort-amount-down"></i>
+                thời gian giảm
+            </a>
+            <a class="btn btn-light" href="/views/{{query}}?sort=4&page=1">
+                <i class="fas fa-sort-amount-down-alt"></i>
+                thời gian tăng
+            </a>
+        </div>
+    </div>
+    <div class="card-body">
+        {{#if products}}
+            <div class="row">
+                {{#each products}}
+                    <div class="col-sm-3 mb-3">
+                        <div class="card h-100">
+                            <img class="card-img-top" src="/public/imgs/products/{{this.ProID}}/thumb.jpg" alt="{{this.ProName}}" title="{{this.ProName}}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{this.ProName}}</h5>
+                                <h5 class="card-title text-info">{{format_number this.CurPrice}}</h5>
+                                <p class="card-text">{{this.TinyDes}}</p>
+                            </div>
+                            <div class="card-footer text-center">
+                                <a href="/detail" class="btn btn-sm btn-outline-primary">
+                                    <i class="fa fa-magnifying-glass" aria-hidden="true"></i>
+                                    Xem chi tiết
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-end">
+                    <li class="page-item">
+                        <a class="page-link" href="#">Previous</a>
+                    </li>
+                    {{#each pageNumbers}}
+                        {{#if this.isCurrent}}
+                            <li class="page-item active">
+                                <a class="page-link" href="javascript:;">{{this.value}}</a>
+                            </li>
+                        {{else}}
+                            <li class="page-item">
+                                <a class="page-link" href="/views/{{../query}}?sort={{../sort}}&page={{this.value}}">{{this.value}}</a>
+                            </li>
+                        {{/if}}
+                    {{/each}}
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
+        {{else}}
+            <h5 class="card-title">Không có dữ liệu về sản phẩm</h5>
+        {{/if}}
+    </div>
+    <div class="card-footer text-muted">
+    </div>
+</div>
