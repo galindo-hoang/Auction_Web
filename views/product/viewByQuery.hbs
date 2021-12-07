@@ -1,32 +1,32 @@
 {{#section 'header'}}
     <style>
-       .btn-light{
-           border-radius: 20px;
-       }
+        .btn-light{
+            border-radius: 20px;
+        }
     </style>
 {{/section}}
 
 <div class="card mt-4 d-flex">
-    <div class="d-flex justify-content-between align-middle">
-        <h4 class="d-flex">
-            {{query}}
+    <div class="d-flex align-middle mt-3 card-header justify-content-evenly">
+        <h4>
+            Kết quả tìm kiếm với từ khoá: '{{query}}'
         </h4>
         <div>
             <a class="btn btn-light" href="/views/{{query}}?sort=1&page=1">
                 <i class="fas fa-sort-amount-down"></i>
-                giá giảm
+                Giá cao đến thấp
             </a>
             <a class="btn btn-light" href="/views/{{query}}?sort=2&page=1">
-                <i class="fas fa-sort-amount-down-alt"></i>
-                giá tăng
+                <i class="fas fa-sort-amount-up"></i>
+                Giá thấp đến cao
             </a>
             <a class="btn btn-light" href="/views/{{query}}?sort=3&page=1">
                 <i class="fas fa-sort-amount-down"></i>
-                thời gian giảm
+                Thời gian kết thúc giảm dần
             </a>
             <a class="btn btn-light" href="/views/{{query}}?sort=4&page=1">
-                <i class="fas fa-sort-amount-down-alt"></i>
-                thời gian tăng
+                <i class="fas fa-sort-amount-up"></i>
+                Thời gian kết thúc tăng dần
             </a>
         </div>
     </div>
@@ -36,43 +36,54 @@
                 {{#each products}}
                     <div class="col-sm-3 mb-3">
                         <div class="card h-100">
-                            <img class="card-img-top" src="/public/imgs/products/{{this.ProID}}/thumb.jpg" alt="{{this.ProName}}" title="{{this.ProName}}">
+                            <a href="/detail"><img class="card-img-top" src="/public/imgs/products/{{this.ProID}}/thumb.jpg" alt="{{this.ProName}}" title="{{this.ProName}}"></a>
                             <div class="card-body">
-                                <h5 class="card-title">{{this.ProName}}</h5>
-                                <h5 class="card-title text-info">{{format_number this.CurPrice}}</h5>
-                                <p class="card-text">{{this.TinyDes}}</p>
+                                <a href="/detail" class="ProTittle"><h5 class="card-title">{{ProName}}</h5></a>
+                                <h5 class="text-info mb-2">
+                                    <i class="fa fa-gavel" aria-hidden="true"></i>
+                                    {{format_number this.CurPrice}}
+                                </h5>
+                                <h5 class="text-danger mb-2">
+                                    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                                    {{format_number this.BuyNowPrice}}
+                                </h5>
+                                <p class="card-text">{{TinyDes}}</p>
                             </div>
                             <div class="card-footer text-center">
-                                <a href="/detail" class="btn btn-sm btn-outline-primary">
-                                    <i class="fa fa-magnifying-glass" aria-hidden="true"></i>
-                                    Xem chi tiết
-                                </a>
+                                <div class="text-danger">Kết thúc sau {{this.remaining}} giờ</div>
+                                <div>({{format_date this.EndDate}})</div>
                             </div>
                         </div>
                     </div>
                 {{/each}}
             </div>
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-end">
-                    <li class="page-item">
-                        <a class="page-link" href="#">Previous</a>
-                    </li>
-                    {{#each pageNumbers}}
-                        {{#if this.isCurrent}}
-                            <li class="page-item active">
-                                <a class="page-link" href="javascript:;">{{this.value}}</a>
-                            </li>
-                        {{else}}
+            {{#unless this.isOnePage}}
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-end">
+                        {{#unless this.isStart}}
                             <li class="page-item">
-                                <a class="page-link" href="/views/{{../query}}?sort={{../sort}}&page={{this.value}}">{{this.value}}</a>
+                                <a class="page-link" href="/views/{{this.query}}?sort={{this.sort}}&page={{this.previousPage}}">Previous</a>
                             </li>
-                        {{/if}}
-                    {{/each}}
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
-                </ul>
-            </nav>
+                        {{/unless}}
+                        {{#each this.pageNumbers}}
+                            {{#if isCurrent}}
+                                <li class="page-item active">
+                                    <a class="page-link" href="javascript:;">{{value}}</a>
+                                </li>
+                            {{else}}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{value}}">{{value}}</a>
+                                </li>
+                            {{/if}}
+                        {{/each}}
+                        {{#unless this.isEnd}}
+                            <li class="page-item">
+                                <a class="page-link" href="/views/{{this.query}}?sort={{this.sort}}&page={{this.nextPage}}">Next</a>
+                            </li>
+                        {{/unless}}
+                    </ul>
+                </nav>
+            {{/unless}}
         {{else}}
             <h5 class="card-title">Không có dữ liệu về sản phẩm</h5>
         {{/if}}

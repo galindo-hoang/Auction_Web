@@ -7,13 +7,12 @@ import register_route from "./routes/register.js";
 import viewByCategories from './models/category.js';
 import viewByProduct from './models/product.js';
 
-
 const app = express();
 
 app.use('/public', express.static('public'));
 // to get data from user (app.post)
 app.use(express.urlencoded({extended:true}));
-console.log("check-git");
+
 local_mdw(app);
 view_mdw(app);
 app.use('/',register_route);
@@ -46,7 +45,7 @@ app.get('/views/byCat/:id',async (req,res)=>{
     for (let i = 1; i <= nPages; i++) {
         pageNumbers.push({
             value: i,
-            isCurrent: +page === i
+            isCurrent: +page === i,
         });
     }
 
@@ -54,10 +53,16 @@ app.get('/views/byCat/:id',async (req,res)=>{
     const name = await viewByCategories.findCatName(CatID);
 
     res.render('product/viewByCat', {
+        CatID: CatID,
         products: products,
         empty: products.length === 0,
         pageNumbers,
-        CatName: name[0].CatName
+        CatName: name[0].CatName,
+        isEnd: +page === nPages,
+        isStart: +page === 1,
+        nextPage: +page + 1,
+        previousPage: +page - 1,
+        isOnePage: pageNumbers.length === 1
     });
 });
 
@@ -80,14 +85,19 @@ app.get('/views/byCatDe/:id',async (req,res)=>{
             isCurrent: +page === i
         });
     }
-    const products = await viewByProduct.findPageByProId(CatDeID, limit, offset);
+    const products = await viewByProduct.findPageByCatDeId(CatDeID, limit, offset);
     const name = await viewByProduct.findCatDeName(CatDeID);
 
     res.render('product/viewByCatDetail', {
         products: products,
         empty: products.length === 0,
         pageNumbers,
-        CatDeName: name[0].CatDeName
+        CatDeName: name[0].CatDeName,
+        isEnd: +page === nPages,
+        isStart: +page === 1,
+        nextPage: +page + 1,
+        previousPage: +page - 1,
+        isOnePage: pageNumbers.length === 1
     });
 });
 
@@ -148,6 +158,7 @@ app.get("/account/favorite",auth,(req,res)=>{
 app.get("/account/purchased",auth,(req,res)=>{
     res.render("account/purchase");
 });
+
 app.post('/views',async (req, res) => {
     res.redirect('/views/'+req.body.query+"?sort="+req.body.sort+"&page="+req.body.page)
 })
@@ -157,16 +168,23 @@ app.get('/views/:query',async (req, res) => {
     const limit = 8;
     let totalPage = Math.floor(totalProduct / limit);
     if (totalProduct % limit > 0) ++totalPage;
+    const page = req.query.page
     const offset = (req.query.page - 1) * limit;
     const data = await viewByProduct.FTS(req.params.query, limit, offset,req.query.sort);
+    for(let pro of data){
+        const remaining = await viewByProduct.findRemaining(pro.ProID);
+        pro.remaining = remaining;
+    }
     const pageNumbers = [];
     for (let i = 1; i <= totalPage; ++i) {
         pageNumbers.push({
             value: i,
-            isCurrent: +req.query.page === i
+            isCurrent: +page === i
         });
     }
-    res.render('product/viewByQuery',{products:data,query:req.params.query,pageNumbers,sort:req.query.sort});
+    res.render('product/viewByQuery',{products:data,query:req.params.query,pageNumbers,sort:req.query.sort,isEnd: +page === totalPage,
+        isStart: +page === 1,nextPage: +page + 1,previousPage: +page - 1,isOnePage: pageNumbers.length === 1
+    });
 })
 
 app.listen(300,()=>{

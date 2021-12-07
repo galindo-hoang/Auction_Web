@@ -9,14 +9,20 @@
                     <div class="card h-100">
                         <a href="/detail"><img src="/public/imgs/products/{{this.ProID}}/thumb.jpg" class="card-img-top" alt={{this.ProName}}></a>
                         <div class="card-body">
-                            <h5 class="card-title"><a href="/detail" class="ProTittle">{{this.ProName}}</a></h5>
-                            <p class="mb-0 text-info">{{format_number this.CurPrice}}</p>
-                            <p class="mb-0 text-danger">{{format_number this.BuyNowPrice}}</p>
+                            <h5 class="card-title mb-2"><a href="/detail" class="ProTittle">{{this.ProName}}</a></h5>
+                            <h5 class="text-info mb-2">
+                                <i class="fa fa-gavel" aria-hidden="true"></i>
+                                {{format_number this.CurPrice}}
+                            </h5>
+                            <h5 class="text-danger mb-2">
+                                <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                                {{format_number this.BuyNowPrice}}
+                            </h5>
                             <p class="card-text">{{this.TinyDes}}</p>
                         </div>
-                        <div class="card-footer d-flex">
-                            <p>{{format_date this.StartDate}}</p>
-                            <p class="text-danger">còn lại {{this.remaining}} giờ</p>
+                        <div class="card-footer text-center">
+                            <div class="text-danger">Kết thúc sau {{this.remaining}} giờ</div>
+                            <div>({{format_date this.EndDate}})</div>
                         </div>
                     </div>
                 </div>

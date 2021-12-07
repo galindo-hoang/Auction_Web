@@ -5,8 +5,10 @@ export default {
         const list = await knex('products').where('CatDeID', ID).count({ amount: 'CatDeID' });
         return list[0].amount;
     },
-    async findPageByProId(ID, limit, offset){
-        return knex('products').where('CatDeID', ID).limit(limit).offset(offset);
+    async findPageByCatDeId(ID, limit, offset){
+        return (await knex.raw(`select *, HOUR(timediff(products.EndDate, now())) remaining
+                            from products 
+                            where CatDeID = ?`, ID))[0];
     },
     findCatDeName(ID){
         return knex.select('CatDeName').from('categories_detail').where('CatDeID', ID);
@@ -35,5 +37,10 @@ export default {
         }else {
             return knex.select('*').from('categories_detail').leftJoin('products','categories_detail.CatDeID','products.CatDeID').where('products.ProName','like','%'+query+'%').orWhere('categories_detail.CatDeName','like','%'+query+'%').orderBy('products.EndDate').limit(limit).offset(offset);
         }
+    },
+
+    async findRemaining(ID){
+        const res = (await knex.raw(`select HOUR(timediff(products.EndDate,now())) remaining from products where ProID = ?`, ID))[0];
+        return res[0].remaining;
     }
 }
