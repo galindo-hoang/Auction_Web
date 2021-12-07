@@ -139,8 +139,24 @@ app.post("/account/signout",(req,res)=>{
 import auth from "./mdw/auth.mdw.js";
 
 app.get("/account/profile",auth,async (req, res) => {
-    const data = await Users.findByID(req.session.isLogin);
-    res.render("account/profile", {user: data});
+    res.render("account/profile", {user: req.session.account});
+});
+
+app.post("/account/profile",auth,async (req, res) => {
+    req.session.account.UserName = req.body.name;
+    req.session.account.DOB = req.body.birthday;
+    const account = Users.findByEmail(req.session.account.UserEmail);
+    if(req.body.CurPassword === "" && req.body.NewPassword === "" && req.body.ConPassword === ""){
+        Users.updateUserWithoutPass(req.session.account.DOB,req.session.account.UserName,req.session.account.UserEmail);
+        res.render("account/profile",{user: req.session.account});
+    }else if(bcrypt.compareSync(req.body.CurPassword,account[0].UserPassword)){
+        res.render("account/profile",{error: "Mật khẩu hiện tại không đúng"});
+    }else if(req.body.NewPassword !==  req.body.ConPassword){
+        res.render("account/profile",{error: "Mật khẩu hiện không trùng khớp"});
+    }else{
+        Users.updateUser(req.body.NewPassword,req.session.account.DOB,req.session.account.UserName,req.session.account.UserEmail);
+        res.render("account/profile",{user: req.session.account});
+    }
 });
 
 app.get("/account/review",auth,(req,res)=>{
