@@ -1,4 +1,6 @@
 import knex from "../utils/db.js";
+import moment from "moment";
+import bcrypt from "bcryptjs";
 
 const entity = {
     addUser: function(object){
@@ -10,6 +12,21 @@ const entity = {
     findByID: async function (ID) {
         if(ID !== undefined) return (await knex.table('users').where('UserID', ID))[0];
         return undefined;
+    },
+    updateUser(pass,date,name,email){
+        const salt = bcrypt.genSaltSync(10);
+        const password = bcrypt.hashSync(pass, salt);
+        knex.table('users').where('UserEmail',email).update({
+            UserPassword: password,
+            DOB: date,
+            UserName:name
+        }).then(()=>{});
+    },
+    updateUserWithoutPass(date,name,email){
+        knex.table('users').where('UserEmail',email).update({
+            DOB: date,
+            UserName:name
+        }).then(()=>{});
     }
 }
 
