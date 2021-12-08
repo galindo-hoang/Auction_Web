@@ -34,6 +34,8 @@ app.get('/views/byCat/:id',async (req,res)=>{
 
     const limit = 8;
     const page = req.query.page || 1;
+    const sort = req.query.sort || 1;
+
     const offset = (page - 1) * limit;
 
     const total = await viewByCategories.countByCatId(CatID);
@@ -49,7 +51,7 @@ app.get('/views/byCat/:id',async (req,res)=>{
         });
     }
 
-    const products = await viewByCategories.findPageByCatId(CatID, limit, offset);
+    const products = await viewByCategories.findPageByCatId(CatID, limit, offset, sort);
     const name = await viewByCategories.findCatName(CatID);
 
     res.render('product/viewByCat', {
@@ -71,6 +73,8 @@ app.get('/views/byCatDe/:id',async (req,res)=>{
 
     const limit = 8;
     const page = req.query.page || 1;
+    const sort = req.query.sort || 1;
+
     const offset = (page - 1) * limit;
 
     const total = await viewByProduct.countByProId(CatDeID);
@@ -85,10 +89,11 @@ app.get('/views/byCatDe/:id',async (req,res)=>{
             isCurrent: +page === i
         });
     }
-    const products = await viewByProduct.findPageByCatDeId(CatDeID, limit, offset);
+    const products = await viewByProduct.findPageByCatDeId(CatDeID, limit, offset, sort);
     const name = await viewByProduct.findCatDeName(CatDeID);
 
     res.render('product/viewByCatDetail', {
+        CatDeID: CatDeID,
         products: products,
         empty: products.length === 0,
         pageNumbers,
@@ -108,7 +113,8 @@ app.get('/detail/:id', async (req,res)=>{
     const similarProduct = await viewByProduct.findTop5ByCatDeID(product.CatDeID, proID);
     res.render('product/detail', {
         product: product,
-        similarProduct: similarProduct
+        similarProduct: similarProduct,
+        similarProductCount: similarProduct.length
     });
 });
 

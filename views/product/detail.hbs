@@ -121,35 +121,41 @@
         </div>
     </div>
     <div class="card mt-4">
-        <h4 class="card-header">
+        <h4 class="card-header mb-2">
             Sản phẩm tương tự
         </h4>
-        <div class="card-body">
-            <div class="row justify-content-center">
-                {{#each this.similarProduct}}
-                    <div class="col-md-4 mb-3">
-                        <div class="card h-100">
-                            <a href="/detail/{{ProID}}"><img class="card-img-top" src="/public/imgs/products/{{ProID}}/thumb.jpg" alt="{{ProName}}" title="{{ProName}}"></a>
-                            <div class="card-body">
-                                <a href="/detail/{{ProID}}" class="ProTittle"><h5 class="card-title">{{ProName}}</h5></a>
-                                <h5 class="card-text text-info mb-2">
-                                    <i class="fa fa-gavel" aria-hidden="true"></i>
-                                    {{format_number this.CurPrice}}
-                                </h5>
-                                <h5 class="card-text text-danger mb-2">
-                                    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                    {{format_number this.BuyNowPrice}}
-                                </h5>
-                                <p class="card-text">{{TinyDes}}</p>
-                            </div>
-                            <div class="card-footer text-center">
-                                <div class="text-danger">Kết thúc sau {{this.remaining}} giờ</div>
-                                <div>({{format_date this.EndDate}})</div>
+        {{#if this.similarProductCount}}
+            <div class="card-body">
+                <div class="row justify-content-center">
+                    {{#each this.similarProduct}}
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100">
+                                <a href="/detail/{{ProID}}"><img class="card-img-top" src="/public/imgs/products/{{ProID}}/thumb.jpg" alt="{{ProName}}" title="{{ProName}}"></a>
+                                <div class="card-body">
+                                    <a href="/detail/{{ProID}}" class="ProTittle"><h5 class="card-title">{{ProName}}</h5></a>
+                                    <h5 class="card-text text-info mb-2">
+                                        <i class="fa fa-gavel" aria-hidden="true"></i>
+                                        {{format_number this.CurPrice}}
+                                    </h5>
+                                    <h5 class="card-text text-danger mb-2">
+                                        <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                                        {{format_number this.BuyNowPrice}}
+                                    </h5>
+                                    <p class="card-text">{{TinyDes}}</p>
+                                </div>
+                                <div class="card-footer text-center">
+                                    <div class="text-danger">Kết thúc sau {{this.remaining}} giờ</div>
+                                    <div>({{format_date this.EndDate}})</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                {{/each}}
+                    {{/each}}
+                </div>
             </div>
+        {{else}}
+        <div class="card-body">
+            <h5>Không có dữ liệu</h5>
         </div>
+        {{/if}}
     </div>
 </div>
