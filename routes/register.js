@@ -1,8 +1,11 @@
-import nodemailer from "nodemailer";
 import fetch from "node-fetch";
 import express from "express";
 import bcrypt from 'bcryptjs';
 import Users from '../models/user.js';
+import auth from "../mdw/auth.mdw.js";
+
+import sendEmail from "../utils/mail.js";
+
 
 const router = express.Router();
 
@@ -11,20 +14,9 @@ let object = {
     UserRating: 0,
     DOB: null
 }
-
-const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: true,
-    service: 'gmail',
-    auth:{
-        user: 'webclc2@gmail.com',
-        pass: 'webktpm2',
-    }
-});
 const check = {}
 
-router.get("/account/register", (req,res)=>{
+router.get("/account/register", auth.afterLogin,(req,res)=>{
     res.render('account/register');
 })
 
@@ -39,16 +31,12 @@ router.post("/account/register", async (req, res) => {
     otp = otp * 100000;
     check.otp = parseInt(otp);
 
-    let info = await transporter.sendMail({
-        to: "hmhuy191101@gmail.com", // list of receivers
-        subject: "OTP", // Subject line
-        html: "<b>" + check.otp + "</b>", // html body
-    });
+    sendEmail(req.body.email,"OTP",check.otp);
 
     res.redirect('/account/register/check/verify');
 });
 
-router.get("/account/register/check",async (req, res) => {
+router.get("/account/register/check",auth.afterLogin,async (req, res) => {
     const captcha = await fetch(`https://www.google.com/recaptcha/api/siteverify?secret=6Le6CncdAAAAAOzSwB7zdJszhDbO9SjFxpQ11Fnf&response=${req.query.recaptcha}`,{
         method: "POST"
     }).then(_res =>_res.json());
@@ -59,18 +47,21 @@ router.get("/account/register/check",async (req, res) => {
     }else res.json(1)
 });
 
-router.get("/account/register/check/verify", (req, res) => {
+router.get("/account/register/check/verify",auth.afterLogin, (req, res) => {
     res.render("account/verify", {email: object.UserEmail});
 })
 
-router.get("/account/register/check/verify/submit",(req,res)=>{
-    res.json((check.otp+"" === req.query.otp));
+router.post("/account/register/check/verify",(req,res)=>{
+    if((check.otp === +req.body.otp)){
+        Users.addUser(object);
+        object = {}
+        res.redirect('/account/login');
+    }else{
+        res.render("account/verify", {email: object.UserEmail,error: "OTP không hợp lệ"});
+    }
 })
 
-router.post("/account/register/check/verify",(req,res)=>{
-    Users.addUser(object);
-    object = {}
-    res.redirect('/account/login');
-})
+
+
 
 export default router;

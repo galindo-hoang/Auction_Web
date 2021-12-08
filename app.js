@@ -1,12 +1,11 @@
-import express  from 'express';
-import Users from './models/user.js';
-import bcrypt from 'bcryptjs';
+import express from 'express';
 import local_mdw from "./mdw/local.mdw.js";
 import view_mdw from "./mdw/view.mdw.js";
 import register_route from "./routes/register.js";
+import login_route from "./routes/login.js";
+import profile_user_route from "./routes/profile-user.js";
 import viewByCategories from './models/category.js';
 import viewByProduct from './models/product.js';
-
 const app = express();
 
 app.use('/public', express.static('public'));
@@ -16,6 +15,8 @@ app.use(express.urlencoded({extended:true}));
 local_mdw(app);
 view_mdw(app);
 app.use('/',register_route);
+app.use('/',login_route);
+app.use('/',profile_user_route);
 
 
 app.get('/',async (req, res) => {
@@ -101,78 +102,8 @@ app.get('/views/byCatDe/:id',async (req,res)=>{
     });
 });
 
-app.get('/detail',(req,res)=>{
+app.get('/detail/:id',(req,res)=>{
     res.render('product/detail');
-});
-
-app.get("/account/login",(req,res)=>{
-    req.session.retUrl = req.headers.referer;
-    res.render('account/login');
-});
-
-app.post("/account/login",async (req, res) => {
-    const url = req.session.retUrl || '/';
-    res.redirect(url);
-});
-
-app.get('/account/login/check',async (req, res) => {
-    const data = await Users.findByEmail(req.query.email);
-    if (data.length === 0) res.json(false);
-    else {
-        if(bcrypt.compareSync(req.query.password,data[0].UserPassword)){
-            req.session.isLogin = true;
-            req.session.account = data[0];
-            delete req.session.account.UserPassword;
-            return res.json(true);
-        }
-    } return res.json(false);
-});
-
-app.post("/account/signout",(req,res)=>{
-    req.session.isLogin = false;
-    req.session.account = null;
-    const url = req.headers.referer || '/';
-    res.redirect(url);
-});
-
-
-import auth from "./mdw/auth.mdw.js";
-
-app.get("/account/profile",auth,async (req, res) => {
-    res.render("account/profile", {user: req.session.account});
-});
-
-app.post("/account/profile",auth,async (req, res) => {
-    req.session.account.UserName = req.body.name;
-    req.session.account.DOB = req.body.birthday;
-    const account = Users.findByEmail(req.session.account.UserEmail);
-    if(req.body.CurPassword === "" && req.body.NewPassword === "" && req.body.ConPassword === ""){
-        Users.updateUserWithoutPass(req.session.account.DOB,req.session.account.UserName,req.session.account.UserEmail);
-        res.render("account/profile",{user: req.session.account});
-    }else if(bcrypt.compareSync(req.body.CurPassword,account[0].UserPassword)){
-        res.render("account/profile",{error: "Mật khẩu hiện tại không đúng"});
-    }else if(req.body.NewPassword !==  req.body.ConPassword){
-        res.render("account/profile",{error: "Mật khẩu hiện không trùng khớp"});
-    }else{
-        Users.updateUser(req.body.NewPassword,req.session.account.DOB,req.session.account.UserName,req.session.account.UserEmail);
-        res.render("account/profile",{user: req.session.account});
-    }
-});
-
-app.get("/account/review",auth,(req,res)=>{
-    res.render("account/review");
-});
-
-app.get("/account/tracking",auth,(req,res)=>{
-    res.render("account/tracking");
-});
-
-app.get("/account/favorite",auth,(req,res)=>{
-    res.render("account/favorite");
-});
-
-app.get("/account/purchased",auth,(req,res)=>{
-    res.render("account/purchase");
 });
 
 app.post('/views',async (req, res) => {
@@ -188,8 +119,7 @@ app.get('/views/:query',async (req, res) => {
     const offset = (req.query.page - 1) * limit;
     const data = await viewByProduct.FTS(req.params.query, limit, offset,req.query.sort);
     for(let pro of data){
-        const remaining = await viewByProduct.findRemaining(pro.ProID);
-        pro.remaining = remaining;
+        pro.remaining = await viewByProduct.findRemaining(pro.ProID);
     }
     const pageNumbers = [];
     for (let i = 1; i <= totalPage; ++i) {
@@ -203,7 +133,7 @@ app.get('/views/:query',async (req, res) => {
     });
 })
 
+
 app.listen(300,()=>{
     console.log(`Example app listening at http://localhost:${300}`);
-    // console.log("TEST");
 });
