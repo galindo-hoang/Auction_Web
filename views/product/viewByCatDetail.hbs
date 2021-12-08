@@ -10,9 +10,9 @@
                 {{#each this.products}}
                     <div class="col-sm-3 mb-4">
                         <div class="card h-100">
-                            <a href="/detail"><img class="card-img-top" src="/public/imgs/products/{{ProID}}/thumb.jpg" alt="{{ProName}}" title="{{ProName}}"></a>
+                            <a href="/detail/{{ProID}}"><img class="card-img-top" src="/public/imgs/products/{{ProID}}/thumb.jpg" alt="{{ProName}}" title="{{ProName}}"></a>
                             <div class="card-body">
-                                <a href="/detail" class="ProTittle"><h5 class="card-title">{{ProName}}</h5></a>
+                                <a href="/detail/{{ProID}}" class="ProTittle"><h5 class="card-title">{{ProName}}</h5></a>
                                 <h5 class="text-info mb-2">
                                     <i class="fa fa-gavel" aria-hidden="true"></i>
                                     {{format_number this.CurPrice}}
@@ -36,7 +36,7 @@
                     <ul class="pagination justify-content-end">
                         {{#unless this.isStart}}
                             <li class="page-item">
-                                <a class="page-link" href="/views/byCatDe/{{this.CatDeID}}?page={{this.previousPage}}">Previous</a>
+                                <a class="page-link" href="/views/byCat/{{this.CatID}}?page={{this.previousPage}}">Previous</a>
                             </li>
                         {{/unless}}
                         {{#each this.pageNumbers}}
@@ -52,7 +52,7 @@
                         {{/each}}
                         {{#unless this.isEnd}}
                             <li class="page-item">
-                                <a class="page-link" href="/views/byCatDe/{{this.CatDeID}}?page={{this.nextPage}}">Next</a>
+                                <a class="page-link" href="/views/byCat/{{this.CatID}}?page={{this.nextPage}}">Next</a>
                             </li>
                         {{/unless}}
                     </ul>

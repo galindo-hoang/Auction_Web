@@ -101,8 +101,15 @@ app.get('/views/byCatDe/:id',async (req,res)=>{
     });
 });
 
-app.get('/detail',(req,res)=>{
-    res.render('product/detail');
+app.get('/detail/:id', async (req,res)=>{
+    const proID = req.params.id || 1;
+
+    const product = await viewByProduct.findByID(proID);
+    const similarProduct = await viewByProduct.findTop5ByCatDeID(product.CatDeID, proID);
+    res.render('product/detail', {
+        product: product,
+        similarProduct: similarProduct
+    });
 });
 
 app.get("/account/login",(req,res)=>{
@@ -205,5 +212,4 @@ app.get('/views/:query',async (req, res) => {
 
 app.listen(300,()=>{
     console.log(`Example app listening at http://localhost:${300}`);
-    // console.log("TEST");
 });
