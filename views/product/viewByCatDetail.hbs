@@ -6,13 +6,33 @@
         {{#if this.empty}}
             <h5 class="card-title">Không có dữ liệu về sản phẩm</h5>
         {{else}}
+            <div class="d-flex align-middle mt-3 card-header justify-content-end mb-4">
+                <div>
+                    <a class="btn btn-light" href="/views/byCatDe/{{this.CatDeID}}?sort=1&page=1">
+                        <i class="fas fa-sort-amount-down"></i>
+                        Giá cao đến thấp
+                    </a>
+                    <a class="btn btn-light" href="/views/byCatDe/{{this.CatDeID}}?sort=2&page=1">
+                        <i class="fas fa-sort-amount-up"></i>
+                        Giá thấp đến cao
+                    </a>
+                    <a class="btn btn-light" href="/views/byCatDe/{{this.CatDeID}}?sort=3&page=1">
+                        <i class="fas fa-sort-amount-down"></i>
+                        Thời gian kết thúc giảm dần
+                    </a>
+                    <a class="btn btn-light" href="/views/byCatDe/{{this.CatDeID}}?sort=4&page=1">
+                        <i class="fas fa-sort-amount-up"></i>
+                        Thời gian kết thúc tăng dần
+                    </a>
+                </div>
+            </div>
             <div class="row">
                 {{#each this.products}}
                     <div class="col-sm-3 mb-4">
                         <div class="card h-100">
-                            <a href="/detail"><img class="card-img-top" src="/public/imgs/products/{{ProID}}/thumb.jpg" alt="{{ProName}}" title="{{ProName}}"></a>
+                            <a href="/detail/{{ProID}}"><img class="card-img-top" src="/public/imgs/products/{{ProID}}/thumb.jpg" alt="{{ProName}}" title="{{ProName}}"></a>
                             <div class="card-body">
-                                <a href="/detail" class="ProTittle"><h5 class="card-title">{{ProName}}</h5></a>
+                                <a href="/detail/{{ProID}}" class="ProTittle"><h5 class="card-title">{{ProName}}</h5></a>
                                 <h5 class="text-info mb-2">
                                     <i class="fa fa-gavel" aria-hidden="true"></i>
                                     {{format_number this.CurPrice}}

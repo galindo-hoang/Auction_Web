@@ -5,13 +5,44 @@ export default {
         const list = await knex('products').where('CatDeID', ID).count({ amount: 'CatDeID' });
         return list[0].amount;
     },
-    async findPageByCatDeId(ID, limit, offset){
-        return (await knex.raw(`select *, HOUR(timediff(products.EndDate, now())) remaining
-                            from products 
-                            where CatDeID = ?`, ID))[0];
+
+    async findPageByCatDeId(ID, limit, offset, sort){
+        if(sort === "1"){
+            return (await knex.raw(`select *, HOUR(timediff(EndDate, now())) remaining
+                                     FROM products
+                                     where CatDeID = ?
+                                     order by CurPrice DESC
+                                        LIMIT ?, ?`, [ID, offset, limit]))[0];
+        }else if(sort === "2"){
+            return (await knex.raw(`select *, HOUR(timediff(EndDate, now())) remaining
+                                    FROM products
+                                    where CatDeID = ?
+                                    order by CurPrice
+                                        LIMIT ?, ?`, [ID, offset, limit]))[0];
+        }else if(sort === "3"){
+            return (await knex.raw(`select *, HOUR(timediff(EndDate, now())) remaining
+                                    FROM products
+                                    where CatDeID = ?
+                                    order by remaining DESC
+                                        LIMIT ?, ?`, [ID, offset, limit]))[0];
+        }else {
+            return (await knex.raw(`select *, HOUR(timediff(EndDate, now())) remaining
+                                    FROM products
+                                    where CatDeID = ?
+                                    order by remaining
+                                        LIMIT ?, ?`, [ID, offset, limit]))[0];
+        }
     },
+    async findByID(ID){
+        return (await knex('products').where('ProID', ID))[0];
+    },
+
     findCatDeName(ID){
         return knex.select('CatDeName').from('categories_detail').where('CatDeID', ID);
+    },
+
+    async findTop5ByCatDeID(ID, exID){
+        return (await knex.raw('select *, HOUR(timediff(products.EndDate,now())) remaining from products where CatDeID = ? and ProID <> ? limit 0,5', [ID, exID]))[0];
     },
 
     findTop5Price: async function () {

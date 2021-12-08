@@ -13,7 +13,7 @@ export default function (app){
             },
             section: hbs_sections(),
             format_date(date){
-                return moment(date).format("DD MMM YYYY")
+                return moment(date).format("DD/MM/YYYY, h:mm:ss A");
             }
         }
     }));
