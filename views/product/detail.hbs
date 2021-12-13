@@ -1,9 +1,3 @@
-{{#if mess}}
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>{{mess}}!</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-{{/if}}
 <div class="container mt-3">
     <div class="row">
         <div class="col-sm-7 mt-2">
@@ -42,14 +36,6 @@
                     (80%
                     <i class="fas fa-thumbs-up" style="color: blue"></i>)
                 </span>
-                <form method="post" id="favorite" action="/favorite?ProID={{this.product.ProID}}&UserID={{account.UserID}}"></form>
-                <span id="text" style="cursor: pointer;">
-                    {{#if favorite}}
-                        <i class="fa fa-eye" aria-hidden="true"></i>
-                    {{else}}
-                        <i class="fa fa-heart" aria-hidden="true"></i>
-                    {{/if}}
-                </span>
             </div>
             <div class="mt-lg-3">
                 <div class="d-flex justify-content-between">
@@ -59,54 +45,25 @@
                     </h5>
                 </div>
             </div>
-            {{#if isLogin}}
-                {{#if seller}}
-                    <div>
-                        <div class="d-flex justify-content-between">
-                            <p><i>Bước giá</i></p>
-                            <p><i>{{format_number this.product.StepPrice}}</i></p>
-                        </div>
-                        <div>
-                            <div class="d-flex justify-content-between">
-                                <p>Mua Ngay</p>
-                                <p class="text-danger"><b>{{format_number this.product.BuyNowPrice}}</b></p>
-                            </div>
-                        </div>
-                    </div>
-                {{else}}
-                    <div>
-                        <div class="d-flex justify-content-between">
-                            <p><i>Bước giá</i></p>
-                            <p><i>{{format_number this.product.StepPrice}}</i></p>
-                        </div>
-                    </div>
-                    <form method="post" id="formBid" action="/bid?ProID={{this.product.ProID}}">
-                    <div class="d-flex justify-content-evenly">
-                        <button class="btn w-25" type="submit" style="background-color: darkblue; color: white" {{#if expire}} disabled {{/if}}>
-                            {{#if expire}}
-                                Không thể đấu giá
-                            {{else}}
-                                <i class="fa fa-gavel"></i>&nbsp;&nbsp;Đặt giá
-                            {{/if}}
-                        </button>
-                        <input type="text" class="form-control w-50" id="Price" name="Price" {{#if expire}} disabled {{/if}}>
-                    </div>
-                    </form>
-                    <h6 class="text-center mt-2 font-weight-bold">hoặc</h6>
-                    <div class="">
-                        <div class="d-grid gap-2 col-6 mx-auto">
-                            <button class="btn btn-danger" type="button" id="PromptPrice" {{#if expire}} disabled {{/if}}>
-                                {{#if expire}}
-                                    Không thể đấu giá
-                                {{else}}
-                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;&nbsp;Mua Ngay
-                                {{/if}}
-                            </button>
-                            <h5 class="font-weight-bold text-danger text-center">{{format_number this.product.BuyNowPrice}}</h5>
-                        </div>
-                    </div>
-                {{/if}}
-            {{/if}}
+            <div>
+                <div class="d-flex justify-content-between">
+                    <p><i>Bước giá</i></p>
+                    <p><i>{{format_number this.product.StepPrice}}</i></p>
+                </div>
+            </div>
+            <div class="d-flex justify-content-evenly">
+                <button class="btn w-25" type="button" style="background-color: darkblue; color: white">
+                    <i class="fa fa-gavel"></i>&nbsp;&nbsp;Đặt giá</button>
+                <input type="text" class="form-control w-50" id="bidPrice" name="bidPrice">
+            </div>
+            <h6 class="text-center mt-2 font-weight-bold">hoặc</h6>
+            <div class="">
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    <button class="btn btn-danger" type="button">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;&nbsp;Mua Ngay</button>
+                    <h5 class="font-weight-bold text-danger text-center">{{format_number this.product.BuyNowPrice}}</h5>
+                </div>
+            </div>
         </div>
     </div>
     <div class="card mt-4">
@@ -161,54 +118,13 @@
                     </div>
                 </div>
             </div>
-
-            {{#if seller}}
-                <div class="card mt-auto">
-                    <h4 class="card-header">Danh sách hàng chờ</h4>
-                    <div class="card-body">
-                        <div class="card-text">
-                            <table class="table table-striped table-inverse table-responsive table-bordered text-center">
-                                <thead class="thead-inverse">
-                                <tr>
-                                    <th>ID người mua</th>
-                                    <th>Tên người mua</th>
-                                    <th> </th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {{#each pending_bidder}}
-                                    <tr>
-                                        <td>{{this.UserID}}</td>
-                                        <td>{{this.UserName}}</td>
-                                        <td>
-                                            <div class="row">
-                                                <form method="post">
-                                                    <input type="hidden" name="BidderID" value="{{this.UserID}}">
-                                                    <input type="hidden" name="ProID" value="{{../product.ProID}}">
-                                                    <button class="border-0 text-success" formaction="/detail/acceptPending">
-                                                        <i class="fas fa-check-circle"></i>
-                                                    </button>
-                                                    <button class="border-0 text-danger" formaction="/detail/denyPending">
-                                                        <i class="fas fa-trash"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                {{/each}}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            {{/if}}
         </div>
     </div>
     <div class="card mt-4">
         <h4 class="card-header mb-2">
             Sản phẩm tương tự
         </h4>
-        {{#if this.similarProduct}}
+        {{#if this.similarProductCount}}
             <div class="card-body">
                 <div class="row justify-content-center">
                     {{#each this.similarProduct}}
@@ -243,32 +159,3 @@
         {{/if}}
     </div>
 </div>
-
-{{#section 'footer'}}
-    <script>
-        $('#text').on('click',function (e){
-            $('#favorite').submit();
-        });
-
-        $('#formBid').on('submit',function (e){
-            e.preventDefault();
-            const price = +$('#Price').val();
-            let BidPrice;
-            if(price>{{product.BuyNowPrice}}){
-                $('#Price').val({{product.BuyNowPrice}}+"");
-                BidPrice = {{product.BuyNowPrice}};
-            }
-            else BidPrice = price;
-            if(BidPrice === {{product.BuyNowPrice}} || BidPrice>={{product.CurPrice}}+{{product.StepPrice}}){
-                $('#formBid').off('submit').submit();
-            }else{
-                alert('giá bạn đưa ra nhỏ hơn giá đấu giá');
-            }
-        });
-
-        $('#PromptPrice').on('click',function (e){
-            $('#Price').val({{product.BuyNowPrice}}+"");
-            $('#formBid').submit();
-        });
-    </script>
-{{/section}}

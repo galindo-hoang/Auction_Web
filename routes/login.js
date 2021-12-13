@@ -30,8 +30,8 @@ router.get('/account/login/check',auth.afterLogin,async (req, res) => {
             req.session.account = data[0];
             delete req.session.account.UserPassword;
             return res.json(true);
-        }else return res.json(false);
-    }
+        }
+    } return res.json(false);
 });
 
 
@@ -51,7 +51,7 @@ router.post("/account/FP",async (req, res) => {
         otp = otp * 100000;
         check.otp = parseInt(otp);
 
-        sendEmail(req.body.email,"OTP",check.otp+"");
+        sendEmail(req.body.email,"OTP",check.otp);
         res.redirect("/account/FP/verify");
     }
 })

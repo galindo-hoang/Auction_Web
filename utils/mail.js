@@ -16,7 +16,7 @@ const sendEmail= function (email,title,content) {
     transporter.sendMail({
         to: email, // list of receivers
         subject: title, // Subject line
-        html: content, // html body
+        html: "<b>" + content + "</b>", // html body
     }).then(()=>{});
 }
 

@@ -31,7 +31,7 @@ router.post("/account/register", async (req, res) => {
     otp = otp * 100000;
     check.otp = parseInt(otp);
 
-    sendEmail(req.body.email,"OTP",String(check.otp));
+    sendEmail(req.body.email,"OTP",check.otp);
 
     res.redirect('/account/register/check/verify');
 });

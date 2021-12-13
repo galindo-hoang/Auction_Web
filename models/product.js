@@ -54,39 +54,24 @@ export default {
     },
 
     async countFTS(query) {
-        const list = (await knex.raw("select count(*) amount from products left join categories_detail cd on products.CatDeID = cd.CatDeID where match(cd.CatDeName) against(?) or match(products.ProName) against (?)", [query, query]))[0];
-        return list[0]["amount"];
+        const list = await knex.select('*').from('categories_detail').leftJoin('products', 'categories_detail.CatDeID', 'products.CatDeID').where('products.ProName', 'like', '%' + query + '%').orWhere('categories_detail.CatDeName', 'like', '%' + query + '%').count({amount: 'products.ProID'});
+        return list[0].amount;
     },
 
-    async FTS(query, limit, offset, sort) {
-        if (sort === "1") {
-            return (await knex.raw("select * from products left join categories_detail cd on products.CatDeID = cd.CatDeID where match(cd.CatDeName) against(?) or match(products.ProName) against (?) order by products.CurPrice desc limit ? offset ?", [query, query, limit, offset]))[0];
-        } else if (sort === "2") {
-            return (await knex.raw("select * from products left join categories_detail cd on products.CatDeID = cd.CatDeID where match(cd.CatDeName) against(?) or match(products.ProName) against (?) order by products.CurPrice limit ? offset ?", [query, query, limit, offset]))[0];
-        } else if (sort === "3") {
-            return (await knex.raw("select * from products left join categories_detail cd on products.CatDeID = cd.CatDeID where match(cd.CatDeName) against(?) or match(products.ProName) against (?) order by products.EndDate desc limit ? offset ?", [query, query, limit, offset]))[0];
-        } else if (sort === "4") {
-            return (await knex.raw("select * from products left join categories_detail cd on products.CatDeID = cd.CatDeID where match(cd.CatDeName) against(?) or match(products.ProName) against (?) order by products.EndDate limit ? offset ?", [query, query, limit, offset]))[0];
-        } else {
-            return (await knex.raw("select * from products left join categories_detail cd on products.CatDeID = cd.CatDeID where match(cd.CatDeName) against(?) or match(products.ProName) against (?) limit ? offset ?", [query, query, limit, offset]))[0];
+    FTS(query,limit,offset,sort){
+        if(sort === "1"){
+            return knex.select('*').from('categories_detail').leftJoin('products','categories_detail.CatDeID','products.CatDeID').where('products.ProName','like','%'+query+'%').orWhere('categories_detail.CatDeName','like','%'+query+'%').orderBy('products.CurPrice','desc').limit(limit).offset(offset);
+        }else if(sort === "2"){
+            return knex.select('*').from('categories_detail').leftJoin('products','categories_detail.CatDeID','products.CatDeID').where('products.ProName','like','%'+query+'%').orWhere('categories_detail.CatDeName','like','%'+query+'%').orderBy('products.CurPrice').limit(limit).offset(offset);
+        }else if(sort === "3"){
+            return knex.select('*').from('categories_detail').leftJoin('products','categories_detail.CatDeID','products.CatDeID').where('products.ProName','like','%'+query+'%').orWhere('categories_detail.CatDeName','like','%'+query+'%').orderBy('products.EndDate','desc').limit(limit).offset(offset);
+        }else {
+            return knex.select('*').from('categories_detail').leftJoin('products','categories_detail.CatDeID','products.CatDeID').where('products.ProName','like','%'+query+'%').orWhere('categories_detail.CatDeName','like','%'+query+'%').orderBy('products.EndDate').limit(limit).offset(offset);
         }
     },
 
     async findRemaining(ID){
         const res = (await knex.raw(`select HOUR(timediff(products.EndDate,now())) remaining from products where ProID = ?`, ID))[0];
         return res[0].remaining;
-    },
-
-    findByFavorite(ID){
-        return knex.select('products.*').from('favorite_list').leftJoin('products','products.ProID','favorite_list.ProID').where('favorite_list.UserID',ID);
-    },
-    updatePrice(Price,ID) {
-        knex('products').where({ProID:ID}).update({CurPrice:Price}).then(()=>{});
-    },
-    // async findWithTime(ID) {
-    //     return (await knex.raw('select *, TIME_TO_SEC(timediff(products.EndDate,now())) time from products where ProID = '+ID))[0];
-    // },
-    updateStatus(Status,ID){
-        knex('products').where({ProID:ID}).update({Status:Status}).then(()=>{});
     }
 }

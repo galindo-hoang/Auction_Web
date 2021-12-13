@@ -1,4 +1,5 @@
 import session from "express-session";
+import Users from '../models/user.js';
 import Category from "../models/category.js";
 import CategoriesDetail from '../models/categories_detail.js';
 import fnMySQLStore from 'express-mysql-session';
