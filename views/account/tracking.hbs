@@ -12,48 +12,23 @@
                     <thead>
                     <tr>
                         <th scope="col" class="text-center">Mã đấu giá</th>
-                        <th scope="col" class="text-center">Ngày đấu giá</th>
+                        <th scope="col" class="text-center">&nbsp;</th>
                         <th scope="col" class="text-center">Sản phẩm</th>
                         <th scope="col" class="text-center">Tiền đấu giá</th>
-                        <th scope="col" class="text-center">Trạng thái sản phẩm</th>
+                        <th scope="col" class="text-center">Ngày đấu giá</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {{#each products_history}}
+                    {{#each products}}
                         <tr class="align-middle">
-                            <th scope="row" class="text-center"><a href="#">{{this.BidID}}</a></th>
-                            <td>{{this.BidDate}}</td>
+                            <th scope="row" class="text-center"><a href="/detail/{{this.ProID}}">{{this.BidID}}</a></th>
+                            <td><img style="width: 120px;height: 120px;" src="/public/imgs/products/{{this.ProID}}/account.jpg"></td>
                             <td>{{this.TinyDes}}</td>
-                            <td class="text-center">{{this.Price}}</td>
-                            <td class="text-center">{{this.EndDate}}</td>
+                            <td class="text-center">{{format_number this.Price}} đ</td>
+                            <td class="text-center">{{format_date this.BidDate}}</td>
                         </tr>
 
                     {{/each}}
-
-
-                    <tr class="align-middle">
-                        <th scope="row" class="text-center"><a href="#">01234</a></th>
-                        <td>3/12/2021</td>
-                        <td>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</td>
-                        <td class="text-center">1.000.000 đ</td>
-                        <td class="text-center">Còn 234859 giây</td>
-                    </tr>
-
-                    <tr class="align-middle">
-                        <th scope="row" class="text-center"><a href="#">01234</a></th>
-                        <td>3/12/2021</td>
-                        <td>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</td>
-                        <td class="text-center">1.000.000 đ</td>
-                        <td class="text-center">Còn 234859 giây</td>
-                    </tr>
-
-                    <tr class="align-middle">
-                        <th scope="row" class="text-center"><a href="#">01234</a></th>
-                        <td>3/12/2021</td>
-                        <td>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</td>
-                        <td class="text-center">1.000.000 đ</td>
-                        <td class="text-center">Còn 234859 giây</td>
-                    </tr>
                     </tbody>
                 </table>
             </div>

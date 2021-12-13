@@ -29,6 +29,15 @@ const entity = {
             DOB: date,
             UserName:name
         }).then(()=>{});
+    },
+    findByProID(ProID) {
+        return knex.select('users.*').from('products').leftJoin('users','users.UserID','products.SellerID').where('ProID',ProID);
+    },
+    findPreBidderByID(ProID) {
+        return knex.select('users.*').from('users').leftJoin('products_history','users.UserID','products_history.BidderID').where('ProID',ProID).orderBy('Price','desc').limit(1);
+    },
+    findUserPendingByProID(ProID){
+        return knex.select('users.*').from('pending_list').leftJoin('users','users.UserID','pending_list.UserID').where('pending_list.ProID',ProID);
     }
 }
 

@@ -6,6 +6,8 @@ import login_route from "./routes/login.js";
 import profile_user_route from "./routes/profile-user.js";
 import viewByCategories from './models/category.js';
 import viewByProduct from './models/product.js';
+import view_product from "./routes/view-product.js";
+
 const app = express();
 
 app.use('/public', express.static('public'));
@@ -17,6 +19,7 @@ view_mdw(app);
 app.use('/',register_route);
 app.use('/',login_route);
 app.use('/',profile_user_route);
+app.use('/',view_product);
 
 
 app.get('/',async (req, res) => {
@@ -104,18 +107,6 @@ app.get('/views/byCatDe/:id',async (req,res)=>{
         nextPage: +page + 1,
         previousPage: +page - 1,
         isOnePage: pageNumbers.length === 1
-    });
-});
-
-app.get('/detail/:id', async (req,res)=>{
-    const proID = req.params.id || 1;
-
-    const product = await viewByProduct.findByID(proID);
-    const similarProduct = await viewByProduct.findTop5ByCatDeID(product.CatDeID, proID);
-    res.render('product/detail', {
-        product: product,
-        similarProduct: similarProduct,
-        similarProductCount: similarProduct.length
     });
 });
 
