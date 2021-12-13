@@ -2,6 +2,9 @@ import auth from "../mdw/auth.mdw.js";
 import Users from "../models/user.js";
 import bcrypt from "bcryptjs";
 import express from "express";
+import viewByProduct from '../models/product.js';
+import products_history from "../models/products_history.js";
+
 
 const router = express.Router();
 
@@ -30,15 +33,17 @@ router.get("/account/review",auth.beforeLogin,(req,res)=>{
     res.render("account/review");
 });
 
-router.get("/account/tracking",auth.beforeLogin,(req,res)=>{
-    res.render("account/tracking");
+router.get("/account/tracking",auth.beforeLogin,async (req, res) => {
+    const products = await products_history.findByTracking(req.session.account.UserID);
+    res.render("account/tracking", {products});
 });
 
-router.get("/account/favorite",auth.beforeLogin,(req,res)=>{
-    res.render("account/favorite");
+router.get("/account/favorite",auth.beforeLogin,async (req, res) => {
+    const products = await viewByProduct.findByFavorite(req.session.account.UserID);
+    res.render("account/favorite", {products});
 });
 
-router.get("/account/purchased",auth.beforeLogin,(req,res)=>{
+router.get("/account/purchased",auth.beforeLogin,(req, res) => {
     res.render("account/purchase");
 });
 

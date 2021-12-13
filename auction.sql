@@ -29,7 +29,8 @@ CREATE TABLE categories_detail ( -- Sản phẩm cụ thể từ một danh mụ
     CatDeID int(11) unsigned NOT NULL AUTO_INCREMENT,
     CatDeName varchar(50) COLLATE utf8_general_ci NOT NULL,
     CatID int(11) unsigned NOT NULL, -- ID lấy từ bảng categories
-    PRIMARY KEY (CatDeID)
+    PRIMARY KEY (CatDeID),
+    FULLTEXT KEY (CatDeName)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 INSERT INTO categories_detail (CatDeID, CatDeName, CatID) VALUES (1, 'Điện thoại', 1);
@@ -61,7 +62,8 @@ CREATE TABLE products ( -- Bảng product được đăng bán cụ thể
     SellerID int NOT NULL, -- ID người bán
     AutoExtend tinyint(1) NOT NULL, -- Có tự động gia hạn không
     Status tinyint(1) NOT NULL, -- Sản phẩm đang được đấu giá hay đã bán (Vd: 0 là đang đấu giá, 1 là đã bán)
-    PRIMARY KEY (ProID)
+    PRIMARY KEY (ProID),
+    FULLTEXT KEY (ProName)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS products_history;
@@ -103,6 +105,23 @@ CREATE TABLE banned_list( -- Bảng danh sách bidder bị cấm đáu giá ở 
     UserID int NOT NULL, -- ID của bidder bị banned
     ProID int(11) unsigned NOT NULL, -- ID sản phẩm mà bidder bị banned
     PRIMARY KEY (UserID, ProID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+
+
+DROP TABLE IF EXISTS pending_list;
+CREATE TABLE pending_list( -- Bảng danh sách bidder đang trong hàng chờ để được đấu giá
+                            UserID int NOT NULL, -- ID của bidder trong hàng chờ
+                            ProID int(11) unsigned NOT NULL, -- ID sản phẩm bidder đang chờ được đấu giá
+                            PRIMARY KEY (UserID, ProID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+
+DROP TABLE IF EXISTS accepted_list;
+CREATE TABLE accepted_list( -- Bảng danh sách bidder được chấp nhận đấu giá
+                            UserID int NOT NULL, -- ID của bidder được chấp nhận đấu giá
+                            ProID int(11) unsigned NOT NULL, -- ID sản phẩm mà bidder được đấu giá
+                            PRIMARY KEY (UserID, ProID)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS update_users;
@@ -213,7 +232,7 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 </tr>
 </tbody>
 </table>
-</div>', 200000, 14000000, 18000000, 2, '2021-12-01 21:20:27', '2021-12-11 21:20:35', 1, 0, 1);
+</div>', 200000, 14000000, 18000000, 2, '2021-12-01 21:20:27', '2021-01-11 21:20:35', 1, 0, 1);
 INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (3, 'Laptop HP 15-DW1001WN 4J238UA', 'hiệu năng ổn định cùng một mức giá hợp lý.', '<div class="box-content">
 <table id="tskt">
 <tbody>
@@ -263,7 +282,7 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 </tr>
 </tbody>
 </table>
-</div>', 100000, 5000000, 10000000, 2, '2021-12-05 21:23:34', '2021-12-07 21:23:38', 1, 0, 1);
+</div>', 100000, 5000000, 10000000, 2, '2021-12-05 21:23:34', '2021-01-07 15:23:38', 1, 0, 1);
 INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (4, 'Laptop HP Probook 430 G8 2H0N6PA', 'Chiếc laptop HP Probook 430 G8 2H0N6PA hỗ trợ đa dạng công việc văn phòng học tập. ', '<div class="box-content">
 <table id="tskt">
 <tbody>
@@ -313,7 +332,7 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 </tr>
 </tbody>
 </table>
-</div>', 300000, 16000000, 21000000, 2, '2021-12-07 21:26:03', '2021-12-09 21:26:07', 1, 0, 1);
+</div>', 300000, 16000000, 21000000, 2, '2021-12-07 21:26:03', '2021-12-15 21:26:07', 1, 0, 1);
 INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (5, 'Laptop HP Probook 430 G8 2H0N6PA', '15s-fq2602TU 4B6D3PA là một sản phẩm mới đến từ thương hiệu HP.', '<div class="box-content">
 <table id="tskt">
 <tbody>
@@ -363,7 +382,7 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 </tr>
 </tbody>
 </table>
-</div>', 200000, 13000000, 17000000, 2, '2021-12-06 21:28:29', '2021-12-09 21:28:33', 1, 0, 1);
+</div>', 200000, 13000000, 17000000, 2, '2021-12-06 21:28:29', '2021-12-25 21:28:33', 1, 0, 1);
 INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (6, 'iPhone 13 | Chính hãng VN/A', ' Sau đó, mọi sự quan tâm lại đổ dồn vào iPhone 13.', '<div class="box-content">
 <table id="tskt">
 <tbody>
@@ -413,7 +432,7 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 </tr>
 </tbody>
 </table>
-</div>', 400000, 20000000, 25000000, 1, '2021-12-03 21:31:35', '2021-12-06 21:31:42', 1, 0, 1);
+</div>', 400000, 20000000, 25000000, 1, '2021-12-03 21:31:35', '2021-12-27 21:31:42', 1, 0, 1);
 INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (7, 'Samsung Galaxy Note 20 Ultra 5G', 'Bên cạnh biên bản Galaxy Note 20 thường, Samsung còn cho ra mắt Note 20 Ultra 5G.', '<div class="box-content">
 <table id="tskt">
 <tbody>
@@ -699,7 +718,7 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 </tr>
 </tbody>
 </table>
-</div>', 70000, 3000000, 6000000, 1, '2021-12-05 21:38:57', '2021-12-05 21:39:02', 1, 0, 1);
+</div>', 70000, 3000000, 6000000, 1, '2021-12-05 21:38:57', '2021-12-31 21:39:02', 1, 0, 1);
 INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (12, 'Lò Vi Sóng Có Nướng Hafele HW-F23B', ' có kích thước nhỏ gọn với dung tích 23 lít. Công suất nướng 1.000W.', '<div class="box-content">
 <table id="tskt">
 <tbody>
@@ -807,7 +826,7 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 </tr>
 </tbody>
 </table>
-</div>', 30000, 800000, 3000000, 3, '2021-12-05 21:43:54', '2021-12-05 21:43:58', 1, 0, 1);
+</div>', 30000, 800000, 3000000, 3, '2021-12-05 21:43:54', '2021-12-29 21:43:58', 1, 0, 1);
 INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (14, 'Sharp R-205VN', 'Thiết kế nhỏ gọn với những đường nét tính tế và hiện đại.', '<div class="box-content">
 <table id="tskt">
 <tbody>
@@ -861,7 +880,7 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 </tr>
 </tbody>
 </table>
-</div>', 20000, 800000, 2000000, 3, '2021-12-05 21:44:57', '2021-12-05 21:44:59', 1, 0, 1);
+</div>', 20000, 800000, 2000000, 3, '2021-12-05 21:44:57', '2022-01-05 21:44:59', 1, 0, 1);
 INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (15, 'Máy Làm Bánh BIYI BM1513F', 'Sản phẩm không tiết ra các chất độc hại trong quá trình sử dụng, ngoài ra khuôn nướng.', '<div class="box-content">
 <table id="tskt">
 <tbody>
@@ -915,7 +934,7 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 </tr>
 </tbody>
 </table>
-</div>', 10000, 200000, 1000000, 4, '2021-12-05 21:47:39', '2021-12-05 21:47:43', 1, 0, 1);
+</div>', 10000, 200000, 1000000, 4, '2021-12-05 21:47:39', '2022-01-08 21:47:43', 1, 0, 1);
 INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (16, 'Máy làm bánh nướng hình thú ngộ nghĩnh.', 'Máy có kiểu dáng nhỏ gọn, trọng lượng chỉ 1.6kg để bạn có thể dễ dàng chi chuyển.', '<div class="box-content">
 <table id="tskt">
 <tbody>
@@ -1077,7 +1096,7 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 </tr>
 </tbody>
 </table>
-</div>', 200000, 1400000, 1700000, 5, '2021-12-05 21:51:18', '2021-12-05 21:51:19', 1, 0, 1);
+</div>', 200000, 1400000, 1700000, 5, '2021-12-05 21:51:18', '2021-12-14 21:51:19', 1, 0, 1);
 INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (19, 'Tự Động Tiross TS9090 (Xanh) - Hàng Chính Hãng', 'màu sắc đẹp mắt và sở hữu tính năng hiện đại, giúp bạn tự làm món kem thơm ngon. ', '<div class="box-content">
 <table id="tskt">
 <tbody>
@@ -1131,7 +1150,7 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 </tr>
 </tbody>
 </table>
-</div>', 250000, 2000000, 2500000, 5, '2021-12-05 21:52:34', '2021-12-05 21:52:35', 1, 0, 1);
+</div>', 250000, 2000000, 2500000, 5, '2021-12-05 21:52:34', '2021-12-14 06:52:35', 1, 0, 1);
 INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (20, 'UNOLD 48895 Dung Tích 1.5 Lít', 'Công nghệ được đóng gói trong một vỏ thép không gỉ thanh lịch, bền.', '<ul>
 <li>Công suất định mức: 150 W, 220-240 V ~, 50 Hz</li>
 <li>Kích thước (LxWxH): 42.5 x 28.5 x 26.2 cm</li>
@@ -1151,7 +1170,7 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 <li>Hẹn giờ kỹ thuật số có thể điều chỉnh trong khoảng từ 5 đến 60 phút</li>
 <li>Nhập khẩu tại Đức</li>
 <li>Phụ kiện: Tập sách công thức với công thức làm kem Schuhbeck, hướng dẫn sử dụng với công thức nấu ăn</li>
-</ul>', 50000, 800000, 1500000, 6, '2021-12-05 21:56:59', '2021-12-11 21:57:00', 1, 0, 1);
+</ul>', 50000, 800000, 1500000, 6, '2021-12-05 21:56:59', '2021-12-18 21:57:00', 1, 0, 1);
 INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (22, 'L-Beans 900A công suất 360W', 'Máy xay cafe chuyên nghiệp của L-Beans luôn được đánh giá cao vì sự bền bỉ.', '<ul>
 <li>Công suất định mức: 150 W, 220-240 V ~, 50 Hz</li>
 <li>Kích thước (LxWxH): 42.5 x 28.5 x 26.2 cm</li>
