@@ -88,5 +88,17 @@ export default {
     // },
     updateStatus(Status,ID){
         knex('products').where({ProID:ID}).update({Status:Status}).then(()=>{});
+    },
+
+    async findTopBidder(ID){
+        const maxPrice =  (await knex.raw(`select * from products_history where BidID >= all (select BidID from products_history where ProID = ?) and ProID = ?`, [+ID, +ID]))[0][0];
+        if(maxPrice === undefined)
+            return [];
+        return (await knex('users').where('UserID', maxPrice.BidderID));
+    },
+
+    async findProductHistory(ID){
+      return (await knex.raw(`select BidDate, Price, UserName from products_history, users where BidderID = UserID and ProID = ?`, +ID))[0];
     }
+
 }

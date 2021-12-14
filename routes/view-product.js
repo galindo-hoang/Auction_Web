@@ -9,6 +9,8 @@ import accepted_list from "../models/accepted_list.js";
 import products_history from "../models/products_history.js";
 import sendEmail from "../utils/mail.js";
 import pending_list from "../models/pending_list.js";
+import asyncErrors from 'express-async-errors';
+
 
 const router = express.Router();
 
@@ -19,6 +21,28 @@ router.get('/detail/:id', async (req,res)=>{
 
     const product = await viewByProduct.findByID(proID);
     const similarProduct = await viewByProduct.findTop5ByCatDeID(product.CatDeID, proID);
+    const topBidder = await viewByProduct.findTopBidder(proID);
+    const productHistory = await viewByProduct.findProductHistory(proID);
+
+    if(topBidder.length) {
+        let tmp = topBidder[0].UserName;
+        tmp = tmp.split("");
+        topBidder[0].UserName = "";
+        for (let i = 0; i / tmp.length < 0.6; i++)
+            tmp[i] = '*';
+        for (let i = 0; i < tmp.length; i++)
+            topBidder[0].UserName += tmp[i];
+
+        for (let i = 0; i < productHistory.length; i++) {
+            tmp = productHistory[i].UserName.split("");
+            for (let j = 0; j / tmp.length < 0.6; j++)
+                tmp[j] = '*';
+            productHistory[i].UserName = '';
+            for (let k = 0; k < tmp.length; k++)
+                productHistory[i].UserName += tmp[k];
+        }
+    }
+
     if(req.session.isLogin){
         let mess = "";
         const banned = ((await banned_list.find(req.session.account.UserID,req.params.id)).length === 1);
@@ -40,13 +64,19 @@ router.get('/detail/:id', async (req,res)=>{
             product: product,
             similarProduct: similarProduct,
             favorite, expire,seller,pending_bidder, mess,
-            isLogin: req.session.isLogin
+            isLogin: req.session.isLogin,
+            topBidder: topBidder[0],
+            isBid: topBidder.length,
+            productHistory
         });
     }else{
         res.render('product/detail', {
             product: product,
             similarProduct: similarProduct,
-            isLogin: req.session.isLogin
+            isLogin: req.session.isLogin,
+            topBidder: topBidder[0],
+            isBid: topBidder.length,
+            productHistory
         });
     }
 });

@@ -137,6 +137,15 @@ app.get('/views/:query',async (req, res) => {
     });
 })
 
+app.use(function (req, res, next) {
+    res.render('404', { layout: false });
+});
+
+app.use(function (err, req, res, next) {
+    console.error(err.stack)
+    // res.status(500).send('Something broke!')
+    res.render('500', { layout: false });
+});
 
 app.listen(300,()=>{
     console.log(`Example app listening at http://localhost:${300}`);
