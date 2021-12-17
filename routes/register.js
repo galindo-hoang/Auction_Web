@@ -23,7 +23,7 @@ router.get("/account/register", auth.afterLogin,(req,res)=>{
 router.post("/account/register", async (req, res) => {
     var salt = bcrypt.genSaltSync(10);
     const password = bcrypt.hashSync(req.body.password, salt);
-    console.log(password);
+    // console.log(password);
     object.UserEmail = req.body.email;
     object.UserPassword = password;
     object.UserName = req.body.name;

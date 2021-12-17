@@ -14,15 +14,29 @@
         </div>
     </div>
 
-    <div class="card">
-        <div class="card-header">
-            Quản lý sản phẩm
-        </div>
-        <div class="card-body">
-            <div class="list-group">
-                <a href="/account/profile" class="list-group-item list-group-item-action">Sản phẩm đang đấu giá</a>
-                <a href="/account/purchased" class="list-group-item list-group-item-action">Sản phẩm kết thúc đấu giá</a>
+    {{#if this.isAdmin}}
+        <div class="card">
+            <div class="card-header">
+                Quản lý sản phẩm
+            </div>
+            <div class="card-body">
+                <div class="list-group">
+                    <a href="/account/profile" class="list-group-item list-group-item-action">Sản phẩm đang đấu giá</a>
+                    <a href="/account/purchased" class="list-group-item list-group-item-action">Sản phẩm kết thúc đấu giá</a>
+                </div>
             </div>
         </div>
-    </div>
+        <div class="card mt-4 mb-3">
+            <div class="card-header">
+                Quản lý danh mục
+            </div>
+            <div class="card-body">
+                <div class="list-group">
+                    <a href="/admin/editCat" class="list-group-item list-group-item-action">Danh mục cấp 1</a>
+                    <a href="/admin/editCatDe" class="list-group-item list-group-item-action">Danh mục cấp 2</a>
+                </div>
+            </div>
+        </div>
+    {{/if}}
+
 </div>
