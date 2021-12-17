@@ -54,7 +54,8 @@ CREATE TABLE products ( -- Bảng product được đăng bán cụ thể
     TinyDes varchar(100) COLLATE utf8_general_ci NOT NULL, -- mô tả ngắn gọn
     FullDes text COLLATE utf8_general_ci NOT NULL, -- mô tả chi tiết
     StepPrice int(11) NOT NULL, -- Bước giá
-    CurPrice int(11) NOT NULL, -- Giá hiện tại (giá khởi điểm lúc đầu)
+    StartPrice int(11) NOT NULL, -- Giá khởi điểm lúc đầu
+    CurPrice int(11) NOT NULL, -- Giá hiện tại
     BuyNowPrice int(11) NOT NULL, -- giá mua ngay
     CatDeID int(11) NOT NULL, -- ID lấy từ bảng categories_detail
     StartDate datetime, -- ngày giờ bắt đầu
@@ -132,7 +133,8 @@ CREATE TABLE update_users ( -- Danh sách bidder xin nâng cấp tài khoản
 
 SET FOREIGN_KEY_CHECKS = 1;
 
-INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu laptop cấu hình mạnh với thiết kế hiện đại.
+insert into products (ProID, ProName, TinyDes, FullDes, StepPrice, StartPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status)
+values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu laptop cấu hình mạnh với thiết kế hiện đại.
 ', '<div class="box-content">
 <table id="tskt">
 <tbody>
@@ -182,8 +184,8 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 </tr>
 </tbody>
 </table>
-</div>', 200000, 15000000, 19000000, 2, '2021-12-05 21:14:52', '2021-12-10 21:14:58', 1, 0, 1);
-INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (2, 'Laptop HP 15-DY2045 2Q1H3UA', 'Laptop HP luôn là lựa chọn được nhiều người dùng tin tưởng lựa chọn', '<div class="box-content">
+</div>', 200000, 15000000, 15000000, 19000000, 2, '2021-12-05 21:14:52', '2021-12-10 21:14:58', 1, 0, 1),
+        (2, 'Laptop HP 15-DY2045 2Q1H3UA', 'Laptop HP luôn là lựa chọn được nhiều người dùng tin tưởng lựa chọn', '<div class="box-content">
 <table id="tskt">
 <tbody>
 <tr>
@@ -232,8 +234,8 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 </tr>
 </tbody>
 </table>
-</div>', 200000, 14000000, 18000000, 2, '2021-12-01 21:20:27', '2021-01-11 21:20:35', 1, 0, 1);
-INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (3, 'Laptop HP 15-DW1001WN 4J238UA', 'hiệu năng ổn định cùng một mức giá hợp lý.', '<div class="box-content">
+</div>', 200000, 14000000, 14000000, 18000000, 2, '2021-12-01 21:20:27', '2021-01-11 21:20:35', 1, 0, 1),
+        (3, 'Laptop HP 15-DW1001WN 4J238UA', 'hiệu năng ổn định cùng một mức giá hợp lý.', '<div class="box-content">
 <table id="tskt">
 <tbody>
 <tr>
@@ -282,8 +284,8 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 </tr>
 </tbody>
 </table>
-</div>', 100000, 5000000, 10000000, 2, '2021-12-05 21:23:34', '2021-01-07 15:23:38', 1, 0, 1);
-INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (4, 'Laptop HP Probook 430 G8 2H0N6PA', 'Chiếc laptop HP Probook 430 G8 2H0N6PA hỗ trợ đa dạng công việc văn phòng học tập. ', '<div class="box-content">
+</div>', 100000, 5000000, 5000000, 10000000, 2, '2021-12-05 21:23:34', '2021-01-07 15:23:38', 1, 0, 1),
+        (4, 'Laptop HP Probook 430 G8 2H0N6PA', 'Chiếc laptop HP Probook 430 G8 2H0N6PA hỗ trợ đa dạng công việc văn phòng học tập. ', '<div class="box-content">
 <table id="tskt">
 <tbody>
 <tr>
@@ -332,8 +334,8 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 </tr>
 </tbody>
 </table>
-</div>', 300000, 16000000, 21000000, 2, '2021-12-07 21:26:03', '2021-12-15 21:26:07', 1, 0, 1);
-INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (5, 'Laptop HP Probook 430 G8 2H0N6PA', '15s-fq2602TU 4B6D3PA là một sản phẩm mới đến từ thương hiệu HP.', '<div class="box-content">
+</div>', 300000, 16000000, 16000000, 21000000, 2, '2021-12-07 21:26:03', '2021-12-15 21:26:07', 1, 0, 1),
+        (5, 'Laptop HP Probook 430 G8 2H0N6PA', '15s-fq2602TU 4B6D3PA là một sản phẩm mới đến từ thương hiệu HP.', '<div class="box-content">
 <table id="tskt">
 <tbody>
 <tr>
@@ -382,8 +384,8 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 </tr>
 </tbody>
 </table>
-</div>', 200000, 13000000, 17000000, 2, '2021-12-06 21:28:29', '2021-12-25 21:28:33', 1, 0, 1);
-INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (6, 'iPhone 13 | Chính hãng VN/A', ' Sau đó, mọi sự quan tâm lại đổ dồn vào iPhone 13.', '<div class="box-content">
+</div>', 200000, 13000000, 13000000, 17000000, 2, '2021-12-06 21:28:29', '2021-12-25 21:28:33', 1, 0, 1),
+        (6, 'iPhone 13 | Chính hãng VN/A', ' Sau đó, mọi sự quan tâm lại đổ dồn vào iPhone 13.', '<div class="box-content">
 <table id="tskt">
 <tbody>
 <tr>
@@ -432,8 +434,8 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 </tr>
 </tbody>
 </table>
-</div>', 400000, 20000000, 25000000, 1, '2021-12-03 21:31:35', '2021-12-27 21:31:42', 1, 0, 1);
-INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (7, 'Samsung Galaxy Note 20 Ultra 5G', 'Bên cạnh biên bản Galaxy Note 20 thường, Samsung còn cho ra mắt Note 20 Ultra 5G.', '<div class="box-content">
+</div>', 400000, 20000000, 20000000, 25000000, 1, '2021-12-03 21:31:35', '2021-12-27 21:31:42', 1, 0, 1),
+        (7, 'Samsung Galaxy Note 20 Ultra 5G', 'Bên cạnh biên bản Galaxy Note 20 thường, Samsung còn cho ra mắt Note 20 Ultra 5G.', '<div class="box-content">
 <table id="tskt">
 <tbody>
 <tr>
@@ -490,8 +492,8 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 </tr>
 </tbody>
 </table>
-</div>', 190000, 19000000, 22000000, 1, '2021-12-05 21:33:38', '2021-12-06 18:33:41', 1, 0, 1);
-INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (8, 'Xiaomi Mi 11 Lite 5G', 'Mi 11 Lite 5G và 4G là bộ đôi vừa được Xiaomi trình làng.', '<div class="box-content">
+</div>', 190000, 19000000, 19000000, 22000000, 1, '2021-12-05 21:33:38', '2021-12-06 18:33:41', 1, 0, 1),
+        (8, 'Xiaomi Mi 11 Lite 5G', 'Mi 11 Lite 5G và 4G là bộ đôi vừa được Xiaomi trình làng.', '<div class="box-content">
 <table id="tskt">
 <tbody>
 <tr>
@@ -548,8 +550,8 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 </tr>
 </tbody>
 </table>
-</div>', 100000, 6000000, 10000000, 1, '2021-12-05 21:34:50', '2021-12-05 21:34:53', 1, 0, 1);
-INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (9, 'OPPO Reno6 5G', 'Tiếp theo phần ra mắt của series Reno 5 thì Oppo lại chuẩn bị trình làng.', '<div class="box-content">
+</div>', 100000, 6000000, 6000000, 10000000, 1, '2021-12-05 21:34:50', '2021-12-05 21:34:53', 1, 0, 1),
+        (9, 'OPPO Reno6 5G', 'Tiếp theo phần ra mắt của series Reno 5 thì Oppo lại chuẩn bị trình làng.', '<div class="box-content">
 <table id="tskt">
 <tbody>
 <tr>
@@ -606,8 +608,8 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 </tr>
 </tbody>
 </table>
-</div>', 150000, 9000000, 12000000, 1, '2021-12-05 21:36:03', '2021-12-05 21:36:05', 1, 0, 1);
-INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (10, 'Nokia 5.4', 'Nokia chắc chắn là một trong những thương hiệu không còn xa lạ với người dùng', '<div class="box-content">
+</div>', 150000, 9000000, 9000000, 12000000, 1, '2021-12-05 21:36:03', '2021-12-05 21:36:05', 1, 0, 1),
+        (10, 'Nokia 5.4', 'Nokia chắc chắn là một trong những thương hiệu không còn xa lạ với người dùng', '<div class="box-content">
 <table id="tskt">
 <tbody>
 <tr>
@@ -664,8 +666,8 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 </tr>
 </tbody>
 </table>
-</div>', 50000, 2000000, 5000000, 1, '2021-12-05 21:37:18', '2021-12-05 21:37:19', 1, 0, 1);
-INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (11, 'Realme 6', 'Realme 6 ra mắt mới đây cùng với Realme 6 Pro tiếp nối sự thành công', '<div class="box-content">
+</div>', 50000, 2000000, 2000000, 5000000, 1, '2021-12-05 21:37:18', '2021-12-05 21:37:19', 1, 0, 1),
+        (11, 'Realme 6', 'Realme 6 ra mắt mới đây cùng với Realme 6 Pro tiếp nối sự thành công', '<div class="box-content">
 <table id="tskt">
 <tbody>
 <tr>
@@ -718,8 +720,8 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 </tr>
 </tbody>
 </table>
-</div>', 70000, 3000000, 6000000, 1, '2021-12-05 21:38:57', '2021-12-31 21:39:02', 1, 0, 1);
-INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (12, 'Lò Vi Sóng Có Nướng Hafele HW-F23B', ' có kích thước nhỏ gọn với dung tích 23 lít. Công suất nướng 1.000W.', '<div class="box-content">
+</div>', 70000, 3000000, 3000000, 6000000, 1, '2021-12-05 21:38:57', '2021-12-31 21:39:02', 1, 0, 1),
+        (12, 'Lò Vi Sóng Có Nướng Hafele HW-F23B', ' có kích thước nhỏ gọn với dung tích 23 lít. Công suất nướng 1.000W.', '<div class="box-content">
 <table id="tskt">
 <tbody>
 <tr>
@@ -772,8 +774,8 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 </tr>
 </tbody>
 </table>
-</div>', 50000, 1500000, 4000000, 3, '2021-12-05 21:42:36', '2021-12-05 21:42:39', 1, 0, 1);
-INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (13, 'Lò Vi Sóng Electrolux EMM2026MX', 'tông màu đen chủ đạo kết hợp viền thép không gỉ, tạo nên nét sang trọng.', '<div class="box-content">
+</div>', 50000, 1500000, 1500000, 4000000, 3, '2021-12-05 21:42:36', '2021-12-05 21:42:39', 1, 0, 1),
+        (13, 'Lò Vi Sóng Electrolux EMM2026MX', 'tông màu đen chủ đạo kết hợp viền thép không gỉ, tạo nên nét sang trọng.', '<div class="box-content">
 <table id="tskt">
 <tbody>
 <tr>
@@ -826,8 +828,8 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 </tr>
 </tbody>
 </table>
-</div>', 30000, 800000, 3000000, 3, '2021-12-05 21:43:54', '2021-12-29 21:43:58', 1, 0, 1);
-INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (14, 'Sharp R-205VN', 'Thiết kế nhỏ gọn với những đường nét tính tế và hiện đại.', '<div class="box-content">
+</div>', 30000, 800000, 800000, 3000000, 3, '2021-12-05 21:43:54', '2021-12-29 21:43:58', 1, 0, 1),
+        (14, 'Sharp R-205VN', 'Thiết kế nhỏ gọn với những đường nét tính tế và hiện đại.', '<div class="box-content">
 <table id="tskt">
 <tbody>
 <tr>
@@ -880,8 +882,8 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 </tr>
 </tbody>
 </table>
-</div>', 20000, 800000, 2000000, 3, '2021-12-05 21:44:57', '2022-01-05 21:44:59', 1, 0, 1);
-INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (15, 'Máy Làm Bánh BIYI BM1513F', 'Sản phẩm không tiết ra các chất độc hại trong quá trình sử dụng, ngoài ra khuôn nướng.', '<div class="box-content">
+</div>', 20000, 800000, 800000, 2000000, 3, '2021-12-05 21:44:57', '2022-01-05 21:44:59', 1, 0, 1),
+        (15, 'Máy Làm Bánh BIYI BM1513F', 'Sản phẩm không tiết ra các chất độc hại trong quá trình sử dụng, ngoài ra khuôn nướng.', '<div class="box-content">
 <table id="tskt">
 <tbody>
 <tr>
@@ -934,8 +936,8 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 </tr>
 </tbody>
 </table>
-</div>', 10000, 200000, 1000000, 4, '2021-12-05 21:47:39', '2022-01-08 21:47:43', 1, 0, 1);
-INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (16, 'Máy làm bánh nướng hình thú ngộ nghĩnh.', 'Máy có kiểu dáng nhỏ gọn, trọng lượng chỉ 1.6kg để bạn có thể dễ dàng chi chuyển.', '<div class="box-content">
+</div>', 10000, 200000, 200000, 1000000, 4, '2021-12-05 21:47:39', '2022-01-08 21:47:43', 1, 0, 1),
+        (16, 'Máy làm bánh nướng hình thú ngộ nghĩnh.', 'Máy có kiểu dáng nhỏ gọn, trọng lượng chỉ 1.6kg để bạn có thể dễ dàng chi chuyển.', '<div class="box-content">
 <table id="tskt">
 <tbody>
 <tr>
@@ -988,8 +990,8 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 </tr>
 </tbody>
 </table>
-</div>', 10000, 200000, 400000, 4, '2021-12-05 21:48:37', '2021-12-05 21:48:38', 1, 0, 1);
-INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (17, '3 Trong 1 Tiross TS513', 'Máy làm bánh Tiross TS513 với 3 loại vỉ nướng đi kèm, bạn có thể làm các loại bánh.', '<div class="box-content">
+</div>', 10000, 200000, 200000, 400000, 4, '2021-12-05 21:48:37', '2021-12-05 21:48:38', 1, 0, 1),
+        (17, '3 Trong 1 Tiross TS513', 'Máy làm bánh Tiross TS513 với 3 loại vỉ nướng đi kèm, bạn có thể làm các loại bánh.', '<div class="box-content">
 <table id="tskt">
 <tbody>
 <tr>
@@ -1042,8 +1044,8 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 </tr>
 </tbody>
 </table>
-</div>', 15000, 400000, 700000, 4, '2021-12-05 21:49:39', '2021-12-05 21:49:40', 1, 0, 1);
-INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (18, 'Máy Bào Đá Kahchan EP5178_Đ', 'nhỏ gọn dễ sử dụng. Công suất máy hoạt động chỉ với 300W không lo điện năng.', '<div class="box-content">
+</div>', 15000, 400000, 400000, 700000, 4, '2021-12-05 21:49:39', '2021-12-05 21:49:40', 1, 0, 1),
+        (18, 'Máy Bào Đá Kahchan EP5178_Đ', 'nhỏ gọn dễ sử dụng. Công suất máy hoạt động chỉ với 300W không lo điện năng.', '<div class="box-content">
 <table id="tskt">
 <tbody>
 <tr>
@@ -1096,8 +1098,8 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 </tr>
 </tbody>
 </table>
-</div>', 200000, 1400000, 1700000, 5, '2021-12-05 21:51:18', '2021-12-14 21:51:19', 1, 0, 1);
-INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (19, 'Tự Động Tiross TS9090 (Xanh) - Hàng Chính Hãng', 'màu sắc đẹp mắt và sở hữu tính năng hiện đại, giúp bạn tự làm món kem thơm ngon. ', '<div class="box-content">
+</div>', 200000, 1400000, 1400000, 1700000, 5, '2021-12-05 21:51:18', '2021-12-14 21:51:19', 1, 0, 1),
+        (19, 'Tự Động Tiross TS9090 (Xanh) - Hàng Chính Hãng', 'màu sắc đẹp mắt và sở hữu tính năng hiện đại, giúp bạn tự làm món kem thơm ngon. ', '<div class="box-content">
 <table id="tskt">
 <tbody>
 <tr>
@@ -1150,8 +1152,8 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 </tr>
 </tbody>
 </table>
-</div>', 250000, 2000000, 2500000, 5, '2021-12-05 21:52:34', '2021-12-14 06:52:35', 1, 0, 1);
-INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (20, 'UNOLD 48895 Dung Tích 1.5 Lít', 'Công nghệ được đóng gói trong một vỏ thép không gỉ thanh lịch, bền.', '<ul>
+</div>', 250000, 2000000, 2000000, 2500000, 5, '2021-12-05 21:52:34', '2021-12-14 06:52:35', 1, 0, 1),
+        (20, 'UNOLD 48895 Dung Tích 1.5 Lít', 'Công nghệ được đóng gói trong một vỏ thép không gỉ thanh lịch, bền.', '<ul>
 <li>Công suất định mức: 150 W, 220-240 V ~, 50 Hz</li>
 <li>Kích thước (LxWxH): 42.5 x 28.5 x 26.2 cm</li>
 <li>Dung tích ca kem: 1.4L~1.5L</li>
@@ -1160,8 +1162,8 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 <li>Hẹn giờ kỹ thuật số có thể điều chỉnh trong khoảng từ 5 đến 60 phút</li>
 <li>Nhập khẩu tại Đức</li>
 <li>Phụ kiện: Tập sách công thức với công thức làm kem Schuhbeck, hướng dẫn sử dụng với công thức nấu ăn</li>
-</ul>', 300000, 7000000, 9000000, 5, '2021-12-05 21:55:05', '2021-12-05 21:55:06', 1, 0, 1);
-INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (21, 'Bear JA02N1 240ml', 'Máy Cafe Gia Đình Bear JA02N1 240ml có ngăn chứa dung tích 240ml', '<ul>
+</ul>', 300000, 7000000, 7000000, 9000000, 5, '2021-12-05 21:55:05', '2021-12-05 21:55:06', 1, 0, 1),
+        (21, 'Bear JA02N1 240ml', 'Máy Cafe Gia Đình Bear JA02N1 240ml có ngăn chứa dung tích 240ml', '<ul>
 <li>Công suất định mức: 150 W, 220-240 V ~, 50 Hz</li>
 <li>Kích thước (LxWxH): 42.5 x 28.5 x 26.2 cm</li>
 <li>Dung tích ca kem: 1.4L~1.5L</li>
@@ -1170,8 +1172,8 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 <li>Hẹn giờ kỹ thuật số có thể điều chỉnh trong khoảng từ 5 đến 60 phút</li>
 <li>Nhập khẩu tại Đức</li>
 <li>Phụ kiện: Tập sách công thức với công thức làm kem Schuhbeck, hướng dẫn sử dụng với công thức nấu ăn</li>
-</ul>', 50000, 800000, 1500000, 6, '2021-12-05 21:56:59', '2021-12-18 21:57:00', 1, 0, 1);
-INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (22, 'L-Beans 900A công suất 360W', 'Máy xay cafe chuyên nghiệp của L-Beans luôn được đánh giá cao vì sự bền bỉ.', '<ul>
+</ul>', 50000, 800000, 800000, 1500000, 6, '2021-12-05 21:56:59', '2021-12-18 21:57:00', 1, 0, 1),
+        (22, 'L-Beans 900A công suất 360W', 'Máy xay cafe chuyên nghiệp của L-Beans luôn được đánh giá cao vì sự bền bỉ.', '<ul>
 <li>Công suất định mức: 150 W, 220-240 V ~, 50 Hz</li>
 <li>Kích thước (LxWxH): 42.5 x 28.5 x 26.2 cm</li>
 <li>Dung tích ca kem: 1.4L~1.5L</li>
@@ -1180,8 +1182,8 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 <li>Hẹn giờ kỹ thuật số có thể điều chỉnh trong khoảng từ 5 đến 60 phút</li>
 <li>Nhập khẩu tại Đức</li>
 <li>Phụ kiện: Tập sách công thức với công thức làm kem Schuhbeck, hướng dẫn sử dụng với công thức nấu ăn</li>
-</ul>', 200000, 9000000, 12000000, 6, '2021-12-05 21:57:58', '2021-12-13 13:57:59', 1, 0, 1);
-INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (23, 'Espresso Tiross TS-621', 'Chế độ đánh bọt giúp pha chế cà phê Cappuccino theo phong cách Ý.', '<ul>
+</ul>', 200000, 9000000, 9000000, 12000000, 6, '2021-12-05 21:57:58', '2021-12-13 13:57:59', 1, 0, 1),
+        (23, 'Espresso Tiross TS-621', 'Chế độ đánh bọt giúp pha chế cà phê Cappuccino theo phong cách Ý.', '<ul>
 <li>Công suất định mức: 150 W, 220-240 V ~, 50 Hz</li>
 <li>Kích thước (LxWxH): 42.5 x 28.5 x 26.2 cm</li>
 <li>Dung tích ca kem: 1.4L~1.5L</li>
@@ -1190,8 +1192,8 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 <li>Hẹn giờ kỹ thuật số có thể điều chỉnh trong khoảng từ 5 đến 60 phút</li>
 <li>Nhập khẩu tại Đức</li>
 <li>Phụ kiện: Tập sách công thức với công thức làm kem Schuhbeck, hướng dẫn sử dụng với công thức nấu ăn</li>
-</ul>', 30000, 700000, 1200000, 6, '2021-12-05 21:59:04', '2021-12-05 21:59:05', 1, 0, 1);
-INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (24, 'Máy xay tích điện mini', ' hình thức và địa chỉ giao hàng mà có thể phát sinh thêm chi phí khác như phí vận chuyển', '<ul>
+</ul>', 30000, 700000, 700000, 1200000, 6, '2021-12-05 21:59:04', '2021-12-05 21:59:05', 1, 0, 1),
+        (24, 'Máy xay tích điện mini', ' hình thức và địa chỉ giao hàng mà có thể phát sinh thêm chi phí khác như phí vận chuyển', '<ul>
 <li>Công suất định mức: 150 W, 220-240 V ~, 50 Hz</li>
 <li>Kích thước (LxWxH): 42.5 x 28.5 x 26.2 cm</li>
 <li>Dung tích ca kem: 1.4L~1.5L</li>
@@ -1200,8 +1202,8 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 <li>Hẹn giờ kỹ thuật số có thể điều chỉnh trong khoảng từ 5 đến 60 phút</li>
 <li>Nhập khẩu tại Đức</li>
 <li>Phụ kiện: Tập sách công thức với công thức làm kem Schuhbeck, hướng dẫn sử dụng với công thức nấu ăn</li>
-</ul>', 10000, 70000, 200000, 7, '2021-12-05 22:05:24', '2021-12-28 15:05:25', 1, 0, 1);
-INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (25, 'Máy Xay Thịt 2 Lưỡi Kép Nonostyle', 'Máy xay thịt Nonostyle với nhiều công dụng và tính năng ưu việt, là trợ thủ đắc lực.', '<ul>
+</ul>', 10000, 70000, 70000, 200000, 7, '2021-12-05 22:05:24', '2021-12-28 15:05:25', 1, 0, 1),
+        (25, 'Máy Xay Thịt 2 Lưỡi Kép Nonostyle', 'Máy xay thịt Nonostyle với nhiều công dụng và tính năng ưu việt, là trợ thủ đắc lực.', '<ul>
 <li>Công suất định mức: 150 W, 220-240 V ~, 50 Hz</li>
 <li>Kích thước (LxWxH): 42.5 x 28.5 x 26.2 cm</li>
 <li>Dung tích ca kem: 1.4L~1.5L</li>
@@ -1210,8 +1212,8 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 <li>Hẹn giờ kỹ thuật số có thể điều chỉnh trong khoảng từ 5 đến 60 phút</li>
 <li>Nhập khẩu tại Đức</li>
 <li>Phụ kiện: Tập sách công thức với công thức làm kem Schuhbeck, hướng dẫn sử dụng với công thức nấu ăn</li>
-</ul>', 10000, 200000, 400000, 7, '2021-12-05 22:13:40', '2021-12-06 05:13:41', 1, 0, 1);
-INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (26, 'Some By Mi Super Matcha Pore Clean Clay Mask 100g', 'Mặt Nạ Đất Sét Some By Mi Super Matcha Pore Clean Clay Mask với thành phần đất sét và trà xanh', '<ul>
+</ul>', 10000, 200000, 200000, 400000, 7, '2021-12-05 22:13:40', '2021-12-06 05:13:41', 1, 0, 1),
+        (26, 'Some By Mi Super Matcha Pore Clean Clay Mask 100g', 'Mặt Nạ Đất Sét Some By Mi Super Matcha Pore Clean Clay Mask với thành phần đất sét và trà xanh', '<ul>
 <li>Công suất định mức: 150 W, 220-240 V ~, 50 Hz</li>
 <li>Kích thước (LxWxH): 42.5 x 28.5 x 26.2 cm</li>
 <li>Dung tích ca kem: 1.4L~1.5L</li>
@@ -1220,8 +1222,8 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 <li>Hẹn giờ kỹ thuật số có thể điều chỉnh trong khoảng từ 5 đến 60 phút</li>
 <li>Nhập khẩu tại Đức</li>
 <li>Phụ kiện: Tập sách công thức với công thức làm kem Schuhbeck, hướng dẫn sử dụng với công thức nấu ăn</li>
-</ul>', 0, 200000, 200000, 8, '2021-12-05 22:32:26', '2021-12-05 22:32:27', 1, 0, 1);
-INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (27, 'Vitamin C SAP Neogen Dermalogy Real Vita Serum 32g', 'Tinh chất sở hữu bộ đôi vàng Vitamin C dạng SAP + niacinamide hàm lượng cao giúp giảm thâm.', '<ul>
+</ul>', 0, 200000, 200000, 200000, 8, '2021-12-05 22:32:26', '2021-12-05 22:32:27', 1, 0, 1),
+        (27, 'Vitamin C SAP Neogen Dermalogy Real Vita Serum 32g', 'Tinh chất sở hữu bộ đôi vàng Vitamin C dạng SAP + niacinamide hàm lượng cao giúp giảm thâm.', '<ul>
 <li>Công suất định mức: 150 W, 220-240 V ~, 50 Hz</li>
 <li>Kích thước (LxWxH): 42.5 x 28.5 x 26.2 cm</li>
 <li>Dung tích ca kem: 1.4L~1.5L</li>
@@ -1230,8 +1232,8 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 <li>Hẹn giờ kỹ thuật số có thể điều chỉnh trong khoảng từ 5 đến 60 phút</li>
 <li>Nhập khẩu tại Đức</li>
 <li>Phụ kiện: Tập sách công thức với công thức làm kem Schuhbeck, hướng dẫn sử dụng với công thức nấu ăn</li>
-</ul>', 0, 460000, 460000, 8, '2021-12-05 22:33:22', '2021-12-05 22:33:22', 1, 0, 1);
-INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (28, 'Kem Dưỡng Ẩm Hỗ Trợ Trị Nám', 'Được đặc chế hòa nhịp với quá trình thay đổi sinh học của làn da.', '<ul>
+</ul>', 0, 460000, 460000, 460000, 8, '2021-12-05 22:33:22', '2021-12-05 22:33:22', 1, 0, 1),
+        (28, 'Kem Dưỡng Ẩm Hỗ Trợ Trị Nám', 'Được đặc chế hòa nhịp với quá trình thay đổi sinh học của làn da.', '<ul>
 <li>Công suất định mức: 150 W, 220-240 V ~, 50 Hz</li>
 <li>Kích thước (LxWxH): 42.5 x 28.5 x 26.2 cm</li>
 <li>Dung tích ca kem: 1.4L~1.5L</li>
@@ -1240,8 +1242,8 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 <li>Hẹn giờ kỹ thuật số có thể điều chỉnh trong khoảng từ 5 đến 60 phút</li>
 <li>Nhập khẩu tại Đức</li>
 <li>Phụ kiện: Tập sách công thức với công thức làm kem Schuhbeck, hướng dẫn sử dụng với công thức nấu ăn</li>
-</ul>', 0, 700000, 700000, 8, '2021-12-05 22:34:33', '2021-12-05 22:34:33', 1, 0, 1);
-INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, BuyNowPrice, CatDeID, StartDate, EndDate, SellerID, AutoExtend, Status) VALUES (29, 'Nước hoa nam Dynik hương biển sành điệu 50ml', 'Bên cạnh đó, tuỳ vào loại sản phẩm, hình thức và địa chỉ giao hàng mà có thể phát sinh', '<ul>
+</ul>', 0, 700000, 700000, 700000, 8, '2021-12-05 22:34:33', '2021-12-05 22:34:33', 1, 0, 1),
+        (29, 'Nước hoa nam Dynik hương biển sành điệu 50ml', 'Bên cạnh đó, tuỳ vào loại sản phẩm, hình thức và địa chỉ giao hàng mà có thể phát sinh', '<ul>
 <li>Công suất định mức: 150 W, 220-240 V ~, 50 Hz</li>
 <li>Kích thước (LxWxH): 42.5 x 28.5 x 26.2 cm</li>
 <li>Dung tích ca kem: 1.4L~1.5L</li>
@@ -1250,4 +1252,4 @@ INSERT INTO products (ProID, ProName, TinyDes, FullDes, StepPrice, CurPrice, Buy
 <li>Hẹn giờ kỹ thuật số có thể điều chỉnh trong khoảng từ 5 đến 60 phút</li>
 <li>Nhập khẩu tại Đức</li>
 <li>Phụ kiện: Tập sách công thức với công thức làm kem Schuhbeck, hướng dẫn sử dụng với công thức nấu ăn</li>
-</ul>', 0, 300000, 300000, 9, '2021-12-05 22:35:35', '2021-12-05 22:35:36', 1, 0, 1);
+</ul>', 0, 300000, 300000, 300000, 9, '2021-12-05 22:35:35', '2021-12-05 22:35:36', 1, 0, 1);

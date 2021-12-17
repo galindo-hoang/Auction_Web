@@ -1,0 +1,47 @@
+<div class="container-fluid mt-4">
+    <div class="row">
+
+        {{> account-layout}}
+
+        <div class="col-sm-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="text-center">
+                        Danh sách sản phẩm đang được đấu giá
+                    </h4>
+                </div>
+
+
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col" class="text-center">Mã sản phẩm</th>
+                        <th scope="col" class="text-center">&nbsp;</th>
+                        <th scope="col" class="text-center">Mô tả</th>
+                        <th scope="col" class="text-center">Giá hiện tại</th>
+                        <th scope="col" class="text-center">Ngày kết thúc</th>
+                        <th scope="col" class="text-center">&nbsp;</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each bidding}}
+                        <tr class="align-middle">
+                            <th class="text-center"><a href="/detail/{{this.ProID}}">{{this.ProID}}</a></th>
+                            <th scope="row" class="text-center"><img style="width: 120px;height: 120px;" src="/public/imgs/products/{{this.ProID}}/account.jpg"></th>
+                            <td>{{this.TinyDes}}</td>
+                            <td class="text-center text-danger">{{format_number this.CurPrice}}</td>
+                            <td class="text-center">{{format_date this.EndDate}}</td>
+                            <td><a href="/detail/{{this.ProID}}" class="btn btn-outline-info"><i class="fas fa-pencil-alt"></i></a></td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+
+                <div class="card-footer text-muted text-center">
+                    <a class="btn btn-outline-primary" href="/seller/add">Thêm sản phẩm</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
