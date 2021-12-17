@@ -9,8 +9,7 @@ import accepted_list from "../models/accepted_list.js";
 import products_history from "../models/products_history.js";
 import sendEmail from "../utils/mail.js";
 import pending_list from "../models/pending_list.js";
-import asyncErrors from 'express-async-errors';
-
+import fs from "fs";
 
 const router = express.Router();
 
@@ -23,6 +22,16 @@ router.get('/detail/:id', async (req,res)=>{
     const similarProduct = await viewByProduct.findTop5ByCatDeID(product.CatDeID, proID);
     const topBidder = await viewByProduct.findTopBidder(proID);
     const productHistory = await viewByProduct.findProductHistory(proID);
+
+    // get img in detail
+    let imgs = [];
+    let active = true;
+    fs.readdirSync('./public/imgs/products/'+proID+'/detail/').forEach(file=>{
+        if(active){
+            imgs.push({name:file,first:active});
+            active = false;
+        }else imgs.push({name:file,first:active});
+    })
 
     if(topBidder.length) {
         let tmp = topBidder[0].UserName;
@@ -63,7 +72,7 @@ router.get('/detail/:id', async (req,res)=>{
         res.render('product/detail', {
             product: product,
             similarProduct: similarProduct,
-            favorite, expire,seller,pending_bidder, mess,
+            favorite, expire,seller,pending_bidder, mess,imgs,
             isLogin: req.session.isLogin,
             topBidder: topBidder[0],
             isBid: topBidder.length,
@@ -76,7 +85,7 @@ router.get('/detail/:id', async (req,res)=>{
             isLogin: req.session.isLogin,
             topBidder: topBidder[0],
             isBid: topBidder.length,
-            productHistory
+            productHistory,imgs
         });
     }
 });
@@ -97,16 +106,17 @@ router.post('/bid',auth.beforeLogin,async (req, res) => {
         products_history.add(object);
         viewByProduct.updatePrice(object.Price, object.ProID);
         //
-        const product = viewByProduct.findByID(req.query.ProID);
-        const PronptPrice = product.CurPrice === product.BuyNowPrice;
-        if(PronptPrice) viewByProduct.updateStatus(1, object.ProID)
+        const product = await viewByProduct.findByID(req.query.ProID);
+        const promptPrice = product.CurPrice === product.BuyNowPrice;
+        if(promptPrice) viewByProduct.updateStatus(0, object.ProID);
         const seller = await Users.findByProID(object.ProID);
         if (preBidder.length !== 0 && preBidder[0].UserID !== req.session.account.UserID){
-            if(PronptPrice) sendEmail(preBidder[0].UserEmail,"Đấu giá","Món hàng bạn đặt đã được mua ngay bởi người khác<div>"+req.headers.referer+"</div>");
+            if(promptPrice) sendEmail(preBidder[0].UserEmail,"Đấu giá","Món hàng bạn đặt đã được mua ngay bởi người khác<div>"+req.headers.referer+"</div>");
             else sendEmail(preBidder[0].UserEmail,"Đấu giá","Món hàng bạn đặt đã được đặt giá bởi người khác :"+ "<b>"+ req.body.Price +" </b><div>"+req.headers.referer+"</div>");
         }
-        if(PronptPrice) sendEmail(seller[0].UserEmail,"Sản phẩm của bạn","Sản phẩm của bạn đã được mua ngay <div>"+req.headers.referer+"</div>");
+        if(promptPrice) sendEmail(seller[0].UserEmail,"Sản phẩm của bạn","Sản phẩm của bạn đã được mua ngay <div>"+req.headers.referer+"</div>");
         else sendEmail(seller[0].UserEmail,"Sản phẩm của bạn","Sản phẩm của bạn đã được đặt với mức giá: <b>"+ req.body.Price +"</b><div>"+req.headers.referer+"</div>");
+
         sendEmail(req.session.account.UserEmail,"chúc mừng","bạn đã ra giá thành công món hàng<div>"+req.headers.referer+"</div>");
 
 
@@ -135,6 +145,46 @@ router.post('/detail/acceptPending',async (req, res) => {
     accepted_list.add({UserID:req.body.BidderID,ProID:req.body.ProID});
     const bidder = await Users.findByID(req.body.BidderID);
     sendEmail(bidder.UserEmail,"đấu giá sản phẩm","<div>bạn đã được cấp quyền đấu giá sản phẩm</div>"+req.headers.referer);
+    res.redirect('/detail/'+req.body.ProID);
+})
+
+router.post('/detail/addFullDes',async (req, res) => {
+    const product = await viewByProduct.findByID(req.body.ProID);
+    const array = moment().format().split("T");
+    const hour = array[1].split("+");
+    const FullDes = product.FullDes + '<div class="text-center"><strong>' + array[0] + ", " + hour[0] + '</strong></div>' + req.body.FullDes;
+    viewByProduct.updateFullDes(req.body.ProID, FullDes);
+    res.redirect('/detail/' + req.body.ProID)
+});
+
+router.post('/detail/deleteUser',async (req, res) => {
+    const Bidders = await products_history.findByProID(req.body.ProID);
+    const product = await viewByProduct.findByID(req.body.ProID);
+    const deleteBidder = await Users.findByID(req.body.BidderID);
+    if (Bidders.length >= 2) {
+        if (Bidders[0].BidderID === +req.body.BidderID) {
+            let findBefore = undefined;
+            for (let i = 1; i < Bidders.length; ++i) {
+                if (Bidders[i].BidderID !== +req.body.BidderID) {
+                    findBefore = await Users.findByID(Bidders[i].BidderID);
+                    if(moment(product.EndDate)>moment()){
+                        if(product.BuyNowPrice === product.CurPrice) viewByProduct.updateStatus(1,product.ProID);
+                        sendEmail(findBefore.UserEmail,"Đấu giá sản phẩm","<div>Bạn đang giữ giá cao nhất trong phiên đấu giá sản phẩm này</div>"+req.headers.referer);
+                    }
+                    viewByProduct.updatePrice(Bidders[i].Price,product.ProID);
+                    break;
+                }
+            }
+            if(findBefore === undefined){
+                if(moment(product.EndDate)>moment() && product.BuyNowPrice === product.CurPrice) viewByProduct.updateStatus(1,product.ProID);
+                viewByProduct.updatePrice(product.StartPrice,product.ProID);
+            }
+        }
+    }else viewByProduct.updatePrice(product.StartPrice,product.ProID);
+    products_history.deleteByProIDAndBidderID(req.body.ProID,req.body.BidderID);
+    sendEmail(deleteBidder.UserEmail,"Đấu giá sản phẩm","<div>Bạn đã bị người bán xóa khỏi cuộc đấu giá sản phẩm này</div>" + req.headers.referer);
+    if(deleteBidder.UserRating < 0.8) accepted_list.delete(deleteBidder.UserID,req.body.ProID);
+    banned_list.add({UserID:req.body.BidderID,ProID:req.body.ProID});
     res.redirect('/detail/'+req.body.ProID);
 })
 

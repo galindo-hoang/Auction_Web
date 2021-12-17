@@ -12,7 +12,8 @@
                     <tbody>
                     {{#each products}}
                         <tr class="align-middle">
-                            <th scope="row" class="text-center"><img style="width: 120px;height: 120px;" src="/public/imgs/products/{{this.ProID}}/account.jpg"></th>
+                            <th scope="row" class="text-center"><a href="/detail/{{this.ProID}}">{{this.ProID}}</a></th>
+                            <td class="text-center"><img style="width: 120px;height: 120px;" src="/public/imgs/products/{{this.ProID}}/account.jpg"></td>
                             <td>{{this.TinyDes}}</td>
                             <td>
                                 <div>{{this.CurPrice}}</div>

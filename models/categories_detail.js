@@ -7,6 +7,9 @@ const entity = {
     // findAllProByCatDeID: function (CatDeID){
     //     return
     // }
+    findAll() {
+        return knex.table('categories_detail').select('*');
+    }
 }
 
 export default entity;

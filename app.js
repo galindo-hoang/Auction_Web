@@ -3,6 +3,8 @@ import local_mdw from "./mdw/local.mdw.js";
 import view_mdw from "./mdw/view.mdw.js";
 import register_route from "./routes/register.js";
 import login_route from "./routes/login.js";
+import profile_seller_route from "./routes/profile-seller.js";
+
 import profile_user_route from "./routes/profile-user.js";
 import viewByCategories from './models/category.js';
 import viewByProduct from './models/product.js';
@@ -20,6 +22,8 @@ app.use('/',register_route);
 app.use('/',login_route);
 app.use('/',profile_user_route);
 app.use('/',view_product);
+app.use('/',profile_seller_route);
+
 
 
 app.get('/',async (req, res) => {
@@ -137,7 +141,8 @@ app.get('/views/:query',async (req, res) => {
     });
 })
 
-app.use(function (req, res, next) {
+app.use(function (err,req, res, next) {
+    console.error(err.stack)
     res.render('404', { layout: false });
 });
 
@@ -147,6 +152,6 @@ app.use(function (err, req, res, next) {
     res.render('500', { layout: false });
 });
 
-app.listen(300,()=>{
-    console.log(`Example app listening at http://localhost:${300}`);
+app.listen(3000,()=>{
+    console.log(`Example app listening at http://localhost:${3000}`);
 });

@@ -6,6 +6,9 @@ const entity = {
     },
     find(UserID, ProID) {
         return knex('accepted_list').select('*').where({UserID: UserID, ProID:ProID});
+    },
+    delete(UserID, ProID) {
+        knex('accepted_list').where({UserID,ProID}).del().then(()=>{});
     }
 }
 

@@ -9,9 +9,9 @@ export default {
     async findPageByCatDeId(ID, limit, offset, sort){
         if(sort === "1"){
             return (await knex.raw(`select *, HOUR(timediff(EndDate, now())) remaining
-                                     FROM products
-                                     where CatDeID = ?
-                                     order by CurPrice DESC
+                                    FROM products
+                                    where CatDeID = ?
+                                    order by CurPrice DESC
                                         LIMIT ?, ?`, [ID, offset, limit]))[0];
         }else if(sort === "2"){
             return (await knex.raw(`select *, HOUR(timediff(EndDate, now())) remaining
@@ -34,7 +34,7 @@ export default {
         }
     },
     async findByID(ID){
-        return (await knex('products').where('ProID', ID))[0];
+        return (await knex('products').where('ProID', ID).select('*'))[0];
     },
 
     findCatDeName(ID){
@@ -98,7 +98,16 @@ export default {
     },
 
     async findProductHistory(ID){
-      return (await knex.raw(`select BidDate, Price, UserName from products_history, users where BidderID = UserID and ProID = ?`, +ID))[0];
-    }
+        return (await knex.raw(`select BidDate, Price, UserName, BidderID from products_history, users where BidderID = UserID and ProID = ?`, +ID))[0];
+    },
 
+    findBySeller(userID) {
+        return knex.select('products.*').from('products').join('users','products.SellerID','users.UserID').where('users.UserID',userID);
+    },
+    addProducts(object) {
+        return knex('products').insert(object);
+    },
+    updateFullDes(ProID, FullDes) {
+        knex('products').where('ProID',ProID).update('FullDes',FullDes).then(()=>{});
+    }
 }
