@@ -11,6 +11,12 @@ const auth = {
             return res.redirect('/');
         }
         next();
+    },
+    isSeller: function (req,res,next){
+        if(+req.session.account.UserRole !== 1){
+            return res.redirect('/account/profile');
+        }
+        next();
     }
 }
 export default auth

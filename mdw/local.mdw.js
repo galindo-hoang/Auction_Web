@@ -20,6 +20,7 @@ export default function (app){
         if(typeof (req.session.isLogin) === 'undefined'){
             req.session.isLogin = false;
         }
+        if(req.session.account) res.locals.seller = (+req.session.account.UserRole === 1);
         res.locals.account = req.session.account;
         res.locals.isLogin = req.session.isLogin;
         next();
