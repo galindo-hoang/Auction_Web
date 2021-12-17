@@ -1,0 +1,55 @@
+<!--    <script>-->
+<!--        $('#editForm').on('submit', function (e){-->
+<!--            e.preventDefault();-->
+
+<!--            $.getJSON(`/admin/editCat/del/${$('#txtCatID').val()}`,function (data){-->
+<!--                if(data === true) {-->
+<!--                    alert('Không thể xoá danh mục có sản phẩm!');-->
+<!--                }-->
+<!--                else-->
+<!--                    $('#editForm').off('submit').submit();-->
+<!--            });-->
+<!--        });-->
+<!--    </script>-->
+
+
+<div class="container-fluid mt-4">
+    <div class="row">
+
+        {{> account-layout}}
+
+        <div class="col-sm-9">
+            <form id="editForm" method="post">
+              <div class="card">
+                <h4 class="card-header">
+                  Chỉnh sửa danh mục
+                </h4>
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="txtCatID">ID danh mục</label>
+                    <input type="text" class="form-control mt-2" id="txtCatID" name="CatID" readonly value="{{this.category.CatID}}">
+                  </div>
+                  <div class="form-group mt-3">
+                    <label for="txtCatName">Tên danh mục</label>
+                    <input type="text" class="form-control mt-2" id="txtCatName" name="CatName" value="{{this.category.CatName}}" autofocus>
+                  </div>
+                </div>
+                <div class="card-footer text-muted">
+                  <a class="btn btn-outline-success" href="/admin/editCat/" role="button">
+                    <i class="fa fa-backward" aria-hidden="true"></i>
+                    Trở về
+                  </a>
+                  <button type="submit" class="btn btn-danger" formaction="/admin/editCat/del">
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                    Xoá
+                  </button>
+                  <button type="submit" class="btn btn-primary" formaction="/admin/editCat/save">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                    Lưu
+                  </button>
+                </div>
+              </div>
+            </form>
+        </div>
+    </div>
+</div>

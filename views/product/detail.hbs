@@ -103,16 +103,16 @@
                         </div>
                     </div>
                     <form method="post" id="formBid" action="/bid?ProID={{this.product.ProID}}">
-                        <div class="d-flex justify-content-evenly">
-                            <button class="btn w-25" type="button" style="background-color: darkblue; color: white" id="CurPrice" data-toggle="modal" data-target="#modal-sm"{{#if expire}} disabled {{/if}}>
-                                {{#if expire}}
-                                    Không thể đấu giá
-                                {{else}}
-                                    <i class="fa fa-gavel"></i>&nbsp;&nbsp;Đặt giá
-                                {{/if}}
-                            </button>
-                            <input type="text" class="form-control w-50" id="Price" name="Price" {{#if expire}} disabled {{/if}}>
-                        </div>
+                    <div class="d-flex justify-content-evenly">
+                        <button class="btn w-25" type="button" style="background-color: darkblue; color: white" id="CurPrice" data-toggle="modal" data-target="#modal-sm"{{#if expire}} disabled {{/if}}>
+                            {{#if expire}}
+                                Không thể đấu giá
+                            {{else}}
+                                <i class="fa fa-gavel"></i>&nbsp;&nbsp;Đặt giá
+                            {{/if}}
+                        </button>
+                        <input type="text" class="form-control w-50" id="Price" name="Price" {{#if expire}} disabled {{/if}}>
+                    </div>
                     </form>
                     <h6 class="text-center mt-2 font-weight-bold">hoặc</h6>
                     <div class="">
@@ -146,7 +146,7 @@
             </p>
             <p class="card-text">
                 <i class="fa fa-image-portrait" style="color: darkslateblue"></i>
-            Bidder giữ giá cao nhất:
+                Bidder giữ giá cao nhất:
                 {{#if this.isBid}}
                     {{this.topBidder.UserName}}
                     <span class="rating-seller">
@@ -154,32 +154,32 @@
                     <i class="fas fa-thumbs-up" style="color: blue"></i>)
                 </span>
                 {{else}}
-                     Không có thông tin
+                    Không có thông tin
                 {{/if}}
             </p>
             <p class="card mt-auto">
-                <h4 class="card-header">Mô tả chi tiết</h4>
-                <div class="card-body">
-                    <p class="card-text">
-                        {{{this.product.FullDes}}}
-                    </p>
-                    {{#if seller}}
-                        <form method="post" action="/detail/addFullDes">
-                            <div class="card mb-3">
-                                <div class="card-header text-center">
-                                    <label for="FullDes" class="form-label">
-                                        <h1 class=" align-middle">
-                                            Thêm mô tả
-                                        </h1>
-                                    </label>
-                                </div>
-                                <input type="hidden" name="ProID" value="{{product.ProID}}">
-                                <textarea id="FullDes" name="FullDes"></textarea>
-                                <input class=" text-dark btn btn-outline-success" type="submit" value="cập nhật">
+            <h4 class="card-header">Mô tả chi tiết</h4>
+            <div class="card-body">
+                <p class="card-text">
+                    {{{this.product.FullDes}}}
+                </p>
+                {{#if seller}}
+                    <form method="post" action="/detail/addFullDes">
+                        <div class="card mb-3">
+                            <div class="card-header text-center">
+                                <label for="FullDes" class="form-label">
+                                    <h1 class=" align-middle">
+                                        Thêm mô tả
+                                    </h1>
+                                </label>
                             </div>
-                        </form>
-                    {{/if}}
-                </div>
+                            <input type="hidden" name="ProID" value="{{product.ProID}}">
+                            <textarea id="FullDes" name="FullDes"></textarea>
+                            <input class=" text-dark btn btn-outline-success" type="submit" value="cập nhật">
+                        </div>
+                    </form>
+                {{/if}}
+            </div>
             </p>
             <div class="card mt-auto">
                 <h4 class="card-header">Lịch sử đấu giá của sản phẩm</h4>
@@ -300,9 +300,9 @@
                 </div>
             </div>
         {{else}}
-        <div class="card-body">
-            <h5>Không có dữ liệu</h5>
-        </div>
+            <div class="card-body">
+                <h5>Không có dữ liệu</h5>
+            </div>
         {{/if}}
     </div>
 </div>
@@ -312,60 +312,60 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
 
     {{#if seller}}
-    <script>
-        tinymce.init({
-            selector: '#FullDes',
-            plugins: 'paste image link autolink lists table media',
-            menubar: false,
-            toolbar: [
-                'undo redo | bold italic underline strikethrough | numlist bullist | alignleft aligncenter alignright | forecolor backcolor | table link ',
-            ],
-        });
-    </script>
+        <script>
+            tinymce.init({
+                selector: '#FullDes',
+                plugins: 'paste image link autolink lists table media',
+                menubar: false,
+                toolbar: [
+                    'undo redo | bold italic underline strikethrough | numlist bullist | alignleft aligncenter alignright | forecolor backcolor | table link ',
+                ],
+            });
+        </script>
     {{/if}}
     {{#if isLogin}}
-    <script>
-        $('#text').on('click',function (e){
-            $('#favorite').submit();
-        });
-        $('#formBid').on('submit',function (e){
-            e.preventDefault();
+        <script>
+            $('#text').on('click',function (e){
+                $('#favorite').submit();
+            });
+            $('#formBid').on('submit',function (e){
+                e.preventDefault();
 
-            {{#if expire}}
-            {{else}}
-                const price = +$('#Price').val();
-                console.log(price);
-                let BidPrice;
-                if(price>{{product.BuyNowPrice}}){
+                {{#if expire}}
+                {{else}}
+                    const price = +$('#Price').val();
+                    console.log(price);
+                    let BidPrice;
+                    if(price>{{product.BuyNowPrice}}){
+                        $('#Price').val({{product.BuyNowPrice}}+"");
+                        BidPrice = {{product.BuyNowPrice}};
+                    }
+                    else BidPrice = price;
+                    if(BidPrice === {{product.BuyNowPrice}} || BidPrice>={{product.CurPrice}}+{{product.StepPrice}}){
+                        $('#formBid').off('submit').submit();
+                    }else{
+                        alert('giá bạn đưa ra nhỏ hơn giá đấu giá');
+                    }
+                {{/if}}
+            });
+                {{#if expire}}
+                {{else}}
+                $('#PromptPrice').on('click',function (e){
                     $('#Price').val({{product.BuyNowPrice}}+"");
-                    BidPrice = {{product.BuyNowPrice}};
-                }
-                else BidPrice = price;
-                if(BidPrice === {{product.BuyNowPrice}} || BidPrice>={{product.CurPrice}}+{{product.StepPrice}}){
-                    $('#formBid').off('submit').submit();
-                }else{
-                    alert('giá bạn đưa ra nhỏ hơn giá đấu giá');
-                }
-            {{/if}}
-        });
-        {{#if expire}}
-        {{else}}
-        $('#PromptPrice').on('click',function (e){
-            $('#Price').val({{product.BuyNowPrice}}+"");
 
 
-            $('#notification').text("Bạn có muốn mua ngay: ");
-            $('#priceNotification').text(numeral({{product.BuyNowPrice}}).format('0,0'));
-        });
+                    $('#notification').text("Bạn có muốn mua ngay: ");
+                    $('#priceNotification').text(numeral({{product.BuyNowPrice}}).format('0,0'));
+                });
 
-        $('#CurPrice').on('click',function (e){
-            $('#notification').text("Bạn có muốn đấu giá: ");
-            $('#priceNotification').text(numeral($('#Price').val()).format('0,0'));
-        });
-        $('#acceptNotification').on('click',function (e){
-            $('#formBid').submit();
-        });
-        {{/if}}
-    </script>
+                $('#CurPrice').on('click',function (e){
+                    $('#notification').text("Bạn có muốn đấu giá: ");
+                    $('#priceNotification').text(numeral($('#Price').val()).format('0,0'));
+                });
+                $('#acceptNotification').on('click',function (e){
+                    $('#formBid').submit();
+                });
+                {{/if}}
+        </script>
     {{/if}}
 {{/section}}
