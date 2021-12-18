@@ -6,8 +6,8 @@
         <div class="col-sm-9">
             <div class="card">
                 <h4 class="card-header d-flex justify-content-between container-fluid">
-                    Danh mục cấp 2
-                    <a class="btn btn-sm btn-outline-primary" href="/admin/editCatDe/add" role="button">
+                    Danh mục cấp 1
+                    <a class="btn btn-sm btn-outline-primary" href="/admin/editCat/add" role="button">
                         <i class="fa fa-plus" aria-hidden="true"></i>
                         Thêm danh mục
                     </a>
@@ -22,18 +22,16 @@
                     </thead>
                     <tbody>
                     {{#each LclCate}}
-                        {{#each this.CDList}}
-                            <tr>
-                                <th scope="row">{{this.CatDeID}}-{{this.CatID}}</th>
-                                <td>{{this.CatDeName}}</td>
-                                <td class="text-sm-end">
-                                    <a class="btn btn-primary" href="/admin/editCatDe/edit/{{this.CatDeID}}" style="background-color: darkcyan">
-                                        <i class="fa fa-pencil-ruler" aria-hidden="true"></i>
-                                        Chỉnh sửa
-                                    </a>
-                                </td>
-                            </tr>
-                        {{/each}}
+                        <tr>
+                            <th scope="row" class="align-middle">{{CatID}}</th>
+                            <td class="align-middle">{{CatName}}</td>
+                            <td class="text-sm-end">
+                                <a class="btn btn-primary" href="/admin/editCat/edit/{{this.CatID}}" style="background-color: darkcyan">
+                                    <i class="fa fa-pencil-ruler" aria-hidden="true"></i>
+                                    Chỉnh sửa
+                                </a>
+                            </td>
+                        </tr>
                     {{/each}}
                     </tbody>
                 </table>

@@ -109,5 +109,12 @@ export default {
     },
     updateFullDes(ProID, FullDes) {
         knex('products').where('ProID',ProID).update('FullDes',FullDes).then(()=>{});
+    },
+
+    findAll(){
+        return knex('products');
+    },
+    async del(ID){
+        return knex('products').where('ProID', ID).del();
     }
 }

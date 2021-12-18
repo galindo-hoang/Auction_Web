@@ -1,0 +1,50 @@
+<div class="container-fluid mt-4">
+    <div class="row">
+
+        {{> account-layout}}
+
+        <div class="col-sm-9">
+            <div class="card">
+                <h4 class="card-header d-flex justify-content-between container-fluid">
+                    Danh sách sản phẩm
+                </h4>
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col" class="text-center"><h5>#</h5></th>
+                        <th scope="col">&nbsp;</th>
+                        <th scope="col" class="text-center"><h5>Tên sản phẩm</h5></th>
+                        <th scope="col">&nbsp;</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each this.product}}
+                        <tr class="align-middle">
+                            <th scope="row" class="text-center">{{ProID}}</th>
+                            <th scope="row" class="text-center"><img style="width: 120px;height: 120px;" src="/public/imgs/products/{{this.ProID}}/thumb.jpg"></th>
+                            <td><a href="/detail/{{ProID}}" class="ProTittle">{{ProName}}</a></td>
+                            <td class="text-sm-end">
+                                <form method="post" id="deleteForm">
+                                    <button type="submit" class="btn btn-danger" formaction="/admin/editPro" value="{{ProID}}" name="ProID">
+                                        Xoá&nbsp;
+                                        <i class="fa fa-trash-can" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--{{#section 'footer'}}-->
+<!--    <script>-->
+<!--        $('#deleteForm').submit(function() {-->
+<!--            const c = confirm("Xoá sản phẩm này?");-->
+<!--            console.log(c);-->
+<!--        });-->
+<!--    </script>-->
+<!--{{/section}}-->

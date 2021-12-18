@@ -4,8 +4,8 @@ import view_mdw from "./mdw/view.mdw.js";
 import register_route from "./routes/register.js";
 import login_route from "./routes/login.js";
 import profile_seller_route from "./routes/profile-seller.js";
-
 import profile_user_route from "./routes/profile-user.js";
+import profile_admin_route from "./routes/profile-admin.js";
 import viewByCategories from './models/category.js';
 import viewByProduct from './models/product.js';
 import view_product from "./routes/view-product.js";
@@ -23,6 +23,7 @@ app.use('/',login_route);
 app.use('/',profile_user_route);
 app.use('/',view_product);
 app.use('/',profile_seller_route);
+app.use('/',profile_admin_route);
 
 
 
@@ -153,5 +154,5 @@ app.use(function (err, req, res, next) {
 });
 
 app.listen(3000,()=>{
-    console.log(`Example app listening at http://localhost:${3000}`);
+    console.log(`Website running at http://localhost:${3000}`);
 });
