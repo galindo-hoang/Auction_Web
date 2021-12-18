@@ -43,10 +43,16 @@
                                 </h5>
                                 <p class="card-text">{{TinyDes}}</p>
                             </div>
-                            <div class="card-footer text-center">
-                                <div class="text-danger">Kết thúc sau {{this.remaining}} giờ</div>
-                                <div>({{format_date this.EndDate}})</div>
-                            </div>
+                            {{#if this.exp}}
+                                <div class="card-footer text-center">
+                                    <div class="text-danger">Sản phẩm đã hết hạn đấu giá</div>
+                                </div>
+                            {{else}}
+                                <div class="card-footer text-center">
+                                    <div class="text-danger">Kết thúc sau {{this.remaining}} giờ</div>
+                                    <div>({{format_date this.EndDate}})</div>
+                                </div>
+                            {{/if}}
                         </div>
                     </div>
                 {{/each}}
@@ -56,7 +62,7 @@
                     <ul class="pagination justify-content-end">
                         {{#unless this.isStart}}
                             <li class="page-item">
-                                <a class="page-link" href="/views/byCat/{{this.CatID}}?page={{this.previousPage}}">Previous</a>
+                                <a class="page-link" href="/views/byCat/{{this.CatID}}?sort={{this.sort}}&page={{this.previousPage}}">Previous</a>
                             </li>
                         {{/unless}}
                         {{#each this.pageNumbers}}
@@ -66,13 +72,13 @@
                                 </li>
                             {{else}}
                                 <li class="page-item">
-                                    <a class="page-link" href="?page={{value}}">{{value}}</a>
+                                    <a class="page-link" href="?sort={{../this.sort}}&page={{this.value}}">{{value}}</a>
                                 </li>
                             {{/if}}
                         {{/each}}
                         {{#unless this.isEnd}}
                             <li class="page-item">
-                                <a class="page-link" href="/views/byCat/{{this.CatID}}?page={{this.nextPage}}">Next</a>
+                                <a class="page-link" href="/views/byCat/{{this.CatID}}?sort={{this.sort}}&page={{this.nextPage}}">Next</a>
                             </li>
                         {{/unless}}
                     </ul>

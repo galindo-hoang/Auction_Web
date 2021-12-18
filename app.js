@@ -9,6 +9,7 @@ import profile_admin_route from "./routes/profile-admin.js";
 import viewByCategories from './models/category.js';
 import viewByProduct from './models/product.js';
 import view_product from "./routes/view-product.js";
+import asyncErrors from 'express-async-errors';
 
 const app = express();
 
@@ -35,6 +36,10 @@ app.get('/',async (req, res) => {
     data[0].title = 'Top 5 sản phẩm có giá cao nhất';
     data[1].title = 'Top 5 sản phẩm gần kết thúc';
     data[2].title = 'Top 5 sản phẩm có nhiều lượt ra giá nhất';
+
+    for(let pro of data[0].product){
+        pro.exp = pro.diff < 0;
+    }
     res.render('home',{data});
 });
 
@@ -43,7 +48,7 @@ app.get('/views/byCat/:id',async (req,res)=>{
 
     const limit = 8;
     const page = req.query.page || 1;
-    const sort = req.query.sort || 1;
+    const sort = req.query.sort || 0;
 
     const offset = (page - 1) * limit;
 
@@ -61,6 +66,9 @@ app.get('/views/byCat/:id',async (req,res)=>{
     }
 
     const products = await viewByCategories.findPageByCatId(CatID, limit, offset, sort);
+    for(let i = 0; i < products.length; i++)
+        products[i].exp = products[i].diff < 0;
+
     const name = await viewByCategories.findCatName(CatID);
 
     res.render('product/viewByCat', {
@@ -73,7 +81,8 @@ app.get('/views/byCat/:id',async (req,res)=>{
         isStart: +page === 1,
         nextPage: +page + 1,
         previousPage: +page - 1,
-        isOnePage: pageNumbers.length === 1
+        isOnePage: pageNumbers.length === 1,
+        sort
     });
 });
 
@@ -99,6 +108,8 @@ app.get('/views/byCatDe/:id',async (req,res)=>{
         });
     }
     const products = await viewByProduct.findPageByCatDeId(CatDeID, limit, offset, sort);
+    for(let i = 0; i < products.length; i++)
+        products[i].exp = products[i].diff < 0;
     const name = await viewByProduct.findCatDeName(CatDeID);
 
     res.render('product/viewByCatDetail', {
@@ -111,7 +122,8 @@ app.get('/views/byCatDe/:id',async (req,res)=>{
         isStart: +page === 1,
         nextPage: +page + 1,
         previousPage: +page - 1,
-        isOnePage: pageNumbers.length === 1
+        isOnePage: pageNumbers.length === 1,
+        sort
     });
 });
 
@@ -126,9 +138,10 @@ app.get('/views/:query',async (req, res) => {
     if (totalProduct % limit > 0) ++totalPage;
     const page = req.query.page
     const offset = (req.query.page - 1) * limit;
-    const data = await viewByProduct.FTS(req.params.query, limit, offset,req.query.sort);
+    const data = await viewByProduct.FTS(req.params.query, limit, offset, req.query.sort);
     for(let pro of data){
         pro.remaining = await viewByProduct.findRemaining(pro.ProID);
+        pro.exp = pro.remaining.diff < 0;
     }
     const pageNumbers = [];
     for (let i = 1; i <= totalPage; ++i) {

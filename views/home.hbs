@@ -20,10 +20,16 @@
                             </h5>
                             <p class="card-text">{{this.TinyDes}}</p>
                         </div>
-                        <div class="card-footer text-center">
-                            <div class="text-danger">Kết thúc sau {{this.remaining}} giờ</div>
-                            <div>({{format_date this.EndDate}})</div>
-                        </div>
+                        {{#if this.exp}}
+                            <div class="card-footer text-center">
+                                <div class="text-danger">Sản phẩm đã hết hạn đấu giá</div>
+                            </div>
+                        {{else}}
+                            <div class="card-footer text-center">
+                                <div class="text-danger">Kết thúc sau {{this.remaining}} giờ</div>
+                                <div>({{format_date this.EndDate}})</div>
+                            </div>
+                        {{/if}}
                     </div>
                 </div>
             {{/each}}

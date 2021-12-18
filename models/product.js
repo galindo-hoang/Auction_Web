@@ -8,28 +8,34 @@ export default {
 
     async findPageByCatDeId(ID, limit, offset, sort){
         if(sort === "1"){
-            return (await knex.raw(`select *, HOUR(timediff(EndDate, now())) remaining
+            return (await knex.raw(`select *, HOUR(timediff(EndDate, now())) remaining, TIMESTAMPDIFF(second, now(), EndDate) diff
                                     FROM products
                                     where CatDeID = ?
                                     order by CurPrice DESC
                                         LIMIT ?, ?`, [ID, offset, limit]))[0];
         }else if(sort === "2"){
-            return (await knex.raw(`select *, HOUR(timediff(EndDate, now())) remaining
+            return (await knex.raw(`select *, HOUR(timediff(EndDate, now())) remaining, TIMESTAMPDIFF(second, now(), EndDate) diff
                                     FROM products
                                     where CatDeID = ?
                                     order by CurPrice
                                         LIMIT ?, ?`, [ID, offset, limit]))[0];
         }else if(sort === "3"){
-            return (await knex.raw(`select *, HOUR(timediff(EndDate, now())) remaining
+            return (await knex.raw(`select *, HOUR(timediff(EndDate, now())) remaining, TIMESTAMPDIFF(second, now(), EndDate) diff
                                     FROM products
                                     where CatDeID = ?
-                                    order by remaining DESC
+                                    order by diff DESC
                                         LIMIT ?, ?`, [ID, offset, limit]))[0];
-        }else {
-            return (await knex.raw(`select *, HOUR(timediff(EndDate, now())) remaining
+        }else if(sort === "4"){
+            return (await knex.raw(`select *, HOUR(timediff(EndDate, now())) remaining, TIMESTAMPDIFF(second, now(), EndDate) diff
                                     FROM products
                                     where CatDeID = ?
-                                    order by remaining
+                                    order by diff
+                                        LIMIT ?, ?`, [ID, offset, limit]))[0];
+        }
+        else{
+            return (await knex.raw(`select *, HOUR(timediff(EndDate, now())) remaining, TIMESTAMPDIFF(second, now(), EndDate) diff
+                                    FROM products
+                                    where CatDeID = ?
                                         LIMIT ?, ?`, [ID, offset, limit]))[0];
         }
     },
@@ -46,7 +52,7 @@ export default {
     },
 
     findTop5Price: async function () {
-        return (await knex.raw('select *,HOUR(timediff(products.EndDate,now())) remaining from products order by CurPrice desc limit 5'))[0];
+        return (await knex.raw('select *,HOUR(timediff(products.EndDate,now())) remaining, TIMESTAMPDIFF(second, now(), EndDate) diff from products order by CurPrice desc limit 5'))[0];
     },
 
     findTop5Exp: async function () {
@@ -73,8 +79,8 @@ export default {
     },
 
     async findRemaining(ID){
-        const res = (await knex.raw(`select HOUR(timediff(products.EndDate,now())) remaining from products where ProID = ?`, ID))[0];
-        return res[0].remaining;
+        const res = (await knex.raw(`select HOUR(timediff(products.EndDate,now())) remaining, TIMESTAMPDIFF(second, now(), EndDate) diff from products where ProID = ?`, ID))[0];
+        return res[0];
     },
 
     findByFavorite(ID){
