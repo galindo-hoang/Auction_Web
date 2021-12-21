@@ -38,6 +38,27 @@ const entity = {
     },
     findUserPendingByProID(ProID){
         return knex.select('users.*').from('pending_list').leftJoin('users','users.UserID','pending_list.UserID').where('pending_list.ProID',ProID);
+    },
+    findAll(){
+        return knex('users').whereRaw('UserRole <> ?', 0);
+    },
+    findAllSeller(){
+        return knex('users').where('UserRole', 1);
+    },
+    // findAllBidder(){
+    //     return knex('users').where('UserRole', 2);
+    // },
+    async requireUpdate(){
+        return (await knex.raw(`select * from users us, update_users ud where us.UserID = ud.UserID`))[0];
+    },
+    async changeRole(ID, role){
+        await knex.raw(`UPDATE users
+                        SET UserRole = ?
+                        WHERE UserID = ?`, [role, ID]);
+        await knex('update_users').where('UserID', ID).del();
+    },
+    del(ID){
+        return knex('users').where('UserID', ID).del();
     }
 }
 

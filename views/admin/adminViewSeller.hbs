@@ -1,0 +1,84 @@
+<div class="container-fluid mt-4">
+    <div class="row">
+
+        {{> account-layout}}
+
+        <div class="col-sm-9">
+            <div class="card">
+                <h4 class="card-header d-flex justify-content-between container-fluid">
+                    Danh sách tài khoản seller
+                </h4>
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col" class="text-center"><h5>#</h5></th>
+                        <th scope="col" class="text-center">Email</th>
+                        <th scope="col" class="text-center">Username</th>
+                        <th scope="col" class="text-center"><h5>&nbsp;</h5></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {{#each this.sellerList}}
+                            <tr class="align-middle">
+                                <td class="text-center">{{UserID}}</td>
+                                <td class="text-center">{{UserEmail}}</td>
+                                <td class="text-center"><a href="/detail/{{UserID}}" class="ProTittle">{{UserName}}</a></td>
+                                <td class="text-sm-end">
+                                    <form method="post" id="">
+                                        <button type="submit" class="btn btn-danger" value="{{UserID}}" name="UserID" formaction="/admin/editAcc/downgrade">
+                                            Hạ cấp&nbsp;
+                                            <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<div class="modal fade" id="downgrade" tabindex="-1" role="dialog" aria-labelledby="downgradeLabel" aria-hidden="true">-->
+<!--    <div class="modal-dialog modal-dialog-centered" role="document">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="downgradeLabel">Xác nhận hạ cấp seller</h5>-->
+<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                    <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--            </div>-->
+<!--            <div class="modal-body">-->
+<!--                Xác nhận hạ cấp seller-->
+<!--            </div>-->
+<!--            <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-primary" id="confirmDowngrade">Xác nhận</button>-->
+<!--                <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="deleteLabel" aria-hidden="true">-->
+<!--    <div class="modal-dialog modal-dialog-centered" role="document">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <h5 class="modal-title" id="deleteLabel">Xác nhận xoá seller</h5>-->
+<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+<!--                    <span aria-hidden="true">&times;</span>-->
+<!--                </button>-->
+<!--            </div>-->
+<!--            <div class="modal-body">-->
+<!--                Xác nhận xoá seller-->
+<!--            </div>-->
+<!--            <div class="modal-footer">-->
+<!--                <button type="button" class="btn btn-primary">Xác nhận</button>-->
+<!--                <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+{{#section 'footer'}}
+{{/section}}

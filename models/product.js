@@ -120,7 +120,7 @@ export default {
     findAll(){
         return knex('products');
     },
-    async del(ID){
+    del(ID){
         return knex('products').where('ProID', ID).del();
     }
 }

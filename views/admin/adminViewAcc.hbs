@@ -1,0 +1,58 @@
+<div class="container-fluid mt-4">
+    <div class="row">
+
+        {{> account-layout}}
+
+        <div class="col-sm-9">
+            <div class="card">
+                <h4 class="card-header d-flex justify-content-between container-fluid">
+                    Danh sách tài khoản
+                </h4>
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col" class="text-center"><h5>#</h5></th>
+                        <th scope="col" class="text-center">Email</th>
+                        <th scope="col" class="text-center">Username</th>
+                        <th scope="col" class="text-center">Loại user</th>
+                        <th scope="col" class="text-center"><h5>&nbsp;</h5></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each this.userList}}
+                        <tr class="align-middle">
+                            <td scope="row" class="text-center">{{UserID}}</td>
+                            <td scope="row" class="text-center">{{UserEmail}}</td>
+                            <td class="text-center"><a href="/detail/{{UserID}}" class="ProTittle">{{UserName}}</a></td>
+                            <td scope="row" class="text-center">
+                                {{#if this.isSeller}}
+                                    Seller
+                                {{else}}
+                                    Bidder
+                                {{/if}}
+                            </td>
+                            <td class="text-sm-end">
+                                <form method="post" id="">
+                                    <button type="submit" class="btn btn-danger" formaction="/admin/editAcc/del" value="{{UserID}}" name="UserID">
+                                        Xoá&nbsp;
+                                        <i class="fa fa-trash-can" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{#section 'footer'}}
+<!--    <script>-->
+<!--        $('#deleteForm').submit(function() {-->
+<!--            const c = confirm("Xoá sản phẩm này?");-->
+<!--            console.log(c);-->
+<!--        });-->
+<!--    </script>-->
+{{/section}}
