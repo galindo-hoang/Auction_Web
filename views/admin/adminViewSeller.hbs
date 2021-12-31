@@ -25,7 +25,7 @@
                                 <td class="text-center"><a href="/detail/{{UserID}}" class="ProTittle">{{UserName}}</a></td>
                                 <td class="text-sm-end">
                                     <form method="post" id="">
-                                        <button type="submit" class="btn btn-danger" value="{{UserID}}" name="UserID" formaction="/admin/editAcc/downgrade">
+                                        <button type="submit" class="btn btn-danger" value="{{UserID}}" name="UserID" formaction="/admin/editAcc/downgrade" onclick="clickedDelete(event)">
                                             Hạ cấp&nbsp;
                                             <i class="fa fa-arrow-down" aria-hidden="true"></i>
                                         </button>
@@ -81,4 +81,11 @@
 <!--</div>-->
 
 {{#section 'footer'}}
+    <script>
+        function clickedDelete(e) {
+            if (!confirm('Xác nhận hạ cấp tài khoản?')) {
+                e.preventDefault();
+            }
+        }
+    </script>
 {{/section}}

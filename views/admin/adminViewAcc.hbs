@@ -33,7 +33,7 @@
                             </td>
                             <td class="text-sm-end">
                                 <form method="post" id="">
-                                    <button type="submit" class="btn btn-danger" formaction="/admin/editAcc/del" value="{{UserID}}" name="UserID">
+                                    <button type="submit" class="btn btn-danger" formaction="/admin/editAcc/del" value="{{UserID}}" name="UserID" onclick="clickedDelete(event)">
                                         Xoá&nbsp;
                                         <i class="fa fa-trash-can" aria-hidden="true"></i>
                                     </button>
@@ -49,10 +49,11 @@
 </div>
 
 {{#section 'footer'}}
-<!--    <script>-->
-<!--        $('#deleteForm').submit(function() {-->
-<!--            const c = confirm("Xoá sản phẩm này?");-->
-<!--            console.log(c);-->
-<!--        });-->
-<!--    </script>-->
+    <script>
+        function clickedDelete(e) {
+            if (!confirm('Xác nhận xoá sản phẩm?')) {
+                e.preventDefault();
+            }
+        }
+    </script>
 {{/section}}
