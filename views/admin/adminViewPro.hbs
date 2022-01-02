@@ -25,7 +25,11 @@
                             <td><a href="/detail/{{ProID}}" class="ProTittle">{{ProName}}</a></td>
                             <td class="text-sm-end">
                                 <form method="post" id="deleteForm">
-                                    <button type="submit" class="btn btn-danger" formaction="/admin/editPro" value="{{ProID}}" name="ProID">
+                                    <label>
+                                        <input value="{{SellerID}}" name="SellerID" hidden>
+                                        <input value="{{ProName}}" name="ProName" hidden>
+                                    </label>
+                                    <button type="submit" class="btn btn-danger" formaction="/admin/editPro" value="{{ProID}}" name="ProID" onclick="clickedDelete(event)">
                                         Xoá&nbsp;
                                         <i class="fa fa-trash-can" aria-hidden="true"></i>
                                     </button>
@@ -40,11 +44,12 @@
     </div>
 </div>
 
-<!--{{#section 'footer'}}-->
-<!--    <script>-->
-<!--        $('#deleteForm').submit(function() {-->
-<!--            const c = confirm("Xoá sản phẩm này?");-->
-<!--            console.log(c);-->
-<!--        });-->
-<!--    </script>-->
-<!--{{/section}}-->
+{{#section 'footer'}}
+    <script>
+        function clickedDelete(e) {
+            if (!confirm('Xác nhận xoá sản phẩm?')) {
+                e.preventDefault();
+            }
+        }
+    </script>
+{{/section}}
