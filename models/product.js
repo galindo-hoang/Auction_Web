@@ -65,19 +65,11 @@ export default {
     },
 
     findTop5Exp: async function () {
-<<<<<<< HEAD
         return (await knex.raw(`select *,TIMESTAMPDIFF(second , now(), EndDate) remaining from products where TIMESTAMPDIFF(second , now(), EndDate) > 0 order by TIMESTAMPDIFF(second , now(), EndDate) LIMIT 5`))[0];
     },
 
     async findTop5Bid() {
         return (await knex.raw('select products.*,count(ph.ProID) bid, TIMESTAMPDIFF(second , now(), EndDate) remaining from products join products_history ph on products.ProID = ph.ProID group by ph.ProID order by bid desc limit 5'))[0];
-=======
-        return (await knex.raw(`select *, HOUR(timediff(products.EndDate, now())) remaining
-                                from products
-                                where timediff(products.EndDate, now()) > 0
-                                order by TIME_TO_SEC(timediff(products.EndDate, now()))
-                                LIMIT 5`))[0];
->>>>>>> a720e899c3d4465ed9635ade9a782d24ea7a6120
     },
 
     async countFTS(query) {
