@@ -20,19 +20,42 @@
                             </h5>
                             <p class="card-text">{{this.TinyDes}}</p>
                         </div>
-                        {{#if this.exp}}
-                            <div class="card-footer text-center">
+                        <div class="card-footer text-center">
+                            {{#if this.exp}}
                                 <div class="text-danger">Sản phẩm đã hết hạn đấu giá</div>
-                            </div>
-                        {{else}}
-                            <div class="card-footer text-center">
-                                <div class="text-danger">Kết thúc sau {{this.remaining}} giờ</div>
-                                <div>({{format_date this.EndDate}})</div>
-                            </div>
-                        {{/if}}
+                            {{else}}
+                                <div class="text-danger">{{this.status}}</div>
+                            {{/if}}
+                            <div>({{format_date this.StartDate}})</div>
+                        </div>
                     </div>
                 </div>
             {{/each}}
         </div>
     </div>
 {{/each}}
+
+{{#section 'footer'}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        // $('#remaining').on('load',function () {
+        //     var dataId = $(this).attr("data-id");
+        //     console.log("The data-id of clicked item is: " + dataId);
+        // })
+        // function gettime(){
+        //     var hour = new Date().getHours();
+        //     var min = new Date().getMinutes();
+        //     var sec = new Date().getSeconds();
+        //     min = (min<10)?"0"+min:min;
+        //     sec = (sec<10)?"0"+sec:sec;
+        //     hour = (hour>12)?hour+12:"0"+hour;
+        //     $('#remaining').text(dataId);
+        //     setTimeout("gettime()",100);
+        // }
+
+        // var dataId = moment($('#endDate').data("id")).format("DD/MM/YYYY, h:mm:ss A");
+        // $('#remaining').text(dataId);
+        // console.log($('.check').data("id"));
+    </script>
+{{/section}}

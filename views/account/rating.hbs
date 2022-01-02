@@ -1,0 +1,50 @@
+<div class="container-fluid mt-4">
+    <div class="row">
+
+        {{> account-layout}}
+        <form class="col-sm-8" method="post">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title d-flex justify-content-center">{{data.Name}}</h4>
+
+                    <div class="mb-3">
+                        <label for="cars" class="form-label">đánh giá:</label>
+                        <select id="cars" name="Rate" class="form-control">
+                            <option value="1">Hài lòng</option>
+                            <option value="0">Không hài lòng</option>
+                        </select>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label for="Comment" class="form-label">Mô tả chi tiết</label>
+                        <textarea id="Comment" name="Comment" maxlength="100">Hello</textarea>
+                    </div>
+
+                    <input type="hidden" name="ProID" value="{{data.ProID}}">
+
+                    <div class="mb-3 d-flex justify-content-center">
+                        <input type="submit" value="Đánh giá">
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+{{#section 'footer'}}
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script>
+        tinymce.init({
+            selector: '#Comment',
+            plugins: 'paste image link autolink lists table media',
+            menubar: false,
+            toolbar: [
+                'undo redo | bold italic underline strikethrough ',
+            ],
+        });
+    </script>
+{{/section}}

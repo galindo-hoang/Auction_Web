@@ -59,6 +59,9 @@ const entity = {
     },
     del(ID){
         return knex('users').where('UserID', ID).del();
+    },
+    updateRating(UserID,UserRating) {
+        knex('users').update({UserRating}).where({UserID}).then(()=>{});
     }
 }
 

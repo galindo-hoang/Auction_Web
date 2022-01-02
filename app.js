@@ -33,12 +33,23 @@ app.get('/',async (req, res) => {
     data.push({},{},{});
     data[0].product = (await viewByProduct.findTop5Price());
     data[1].product = (await viewByProduct.findTop5Exp());
+    data[2].product = (await viewByProduct.findTop5Bid())
     data[0].title = 'Top 5 sản phẩm có giá cao nhất';
     data[1].title = 'Top 5 sản phẩm gần kết thúc';
     data[2].title = 'Top 5 sản phẩm có nhiều lượt ra giá nhất';
 
-    for(let pro of data[0].product){
-        pro.exp = pro.diff < 0;
+
+    for(let i = 0;i<data.length;++i){
+        for(let pro of data[i].product){
+            pro.exp = pro.remaining < 0;
+            if(!pro.exp){
+                let status = "còn ";
+                if( Math.floor(pro.remaining/3600) > 0) status += Math.floor(pro.remaining/3600) + " giờ "
+                if(Math.floor((pro.remaining%3600)/60) > 0) status += Math.floor((pro.remaining%3600)/60) + " phút "
+                status += pro.remaining%60 + " giây"
+                pro.status = status;
+            }
+        }
     }
     res.render('home',{data});
 });

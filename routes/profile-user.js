@@ -4,6 +4,10 @@ import bcrypt from "bcryptjs";
 import express from "express";
 import viewByProduct from '../models/product.js';
 import products_history from "../models/products_history.js";
+import win_list from "../models/win_list.js";
+import user from "../models/user.js";
+import rating_list from "../models/rating_list.js"
+import User from "../models/user.js";
 
 
 const router = express.Router();
@@ -32,10 +36,12 @@ router.post("/account/profile",auth.beforeLogin,async (req, res) => {
     }
 });
 
-router.get("/account/review",auth.beforeLogin,(req,res)=>{
+router.get("/account/review",auth.beforeLogin,async (req, res) => {
+    const rates = await rating_list.findByUserRateID(req.session.account.UserID);
     res.render("account/review", {
         user: req.session.account,
-        isAdmin: req.session.account.UserRole === 0
+        isAdmin: req.session.account.UserRole === 0,
+        rates
     });
 });
 
@@ -57,11 +63,43 @@ router.get("/account/favorite",auth.beforeLogin,async (req, res) => {
     });
 });
 
-router.get("/account/purchased",auth.beforeLogin,(req, res) => {
-    res.render("account/purchase", {
+router.get("/account/win",auth.beforeLogin,async (req, res) => {
+    const products = await viewByProduct.findByWinList(req.session.account.UserID);
+    for (let i=0;i<products.length;++i){
+        const rating = await win_list.findByRating(products[i].ProID,products[i].UserID);
+        products[i].rating = rating.length !== 0;
+    }
+    // const products = await win_list.findByRating()
+    res.render("account/win_list", {
+        products,
         user: req.session.account,
         isAdmin: req.session.account.UserRole === 0
     });
 });
+
+router.get("/account/ratingProduct/:id",auth.beforeLogin,async (req, res) => {
+    const data = await viewByProduct.findToRating(req.params.id);
+    data.Name = data.ProName;
+    res.render("account/rating",{data});
+})
+
+router.post("/account/ratingProduct/:id",auth.beforeLogin,async (req, res) => {
+    const seller = (await user.findByProID(req.params.id))[0];
+    const object = {};
+    object.ProID = req.params.id;
+    object.UserID = seller.UserID;
+    object.UserRateID = req.session.account.UserID;
+    object.Rate = req.body.Rate;
+    object.Comment = req.body.Comment;
+    rating_list.add(object);
+
+    const rates = await rating_list.findByUserID(object.UserID);
+    let like = 0;
+    for(let i=0;i<rates.length;++i){
+        if(rates[i].Rate === 1) ++like;
+    }
+    User.updateRating(object.UserID,like/rates.length);
+    res.redirect("/account/win");
+})
 
 export default router;

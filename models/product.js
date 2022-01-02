@@ -52,29 +52,33 @@ export default {
     },
 
     findTop5Price: async function () {
-        return (await knex.raw('select *,HOUR(timediff(products.EndDate,now())) remaining, TIMESTAMPDIFF(second, now(), EndDate) diff from products order by CurPrice desc limit 5'))[0];
+        return (await knex.raw('select *,TIMESTAMPDIFF(second, now(), EndDate) remaining from products order by CurPrice desc limit 5'))[0];
     },
 
     findTop5Exp: async function () {
-        return (await knex.raw(`select *,HOUR(timediff(products.EndDate,now())) remaining from products where timediff(products.EndDate,now()) > 0 order by TIME_TO_SEC(timediff(products.EndDate,now())) LIMIT 5`))[0];
+        return (await knex.raw(`select *,TIMESTAMPDIFF(second , now(), EndDate) remaining from products where TIMESTAMPDIFF(second , now(), EndDate) > 0 order by TIMESTAMPDIFF(second , now(), EndDate) LIMIT 5`))[0];
+    },
+
+    async findTop5Bid() {
+        return (await knex.raw('select products.*,count(ph.ProID) bid, TIMESTAMPDIFF(second , now(), EndDate) remaining from products join products_history ph on products.ProID = ph.ProID group by ph.ProID order by bid desc limit 5'))[0];
     },
 
     async countFTS(query) {
-        const list = (await knex.raw("select count(*) amount from products left join categories_detail cd on products.CatDeID = cd.CatDeID where match(cd.CatDeName) against(?) or match(products.ProName) against (?)", [query, query]))[0];
+        const list = (await knex.raw("select count(*) amount from products join categories_detail cd on products.CatDeID = cd.CatDeID where match(products.ProName) against (?)", [query]))[0];
         return list[0]["amount"];
     },
 
     async FTS(query, limit, offset, sort) {
         if (sort === "1") {
-            return (await knex.raw("select * from products left join categories_detail cd on products.CatDeID = cd.CatDeID where match(cd.CatDeName) against(?) or match(products.ProName) against (?) order by products.CurPrice desc limit ? offset ?", [query, query, limit, offset]))[0];
+            return (await knex.raw("select * from products join categories_detail cd on products.CatDeID = cd.CatDeID where match(products.ProName) against (?) order by products.CurPrice desc limit ? offset ?", [query, limit, offset]))[0];
         } else if (sort === "2") {
-            return (await knex.raw("select * from products left join categories_detail cd on products.CatDeID = cd.CatDeID where match(cd.CatDeName) against(?) or match(products.ProName) against (?) order by products.CurPrice limit ? offset ?", [query, query, limit, offset]))[0];
+            return (await knex.raw("select * from products join categories_detail cd on products.CatDeID = cd.CatDeID where match(products.ProName) against (?) order by products.CurPrice limit ? offset ?", [query, limit, offset]))[0];
         } else if (sort === "3") {
-            return (await knex.raw("select * from products left join categories_detail cd on products.CatDeID = cd.CatDeID where match(cd.CatDeName) against(?) or match(products.ProName) against (?) order by products.EndDate desc limit ? offset ?", [query, query, limit, offset]))[0];
+            return (await knex.raw("select * from products join categories_detail cd on products.CatDeID = cd.CatDeID where match(products.ProName) against (?) order by products.EndDate desc limit ? offset ?", [query, limit, offset]))[0];
         } else if (sort === "4") {
-            return (await knex.raw("select * from products left join categories_detail cd on products.CatDeID = cd.CatDeID where match(cd.CatDeName) against(?) or match(products.ProName) against (?) order by products.EndDate limit ? offset ?", [query, query, limit, offset]))[0];
+            return (await knex.raw("select * from products join categories_detail cd on products.CatDeID = cd.CatDeID where match(products.ProName) against (?) order by products.EndDate limit ? offset ?", [query, limit, offset]))[0];
         } else {
-            return (await knex.raw("select * from products left join categories_detail cd on products.CatDeID = cd.CatDeID where match(cd.CatDeName) against(?) or match(products.ProName) against (?) limit ? offset ?", [query, query, limit, offset]))[0];
+            return (await knex.raw("select * from products join categories_detail cd on products.CatDeID = cd.CatDeID where match(products.ProName) against (?) limit ? offset ?", [query, limit, offset]))[0];
         }
     },
 
@@ -122,5 +126,19 @@ export default {
     },
     del(ID){
         return knex('products').where('ProID', ID).del();
+    },
+
+    updateMinute(ID){
+        knex.raw('update products set products.EndDate = addtime(products.EndDate,\'00:10:00\') where products.ProID = ?',ID).then(()=>{});
+    },
+
+    findByWinList(UserID){
+        return knex.select('*').from('win_list').leftJoin('products','products.ProID','win_list.ProID').where('win_list.UserID',UserID);
+    },
+    async findToRating(ProID) {
+        return (await knex.select('*').from('products').join('users', 'users.UserID', 'products.SellerID').where('products.ProID', ProID))[0];
+    },
+    async findEndBidding(SellerID) {
+        return (await knex.raw('select * from products where (now() > products.EndDate or products.CurPrice = products.BuyNowPrice) and products.SellerID = ?',[SellerID]))[0];
     }
 }

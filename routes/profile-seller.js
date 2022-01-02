@@ -5,6 +5,9 @@ import multer from "multer";
 import fs from "fs";
 import categories_detail from "../models/categories_detail.js";
 import auth from "../mdw/auth.mdw.js";
+import win_list from "../models/win_list.js";
+import rating_list from "../models/rating_list.js";
+import User from "../models/user.js";
 
 
 
@@ -73,6 +76,43 @@ router.post('/seller/add', (req, res) => {
         })
     });
 
-})
+});
 
+router.get("/seller/end",auth.beforeLogin,auth.isSeller,async (req,res)=>{
+    const products = await Product.findEndBidding(req.session.account.UserID);
+    for(let i=0;i<products.length;++i){
+        products[i].noWin = (products[i].CurPrice === products[i].StartPrice);
+        if(!products[i].noWin){
+            products[i].bidder = await win_list.findByProID(products[i].ProID);
+            products[i].rating = await rating_list.findByProIDUserRateID(products[i].ProID,req.session.account.UserID);
+        }
+        else products[i].bidder = undefined;
+    }
+    res.render("seller/endBidding",{products});
+
+});
+
+router.get("/account/ratingUser/:id",auth.beforeLogin,auth.isSeller,async (req,res)=>{
+    const data = await User.findByID(req.params.id);
+    data.Name = data.UserName;
+    data.ProID = req.query.ProID;
+    res.render("account/rating",{data})
+});
+
+router.post("/account/ratingUser/:id",auth.beforeLogin,auth.isSeller,async (req,res)=>{
+    const object = {};
+    object.ProID = req.body.ProID;
+    object.UserID = req.params.id;
+    object.UserRateID = req.session.account.UserID;
+    object.Rate = req.body.Rate;
+    object.Comment = req.body.Comment;
+    rating_list.add(object);
+    const rates = await rating_list.findByUserID(object.UserID);
+    let like = 0;
+    for(let i=0;i<rates.length;++i){
+        if(rates[i].Rate === 1) ++like;
+    }
+    User.updateRating(object.UserID,like/rates.length);
+    res.redirect("/seller/end");
+})
 export default router;

@@ -1,0 +1,53 @@
+<div class="container-fluid mt-4">
+    <div class="row">
+
+        {{> account-layout}}
+
+        <div class="col-sm-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="text-center">
+                        Danh sách sản phẩm đang được đấu giá
+                    </h4>
+                </div>
+
+
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col" class="text-center">Mã sản phẩm</th>
+                        <th scope="col" class="text-center">&nbsp;</th>
+                        <th scope="col" class="text-center">Mô tả</th>
+                        <th scope="col" class="text-center">Giá thắng</th>
+                        <th scope="col" class="text-center">Người thắng</th>
+                        <th scope="col" class="text-center">&nbsp;</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each products}}
+                        <tr class="align-middle">
+                            <th class="text-center"><a href="/detail/{{this.ProID}}">{{this.ProID}}</a></th>
+                            <th scope="row" class="text-center"><img style="width: 120px;height: 120px;" src="/public/imgs/products/{{this.ProID}}/account.jpg"></th>
+                            <td>{{this.TinyDes}}</td>
+                            {{#if this.bidder}}
+                                <td class="text-center text-danger">{{format_number this.CurPrice}}</td>
+                                <td class="text-center">{{this.bidder.UserName}}</td>
+                                {{#if this.rating}}
+                                    <td class="text-center"><i class="fas fa-check-circle text-success"></i></td>
+                                {{else}}
+                                    <td class="text-center"><a href="/account/ratingUser/{{this.bidder.UserID}}?ProID={{this.ProID}}"><i class="fas fa-hourglass-end text-primary"></i></a></td>
+                                {{/if}}
+                            {{else}}
+                                <td class="text-center"><strong>NaN</strong></td>
+                                <td class="text-center">&nbsp;</td>
+                                <td class="text-center">&nbsp;</td>
+                            {{/if}}
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>

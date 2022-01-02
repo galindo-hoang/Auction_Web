@@ -191,7 +191,10 @@
                                         <th>Người mua</th>
                                         <th>Giá</th>
                                         {{#if seller}}
-                                            <th> </th>
+                                            {{#if expire}}
+                                            {{else}}
+                                                <th></th>
+                                            {{/if}}
                                         {{/if}}
                                     </tr>
                                     </thead>
@@ -202,15 +205,18 @@
                                             <td>{{this.UserName}}</td>
                                             <td>{{format_number this.Price}}</td>
                                             {{#if ../seller}}
-                                                <td>
-                                                    <form method="post">
-                                                        <input name="ProID" value="{{../product.ProID}}" type="hidden">
-                                                        <input name="BidderID" value="{{this.BidderID}}" type="hidden">
-                                                        <button class="border-0 text-danger" formaction="/detail/deleteUser">
-                                                            <i class="fas fa-trash"></i>
-                                                        </button>
-                                                    </form>
-                                                </td>
+                                                {{#if ../expire}}
+                                                {{else}}
+                                                    <td>
+                                                        <form method="post">
+                                                            <input name="ProID" value="{{../product.ProID}}" type="hidden">
+                                                            <input name="BidderID" value="{{this.BidderID}}" type="hidden">
+                                                            <button class="border-0 text-danger" formaction="/detail/deleteUser">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                {{/if}}
                                             {{/if}}
                                         </tr>
                                     {{/each}}

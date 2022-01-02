@@ -10,6 +10,7 @@ import products_history from "../models/products_history.js";
 import sendEmail from "../utils/mail.js";
 import pending_list from "../models/pending_list.js";
 import fs from "fs";
+import win_list from "../models/win_list.js";
 
 const router = express.Router();
 
@@ -108,13 +109,17 @@ router.post('/bid',auth.beforeLogin,async (req, res) => {
         //
         const product = await viewByProduct.findByID(req.query.ProID);
         const promptPrice = product.CurPrice === product.BuyNowPrice;
-        if(promptPrice) viewByProduct.updateStatus(0, object.ProID);
         const seller = await Users.findByProID(object.ProID);
         if (preBidder.length !== 0 && preBidder[0].UserID !== req.session.account.UserID){
             if(promptPrice) sendEmail(preBidder[0].UserEmail,"Đấu giá","Món hàng bạn đặt đã được mua ngay bởi người khác<div>"+req.headers.referer+"</div>");
             else sendEmail(preBidder[0].UserEmail,"Đấu giá","Món hàng bạn đặt đã được đặt giá bởi người khác :"+ "<b>"+ req.body.Price +" </b><div>"+req.headers.referer+"</div>");
         }
-        if(promptPrice) sendEmail(seller[0].UserEmail,"Sản phẩm của bạn","Sản phẩm của bạn đã được mua ngay <div>"+req.headers.referer+"</div>");
+        if(promptPrice){
+
+            win_list.add(object.ProID,object.BidderID);
+            viewByProduct.updateStatus(0, object.ProID);
+            sendEmail(seller[0].UserEmail,"Sản phẩm của bạn","Sản phẩm của bạn đã được mua ngay <div>"+req.headers.referer+"</div>");
+        }
         else sendEmail(seller[0].UserEmail,"Sản phẩm của bạn","Sản phẩm của bạn đã được đặt với mức giá: <b>"+ req.body.Price +"</b><div>"+req.headers.referer+"</div>");
 
         sendEmail(req.session.account.UserEmail,"chúc mừng","bạn đã ra giá thành công món hàng<div>"+req.headers.referer+"</div>");
@@ -168,7 +173,6 @@ router.post('/detail/deleteUser',async (req, res) => {
                 if (Bidders[i].BidderID !== +req.body.BidderID) {
                     findBefore = await Users.findByID(Bidders[i].BidderID);
                     if(moment(product.EndDate)>moment()){
-                        if(product.BuyNowPrice === product.CurPrice) viewByProduct.updateStatus(1,product.ProID);
                         sendEmail(findBefore.UserEmail,"Đấu giá sản phẩm","<div>Bạn đang giữ giá cao nhất trong phiên đấu giá sản phẩm này</div>"+req.headers.referer);
                     }
                     viewByProduct.updatePrice(Bidders[i].Price,product.ProID);
@@ -176,7 +180,6 @@ router.post('/detail/deleteUser',async (req, res) => {
                 }
             }
             if(findBefore === undefined){
-                if(moment(product.EndDate)>moment() && product.BuyNowPrice === product.CurPrice) viewByProduct.updateStatus(1,product.ProID);
                 viewByProduct.updatePrice(product.StartPrice,product.ProID);
             }
         }

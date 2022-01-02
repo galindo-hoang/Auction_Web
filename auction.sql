@@ -80,6 +80,7 @@ CREATE TABLE products_history ( -- Bảng lịch sử đấu giá của sản ph
 DROP TABLE IF EXISTS rating_list;
 CREATE TABLE rating_list ( -- Bảng chi tiết các lần được đánh giá
     RateID int(11) unsigned NOT NULL AUTO_INCREMENT,
+    ProID int(11) unsigned NOT NULL, -- ID của sản phẩm được đăng bán
     UserID int NOT NULL, -- ID của USER ĐƯỢC ĐÁNH GIÁ
     UserRateID int NOT NULL, -- ID của USER ĐÁNH GIÁ
     Rate tinyint(1) NOT NULL, -- rating của người đánh giá (VD: 0 là chê, 1 là khen)
@@ -184,7 +185,7 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 </tr>
 </tbody>
 </table>
-</div>', 200000, 15000000, 15000000, 19000000, 2, '2021-12-05 21:14:52', '2021-12-10 21:14:58', 1, 0, 1),
+</div>', 200000, 15000000, 19000000, 19000000, 2, '2021-12-05 21:14:52', '2022-01-16 21:14:58', 1, 0, 0),
         (2, 'Laptop HP 15-DY2045 2Q1H3UA', 'Laptop HP luôn là lựa chọn được nhiều người dùng tin tưởng lựa chọn', '<div class="box-content">
 <table id="tskt">
 <tbody>
@@ -234,7 +235,7 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 </tr>
 </tbody>
 </table>
-</div>', 200000, 14000000, 14000000, 18000000, 2, '2021-12-01 21:20:27', '2021-01-11 21:20:35', 1, 0, 1),
+</div>', 200000, 14000000, 14000000, 18000000, 2, '2021-12-01 21:20:27', '2022-01-11 21:20:35', 1, 0, 1),
         (3, 'Laptop HP 15-DW1001WN 4J238UA', 'hiệu năng ổn định cùng một mức giá hợp lý.', '<div class="box-content">
 <table id="tskt">
 <tbody>
@@ -334,7 +335,7 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 </tr>
 </tbody>
 </table>
-</div>', 300000, 16000000, 16000000, 21000000, 2, '2021-12-07 21:26:03', '2021-12-15 21:26:07', 1, 0, 1),
+</div>', 300000, 16000000, 16000000, 21000000, 2, '2021-12-07 21:26:03', '2022-01-15 21:26:07', 1, 0, 1),
         (5, 'Laptop HP Probook 430 G8 2H0N6PA', '15s-fq2602TU 4B6D3PA là một sản phẩm mới đến từ thương hiệu HP.', '<div class="box-content">
 <table id="tskt">
 <tbody>
@@ -434,7 +435,7 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 </tr>
 </tbody>
 </table>
-</div>', 400000, 20000000, 20000000, 25000000, 1, '2021-12-03 21:31:35', '2021-12-27 21:31:42', 1, 0, 1),
+</div>', 400000, 20000000, 20000000, 25000000, 1, '2021-12-03 21:31:35', '2022-02-27 21:31:42', 1, 0, 1),
         (7, 'Samsung Galaxy Note 20 Ultra 5G', 'Bên cạnh biên bản Galaxy Note 20 thường, Samsung còn cho ra mắt Note 20 Ultra 5G.', '<div class="box-content">
 <table id="tskt">
 <tbody>
@@ -720,7 +721,7 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 </tr>
 </tbody>
 </table>
-</div>', 70000, 3000000, 3000000, 6000000, 1, '2021-12-05 21:38:57', '2021-12-31 21:39:02', 1, 0, 1),
+</div>', 70000, 3000000, 3000000, 6000000, 1, '2021-12-05 21:38:57', '2022-01-31 21:39:02', 1, 0, 1),
         (12, 'Lò Vi Sóng Có Nướng Hafele HW-F23B', ' có kích thước nhỏ gọn với dung tích 23 lít. Công suất nướng 1.000W.', '<div class="box-content">
 <table id="tskt">
 <tbody>
@@ -828,7 +829,7 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 </tr>
 </tbody>
 </table>
-</div>', 30000, 800000, 800000, 3000000, 3, '2021-12-05 21:43:54', '2021-12-29 21:43:58', 1, 0, 1),
+</div>', 30000, 800000, 900000, 3000000, 3, '2021-12-05 21:43:54', '2021-12-29 21:43:58', 1, 0, 1),
         (14, 'Sharp R-205VN', 'Thiết kế nhỏ gọn với những đường nét tính tế và hiện đại.', '<div class="box-content">
 <table id="tskt">
 <tbody>
@@ -882,7 +883,7 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 </tr>
 </tbody>
 </table>
-</div>', 20000, 800000, 800000, 2000000, 3, '2021-12-05 21:44:57', '2022-01-05 21:44:59', 1, 0, 1),
+</div>', 20000, 800000, 800000, 2000000, 3, '2021-12-05 21:44:57', '2022-03-05 21:44:59', 1, 0, 1),
         (15, 'Máy Làm Bánh BIYI BM1513F', 'Sản phẩm không tiết ra các chất độc hại trong quá trình sử dụng, ngoài ra khuôn nướng.', '<div class="box-content">
 <table id="tskt">
 <tbody>
@@ -936,7 +937,7 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 </tr>
 </tbody>
 </table>
-</div>', 10000, 200000, 200000, 1000000, 4, '2021-12-05 21:47:39', '2022-01-08 21:47:43', 1, 0, 1),
+</div>', 10000, 200000, 200000, 1000000, 4, '2021-12-05 21:47:39', '2022-02-08 21:47:43', 1, 0, 1),
         (16, 'Máy làm bánh nướng hình thú ngộ nghĩnh.', 'Máy có kiểu dáng nhỏ gọn, trọng lượng chỉ 1.6kg để bạn có thể dễ dàng chi chuyển.', '<div class="box-content">
 <table id="tskt">
 <tbody>
@@ -1098,7 +1099,7 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 </tr>
 </tbody>
 </table>
-</div>', 200000, 1400000, 1400000, 1700000, 5, '2021-12-05 21:51:18', '2021-12-14 21:51:19', 1, 0, 1),
+</div>', 200000, 1400000, 1400000, 1700000, 5, '2021-12-05 21:51:18', '2022-01-14 21:51:19', 1, 0, 1),
         (19, 'Tự Động Tiross TS9090 (Xanh) - Hàng Chính Hãng', 'màu sắc đẹp mắt và sở hữu tính năng hiện đại, giúp bạn tự làm món kem thơm ngon. ', '<div class="box-content">
 <table id="tskt">
 <tbody>
@@ -1152,7 +1153,7 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 </tr>
 </tbody>
 </table>
-</div>', 250000, 2000000, 2000000, 2500000, 5, '2021-12-05 21:52:34', '2021-12-14 06:52:35', 1, 0, 1),
+</div>', 250000, 2000000, 2000000, 2500000, 5, '2021-12-05 21:52:34', '2022-01-19 06:52:35', 1, 0, 1),
         (20, 'UNOLD 48895 Dung Tích 1.5 Lít', 'Công nghệ được đóng gói trong một vỏ thép không gỉ thanh lịch, bền.', '<ul>
 <li>Công suất định mức: 150 W, 220-240 V ~, 50 Hz</li>
 <li>Kích thước (LxWxH): 42.5 x 28.5 x 26.2 cm</li>
@@ -1172,7 +1173,7 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 <li>Hẹn giờ kỹ thuật số có thể điều chỉnh trong khoảng từ 5 đến 60 phút</li>
 <li>Nhập khẩu tại Đức</li>
 <li>Phụ kiện: Tập sách công thức với công thức làm kem Schuhbeck, hướng dẫn sử dụng với công thức nấu ăn</li>
-</ul>', 50000, 800000, 800000, 1500000, 6, '2021-12-05 21:56:59', '2021-12-18 21:57:00', 1, 0, 1),
+</ul>', 50000, 800000, 1500000, 1500000, 6, '2021-12-05 21:56:59', '2022-01-18 15:17:00', 1, 0, 0),
         (22, 'L-Beans 900A công suất 360W', 'Máy xay cafe chuyên nghiệp của L-Beans luôn được đánh giá cao vì sự bền bỉ.', '<ul>
 <li>Công suất định mức: 150 W, 220-240 V ~, 50 Hz</li>
 <li>Kích thước (LxWxH): 42.5 x 28.5 x 26.2 cm</li>
@@ -1182,7 +1183,7 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 <li>Hẹn giờ kỹ thuật số có thể điều chỉnh trong khoảng từ 5 đến 60 phút</li>
 <li>Nhập khẩu tại Đức</li>
 <li>Phụ kiện: Tập sách công thức với công thức làm kem Schuhbeck, hướng dẫn sử dụng với công thức nấu ăn</li>
-</ul>', 200000, 9000000, 9000000, 12000000, 6, '2021-12-05 21:57:58', '2021-12-13 13:57:59', 1, 0, 1),
+</ul>', 200000, 9000000, 9000000, 12000000, 6, '2021-12-05 21:57:58', '2022-02-13 13:57:59', 1, 0, 1),
         (23, 'Espresso Tiross TS-621', 'Chế độ đánh bọt giúp pha chế cà phê Cappuccino theo phong cách Ý.', '<ul>
 <li>Công suất định mức: 150 W, 220-240 V ~, 50 Hz</li>
 <li>Kích thước (LxWxH): 42.5 x 28.5 x 26.2 cm</li>
@@ -1222,7 +1223,7 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 <li>Hẹn giờ kỹ thuật số có thể điều chỉnh trong khoảng từ 5 đến 60 phút</li>
 <li>Nhập khẩu tại Đức</li>
 <li>Phụ kiện: Tập sách công thức với công thức làm kem Schuhbeck, hướng dẫn sử dụng với công thức nấu ăn</li>
-</ul>', 0, 200000, 200000, 200000, 8, '2021-12-05 22:32:26', '2021-12-05 22:32:27', 1, 0, 1),
+</ul>', 0, 200000, 200000, 200000, 8, '2021-12-05 22:32:26', '2022-02-05 22:32:27', 1, 0, 1),
         (27, 'Vitamin C SAP Neogen Dermalogy Real Vita Serum 32g', 'Tinh chất sở hữu bộ đôi vàng Vitamin C dạng SAP + niacinamide hàm lượng cao giúp giảm thâm.', '<ul>
 <li>Công suất định mức: 150 W, 220-240 V ~, 50 Hz</li>
 <li>Kích thước (LxWxH): 42.5 x 28.5 x 26.2 cm</li>
@@ -1252,4 +1253,4 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 <li>Hẹn giờ kỹ thuật số có thể điều chỉnh trong khoảng từ 5 đến 60 phút</li>
 <li>Nhập khẩu tại Đức</li>
 <li>Phụ kiện: Tập sách công thức với công thức làm kem Schuhbeck, hướng dẫn sử dụng với công thức nấu ăn</li>
-</ul>', 0, 300000, 300000, 300000, 9, '2021-12-05 22:35:35', '2021-12-05 22:35:36', 1, 0, 1);
+</ul>', 0, 300000, 300000, 300000, 9, '2021-12-05 22:35:35', '2022-01-14 22:35:36', 1, 0, 1);
