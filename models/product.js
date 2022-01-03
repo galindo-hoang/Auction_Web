@@ -57,7 +57,7 @@ export default {
     },
 
     async findTop5ByCatDeID(ID, exID) {
-        return (await knex.raw('select *, HOUR(timediff(products.EndDate,now())) remaining from products where CatDeID = ? and ProID <> ? limit 0,5', [ID, exID]))[0];
+        return (await knex.raw('select *, HOUR(timediff(products.EndDate,now())) remaining, TIMESTAMPDIFF(second, now(), EndDate) diff from products where CatDeID = ? and ProID <> ? limit 0,5', [ID, exID]))[0];
     },
 
     findTop5Price: async function () {
@@ -65,7 +65,11 @@ export default {
     },
 
     findTop5Exp: async function () {
-        return (await knex.raw(`select *,TIMESTAMPDIFF(second , now(), EndDate) remaining from products where TIMESTAMPDIFF(second , now(), EndDate) > 0 order by TIMESTAMPDIFF(second , now(), EndDate) LIMIT 5`))[0];
+        return (await knex.raw(`select *, TIMESTAMPDIFF(second, now(), EndDate) remaining
+                                from products
+                                where TIMESTAMPDIFF(second, now(), EndDate) > 0
+                                order by TIMESTAMPDIFF(second, now(), EndDate)
+                                LIMIT 5`))[0];
     },
 
     async findTop5Bid() {
@@ -148,12 +152,13 @@ export default {
     del(ID) {
         return knex('products').where('ProID', ID).del();
     },
-    updateMinute(ID){
-        knex.raw('update products set products.EndDate = addtime(products.EndDate,\'00:10:00\') where products.ProID = ?',ID).then(()=>{});
+    updateMinute(ID) {
+        knex.raw('update products set products.EndDate = addtime(products.EndDate,\'00:10:00\') where products.ProID = ?', ID).then(() => {
+        });
     },
 
-    findByWinList(UserID){
-        return knex.select('*').from('win_list').leftJoin('products','products.ProID','win_list.ProID').where('win_list.UserID',UserID);
+    findByWinList(UserID) {
+        return knex.select('*').from('win_list').leftJoin('products', 'products.ProID', 'win_list.ProID').where('win_list.UserID', UserID);
     },
     async findToRating(ProID) {
         return (await knex.select('*').from('products').join('users', 'users.UserID', 'products.SellerID').where('products.ProID', ProID))[0];
@@ -162,7 +167,10 @@ export default {
         return (await knex.raw('select * from products where (now() > products.EndDate or products.CurPrice = products.BuyNowPrice) and products.SellerID = ?', [SellerID]))[0];
 
     },
-    findUserEmail(ID){
+    findUserEmail(ID) {
         return knex.select('UserEmail').from('users').where('UserID', ID);
+    },
+    findSellerName(ID) {
+        return knex.select('UserName').from('users').where('UserID', ID);
     }
 }

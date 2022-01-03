@@ -15,22 +15,21 @@ const app = express();
 
 app.use('/public', express.static('public'));
 // to get data from user (app.post)
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({extended: true}));
 
 local_mdw(app);
 view_mdw(app);
-app.use('/',register_route);
-app.use('/',login_route);
-app.use('/',profile_user_route);
-app.use('/',view_product);
-app.use('/',profile_seller_route);
-app.use('/',profile_admin_route);
+app.use('/', register_route);
+app.use('/', login_route);
+app.use('/', profile_user_route);
+app.use('/', view_product);
+app.use('/', profile_seller_route);
+app.use('/', profile_admin_route);
 
 
-
-app.get('/',async (req, res) => {
+app.get('/', async (req, res) => {
     const data = [];
-    data.push({},{},{});
+    data.push({}, {}, {});
     data[0].product = (await viewByProduct.findTop5Price());
     data[1].product = (await viewByProduct.findTop5Exp());
     data[2].product = (await viewByProduct.findTop5Bid())
@@ -39,22 +38,22 @@ app.get('/',async (req, res) => {
     data[2].title = 'Top 5 sản phẩm có nhiều lượt ra giá nhất';
 
 
-    for(let i = 0;i<data.length;++i){
-        for(let pro of data[i].product){
+    for (let i = 0; i < data.length; ++i) {
+        for (let pro of data[i].product) {
             pro.exp = pro.remaining < 0;
-            if(!pro.exp){
+            if (!pro.exp) {
                 let status = "còn ";
-                if( Math.floor(pro.remaining/3600) > 0) status += Math.floor(pro.remaining/3600) + " giờ "
-                if(Math.floor((pro.remaining%3600)/60) > 0) status += Math.floor((pro.remaining%3600)/60) + " phút "
-                status += pro.remaining%60 + " giây"
+                if (Math.floor(pro.remaining / 3600) > 0) status += Math.floor(pro.remaining / 3600) + " giờ "
+                if (Math.floor((pro.remaining % 3600) / 60) > 0) status += Math.floor((pro.remaining % 3600) / 60) + " phút "
+                status += pro.remaining % 60 + " giây"
                 pro.status = status;
             }
         }
     }
-    res.render('home',{data});
+    res.render('home', {data});
 });
 
-app.get('/views/byCat/:id',async (req,res)=>{
+app.get('/views/byCat/:id', async (req, res) => {
     const CatID = req.params.id || 0;
 
     const limit = 8;
@@ -77,7 +76,7 @@ app.get('/views/byCat/:id',async (req,res)=>{
     }
 
     const products = await viewByCategories.findPageByCatId(CatID, limit, offset, sort);
-    for(let i = 0; i < products.length; i++)
+    for (let i = 0; i < products.length; i++)
         products[i].exp = products[i].diff < 0;
 
     const name = await viewByCategories.findCatName(CatID);
@@ -97,7 +96,7 @@ app.get('/views/byCat/:id',async (req,res)=>{
     });
 });
 
-app.get('/views/byCatDe/:id',async (req,res)=>{
+app.get('/views/byCatDe/:id', async (req, res) => {
     const CatDeID = req.params.id || 0;
 
     const limit = 8;
@@ -119,7 +118,7 @@ app.get('/views/byCatDe/:id',async (req,res)=>{
         });
     }
     const products = await viewByProduct.findPageByCatDeId(CatDeID, limit, offset, sort);
-    for(let i = 0; i < products.length; i++)
+    for (let i = 0; i < products.length; i++)
         products[i].exp = products[i].diff < 0;
     const name = await viewByProduct.findCatDeName(CatDeID);
 
@@ -138,11 +137,11 @@ app.get('/views/byCatDe/:id',async (req,res)=>{
     });
 });
 
-app.post('/views',async (req, res) => {
-    res.redirect('/views/'+req.body.query+"?sort="+req.body.sort+"&page="+req.body.page)
+app.post('/views', async (req, res) => {
+    res.redirect('/views/' + req.body.query + "?sort=" + req.body.sort + "&page=" + req.body.page)
 })
 
-app.get('/views/:query',async (req, res) => {
+app.get('/views/:query', async (req, res) => {
     const totalProduct = await viewByProduct.countFTS(req.params.query);
     const limit = 8;
     let totalPage = Math.floor(totalProduct / limit);
@@ -150,7 +149,7 @@ app.get('/views/:query',async (req, res) => {
     const page = req.query.page
     const offset = (req.query.page - 1) * limit;
     const data = await viewByProduct.FTS(req.params.query, limit, offset, req.query.sort);
-    for(let pro of data){
+    for (let pro of data) {
         pro.remaining = await viewByProduct.findRemaining(pro.ProID);
         pro.exp = pro.remaining.diff < 0;
     }
@@ -161,22 +160,23 @@ app.get('/views/:query',async (req, res) => {
             isCurrent: +page === i
         });
     }
-    res.render('product/viewByQuery',{products:data,query:req.params.query,pageNumbers,sort:req.query.sort,isEnd: +page === totalPage,
-        isStart: +page === 1,nextPage: +page + 1,previousPage: +page - 1,isOnePage: pageNumbers.length === 1
+    res.render('product/viewByQuery', {
+        products: data, query: req.params.query, pageNumbers, sort: req.query.sort, isEnd: +page === totalPage,
+        isStart: +page === 1, nextPage: +page + 1, previousPage: +page - 1, isOnePage: pageNumbers.length === 1
     });
 })
 
-app.use(function (err,req, res, next) {
+app.use(function (err, req, res, next) {
     console.error(err.stack)
-    res.render('404', { layout: false });
+    res.render('404', {layout: false});
 });
 
 app.use(function (err, req, res, next) {
     console.error(err.stack)
     // res.status(500).send('Something broke!')
-    res.render('500', { layout: false });
+    res.render('500', {layout: false});
 });
 
-app.listen(3000,()=>{
+app.listen(3000, () => {
     console.log(`Website running at http://localhost:${3000}`);
 });

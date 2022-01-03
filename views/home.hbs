@@ -22,11 +22,11 @@
                         </div>
                         <div class="card-footer text-center">
                             {{#if this.exp}}
-                                <div class="text-danger">Sản phẩm đã hết hạn đấu giá</div>
+                                <div class="text-danger">Sản phẩm hết hạn đấu giá</div>
                             {{else}}
                                 <div class="text-danger">{{this.status}}</div>
+                                <div>({{format_date this.EndDate}})</div>
                             {{/if}}
-                            <div>({{format_date this.StartDate}})</div>
                         </div>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
         //     $('#remaining').text(dataId);
         //     setTimeout("gettime()",100);
         // }
-
+        //
         // var dataId = moment($('#endDate').data("id")).format("DD/MM/YYYY, h:mm:ss A");
         // $('#remaining').text(dataId);
         // console.log($('.check').data("id"));
