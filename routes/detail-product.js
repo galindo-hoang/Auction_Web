@@ -127,7 +127,7 @@ router.post('/bid', auth.beforeLogin, async (req, res) => {
         if (promptPrice) {
 
             win_list.add(object.ProID, object.BidderID);
-            viewByProduct.updateStatus(0, object.ProID);
+            viewByProduct.updateStatusEndBidding(object.ProID);
             sendEmail(seller[0].UserEmail, "Sản phẩm của bạn", "Sản phẩm của bạn đã được mua ngay <div>" + req.headers.referer + "</div>");
         } else sendEmail(seller[0].UserEmail, "Sản phẩm của bạn", "Sản phẩm của bạn đã được đặt với mức giá: <b>" + req.body.Price + "</b><div>" + req.headers.referer + "</div>");
 

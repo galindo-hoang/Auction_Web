@@ -109,8 +109,8 @@ export default {
     // async findWithTime(ID) {
     //     return (await knex.raw('select *, TIME_TO_SEC(timediff(products.EndDate,now())) time from products where ProID = '+ID))[0];
     // },
-    updateStatus(Status, ID) {
-        knex('products').where({ProID: ID}).update({Status: Status}).then(() => {
+    updateStatusEndBidding(ID) {
+        knex('products').where({ProID: ID}).update({Status: 0,Mail: 1}).then(() => {
         });
     },
 
@@ -168,5 +168,18 @@ export default {
     },
     findSellerName(ID) {
         return knex.select('UserName').from('users').where('UserID', ID);
+    },
+    async findProductEndBiddingWithCron() {
+        const productExpire = (await knex.raw('select products.ProID, users.UserEmail sellerMail  from products join users on users.UserID = products.SellerID where TIMESTAMPDIFF(second , now(), EndDate) <= 0 and products.Mail = false and products.Status = 1'))[0];
+        for (let i=0;i<productExpire.length;++i){
+            const bidder = await knex.select('users.UserEmail, users.UserID').from('users').join('products_history','products_history.BidderID','users.UserID').where('products_history.ProID',productExpire[i].ProID).orderBy('products_history.BidID','desc').limit(1);
+            if(bidder.length === 0) productExpire[i].bidderMail = null;
+            else {
+                productExpire[i].bidderMail = bidder[0].UserEmail;
+                productExpire[i].bidderID = bidder[0].UserID;
+            }
+            this.updateStatusEndBidding(productExpire[i].ProID);
+        }
+        return productExpire;
     }
 }
