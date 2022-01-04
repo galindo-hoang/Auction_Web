@@ -26,37 +26,38 @@
                     </a>
                 </div>
             </div>
-            <div class="row">
+
+            <div class="cards">
                 {{#each this.products}}
-                    <div class="col-sm-3 mb-4">
-                        <div class="card h-100">
-                            <a href="/detail/{{ProID}}"><img class="card-img-top" src="/public/imgs/products/{{ProID}}/thumb.jpg" alt="{{ProName}}" title="{{ProName}}"></a>
-                            <div class="card-body">
-                                <a href="/detail/{{ProID}}" class="ProTittle"><h5 class="card-title">{{ProName}}</h5></a>
-                                <h5 class="text-info mb-2">
-                                    <i class="fa fa-gavel" aria-hidden="true"></i>
-                                    {{format_number this.CurPrice}}
-                                </h5>
-                                <h5 class="text-danger mb-2">
-                                    <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                    {{format_number this.BuyNowPrice}}
-                                </h5>
-                                <p class="card-text">{{TinyDes}}</p>
+                    <div class="card">
+                        <a href="/detail/{{this.ProID}}"><img src="/public/imgs/products/{{this.ProID}}/thumb.jpg" class="card-image" alt="{{this.ProName}}"></a>
+                        <div class="card-content">
+                            <div class="card-top">
+                                <h3 class="card-title">
+                                    <a href="/detail/{{this.ProID}}">{{this.ProName}}</a>
+                                </h3>
+                                <div class="card-body">
+                                    <div class="bidPrice"><i class="fa fa-gavel" aria-hidden="true"></i> {{format_number this.CurPrice}}  ({{this.nameMaxBid}})</div>
+                                    <div class="promptPrice"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i> {{format_number this.BuyNowPrice}} (Mua ngay)</div>
+                                    <div class="startDate">{{format_date this.StartDate}}</div>
+                                </div>
                             </div>
-                            {{#if this.exp}}
-                                <div class="card-footer text-center">
-                                    <div class="text-danger">Sản phẩm đã hết hạn đấu giá</div>
+                            <div class="card-bottom">
+                                <div class="card-bid">
+                                    <span>{{this.bid}} lượt đấu giá</span>
                                 </div>
-                            {{else}}
-                                <div class="card-footer text-center">
-                                    <div class="text-danger">Kết thúc sau {{this.remaining}} giờ</div>
-                                    <div>({{format_date this.EndDate}})</div>
-                                </div>
-                            {{/if}}
+                                {{#if this.exp}}
+                                    <div class="card-remaining text-danger">hết hạn đấu giá</div>
+                                {{else}}
+                                    <div class="card-remaining">Còn 8 ngày</div>
+                                {{/if}}
+
+                            </div>
                         </div>
                     </div>
                 {{/each}}
             </div>
+
             {{#unless this.isOnePage}}
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-end">
@@ -89,3 +90,7 @@
     <div class="card-footer text-muted">
     </div>
 </div>
+
+{{#section 'header'}}
+    <link rel="stylesheet" href="/public/css/viewByCatDetail.css">
+{{/section}}

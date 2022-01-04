@@ -18,6 +18,9 @@ const entity = {
     },
     deleteByProIDAndBidderID(ProID, BidderID) {
         knex('products_history').where({BidderID:BidderID,ProID:ProID}).del().then(()=>{});
+    },
+    async findBidderAndCount(ProID) {
+        return knex.select('users.UserName').from('products_history').join('users', 'users.UserID', 'products_history.BidderID').where('products_history.ProID', ProID).groupBy('products_history.BidID').orderBy('products_history.BidID', 'desc');
     }
 }
 

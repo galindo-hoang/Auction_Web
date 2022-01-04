@@ -61,11 +61,11 @@ export default {
     },
 
     findTop5Price: async function () {
-        return (await knex.raw('select *,TIMESTAMPDIFF(second, now(), EndDate) remaining from products order by CurPrice desc limit 5'))[0];
+        return (await knex.raw('select products.*,count(ph.ProID) bid,TIMESTAMPDIFF(second, now(), EndDate) remaining from products left join products_history ph on products.ProID = ph.ProID group by ph.ProID,products.CurPrice order by products.CurPrice desc limit 5'))[0];
     },
 
     findTop5Exp: async function () {
-        return (await knex.raw(`select *,TIMESTAMPDIFF(second , now(), EndDate) remaining from products where TIMESTAMPDIFF(second , now(), EndDate) > 0 order by TIMESTAMPDIFF(second , now(), EndDate) LIMIT 5`))[0];
+        return (await knex.raw(`select products.*,count(ph.ProID) bid, TIMESTAMPDIFF(second , now(), EndDate) remaining from products left join products_history ph on products.ProID = ph.ProID where TIMESTAMPDIFF(second , now(), EndDate) > 0 group by products.ProID order by remaining limit 5`))[0];
     },
 
     async findTop5Bid() {
