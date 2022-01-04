@@ -1,21 +1,29 @@
 {{#each data}}
-    <div class="row">
-        <h4 class="text-center mb-3">
+    <div class="home-row w-100 justify-content-center">
+        <h4 class="text-center mb-3 mt-4">
             {{this.title}}
         </h4>
         <div class="cards">
             {{#each this.product}}
                 <div class="card">
-                    <a href="/detail/{{this.ProID}}"><img src="/public/imgs/products/{{this.ProID}}/thumb.jpg" class="card-image" alt="{{this.ProName}}"></a>
+                    <a href="/detail/{{this.ProID}}"><img src="/public/imgs/products/{{this.ProID}}/thumb.jpg"
+                                                          class="card-image" alt="{{this.ProName}}"></a>
                     <div class="card-content">
                         <div class="card-top">
                             <h3 class="card-title">
                                 <a href="/detail/{{this.ProID}}">{{this.ProName}}</a>
                             </h3>
-                            <div class="card-body">
-                                <div class="bidPrice"><i class="fa fa-gavel" aria-hidden="true"></i> {{format_number this.CurPrice}} ({{this.nameMaxBid}})</div>
-                                <div class="promptPrice"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i> {{format_number this.BuyNowPrice}} (Mua ngay)</div>
-                                <div class="startDate">{{format_date this.StartDate}}</div>
+                            <div class="card-body-home mt-2">
+                                <div class="bidPrice mb-1"><i class="fa fa-gavel"
+                                                              aria-hidden="true"></i> {{format_number this.CurPrice}}
+                                    {{#if this.nameMaxBid}}
+                                        ({{this.nameMaxBid}})
+                                    {{/if}}
+                                </div>
+                                <div class="promptPrice"><i class="fa fa-cart-arrow-down"
+                                                            aria-hidden="true"></i> {{format_number this.BuyNowPrice}}
+                                    (Mua ngay)
+                                </div>
                             </div>
                         </div>
                         <div class="card-bottom">
@@ -23,7 +31,7 @@
                                 <span>{{this.bid}} lượt đấu giá</span>
                             </div>
                             {{#if this.exp}}
-                                <div class="card-remaining text-danger">hết hạn đấu giá</div>
+                                <div class="card-remaining text-danger">ĐÃ HẾT HẠN</div>
                             {{else}}
                                 <div class="card-remaining" data-date="{{this.EndDate}}"></div>
                             {{/if}}
@@ -40,29 +48,31 @@
 {{/section}}
 
 {{#section 'footer'}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+            integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script>
         const elements = document.getElementsByClassName("card-remaining");
-        for(let i=0; i<elements.length; i++) {
+        for (let i = 0; i < elements.length; i++) {
             const check = elements[i].getAttribute("data-date");
-            if(check === null) continue;
-            setInterval(function (){
+            if (check === null) continue;
+            setInterval(function () {
                 const expire = moment(check);
                 const now = moment();
-                let diff = expire.diff(now,'days');
-                if(diff >= 1) elements[i].innerHTML = "Còn " + diff + " ngày";
+                let diff = expire.diff(now, 'days');
+                if (diff >= 1) elements[i].innerHTML = "Còn " + diff + " ngày";
                 else {
-                    diff = expire.diff(now,'hours');
-                    if(diff >= 1) elements[i].innerHTML = "Còn " + diff + " giờ";
-                    else{
-                        diff = expire.diff(now,'minutes');
-                        if(diff >= 1) elements[i].innerHTML = "Còn " + diff + " phút";
-                        else elements[i].innerHTML = "Còn " + expire.diff(now,'seconds') + " giây";
+                    diff = expire.diff(now, 'hours');
+                    if (diff >= 1) elements[i].innerHTML = "Còn " + diff + " giờ";
+                    else {
+                        diff = expire.diff(now, 'minutes');
+                        if (diff >= 1) elements[i].innerHTML = "Còn " + diff + " phút";
+                        else elements[i].innerHTML = "Còn " + expire.diff(now, 'seconds') + " giây";
                     }
                 }
 
-            },1000);
+            }, 1000);
         }
     </script>
 {{/section}}

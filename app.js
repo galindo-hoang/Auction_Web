@@ -24,12 +24,12 @@ app.use(express.urlencoded({extended: true}));
 
 local_mdw(app);
 view_mdw(app);
-app.use('/',register_route);
-app.use('/',login_route);
-app.use('/',profile_user_route);
-app.use('/',detail_product);
-app.use('/',profile_seller_route);
-app.use('/',profile_admin_route);
+app.use('/', register_route);
+app.use('/', login_route);
+app.use('/', profile_user_route);
+app.use('/', detail_product);
+app.use('/', profile_seller_route);
+app.use('/', profile_admin_route);
 
 export const addBidAndUserMaxBid = async function (pro) {
     const raw = await products_history.findBidderAndCount(pro.ProID);
@@ -38,11 +38,11 @@ export const addBidAndUserMaxBid = async function (pro) {
         pro.nameMaxBid = "***" + raw[0].UserName.substring(Math.trunc(raw[0].UserName.length * 0.8));
     } else {
         pro.bid = 0;
-        pro.nameMaxBid = "Null";
+        pro.nameMaxBid = false;
     }
 }
 
-app.get('/',async (req, res) => {
+app.get('/', async (req, res) => {
     const data = [];
     data.push({}, {}, {});
     data[0].product = (await viewByProduct.findTop5Price());
@@ -52,10 +52,11 @@ app.get('/',async (req, res) => {
     data[1].title = 'Top 5 sản phẩm gần kết thúc';
     data[2].title = 'Top 5 sản phẩm có nhiều lượt ra giá nhất';
 
-    for(let i = 0;i<data.length;++i){
-        for(let pro of data[i].product){
+    for (let i = 0; i < data.length; ++i) {
+        for (let pro of data[i].product) {
             pro.exp = pro.remaining < 0;
-            addBidAndUserMaxBid(pro).then(()=>{});
+            addBidAndUserMaxBid(pro).then(() => {
+            });
         }
     }
     res.render('home', {data});
@@ -84,10 +85,11 @@ app.get('/views/byCat/:id', async (req, res) => {
     }
 
     const products = await viewByCategories.findPageByCatId(CatID, limit, offset, sort);
-    for(let i = 0; i < products.length; i++){
+    for (let i = 0; i < products.length; i++) {
         products[i].exp = products[i].diff < 0;
 
-        addBidAndUserMaxBid(products[i]).then(()=>{});
+        addBidAndUserMaxBid(products[i]).then(() => {
+        });
     }
 
     const name = await viewByCategories.findCatName(CatID);
@@ -129,9 +131,10 @@ app.get('/views/byCatDe/:id', async (req, res) => {
         });
     }
     const products = await viewByProduct.findPageByCatDeId(CatDeID, limit, offset, sort);
-    for(let i = 0; i < products.length; i++) {
+    for (let i = 0; i < products.length; i++) {
         products[i].exp = products[i].diff < 0;
-        addBidAndUserMaxBid(products[i]).then(()=>{});
+        addBidAndUserMaxBid(products[i]).then(() => {
+        });
     }
     const name = await viewByProduct.findCatDeName(CatDeID);
 
@@ -168,13 +171,13 @@ app.get('/views/:query', async (req, res) => {
 
         const raw = await products_history.findBidderAndCount(pro.ProID);
         let data = {}
-        if(raw.length > 0){
+        if (raw.length > 0) {
             pro.bid = raw.length;
             pro.nameMaxBid = raw[0].UserName;
-            data = {'bid':raw.length,'nameMaxBid':raw[0].UserName};
-        }else{
+            data = {'bid': raw.length, 'nameMaxBid': raw[0].UserName};
+        } else {
             pro.bid = 0;
-            pro.nameMaxBid = "Null";
+            pro.nameMaxBid = false;
         }
     }
     const pageNumbers = [];
@@ -197,7 +200,6 @@ app.use(function (err, req, res, next) {
 
 app.use(function (err, req, res, next) {
     console.error(err.stack)
-    // res.status(500).send('Something broke!')
     res.render('500', {layout: false});
 });
 

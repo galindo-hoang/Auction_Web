@@ -23,7 +23,7 @@
         </div>
     </div>
     {{#if products}}
-        <div class="cards">
+        <div class="cards mt-5">
             {{#each this.products}}
                 <div class="card">
                     <a href="/detail/{{this.ProID}}"><img src="/public/imgs/products/{{this.ProID}}/thumb.jpg" class="card-image" alt="{{this.ProName}}"></a>
@@ -32,10 +32,13 @@
                             <h3 class="card-title">
                                 <a href="/detail/{{this.ProID}}">{{this.ProName}}</a>
                             </h3>
-                            <div class="card-body">
-                                <div class="bidPrice"><i class="fa fa-gavel" aria-hidden="true"></i> {{format_number this.CurPrice}} ({{this.nameMaxBid}})</div>
-                                <div class="promptPrice"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i> {{format_number this.BuyNowPrice}} (Mua ngay)</div>
-                                <div class="startDate">{{format_date this.StartDate}}</div>
+                            <div class="card-body-ByQuery mt-2">
+                                <div class="bidPrice"><i class="fa fa-gavel" aria-hidden="true"></i> {{format_number this.CurPrice}}
+                                    {{#if this.nameMaxBid}}
+                                        ({{this.nameMaxBid}})
+                                    {{/if}}
+                                </div>
+                                <div class="promptPrice mt-1"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i> {{format_number this.BuyNowPrice}} (Mua ngay)</div>
                             </div>
                         </div>
                         <div class="card-bottom">
@@ -43,7 +46,7 @@
                                 <span>{{this.bid}} lượt đấu giá</span>
                             </div>
                             {{#if this.exp}}
-                                <div class="card-remaining text-danger">hết hạn đấu giá</div>
+                                <div class="card-remaining text-danger">Hết hạn đấu giá</div>
                             {{else}}
                                 <div class="card-remaining" data-date="{{this.EndDate}}"></div>
                             {{/if}}
@@ -81,9 +84,11 @@
             </nav>
         {{/unless}}
     {{else}}
-        <h5 class="card-title">Không có dữ liệu về sản phẩm</h5>
+        <div class="d-flex justify-content-center mt-5">
+            <img src="/public/assets/empty.png" alt="Empty">
+        </div>
+        <h5 class="text-center mb-5" style="color: #999999">Không có dữ liệu về sản phẩm</h5>
     {{/if}}
-    <div class="card-footer text-muted"></div>
 </div>
 
 

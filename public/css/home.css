@@ -1,4 +1,4 @@
-.row {
+.home-row {
     padding: 20px;
 }
 
@@ -67,7 +67,7 @@
     font-weight: 400;
 }
 
-.card-body{
+.card-body-home{
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
