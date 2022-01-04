@@ -39,6 +39,7 @@
                                     {{/if}}
                                 </div>
                                 <div class="promptPrice mt-1"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i> {{format_number this.BuyNowPrice}} (Mua ngay)</div>
+                                <div class="start-date-at-view">Đăng vào ngày: {{format_date this.StartDate}}</div>
                             </div>
                         </div>
                         <div class="card-bottom">
@@ -48,7 +49,7 @@
                             {{#if this.exp}}
                                 <div class="card-remaining text-danger">Hết hạn đấu giá</div>
                             {{else}}
-                                <div class="card-remaining" data-date="{{this.EndDate}}"></div>
+                                <div class="card-remaining mt-2" data-date="{{this.EndDate}}"></div>
                             {{/if}}
 
                         </div>

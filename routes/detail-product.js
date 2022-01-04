@@ -88,6 +88,7 @@ router.get('/detail/:id', async (req, res) => {
             prevPage
         });
     } else {
+        const expire = moment(product.EndDate) < moment() || product.CurPrice === product.BuyNowPrice || !product.Status;
         res.render('product/detail', {
             product: product,
             similarProduct: similarProduct,
@@ -96,7 +97,8 @@ router.get('/detail/:id', async (req, res) => {
             isBid: topBidder.length,
             productHistory, imgs,
             Seller: proSeller[0].UserName,
-            prevPage
+            prevPage,
+            expire
         });
     }
 });
