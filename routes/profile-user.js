@@ -8,15 +8,25 @@ import win_list from "../models/win_list.js";
 import user from "../models/user.js";
 import rating_list from "../models/rating_list.js"
 import User from "../models/user.js";
+import upgradeList from "../models/upgrade_list.js";
 
 
 const router = express.Router();
 
 router.get("/account/profile",auth.beforeLogin,async (req, res) => {
+    const upgradeReq = await upgradeList.getUserID(req.session.account.UserID);
     res.render("account/profile", {
         user: req.session.account,
-        isAdmin: req.session.account.UserRole === 0
+        isBidder: +req.session.account.UserRole === 2,
+        isAdmin: +req.session.account.UserRole === 0,
+        isRequested: upgradeReq.length !== 0
     });
+});
+
+router.post('/account/profile/upgrade', auth.beforeLogin, async function (req, res){
+    upgradeList.insert(req.body);
+    const upgradeReq = await upgradeList.getUserID(req.session.account.UserID);
+    res.redirect('/account/profile');
 });
 
 router.post("/account/profile",auth.beforeLogin,async (req, res) => {

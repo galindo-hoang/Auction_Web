@@ -25,10 +25,16 @@
                             <td class="text-center"><a href="/detail/{{UserID}}" class="ProTittle">{{UserName}}</a></td>
                             <td class="text-sm-end">
                                 <form method="post" id="">
-                                        <button type="submit" class="btn btn-outline-success" formaction="/admin/editAcc/upgrade" value="{{UserID}}" name="UserID">
-                                            Phê duyệt&nbsp;
-                                            <i class="fa fa-check" aria-hidden="true"></i>
-                                        </button>
+                                    <button type="submit" class="btn btn-outline-success"
+                                            formaction="/admin/editAcc/upgrade" value="{{UserID}}" name="UserID">
+                                        Phê duyệt&nbsp;
+                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                    </button>
+                                    <button type="submit" class="btn btn-outline-danger"
+                                            formaction="/admin/editAcc/notUpgrade" value="{{UserID}}" name="UserID">
+                                        Xoá&nbsp;
+                                        <i class="fa fa-trash-can" aria-hidden="true"></i>
+                                    </button>
                                 </form>
                             </td>
                         </tr>
@@ -41,10 +47,10 @@
 </div>
 
 {{#section 'footer'}}
-<!--    <script>-->
-<!--        $('#deleteForm').submit(function() {-->
-<!--            const c = confirm("Xoá sản phẩm này?");-->
-<!--            console.log(c);-->
-<!--        });-->
-<!--    </script>-->
+    <!--    <script>-->
+    <!--        $('#deleteForm').submit(function() {-->
+    <!--            const c = confirm("Xoá sản phẩm này?");-->
+    <!--            console.log(c);-->
+    <!--        });-->
+    <!--    </script>-->
 {{/section}}

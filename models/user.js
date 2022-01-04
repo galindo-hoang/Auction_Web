@@ -57,7 +57,12 @@ const entity = {
                         WHERE UserID = ?`, [role, ID]);
         await knex('update_users').where('UserID', ID).del();
     },
-    del(ID){
+    async del(ID){
+        const role = await knex.select('UserRole').from('users').where('UserID', ID);
+        console.log(role[0].UserRole);
+        if(+role[0].UserRole === 1) {
+            await knex('products').where("SellerID", ID).del();
+        }
         return knex('users').where('UserID', ID).del();
     },
     updateRating(UserID,UserRating) {

@@ -12,6 +12,15 @@
     </div>
     {{/if}}
 
+    {{#if upgrade}}
+        <div class="col-sm-12">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>{{upgrade}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    {{/if}}
+
     <div class="row">
         {{> account-layout}}
         <div class="col-sm-6">
@@ -61,6 +70,13 @@
                     </div>
                 </div>
             </div>
+            {{#if isBidder}}
+                <div class="text-center">
+                    <form method="post" id="upgrade">
+                        <button type="submit" class="btn btn-outline-success mt-3" formaction="/account/profile/upgrade" name="UserID" value="{{user.UserID}}" {{#if isRequested}}disabled{{/if}}>Gửi yêu cầu nâng cấp thành seller</button>
+                    </form>
+                </div>
+            {{/if}}
         </div>
 
     </div>

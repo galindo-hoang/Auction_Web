@@ -227,6 +227,17 @@ router.post("/admin/editAcc/upgrade", auth.beforeLogin, async function (req, res
     }
 });
 
+router.post("/admin/editAcc/notUpgrade", auth.beforeLogin, async function (req, res) {
+    if (req.session.account.UserRole !== 0)
+        res.redirect('/');
+    else {
+        const email = await viewByProduct.findUserEmail(req.body.UserID);
+        sendEmail((email[0].UserEmail), 'THÔNG BÁO PHÊ DUYỆT NÂNG CẤP', 'Yêu cầu nâng cấp tài khoản của bạn đã bị từ chối');
+        await users.changeRole(req.body.UserID, 2);
+        res.redirect('/admin/editBidder');
+    }
+});
+
 router.post("/admin/editAcc/downgrade", auth.beforeLogin, async function (req, res) {
     if (req.session.account.UserRole !== 0)
         res.redirect('/');
