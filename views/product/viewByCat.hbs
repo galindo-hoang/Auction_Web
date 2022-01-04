@@ -49,7 +49,7 @@
                                 {{#if this.exp}}
                                     <div class="card-remaining text-danger">hết hạn đấu giá</div>
                                 {{else}}
-                                    <div class="card-remaining">Còn 8 ngày</div>
+                                    <div class="card-remaining" data-date="{{this.EndDate}}"></div>
                                 {{/if}}
 
                             </div>
@@ -93,4 +93,32 @@
 
 {{#section 'header'}}
     <link rel="stylesheet" href="/public/css/viewByCat.css">
+{{/section}}
+
+{{#section 'footer'}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        const elements = document.getElementsByClassName("card-remaining");
+        for(let i=0; i<elements.length; i++) {
+            const check = elements[i].getAttribute("data-date");
+            if(check === null) continue;
+            setInterval(function (){
+                const expire = moment(check);
+                const now = moment();
+                let diff = expire.diff(now,'days');
+                if(diff >= 1) elements[i].innerHTML = "Còn " + diff + " ngày";
+                else {
+                    diff = expire.diff(now,'hours');
+                    if(diff >= 1) elements[i].innerHTML = "Còn " + diff + " giờ";
+                    else{
+                        diff = expire.diff(now,'minutes');
+                        if(diff >= 1) elements[i].innerHTML = "Còn " + diff + " phút";
+                        else elements[i].innerHTML = "Còn " + expire.diff(now,'seconds') + " giây";
+                    }
+                }
+
+            },1000);
+        }
+    </script>
 {{/section}}

@@ -4,7 +4,7 @@ import CategoriesDetail from '../models/categories_detail.js';
 import fnMySQLStore from 'express-mysql-session';
 import {ConnectInfor} from "../utils/db.js";
 
-export default function (app){
+export default function (app) {
 
     const MySQLStore = fnMySQLStore(session);
     const SessionStore = new MySQLStore(ConnectInfor);
@@ -17,10 +17,10 @@ export default function (app){
     }));
 
     app.use(async function (req, res, next) {
-        if(typeof (req.session.isLogin) === 'undefined'){
+        if (typeof (req.session.isLogin) === 'undefined') {
             req.session.isLogin = false;
         }
-        if(req.session.account) res.locals.seller = (+req.session.account.UserRole === 1);
+        if (req.session.account) res.locals.seller = (+req.session.account.UserRole === 1);
         res.locals.account = req.session.account;
         res.locals.isLogin = req.session.isLogin;
         next();
@@ -29,7 +29,7 @@ export default function (app){
     app.use(async function (req, res, next) {
         const Cate = await Category.findAll();
         const data = [];
-        for(let i=0;i<Cate.length;++i){
+        for (let i = 0; i < Cate.length; ++i) {
             let model = {};
             model.CatName = Cate[i].CatName;
             model.CDList = await CategoriesDetail.findByCatID(Cate[i].CatID);

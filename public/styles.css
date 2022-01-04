@@ -1,11 +1,12 @@
-.logo{
+.logo {
     width: 60px;
     height: 60px;
 }
-.navbar-logo{
+
+.navbar-logo {
 }
 
-.back-ground{
+.back-ground {
     text-align: center;
     color: #fff;
     background-image: url(./imgs/background/background.png);
@@ -16,11 +17,11 @@
 }
 
 
-.card-layout{
+.card-layout {
     margin: auto 20px;
 }
 
-.justify-content-between{
+.justify-content-between {
     margin: auto 50px;
 }
 
@@ -29,38 +30,95 @@
     width: 32px;
     height: 32px;
 }
+
 .carousel-control-next-icon {
     background-image: url(public/imgs/detail.png);
     width: 32px;
     height: 32px;
 }
 
-.row{
+.row {
     padding-left: 0;
 }
 
-.current_price{
+.current_price {
     display: flex;
     justify-content: left;
 }
 
-.container-information{
+.container-information {
     display: flex;
     justify-content: center;
 }
 
-.information{
+.information {
     width: 700px;
 }
 
-a{
+a {
     text-decoration: none !important;
 }
 
-a.ProTittle{
+a.ProTittle {
     color: black;
 }
 
-a.ProTittle:hover{
+a.ProTittle:hover {
     color: blue;
+}
+
+span.signup_rec {
+    font-size: 13px;
+}
+
+.proName {
+    font-family: "Montserrat", sans-serif;
+    font-size: 30px;
+    text-align: justify-all;
+}
+
+div.proTittle {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: solid #eee;
+}
+
+.CurPrice, .StepPrice {
+    justify-content: space-between;
+}
+
+a.ProDetail_Back {
+    color: #999;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+a.ProDetail_Back span {
+    margin-left: 1.5rem;
+}
+
+div.ProDetail_Favorite {
+    color: #999;
+    font-size: 1rem;
+}
+
+.TinyDes {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.NavBar {
+    font-family: "Segoe UI", sans-serif;
+}
+
+.footer {
+    clear: both;
+    position: relative;
+}
+
+.ProDetail_Info {
+    font-family: "Arial", serif;
 }

@@ -10,10 +10,11 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <div class="modal-title text-md">Xác nhận</div> <button class="close" data-dismiss="modal">&times;</button>
+                <div class="modal-title text-md">Xác nhận</div>
+                <button class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <div class="p-4 text-center" >
+                <div class="p-4 text-center">
                     <p id="notification"></p>
                     <p id="priceNotification" class="text-danger fw-bolder"></p>
                 </div>
@@ -30,14 +31,34 @@
     </div>
 </div>
 
-<div class="container mt-3">
+<div class="container">
     <div class="row">
-        <div class="col-sm-7 mt-2">
-            <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+        <div class="proTittle my-3">
+            <a href="{{this.prevPage}}" class="ProDetail_Back">
+                <i class="fa fa-angle-left"></i>
+                <span>
+                    Trở về
+                </span>
+            </a>
+            <form method="post" id="favorite" action="/favorite?ProID={{this.product.ProID}}&UserID={{account.UserID}}
+            "></form>
+            <div id="text" style="cursor: pointer;" class="ProDetail_Favorite">
+                {{#if favorite}}
+                    Xoá khỏi sản phẩm yêu thích
+                    <i class="fa fa-eye" aria-hidden="true"></i>
+                {{else}}
+                    Thêm vào sản phẩm yêu thích&nbsp;
+                    <i class="fa fa-heart" aria-hidden="true"></i>
+                {{/if}}
+            </div>
+        </div>
+        <div class="col-sm-7 mt-4 d-flex justify-content-center">
+            <div id="carouselExampleFade" class="carousel slide carousel-fade w-50" data-ride="carousel">
                 <div class="carousel-inner">
                     {{#each imgs}}
                         <div class="carousel-item {{#if this.first}}active{{/if}}">
-                            <img src="/public/imgs/products/{{../product.ProID}}/detail/{{this.name}}" class="d-flex justify-content-center w-100" alt="{{../product.ProName}}">
+                            <img src="/public/imgs/products/{{../product.ProID}}/detail/{{this.name}}"
+                                 class="d-flex justify-content-center w-100" alt="{{../product.ProName}}">
                         </div>
                     {{/each}}
                 </div>
@@ -51,30 +72,12 @@
                 </a>
             </div>
         </div>
-        <div class="col-sm-5">
-            <h5 class="Name_item">
+        <div class="col-sm-5 mt-4">
+            <h5 class="proName mb-4">
                 {{this.product.ProName}}
             </h5>
-
-            <div class="seller mt-1">
-                <span class="name-seller ">
-                    Seller: {{this.product.SellerID}}
-                </span>
-                <span class="rating-seller">
-                    (80%
-                    <i class="fas fa-thumbs-up" style="color: blue"></i>)
-                </span>
-                <form method="post" id="favorite" action="/favorite?ProID={{this.product.ProID}}&UserID={{account.UserID}}"></form>
-                <span id="text" style="cursor: pointer;">
-                    {{#if favorite}}
-                        <i class="fa fa-eye" aria-hidden="true"></i>
-                    {{else}}
-                        <i class="fa fa-heart" aria-hidden="true"></i>
-                    {{/if}}
-                </span>
-            </div>
             <div class="mt-lg-3">
-                <div class="d-flex justify-content-between">
+                <div class="d-flex CurPrice">
                     <h5>Giá hiện tại</h5>
                     <h5 class="card-text text-info mb-2">
                         {{format_number this.product.CurPrice}}
@@ -84,12 +87,15 @@
             {{#if isLogin}}
                 {{#if seller}}
                     <div>
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex StepPrice">
                             <p><i>Bước giá</i></p>
                             <p><i>{{format_number this.product.StepPrice}}</i></p>
                         </div>
+                        <p class="TinyDes">
+                            {{this.product.TinyDes}}
+                        </p>
                         <div>
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex">
                                 <p>Mua Ngay</p>
                                 <p class="text-danger"><b>{{format_number this.product.BuyNowPrice}}</b></p>
                             </div>
@@ -97,41 +103,49 @@
                     </div>
                 {{else}}
                     <div>
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex StepPrice">
                             <p><i>Bước giá</i></p>
                             <p><i>{{format_number this.product.StepPrice}}</i></p>
                         </div>
+                        <p class="TinyDes">
+                            {{this.product.TinyDes}}
+                        </p>
                     </div>
                     <form method="post" id="formBid" action="/bid?ProID={{this.product.ProID}}">
-                    <div class="d-flex justify-content-evenly">
-                        <button class="btn w-25" type="button" style="background-color: darkblue; color: white" id="CurPrice" data-toggle="modal" data-target="#modal-sm"{{#if expire}} disabled {{/if}}>
-                            {{#if expire}}
-                                Không thể đấu giá
-                            {{else}}
-                                <i class="fa fa-gavel"></i>&nbsp;&nbsp;Đặt giá
-                            {{/if}}
-                        </button>
-                        <input type="text" class="form-control w-50" id="Price" name="Price" {{#if expire}} disabled {{/if}}>
-                    </div>
+                        <div class="d-flex" style="justify-content: space-between">
+                            <button class="btn w-25" type="button" style="background-color: darkblue; color: white"
+                                    id="CurPrice" data-toggle="modal" data-target="#modal-sm"{{#if expire}}
+                                    disabled {{/if}}>
+                                {{#if expire}}
+                                    Không thể đấu giá
+                                {{else}}
+                                    <i class="fa fa-gavel"></i>&nbsp;&nbsp;Đặt giá
+                                {{/if}}
+                            </button>
+                            <input type="text" class="form-control w-50" id="Price" name="Price" {{#if expire}}
+                                   disabled {{/if}}>
+                        </div>
                     </form>
                     <h6 class="text-center mt-2 font-weight-bold">hoặc</h6>
                     <div class="">
                         <div class="d-grid gap-2 col-6 mx-auto">
-                            <button class="btn btn-danger" type="button" id="PromptPrice"  data-toggle="modal" data-target="#modal-sm"{{#if expire}} disabled {{/if}}>
+                            <button class="btn btn-danger" type="button" id="PromptPrice" data-toggle="modal"
+                                    data-target="#modal-sm"{{#if expire}} disabled {{/if}}>
                                 {{#if expire}}
                                     Không thể đấu giá
                                 {{else}}
                                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp;&nbsp;Mua Ngay
                                 {{/if}}
                             </button>
-                            <h5 class="font-weight-bold text-danger text-center">{{format_number this.product.BuyNowPrice}}</h5>
+                            <h5 class="font-weight-bold text-danger text-center">{{format_number
+                                    this.product.BuyNowPrice}}</h5>
                         </div>
                     </div>
                 {{/if}}
             {{/if}}
         </div>
     </div>
-    <div class="card mt-4">
+    <div class="card mt-4 ProDetail_Info">
         <h4 class="card-header">
             Thông tin sản phẩm
         </h4>
@@ -144,86 +158,96 @@
                 <i class="fa fa-clock" aria-hidden="true" style="color: darkslateblue"></i>
                 Kết thúc: {{format_date this.product.EndDate}}
             </p>
+            <div class="seller">
+                <i class="fa fa-store-alt" style="color: darkslateblue"></i>
+                <span class="name-seller">
+                    Seller: {{this.Seller}}
+                </span>
+                <span class="rating-seller">
+                    (80%&nbsp;<i class="fas fa-thumbs-up" style="color: blue"></i>)
+                </span>
+            </div>
             {{#if this.isBid}}
-            <p class="card-text">
-                <i class="fa fa-image-portrait" style="color: darkslateblue"></i>
-                Bidder giữ giá cao nhất:
+                <p class="card-text">
+                    <i class="fa fa-image-portrait" style="color: darkslateblue"></i>
+                    Bidder giữ giá cao nhất:
                     {{this.topBidder.UserName}}
                     <span class="rating-seller">
                     ({{this.topBidder.UserRating}}%
                     <i class="fas fa-thumbs-up" style="color: blue"></i>)
                 </span>
-            </p>
+                </p>
             {{/if}}
             <p class="card mt-auto">
-                <h4 class="card-header">Mô tả chi tiết</h4>
-                <div class="card-body">
-                    <p class="card-text">
-                        {{{this.product.FullDes}}}
-                    </p>
-                    {{#if seller}}
-                        <form method="post" action="/detail/addFullDes">
-                            <div class="card mb-3">
-                                <div class="card-header text-center">
-                                    <label for="FullDes" class="form-label">
-                                        <h1 class=" align-middle">
-                                            Thêm mô tả
-                                        </h1>
-                                    </label>
-                                </div>
-                                <input type="hidden" name="ProID" value="{{product.ProID}}">
-                                <textarea id="FullDes" name="FullDes"></textarea>
-                                <input class=" text-dark btn btn-outline-success" type="submit" value="cập nhật">
+            <h4 class="card-header mt-2">Mô tả chi tiết</h4>
+            <div class="card-body">
+                <p class="card-text ProFullDes">
+                    {{{this.product.FullDes}}}
+                </p>
+                {{#if seller}}
+                    <form method="post" action="/detail/addFullDes">
+                        <div class="card mb-3">
+                            <div class="card-header text-center">
+                                <label for="FullDes" class="form-label">
+                                    <h1 class=" align-middle">
+                                        Thêm mô tả
+                                    </h1>
+                                </label>
                             </div>
-                        </form>
-                    {{/if}}
-                </div>
+                            <input type="hidden" name="ProID" value="{{product.ProID}}">
+                            <textarea id="FullDes" name="FullDes"></textarea>
+                            <input class=" text-dark btn btn-outline-success" type="submit" value="cập nhật">
+                        </div>
+                    </form>
+                {{/if}}
+            </div>
             </p>
             {{#if this.isBid}}
                 <div class="card mt-auto">
                     <h4 class="card-header">Lịch sử đấu giá của sản phẩm</h4>
-                        <div class="card-body">
-                            <div class="card-text">
-                                <table class="table table-striped table-inverse table-responsive table-bordered text-center">
-                                    <thead class="thead-inverse">
+                    <div class="card-body">
+                        <div class="card-text">
+                            <table class="table table-striped table-inverse table-responsive table-bordered text-center">
+                                <thead class="thead-inverse">
+                                <tr>
+                                    <th>Thời điểm</th>
+                                    <th>Người mua</th>
+                                    <th>Giá</th>
+                                    {{#if seller}}
+                                        {{#if expire}}
+                                        {{else}}
+                                            <th></th>
+                                        {{/if}}
+                                    {{/if}}
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {{#each this.productHistory}}
                                     <tr>
-                                        <th>Thời điểm</th>
-                                        <th>Người mua</th>
-                                        <th>Giá</th>
-                                        {{#if seller}}
-                                            {{#if expire}}
+                                        <td>{{format_date this.BidDate}}</td>
+                                        <td>{{this.UserName}}</td>
+                                        <td>{{format_number this.Price}}</td>
+                                        {{#if ../seller}}
+                                            {{#if ../expire}}
                                             {{else}}
-                                                <th></th>
+                                                <td>
+                                                    <form method="post">
+                                                        <input name="ProID" value="{{../product.ProID}}" type="hidden">
+                                                        <input name="BidderID" value="{{this.BidderID}}" type="hidden">
+                                                        <button class="border-0 text-danger"
+                                                                formaction="/detail/deleteUser">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </td>
                                             {{/if}}
                                         {{/if}}
                                     </tr>
-                                    </thead>
-                                    <tbody>
-                                    {{#each this.productHistory}}
-                                        <tr>
-                                            <td>{{format_date this.BidDate}}</td>
-                                            <td>{{this.UserName}}</td>
-                                            <td>{{format_number this.Price}}</td>
-                                            {{#if ../seller}}
-                                                {{#if ../expire}}
-                                                {{else}}
-                                                    <td>
-                                                        <form method="post">
-                                                            <input name="ProID" value="{{../product.ProID}}" type="hidden">
-                                                            <input name="BidderID" value="{{this.BidderID}}" type="hidden">
-                                                            <button class="border-0 text-danger" formaction="/detail/deleteUser">
-                                                                <i class="fas fa-trash"></i>
-                                                            </button>
-                                                        </form>
-                                                    </td>
-                                                {{/if}}
-                                            {{/if}}
-                                        </tr>
-                                    {{/each}}
-                                    </tbody>
-                                </table>
-                            </div>
+                                {{/each}}
+                                </tbody>
+                            </table>
                         </div>
+                    </div>
                 </div>
             {{/if}}
 
@@ -237,7 +261,7 @@
                                 <tr>
                                     <th>ID người mua</th>
                                     <th>Tên người mua</th>
-                                    <th> </th>
+                                    <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -250,10 +274,12 @@
                                                 <form method="post">
                                                     <input type="hidden" name="BidderID" value="{{this.UserID}}">
                                                     <input type="hidden" name="ProID" value="{{../product.ProID}}">
-                                                    <button class="border-0 text-success" formaction="/detail/acceptPending">
+                                                    <button class="border-0 text-success"
+                                                            formaction="/detail/acceptPending">
                                                         <i class="fas fa-check-circle"></i>
                                                     </button>
-                                                    <button class="border-0 text-danger" formaction="/detail/denyPending">
+                                                    <button class="border-0 text-danger"
+                                                            formaction="/detail/denyPending">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
                                                 </form>
@@ -269,36 +295,42 @@
             {{/if}}
         </div>
     </div>
-    <div class="card mt-4">
+    <div class="card mt-4 mb-5">
         <h4 class="card-header mb-2">
             Sản phẩm tương tự
         </h4>
         {{#if this.similarProduct}}
             <div class="card-body">
                 <div class="row justify-content-center">
-                    {{#each this.similarProduct}}
-                        <div class="col-md-4 mb-3">
-                            <div class="card h-100">
-                                <a href="/detail/{{ProID}}"><img class="card-img-top" src="/public/imgs/products/{{ProID}}/thumb.jpg" alt="{{ProName}}" title="{{ProName}}"></a>
-                                <div class="card-body">
-                                    <a href="/detail/{{ProID}}" class="ProTittle"><h5 class="card-title">{{ProName}}</h5></a>
-                                    <h5 class="card-text text-info mb-2">
-                                        <i class="fa fa-gavel" aria-hidden="true"></i>
-                                        {{format_number this.CurPrice}}
-                                    </h5>
-                                    <h5 class="card-text text-danger mb-2">
-                                        <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                        {{format_number this.BuyNowPrice}}
-                                    </h5>
-                                    <p class="card-text">{{TinyDes}}</p>
-                                </div>
-                                <div class="card-footer text-center">
-                                    <div class="text-danger">Kết thúc sau {{this.remaining}} giờ</div>
-                                    <div>({{format_date this.EndDate}})</div>
+                    <div class="cards">
+                        {{#each this.similarProduct}}
+                            <div class="card">
+                                <a href="/detail/{{this.ProID}}"><img src="/public/imgs/products/{{this.ProID}}/thumb.jpg" class="card-image" alt="{{this.ProName}}"></a>
+                                <div class="card-content">
+                                    <div class="card-top">
+                                        <h3 class="card-title">
+                                            <a href="/detail/{{this.ProID}}">{{this.ProName}}</a>
+                                        </h3>
+                                        <div class="card-body">
+                                            <div class="bidPrice"><i class="fa fa-gavel" aria-hidden="true"></i> {{format_number this.CurPrice}} ({{this.nameMaxBid}})</div>
+                                            <div class="promptPrice"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i> {{format_number this.BuyNowPrice}} (Mua ngay)</div>
+                                            <div class="startDate">{{format_date this.StartDate}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="card-bottom">
+                                        <div class="card-bid">
+                                            <span>{{this.bid}} lượt đấu giá</span>
+                                        </div>
+                                        {{#if this.exp}}
+                                            <div class="card-remaining text-danger">hết hạn đấu giá</div>
+                                        {{else}}
+                                            <div class="card-remaining" data-date="{{this.EndDate}}"></div>
+                                        {{/if}}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    {{/each}}
+                        {{/each}}
+                    </div>
                 </div>
             </div>
         {{else}}
@@ -309,9 +341,38 @@
     </div>
 </div>
 
+{{#section 'header'}}
+    <link rel="stylesheet" href="/public/css/detail.css">
+{{/section}}
+
 {{#section 'footer'}}
     <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        const elements = document.getElementsByClassName("card-remaining");
+        for(let i=0; i<elements.length; i++) {
+            const check = elements[i].getAttribute("data-date");
+            if(check === null) continue;
+            setInterval(function (){
+                const expire = moment(check);
+                const now = moment();
+                let diff = expire.diff(now,'days');
+                if(diff >= 1) elements[i].innerHTML = "Còn " + diff + " ngày";
+                else {
+                    diff = expire.diff(now,'hours');
+                    if(diff >= 1) elements[i].innerHTML = "Còn " + diff + " giờ";
+                    else{
+                        diff = expire.diff(now,'minutes');
+                        if(diff >= 1) elements[i].innerHTML = "Còn " + diff + " phút";
+                        else elements[i].innerHTML = "Còn " + expire.diff(now,'seconds') + " giây";
+                    }
+                }
+
+            },1000);
+        }
+    </script>
 
     {{#if seller}}
         <script>
@@ -327,10 +388,10 @@
     {{/if}}
     {{#if isLogin}}
         <script>
-            $('#text').on('click',function (e){
+            $('#text').on('click', function (e) {
                 $('#favorite').submit();
             });
-            $('#formBid').on('submit',function (e){
+            $('#formBid').on('submit', function (e) {
                 e.preventDefault();
 
                 {{#if expire}}
@@ -338,21 +399,20 @@
                     const price = +$('#Price').val();
                     console.log(price);
                     let BidPrice;
-                    if(price>{{product.BuyNowPrice}}){
+                    if (price >{{product.BuyNowPrice}}) {
                         $('#Price').val({{product.BuyNowPrice}}+"");
                         BidPrice = {{product.BuyNowPrice}};
-                    }
-                    else BidPrice = price;
-                    if(BidPrice === {{product.BuyNowPrice}} || BidPrice>={{product.CurPrice}}+{{product.StepPrice}}){
+                    } else BidPrice = price;
+                    if (BidPrice === {{product.BuyNowPrice}} || BidPrice >={{product.CurPrice}}+{{product.StepPrice}}) {
                         $('#formBid').off('submit').submit();
-                    }else{
+                    } else {
                         alert('giá bạn đưa ra nhỏ hơn giá đấu giá');
                     }
                 {{/if}}
             });
                 {{#if expire}}
                 {{else}}
-                $('#PromptPrice').on('click',function (e){
+                $('#PromptPrice').on('click', function (e) {
                     $('#Price').val({{product.BuyNowPrice}}+"");
 
 
@@ -360,11 +420,11 @@
                     $('#priceNotification').text(numeral({{product.BuyNowPrice}}).format('0,0'));
                 });
 
-                $('#CurPrice').on('click',function (e){
+                $('#CurPrice').on('click', function (e) {
                     $('#notification').text("Bạn có muốn đấu giá: ");
                     $('#priceNotification').text(numeral($('#Price').val()).format('0,0'));
                 });
-                $('#acceptNotification').on('click',function (e){
+                $('#acceptNotification').on('click', function (e) {
                     $('#formBid').submit();
                 });
                 {{/if}}
