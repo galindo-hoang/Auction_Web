@@ -210,7 +210,7 @@ router.post('/favorite', auth.beforeLogin, async (req, res) => {
     } else {
         favorite_list.remove(req.query.UserID, req.query.ProID);
     }
-    res.redirect("/detail/" + req.query.ProID);
+    res.redirect(("/detail/" + req.query.ProID).trim());
 });
 
 export default router;

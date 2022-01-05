@@ -34,20 +34,6 @@
 <div class="container">
     <div class="row">
         {{#if isLogin}}
-            <div class="proTittle">
-                <form method="post" id="favorite" action="/favorite?ProID={{this.product.ProID}}
-                &UserID={{account.UserID}}
-                "></form>
-                <div id="text" style="cursor: pointer;" class="ProDetail_Favorite">
-                    {{#if favorite}}
-                        Xoá khỏi sản phẩm yêu thích&nbsp;
-                        <i class="fa fa-eye" aria-hidden="true"></i>
-                    {{else}}
-                        Thêm vào sản phẩm yêu thích&nbsp;
-                        <i class="fa fa-heart" aria-hidden="true"></i>
-                    {{/if}}
-                </div>
-            </div>
         {{/if}}
         <div class="col-sm-7 mt-4 d-flex justify-content-center">
             <div id="carouselExampleFade" class="carousel slide carousel-fade w-50" data-ride="carousel">
@@ -73,6 +59,22 @@
             <h5 class="proName mb-4">
                 {{this.product.ProName}}
             </h5>
+
+
+            <div class="proTittle">
+                <form method="post" id="favorite" action="/favorite?ProID={{this.product.ProID}}&UserID={{account.UserID}}"></form>
+                <div id="text" style="cursor: pointer;" class="ProDetail_Favorite">
+                    {{#if favorite}}
+                        Bỏ yêu thích&nbsp;
+                        <i class="fas fa-heart-broken"style="color: #F90716"></i>
+                    {{else}}
+                        Yêu thích&nbsp;
+                        <i class="fa fa-heart" style="color: #F90716" aria-hidden="true"></i>
+                    {{/if}}
+                </div>
+            </div>
+
+
             {{#if isLogin}}
                 <div class="mt-lg-3">
                     <div class="d-flex CurPrice">
@@ -379,6 +381,9 @@
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script>
+        $('#text').on('click', function (e) {
+            $('#favorite').submit();
+        });
         const elements = document.getElementsByClassName("card-remaining");
         for (let i = 0; i < elements.length; i++) {
             const check = elements[i].getAttribute("data-date");
@@ -416,9 +421,6 @@
     {{/if}}
     {{#if isLogin}}
         <script>
-            $('#text').on('click', function (e) {
-                $('#favorite').submit();
-            });
             $('#formBid').on('submit', function (e) {
                 e.preventDefault();
 

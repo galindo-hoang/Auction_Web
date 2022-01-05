@@ -172,7 +172,7 @@ export default {
     async findProductEndBiddingWithCron() {
         const productExpire = (await knex.raw('select products.ProID, users.UserEmail sellerMail  from products join users on users.UserID = products.SellerID where TIMESTAMPDIFF(second , now(), EndDate) <= 0 and products.Mail = false and products.Status = 1'))[0];
         for (let i=0;i<productExpire.length;++i){
-            const bidder = await knex.select('users.UserEmail, users.UserID').from('users').join('products_history','products_history.BidderID','users.UserID').where('products_history.ProID',productExpire[i].ProID).orderBy('products_history.BidID','desc').limit(1);
+            const bidder = await knex.select('*').from('users').join('products_history','products_history.BidderID','users.UserID').where('products_history.ProID',productExpire[i].ProID).orderBy('products_history.BidID','desc').limit(1);
             if(bidder.length === 0) productExpire[i].bidderMail = null;
             else {
                 productExpire[i].bidderMail = bidder[0].UserEmail;

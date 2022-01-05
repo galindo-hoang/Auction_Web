@@ -186,7 +186,7 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 </tr>
 </tbody>
 </table>
-</div>', 200000, 15000000, 17000000, 19000000, 2, '2021-12-05 21:14:52', '2022-01-16 21:14:58', 1, 0, 1, 0),
+</div>', 200000, 15000000, 15000000, 19000000, 2, '2021-12-05 21:14:52', '2022-01-16 21:14:58', 1, 0, 1, 0),
         (2, 'Laptop HP 15-DY2045 2Q1H3UA', 'Laptop HP luôn là lựa chọn được nhiều người dùng tin tưởng lựa chọn', '<div class="box-content">
 <table id="tskt">
 <tbody>
@@ -336,7 +336,7 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 </tr>
 </tbody>
 </table>
-</div>', 300000, 16000000, 17000000, 21000000, 2, '2021-12-07 21:26:03', '2022-01-15 21:26:07', 1, 0, 1, 0),
+</div>', 300000, 16000000, 16000000, 21000000, 2, '2021-12-07 21:26:03', '2022-01-15 21:26:07', 1, 0, 1, 0),
         (5, 'Laptop HP Probook 430 G8 2H0N6PA', '15s-fq2602TU 4B6D3PA là một sản phẩm mới đến từ thương hiệu HP.', '<div class="box-content">
 <table id="tskt">
 <tbody>
@@ -552,7 +552,7 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 </tr>
 </tbody>
 </table>
-</div>', 100000, 6000000, 6000000, 10000000, 1, '2021-12-05 21:34:50', '2021-12-05 21:34:53', 1, 0, 1, 0),
+</div>', 100000, 6000000, 6000000, 10000000, 1, '2021-12-05 21:34:50', '2022-02-05 21:34:53', 1, 0, 1, 0),
         (9, 'OPPO Reno6 5G', 'Tiếp theo phần ra mắt của series Reno 5 thì Oppo lại chuẩn bị trình làng.', '<div class="box-content">
 <table id="tskt">
 <tbody>
@@ -610,7 +610,7 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 </tr>
 </tbody>
 </table>
-</div>', 150000, 9000000, 9000000, 12000000, 1, '2021-12-05 21:36:03', '2021-12-05 21:36:05', 1, 0, 1, 0),
+</div>', 150000, 9000000, 9000000, 12000000, 1, '2021-12-05 21:36:03', '2022-01-12 21:36:05', 1, 0, 1, 0),
         (10, 'Nokia 5.4', 'Nokia chắc chắn là một trong những thương hiệu không còn xa lạ với người dùng', '<div class="box-content">
 <table id="tskt">
 <tbody>
@@ -668,7 +668,7 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 </tr>
 </tbody>
 </table>
-</div>', 50000, 2000000, 2000000, 5000000, 1, '2021-12-05 21:37:18', '2021-12-05 21:37:19', 1, 0, 1, 0),
+</div>', 50000, 2000000, 2000000, 5000000, 1, '2021-12-05 21:37:18', '2022-01-11 15:37:19', 1, 0, 1, 0),
         (11, 'Realme 6', 'Realme 6 ra mắt mới đây cùng với Realme 6 Pro tiếp nối sự thành công', '<div class="box-content">
 <table id="tskt">
 <tbody>
@@ -776,7 +776,7 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 </tr>
 </tbody>
 </table>
-</div>', 50000, 1500000, 4000000, 4000000, 3, '2021-12-05 21:42:36', '2021-12-05 21:42:39', 1, 0, 0, 1),
+</div>', 50000, 1500000, 1500000, 4000000, 3, '2021-12-05 21:42:36', '2022-01-11 15:42:39', 1, 0, 1, 0),
         (13, 'Lò Vi Sóng Electrolux EMM2026MX', 'tông màu đen chủ đạo kết hợp viền thép không gỉ, tạo nên nét sang trọng.', '<div class="box-content">
 <table id="tskt">
 <tbody>
@@ -992,7 +992,7 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 </tr>
 </tbody>
 </table>
-</div>', 10000, 200000, 200000, 400000, 4, '2021-12-05 21:48:37', '2021-12-05 21:48:38', 1, 0, 1, 0),
+</div>', 10000, 200000, 200000, 400000, 4, '2021-12-05 21:48:37', '2022-01-12 11:48:38', 1, 0, 1, 0),
         (17, '3 Trong 1 Tiross TS513', 'Máy làm bánh Tiross TS513 với 3 loại vỉ nướng đi kèm, bạn có thể làm các loại bánh.', '<div class="box-content">
 <table id="tskt">
 <tbody>
@@ -1046,7 +1046,7 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 </tr>
 </tbody>
 </table>
-</div>', 15000, 400000, 400000, 700000, 4, '2021-12-05 21:49:39', '2021-12-05 21:49:40', 1, 0, 1, 0),
+</div>', 15000, 400000, 400000, 700000, 4, '2021-12-05 21:49:39', '2022-01-13 21:49:40', 1, 0, 1, 0),
         (18, 'Máy Bào Đá Kahchan EP5178_Đ', 'nhỏ gọn dễ sử dụng. Công suất máy hoạt động chỉ với 300W không lo điện năng.', '<div class="box-content">
 <table id="tskt">
 <tbody>
@@ -1100,7 +1100,7 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 </tr>
 </tbody>
 </table>
-</div>', 200000, 1400000, 1700000, 1700000, 5, '2021-12-05 21:51:18', '2022-01-14 21:51:19', 1, 0, 0, 1),
+</div>', 200000, 1400000, 1400000, 1700000, 5, '2021-12-05 21:51:18', '2022-01-14 21:51:19', 1, 0, 1, 0),
         (19, 'Tự Động Tiross TS9090 (Xanh) - Hàng Chính Hãng', 'màu sắc đẹp mắt và sở hữu tính năng hiện đại, giúp bạn tự làm món kem thơm ngon. ', '<div class="box-content">
 <table id="tskt">
 <tbody>
@@ -1164,7 +1164,7 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 <li>Hẹn giờ kỹ thuật số có thể điều chỉnh trong khoảng từ 5 đến 60 phút</li>
 <li>Nhập khẩu tại Đức</li>
 <li>Phụ kiện: Tập sách công thức với công thức làm kem Schuhbeck, hướng dẫn sử dụng với công thức nấu ăn</li>
-</ul>', 300000, 7000000, 7000000, 9000000, 5, '2021-12-05 21:55:05', '2021-12-05 21:55:06', 1, 0, 1, 0),
+</ul>', 300000, 7000000, 7000000, 9000000, 5, '2021-12-05 21:55:05', '2022-01-15 21:55:06', 1, 0, 1, 0),
         (21, 'Bear JA02N1 240ml', 'Máy Cafe Gia Đình Bear JA02N1 240ml có ngăn chứa dung tích 240ml', '<ul>
 <li>Công suất định mức: 150 W, 220-240 V ~, 50 Hz</li>
 <li>Kích thước (LxWxH): 42.5 x 28.5 x 26.2 cm</li>
@@ -1194,7 +1194,7 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 <li>Hẹn giờ kỹ thuật số có thể điều chỉnh trong khoảng từ 5 đến 60 phút</li>
 <li>Nhập khẩu tại Đức</li>
 <li>Phụ kiện: Tập sách công thức với công thức làm kem Schuhbeck, hướng dẫn sử dụng với công thức nấu ăn</li>
-</ul>', 30000, 700000, 700000, 1200000, 6, '2021-12-05 21:59:04', '2021-12-05 21:59:05', 1, 0, 1, 0),
+</ul>', 30000, 700000, 700000, 1200000, 6, '2021-12-05 21:59:04', '2022-02-05 21:59:05', 1, 0, 1, 0),
         (24, 'Máy xay tích điện mini', ' hình thức và địa chỉ giao hàng mà có thể phát sinh thêm chi phí khác như phí vận chuyển', '<ul>
 <li>Công suất định mức: 150 W, 220-240 V ~, 50 Hz</li>
 <li>Kích thước (LxWxH): 42.5 x 28.5 x 26.2 cm</li>
@@ -1214,7 +1214,7 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 <li>Hẹn giờ kỹ thuật số có thể điều chỉnh trong khoảng từ 5 đến 60 phút</li>
 <li>Nhập khẩu tại Đức</li>
 <li>Phụ kiện: Tập sách công thức với công thức làm kem Schuhbeck, hướng dẫn sử dụng với công thức nấu ăn</li>
-</ul>', 10000, 200000, 200000, 400000, 7, '2021-12-05 22:13:40', '2021-12-06 05:13:41', 1, 0, 1, 0),
+</ul>', 10000, 200000, 200000, 400000, 7, '2021-12-05 22:13:40', '2022-01-16 05:13:41', 1, 0, 1, 0),
         (26, 'Some By Mi Super Matcha Pore Clean Clay Mask 100g', 'Mặt Nạ Đất Sét Some By Mi Super Matcha Pore Clean Clay Mask với thành phần đất sét và trà xanh', '<ul>
 <li>Công suất định mức: 150 W, 220-240 V ~, 50 Hz</li>
 <li>Kích thước (LxWxH): 42.5 x 28.5 x 26.2 cm</li>
@@ -1234,7 +1234,7 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 <li>Hẹn giờ kỹ thuật số có thể điều chỉnh trong khoảng từ 5 đến 60 phút</li>
 <li>Nhập khẩu tại Đức</li>
 <li>Phụ kiện: Tập sách công thức với công thức làm kem Schuhbeck, hướng dẫn sử dụng với công thức nấu ăn</li>
-</ul>', 50000, 460000, 460000, 860000, 8, '2021-12-05 22:33:22', '2021-12-05 22:33:22', 1, 0, 1, 0),
+</ul>', 50000, 460000, 460000, 860000, 8, '2021-12-05 22:33:22', '2022-02-01 17:33:22', 1, 0, 1, 0),
         (28, 'Kem Dưỡng Ẩm Hỗ Trợ Trị Nám', 'Được đặc chế hòa nhịp với quá trình thay đổi sinh học của làn da.', '<ul>
 <li>Công suất định mức: 150 W, 220-240 V ~, 50 Hz</li>
 <li>Kích thước (LxWxH): 42.5 x 28.5 x 26.2 cm</li>
@@ -1244,7 +1244,7 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 <li>Hẹn giờ kỹ thuật số có thể điều chỉnh trong khoảng từ 5 đến 60 phút</li>
 <li>Nhập khẩu tại Đức</li>
 <li>Phụ kiện: Tập sách công thức với công thức làm kem Schuhbeck, hướng dẫn sử dụng với công thức nấu ăn</li>
-</ul>', 60000, 700000, 700000, 900000, 8, '2021-12-05 22:34:33', '2021-12-05 22:34:33', 1, 0, 1, 0),
+</ul>', 60000, 700000, 700000, 900000, 8, '2021-12-05 22:34:33', '2022-02-02 22:34:33', 1, 0, 1, 0),
         (29, 'Nước hoa nam Dynik hương biển sành điệu 50ml', 'Bên cạnh đó, tuỳ vào loại sản phẩm, hình thức và địa chỉ giao hàng mà có thể phát sinh', '<ul>
 <li>Công suất định mức: 150 W, 220-240 V ~, 50 Hz</li>
 <li>Kích thước (LxWxH): 42.5 x 28.5 x 26.2 cm</li>
@@ -1254,4 +1254,4 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 <li>Hẹn giờ kỹ thuật số có thể điều chỉnh trong khoảng từ 5 đến 60 phút</li>
 <li>Nhập khẩu tại Đức</li>
 <li>Phụ kiện: Tập sách công thức với công thức làm kem Schuhbeck, hướng dẫn sử dụng với công thức nấu ăn</li>
-</ul>', 55000, 300000, 400000, 700000, 9, '2021-12-05 22:35:35', '2022-01-14 22:35:36', 1, 0, 1, 0);
+</ul>', 55000, 300000, 300000, 700000, 9, '2021-12-05 22:35:35', '2022-01-14 22:35:36', 1, 0, 1, 0);

@@ -10,7 +10,7 @@ import viewByCategories from './models/category.js';
 import viewByProduct from './models/product.js';
 import detail_product from "./routes/detail-product.js";
 import products_history from "./models/products_history.js";
-// import cronJob from "./utils/cron.js";
+import cronJob from "./utils/cron.js";
 
 const app = express();
 
@@ -19,7 +19,7 @@ app.use('/public', express.static('public'));
 app.use(express.urlencoded({extended: true}));
 
 
-// cronJob.start();
+cronJob.start();
 
 
 local_mdw(app);
