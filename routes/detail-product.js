@@ -57,7 +57,7 @@ router.get('/detail/:id', async (req, res) => {
                 productHistory[i].UserName += tmp[k];
         }
     }
-    const proSeller = await viewByProduct.findSellerName(product.SellerID);
+    const proSeller = await viewByProduct.findSeller(product.SellerID);
     const prevPage = req.headers.referer;
     if (req.session.isLogin) {
         let mess = "";
@@ -84,7 +84,7 @@ router.get('/detail/:id', async (req, res) => {
             topBidder: topBidder[0],
             isBid: topBidder.length,
             productHistory,
-            Seller: proSeller[0].UserName,
+            Seller: proSeller[0],
             prevPage
         });
     } else {
@@ -96,7 +96,7 @@ router.get('/detail/:id', async (req, res) => {
             topBidder: topBidder[0],
             isBid: topBidder.length,
             productHistory, imgs,
-            Seller: proSeller[0].UserName,
+            Seller: proSeller[0],
             prevPage,
             expire
         });
