@@ -52,12 +52,12 @@ router.post("/account/FP",async (req, res) => {
         check.otp = parseInt(otp);
 
         sendEmail(req.body.email,"OTP",check.otp+"");
-        res.redirect("/account/FP/verify");
+        res.redirect("/account/FP/verify?email="+req.body.email);
     }
 })
 
 router.get("/account/FP/verify",auth.afterLogin,(req,res)=>{
-    res.render("account/verify");
+    res.render("account/verify",{email: req.query.email});
 })
 
 router.post("/account/FP/verify",(req,res)=>{

@@ -119,10 +119,11 @@ div.ProDetail_Favorite {
 }
 
 .footer {
+    display: flex;
+    flex: 1;
+    width: 100%;
     /*clear: both;*/
-    position: absolute;
-    /*bottom: 0;*/
-    width:100%;
+    bottom: 0;
     /*height:60px;   !* Height of the footer *!*/
     /*background:#6cf;*/
 }
