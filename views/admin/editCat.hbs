@@ -3,7 +3,7 @@
         {{#if this.mess}}
             <div class="col-sm-12">
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>{{mess}}</strong>
+                    <strong>Không thể xoá danh mục có sản phẩm</strong>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             </div>
@@ -11,9 +11,9 @@
         {{> account-layout}}
 
         <div class="col-sm-9">
-            <form id="editForm" method="post">
+            <form id="editForm" method="post" action="/admin/editCat/del">
                 <div class="card">
-                    <h4 class="card-header">
+                    <h4 class="card-header text-white bg-secondary">
                         Chỉnh sửa danh mục
                     </h4>
                     <div class="card-body">
@@ -28,14 +28,13 @@
                                    value="{{this.category.CatName}}" autofocus>
                         </div>
                     </div>
-                    <div class="card-footer text-muted">
+                    <div class="card-body">
                         <a class="btn btn-outline-success" href="/admin/editCat/" role="button">
-                            <i class="fa fa-backward" aria-hidden="true"></i>
+                            <i class="fa fa-rotate-back" aria-hidden="true"></i>
                             Trở về
                         </a>
-                        <button type="submit" class="btn btn-danger" formaction="/admin/editCat/del"
-                                onclick="clickedDelete(event)">
-                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirmDel">
+                            <i class="fa fa-trash-can" aria-hidden="true"></i>
                             Xoá
                         </button>
                         <button type="submit" class="btn btn-primary" formaction="/admin/editCat/save">
@@ -49,12 +48,31 @@
     </div>
 </div>
 
+<div class="modal fade" id="confirmDel" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalLabel">Xác nhận xoá</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Xác nhận xoá danh mục <b>{{this.category.CatName}}</b>?
+            </div>
+            <div class="modal-body text-center">
+                <button type="button" class="btn btn-primary" id="cfmButton">Xác nhận</button>
+                <span>&nbsp;</span>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 {{#section 'footer'}}
     <script>
-        function clickedDelete(e) {
-            if (!confirm('Xác nhận xoá danh mục?')) {
-                e.preventDefault();
-            }
-        }
+        $('#cfmButton').on('click', function (e){
+            $('#editForm').submit();
+        });
     </script>
 {{/section}}

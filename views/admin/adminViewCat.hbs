@@ -5,25 +5,23 @@
 
         <div class="col-sm-9">
             <div class="card">
-                <h4 class="card-header d-flex justify-content-between container-fluid">
+                <h4 class="card-header d-flex justify-content-between container-fluid text-white bg-secondary">
                     Danh mục cấp 1
-                    <a class="btn btn-sm btn-outline-primary" href="/admin/editCat/add" role="button">
-                        <i class="fa fa-plus" aria-hidden="true"></i>
-                        Thêm danh mục
-                    </a>
                 </h4>
-                <table class="table table-hover">
+                <table class="table table-hover mt-2">
                     <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Tên danh mục</th>
-                        <th scope="col">&nbsp;</th>
-                    </tr>
+                        <tr>
+                            <th scope="col" class="text-center"><h5>ID</h5></th>
+                            <th scope="col">&nbsp;</th>
+                            <th scope="col"><h5>Tên danh mục</h5></th>
+                            <th scope="col">&nbsp;</th>
+                        </tr>
                     </thead>
                     <tbody>
                     {{#each LclCate}}
                         <tr>
-                            <th scope="row" class="align-middle">{{CatID}}</th>
+                            <th scope="row" class="align-middle text-center">{{CatID}}</th>
+                            <th scope="col">&nbsp;</th>
                             <td class="align-middle">{{CatName}}</td>
                             <td class="text-sm-end">
                                 <a class="btn btn-primary" href="/admin/editCat/edit/{{this.CatID}}" style="background-color: darkcyan">
@@ -35,6 +33,10 @@
                     {{/each}}
                     </tbody>
                 </table>
+                <a class="btn btn-sm btn-outline-primary mt-3" href="/admin/editCat/add" role="button">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    Thêm danh mục
+                </a>
             </div>
         </div>
     </div>

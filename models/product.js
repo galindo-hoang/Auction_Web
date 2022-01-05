@@ -166,8 +166,8 @@ export default {
     findUserEmail(ID) {
         return knex.select('UserEmail').from('users').where('UserID', ID);
     },
-    findSellerName(ID) {
-        return knex.select('UserName').from('users').where('UserID', ID);
+    findSeller(ID) {
+        return knex('users').where('UserID', ID);
     },
     async findProductEndBiddingWithCron() {
         const productExpire = (await knex.raw('select products.ProID, users.UserEmail sellerMail  from products join users on users.UserID = products.SellerID where TIMESTAMPDIFF(second , now(), EndDate) <= 0 and products.Mail = false and products.Status = 1'))[0];

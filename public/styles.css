@@ -145,3 +145,11 @@ div.ProDetail_Favorite {
     text-align: center;
     margin-top: 1rem;
 }
+
+a.sort-btn{
+    background-color: #d6d6d6;
+}
+
+a.sort-btn:hover{
+    background-color: #d6d6d6;
+}

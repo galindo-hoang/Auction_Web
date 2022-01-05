@@ -24,10 +24,12 @@ router.get("/admin/editCat/edit/:id", auth.beforeLogin, async function (req, res
         res.redirect('/');
     else {
         const category = await viewByCategories.findByCatID(req.params.id);
+        const mess = req.query.mess || false;
         res.render("admin/editCat", {
             user: req.session.account,
             isAdmin: req.session.account.UserRole === 0,
-            category: category[0]
+            category: category[0],
+            mess
         });
     }
 });
@@ -39,12 +41,7 @@ router.post("/admin/editCat/del", auth.beforeLogin, async function (req, res) {
         const result = await viewByCategories.del(req.body.CatID);
         if (result === null) {
             const category = await viewByCategories.findByCatID(req.body.CatID);
-            res.render("admin/editCat", {
-                user: req.session.account,
-                isAdmin: req.session.account.UserRole === 0,
-                category: category[0],
-                mess: 'Không thể xoá danh mục có sản phẩm'
-            });
+            res.redirect('/admin/editCat/edit/' + req.body.CatID + '?&mess=true');
         } else
             res.redirect('/admin/editCat');
     }
@@ -63,7 +60,7 @@ router.get("/admin/editCat/add", auth.beforeLogin, function (req, res) {
     if (req.session.account.UserRole !== 0)
         res.redirect('/');
     else
-        res.render("admin/addCat");
+        res.render("admin/addCat", {isAdmin: true});
 });
 
 router.post("/admin/editCat/add", auth.beforeLogin, function (req, res) {
@@ -72,7 +69,7 @@ router.post("/admin/editCat/add", auth.beforeLogin, function (req, res) {
     else {
         viewByCategories.add(req.body);
         res.render("admin/addCat", {
-            mess: 'Thêm thành công!'
+            mess: 'Thêm thành công!', isAdmin: true
         });
     }
 });
@@ -93,10 +90,12 @@ router.get("/admin/editCatDe/edit/:id", auth.beforeLogin, async function (req, r
         res.redirect('/');
     else {
         const categories_detail = await viewByCategoriesDetail.findByCatDeID(req.params.id);
+        const mess = req.query.mess || false;
         res.render("admin/editCatDe", {
             user: req.session.account,
             isAdmin: req.session.account.UserRole === 0,
-            categories_detail: categories_detail[0]
+            categories_detail: categories_detail[0],
+            mess
         });
     }
 });
@@ -108,12 +107,7 @@ router.post("/admin/editCatDe/del", auth.beforeLogin, async function (req, res) 
         const result = await viewByCategoriesDetail.del(req.body.CatDeID);
         if (result === null) {
             const categories_detail = await viewByCategoriesDetail.findByCatDeID(req.body.CatDeID);
-            res.render("admin/editCatDe", {
-                user: req.session.account,
-                isAdmin: req.session.account.UserRole === 0,
-                categories_detail: categories_detail[0],
-                mess: 'Không thể xoá danh mục có sản phẩm'
-            });
+            res.redirect('/admin/editCatDe/edit/' + req.body.CatDeID + '?&mess=true');
         } else
             res.redirect('/admin/editCatDe');
     }
@@ -132,7 +126,7 @@ router.get("/admin/editCatDe/add", auth.beforeLogin, function (req, res) {
     if (req.session.account.UserRole !== 0)
         res.redirect('/');
     else
-        res.render("admin/addCatDe");
+        res.render("admin/addCatDe", {isAdmin: true});
 });
 
 router.post("/admin/editCatDe/add", auth.beforeLogin, function (req, res) {
@@ -141,7 +135,7 @@ router.post("/admin/editCatDe/add", auth.beforeLogin, function (req, res) {
     else {
         viewByCategoriesDetail.add(req.body);
         res.render("admin/addCatDe", {
-            mess: 'Thêm thành công!'
+            mess: 'Thêm thành công!', isAdmin: true
         });
     }
 });

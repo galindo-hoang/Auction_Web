@@ -180,18 +180,17 @@
                     &nbsp;Bidder giữ giá cao nhất:
                     {{this.topBidder.UserName}}
                     <span class="rating-seller">
-                    ({{this.topBidder.UserRating}}%
-                    <i class="fas fa-thumbs-up" style="color: blue"></i>)
+                    ({{this.topBidder.UserRating}}%&nbsp;<i class="fas fa-thumbs-up" style="color: blue"></i>)
                     </span>
                 </p>
             {{/if}}
             <p class="card-text">
                 <i class="fa fa-store-alt" style="color: darkslateblue"></i>
                 <span>
-                    &nbsp;Seller: {{this.Seller}}
+                    &nbsp;Seller: {{this.Seller.UserName}}
                 </span>
                 <span class="rating-seller">
-                    (80%&nbsp;<i class="fas fa-thumbs-up" style="color: blue"></i>)
+                    ({{this.Seller.UserRating}}%&nbsp;<i class="fas fa-thumbs-up" style="color: blue"></i>)
                 </span>
             </p>
             <p class="card mt-auto">

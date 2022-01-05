@@ -1,22 +1,19 @@
-<div class="container-fluid mt-4">
+<div class="container-fluid mt-4 mb-4">
     <div class="row">
 
         {{> account-layout}}
 
         <div class="col-sm-9">
             <div class="card">
-                <h4 class="card-header d-flex justify-content-between container-fluid">
+                <h4 class="card-header d-flex justify-content-between container-fluid text-white bg-secondary">
                     Danh mục cấp 2
-                    <a class="btn btn-sm btn-outline-primary" href="/admin/editCatDe/add" role="button">
-                        <i class="fa fa-plus" aria-hidden="true"></i>
-                        Thêm danh mục
-                    </a>
                 </h4>
-                <table class="table table-hover">
+                <table class="table table-hover mt-2">
                     <thead>
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Tên danh mục</th>
+                        <th scope="col" class="text-center"><h5>ID</h5></th>
+                        <th scope="col">&nbsp;</th>
+                        <th scope="col"><h5>Tên danh mục</h5></th>
                         <th scope="col">&nbsp;</th>
                     </tr>
                     </thead>
@@ -24,10 +21,12 @@
                     {{#each LclCate}}
                         {{#each this.CDList}}
                             <tr>
-                                <th scope="row" class="align-middle">{{this.CatDeID}}-{{this.CatID}}</th>
+                                <th scope="row" class="align-middle text-center">{{this.CatDeID}}</th>
+                                <th scope="col">&nbsp;</th>
                                 <td class="align-middle">{{this.CatDeName}}</td>
                                 <td class="text-sm-end">
-                                    <a class="btn btn-primary" href="/admin/editCatDe/edit/{{this.CatDeID}}" style="background-color: darkcyan">
+                                    <a class="btn btn-primary" href="/admin/editCatDe/edit/{{this.CatDeID}}"
+                                       style="background-color: darkcyan">
                                         <i class="fa fa-pencil-ruler" aria-hidden="true"></i>
                                         Chỉnh sửa
                                     </a>
@@ -37,6 +36,10 @@
                     {{/each}}
                     </tbody>
                 </table>
+                <a class="btn btn-sm btn-outline-primary mt-3" href="/admin/editCatDe/add" role="button">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    Thêm danh mục
+                </a>
             </div>
         </div>
     </div>

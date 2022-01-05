@@ -1,95 +1,97 @@
-<div class="card mt-4 d-flex">
-    <div class="d-flex align-middle mt-3 card-header justify-content-evenly">
-        <h4>
-            Kết quả tìm kiếm với từ khoá: '{{query}}'
-        </h4>
-        <div>
-            <a class="btn btn-light" href="/views/{{query}}?sort=1&page=1">
-                <i class="fas fa-sort-amount-down"></i>
-                Giá cao đến thấp
-            </a>
-            <a class="btn btn-light" href="/views/{{query}}?sort=2&page=1">
-                <i class="fas fa-sort-amount-up"></i>
-                Giá thấp đến cao
-            </a>
-            <a class="btn btn-light" href="/views/{{query}}?sort=3&page=1">
-                <i class="fas fa-sort-amount-down"></i>
-                Thời gian kết thúc giảm dần
-            </a>
-            <a class="btn btn-light" href="/views/{{query}}?sort=4&page=1">
-                <i class="fas fa-sort-amount-up"></i>
-                Thời gian kết thúc tăng dần
-            </a>
+<div class="card mt-4">
+    <h4 class="card-header text-white bg-secondary">
+        Kết quả tìm kiếm với từ khoá: '{{query}}'
+    </h4>
+    <div class="card-body">
+        <div class="d-flex align-middle mt-3 justify-content-end mb-5">
+            <div>
+                <a class="btn btn-light sort-btn" href="/views/{{query}}?sort=1&page=1">
+                    <i class="fas fa-sort-amount-down"></i>
+                    Giá cao đến thấp
+                </a>
+                <a class="btn btn-light sort-btn" href="/views/{{query}}?sort=2&page=1">
+                    <i class="fas fa-sort-amount-up"></i>
+                    Giá thấp đến cao
+                </a>
+                <a class="btn btn-light sort-btn" href="/views/{{query}}?sort=3&page=1">
+                    <i class="fas fa-sort-amount-down"></i>
+                    Thời gian kết thúc giảm dần
+                </a>
+                <a class="btn btn-light sort-btn" href="/views/{{query}}?sort=4&page=1">
+                    <i class="fas fa-sort-amount-up"></i>
+                    Thời gian kết thúc tăng dần
+                </a>
+            </div>
         </div>
-    </div>
-    {{#if products}}
-        <div class="cards mt-5">
-            {{#each this.products}}
-                <div class="card">
-                    <a href="/detail/{{this.ProID}}"><img src="/public/imgs/products/{{this.ProID}}/thumb.jpg" class="card-image" alt="{{this.ProName}}"></a>
-                    <div class="card-content">
-                        <div class="card-top">
-                            <h3 class="card-title">
-                                <a href="/detail/{{this.ProID}}">{{this.ProName}}</a>
-                            </h3>
-                            <div class="card-body-ByQuery mt-2">
-                                <div class="bidPrice"><i class="fa fa-gavel" aria-hidden="true"></i> {{format_number this.CurPrice}}
-                                    {{#if this.nameMaxBid}}
-                                        ({{this.nameMaxBid}})
-                                    {{/if}}
+        {{#if products}}
+            <div class="cards">
+                {{#each this.products}}
+                    <div class="card">
+                        <a href="/detail/{{this.ProID}}"><img src="/public/imgs/products/{{this.ProID}}/thumb.jpg" class="card-image" alt="{{this.ProName}}"></a>
+                        <div class="card-content">
+                            <div class="card-top">
+                                <h3 class="card-title">
+                                    <a href="/detail/{{this.ProID}}">{{this.ProName}}</a>
+                                </h3>
+                                <div class="card-body-ByQuery mt-2">
+                                    <div class="bidPrice"><i class="fa fa-gavel" aria-hidden="true"></i> {{format_number this.CurPrice}}
+                                        {{#if this.nameMaxBid}}
+                                            ({{this.nameMaxBid}})
+                                        {{/if}}
+                                    </div>
+                                    <div class="promptPrice mt-1"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i> {{format_number this.BuyNowPrice}} (Mua ngay)</div>
+                                    <div class="start-date-at-view">Đăng vào ngày: {{format_date this.StartDate}}</div>
                                 </div>
-                                <div class="promptPrice mt-1"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i> {{format_number this.BuyNowPrice}} (Mua ngay)</div>
-                                <div class="start-date-at-view">Đăng vào ngày: {{format_date this.StartDate}}</div>
                             </div>
-                        </div>
-                        <div class="card-bottom">
-                            <div class="card-bid">
-                                <span>{{this.bid}} lượt đấu giá</span>
-                            </div>
-                            {{#if this.exp}}
-                                <div class="card-remaining text-danger">Hết hạn đấu giá</div>
-                            {{else}}
-                                <div class="card-remaining mt-2" data-date="{{this.EndDate}}"></div>
-                            {{/if}}
+                            <div class="card-bottom">
+                                <div class="card-bid">
+                                    <span>{{this.bid}} lượt đấu giá</span>
+                                </div>
+                                {{#if this.exp}}
+                                    <div class="card-remaining text-danger">Hết hạn đấu giá</div>
+                                {{else}}
+                                    <div class="card-remaining mt-2" data-date="{{this.EndDate}}"></div>
+                                {{/if}}
 
+                            </div>
                         </div>
                     </div>
-                </div>
-            {{/each}}
+                {{/each}}
+            </div>
         </div>
-        {{#unless this.isOnePage}}
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-end">
-                    {{#unless this.isStart}}
-                        <li class="page-item">
-                            <a class="page-link" href="/views/{{this.query}}?sort={{this.sort}}&page={{this.previousPage}}">Previous</a>
-                        </li>
-                    {{/unless}}
-                    {{#each this.pageNumbers}}
-                        {{#if isCurrent}}
-                            <li class="page-item active">
-                                <a class="page-link" href="javascript:;">{{value}}</a>
-                            </li>
-                        {{else}}
+            {{#unless this.isOnePage}}
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-end">
+                        {{#unless this.isStart}}
                             <li class="page-item">
-                                <a class="page-link" href="?sort={{../this.sort}}&page={{this.value}}">{{value}}</a>
+                                <a class="page-link" href="/views/{{this.query}}?sort={{this.sort}}&page={{this.previousPage}}">&laquo;</a>
                             </li>
-                        {{/if}}
-                    {{/each}}
-                    {{#unless this.isEnd}}
-                        <li class="page-item">
-                            <a class="page-link" href="/views/{{this.query}}?sort={{this.sort}}&page={{this.nextPage}}">Next</a>
-                        </li>
-                    {{/unless}}
-                </ul>
-            </nav>
-        {{/unless}}
-    {{else}}
-        <div class="d-flex justify-content-center mt-5">
-            <img src="/public/assets/empty.png" alt="Empty">
-        </div>
-        <h5 class="text-center mb-5" style="color: #999999">Không có dữ liệu về sản phẩm</h5>
-    {{/if}}
+                        {{/unless}}
+                        {{#each this.pageNumbers}}
+                            {{#if isCurrent}}
+                                <li class="page-item active">
+                                    <a class="page-link" href="javascript:;">{{value}}</a>
+                                </li>
+                            {{else}}
+                                <li class="page-item">
+                                    <a class="page-link" href="?sort={{../this.sort}}&page={{this.value}}">{{value}}</a>
+                                </li>
+                            {{/if}}
+                        {{/each}}
+                        {{#unless this.isEnd}}
+                            <li class="page-item">
+                                <a class="page-link" href="/views/{{this.query}}?sort={{this.sort}}&page={{this.nextPage}}">&raquo;</a>
+                            </li>
+                        {{/unless}}
+                    </ul>
+                </nav>
+            {{/unless}}
+        {{else}}
+            <div class="d-flex justify-content-center mt-5">
+                <img src="/public/assets/empty.png" alt="Empty">
+            </div>
+            <h5 class="text-center mb-5" style="color: #999999">Không có dữ liệu về sản phẩm</h5>
+        {{/if}}
 </div>
 
 
