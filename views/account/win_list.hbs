@@ -1,4 +1,4 @@
-<div class="container-fluid mt-4">
+<div class="container-fluid mt-4 profile-view">
     <div class="row">
 
         {{> account-layout}}
@@ -21,14 +21,16 @@
                     <tbody>
                     {{#each products}}
                         <tr class="align-middle">
-                            <th><img style="width: 120px;height: 120px;" src="/public/imgs/products/{{this.ProID}}/account.jpg"></th>
+                            <th><img style="width: 120px;height: 120px;"
+                                     src="/public/imgs/products/{{this.ProID}}/account.jpg"></th>
                             <td>{{this.TinyDes}}</td>
                             <td class="text-center text-danger">{{this.CurPrice}}</td>
                             <td class="text-center">{{this.EndDate}}</td>
                             {{#if this.rating}}
                                 <td class="text-center"><i class="fas fa-check-circle text-success"></i></td>
                             {{else}}
-                                <td class="text-center"><a href="/account/ratingProduct/{{this.ProID}}"><i class="fas fa-hourglass-end text-primary"></i></a></td>
+                                <td class="text-center"><a href="/account/ratingProduct/{{this.ProID}}"><i
+                                        class="fas fa-hourglass-end text-primary"></i></a></td>
                             {{/if}}
                             <td></td>
                         </tr>

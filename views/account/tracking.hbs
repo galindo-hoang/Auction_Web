@@ -1,4 +1,4 @@
-<div class="container-fluid mt-4">
+<div class="container-fluid mt-4 profile-view">
     <div class="row">
 
         {{> account-layout}}
@@ -22,7 +22,8 @@
                     {{#each products}}
                         <tr class="align-middle">
                             <th scope="row" class="text-center"><a href="/detail/{{this.ProID}}">{{this.BidID}}</a></th>
-                            <td><img style="width: 120px;height: 120px;" src="/public/imgs/products/{{this.ProID}}/account.jpg"></td>
+                            <td><img style="width: 120px;height: 120px;"
+                                     src="/public/imgs/products/{{this.ProID}}/account.jpg"></td>
                             <td>{{this.TinyDes}}</td>
                             <td class="text-center">{{format_number this.Price}} đ</td>
                             <td class="text-center">{{format_date this.BidDate}}</td>

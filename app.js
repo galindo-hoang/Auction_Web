@@ -193,14 +193,18 @@ app.get('/views/:query', async (req, res) => {
     });
 })
 
-app.use(function (err, req, res, next) {
-    console.error(err.stack)
-    res.render('404', {layout: false});
+app.get('/err', function (req, res) {
+    throw new Error('Error!');
+});
+
+app.use(function (req, res, next) {
+    res.render('404', { layout: false });
 });
 
 app.use(function (err, req, res, next) {
-    console.error(err.stack)
-    res.render('500', {layout: false});
+    console.error(err.stack);
+    // res.status(500).send('Something broke!')
+    res.render('500', { layout: false });
 });
 
 app.listen(3000, () => {
