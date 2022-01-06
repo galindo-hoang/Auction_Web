@@ -9,13 +9,16 @@ import user from "../models/user.js";
 import rating_list from "../models/rating_list.js"
 import User from "../models/user.js";
 import upgradeList from "../models/upgrade_list.js";
+import favorite_list from "../models/favorite_list.js";
 
 
 const router = express.Router();
 
 router.get("/account/profile",auth.beforeLogin,async (req, res) => {
     const upgradeReq = await upgradeList.getUserID(req.session.account.UserID);
+    req.session.account.UserRating = (await User.findRatingByUserID(req.session.account.UserID)).UserRating;
     res.render("account/profile", {
+        profile: true,
         user: req.session.account,
         isBidder: +req.session.account.UserRole === 2,
         isAdmin: +req.session.account.UserRole === 0,
@@ -49,6 +52,7 @@ router.post("/account/profile",auth.beforeLogin,async (req, res) => {
 router.get("/account/review",auth.beforeLogin,async (req, res) => {
     const rates = await rating_list.findByUserRateID(req.session.account.UserID);
     res.render("account/review", {
+        review: true,
         user: req.session.account,
         isAdmin: req.session.account.UserRole === 0,
         rates
@@ -58,6 +62,7 @@ router.get("/account/review",auth.beforeLogin,async (req, res) => {
 router.get("/account/tracking",auth.beforeLogin,async (req, res) => {
     const products = await products_history.findByTracking(req.session.account.UserID);
     res.render("account/tracking", {
+        tracking: true,
         products,
         user: req.session.account,
         isAdmin: req.session.account.UserRole === 0
@@ -67,10 +72,17 @@ router.get("/account/tracking",auth.beforeLogin,async (req, res) => {
 router.get("/account/favorite",auth.beforeLogin,async (req, res) => {
     const products = await viewByProduct.findByFavorite(req.session.account.UserID);
     res.render("account/favorite", {
+        favorite: true,
         products,
         user: req.session.account,
         isAdmin: req.session.account.UserRole === 0
     });
+});
+
+
+router.post("/account/favorite",auth.beforeLogin,async (req, res) => {
+    favorite_list.remove(req.session.account.UserID,req.body.ProID);
+    res.redirect("/account/favorite");
 });
 
 router.get("/account/win",auth.beforeLogin,async (req, res) => {
@@ -81,6 +93,7 @@ router.get("/account/win",auth.beforeLogin,async (req, res) => {
     }
     // const products = await win_list.findByRating()
     res.render("account/win_list", {
+        win: true,
         products,
         user: req.session.account,
         isAdmin: req.session.account.UserRole === 0

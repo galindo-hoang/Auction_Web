@@ -67,6 +67,9 @@ const entity = {
     },
     updateRating(UserID,UserRating) {
         knex('users').update({UserRating}).where({UserID}).then(()=>{});
+    },
+    async findRatingByUserID(UserID) {
+        return (await knex('users').select('users.UserRating').where('users.UserID', UserID))[0];
     }
 }
 

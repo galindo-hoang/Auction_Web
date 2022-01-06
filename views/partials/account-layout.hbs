@@ -5,11 +5,11 @@
         </div>
         <div class="card-body">
             <div class="list-group ">
-                <a href="/account/profile" class="list-group-item list-group-item-action">Thông tin tài khoản</a>
-                <a href="/account/win" class="list-group-item list-group-item-action">Sản phẩm đã thắng</a>
-                <a href="/account/tracking" class="list-group-item list-group-item-action">Theo dõi sản phẩm</a>
-                <a href="/account/favorite" class="list-group-item list-group-item-action">Sản phẩm yêu thích</a>
-                <a href="/account/review" class="list-group-item list-group-item-action">Đánh giá về tôi</a>
+                <a href="/account/profile" class="list-group-item list-group-item-action {{#if profile}} active{{/if}}">Thông tin tài khoản</a>
+                <a href="/account/win" class="list-group-item list-group-item-action {{#if win}} active{{/if}}">Sản phẩm đã thắng</a>
+                <a href="/account/tracking" class="list-group-item list-group-item-action {{#if tracking}} active{{/if}}">Theo dõi sản phẩm</a>
+                <a href="/account/favorite" class="list-group-item list-group-item-action {{#if favorite}} active{{/if}}">Sản phẩm yêu thích</a>
+                <a href="/account/review" class="list-group-item list-group-item-action {{#if review}} active{{/if}}">Đánh giá về tôi</a>
             </div>
         </div>
     </div>
@@ -20,8 +20,8 @@
             </div>
             <div class="card-body">
                 <div class="list-group">
-                    <a href="/seller/bidding" class="list-group-item list-group-item-action">Sản phẩm đang đấu giá</a>
-                    <a href="/seller/end" class="list-group-item list-group-item-action">Sản phẩm kết thúc đấu giá</a>
+                    <a href="/seller/bidding" class="list-group-item list-group-item-action {{#if bid}} active{{/if}}">Sản phẩm đang đấu giá</a>
+                    <a href="/seller/end" class="list-group-item list-group-item-action {{#if end}} active{{/if}}">Sản phẩm kết thúc đấu giá</a>
                 </div>
             </div>
         </div>

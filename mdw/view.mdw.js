@@ -14,6 +14,9 @@ export default function (app){
             section: hbs_sections(),
             format_date(date){
                 return moment(date).format("DD/MM/YYYY, h:mm:ss A");
+            },
+            format_rating(rating){
+                return (parseFloat(rating)).toFixed(2)*100;
             }
         }
     }));

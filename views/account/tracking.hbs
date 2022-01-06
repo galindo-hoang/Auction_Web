@@ -6,7 +6,7 @@
         <div class="col-sm-8">
             <div class="card">
                 <h4 class="card-header text-center bg-secondary text-white">
-                    Nội dung đánh giá
+                    Danh sách sản phẩm đang tham gia đấu giá
                 </h4>
                 <table class="table table-hover">
                     <thead>
@@ -24,7 +24,7 @@
                             <th scope="row" class="text-center"><a href="/detail/{{this.ProID}}">{{this.BidID}}</a></th>
                             <td><img style="width: 120px;height: 120px;"
                                      src="/public/imgs/products/{{this.ProID}}/account.jpg"></td>
-                            <td>{{this.TinyDes}}</td>
+                            <td><a href="/detail/{{this.ProID}}" style="color: black">{{this.TinyDes}}</a></td>
                             <td class="text-center">{{format_number this.Price}} đ</td>
                             <td class="text-center">{{format_date this.BidDate}}</td>
                         </tr>

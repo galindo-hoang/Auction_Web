@@ -6,9 +6,18 @@
         <div class="col-sm-8">
             <div class="card">
                 <h4 class="card-header text-center text-white bg-secondary">
-                    Nội dung đánh giá
+                    Danh sách sản phẩm yêu thích
                 </h4>
                 <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col" class="text-center">Mã Sản phẩm</th>
+                        <th scope="col" class="text-center">&nbsp;</th>
+                        <th scope="col" class="text-center">Mô tả khái quát</th>
+                        <th scope="col">Trạng thái</th>
+                        <th scope="col" class="text-center">&nbsp;</th>
+                    </tr>
+                    </thead>
                     <tbody>
                     {{#each products}}
                         <tr class="align-middle">
@@ -19,21 +28,31 @@
                                 <div>{{this.CurPrice}}</div>
                                 {{#if this.Status}}
                                     <div>
-                                        <strong>Đang đấu giá</strong>
+                                        <strong style="color: mediumseagreen">Đang đấu giá</strong>
                                     </div>
                                 {{else}}
                                     <div>
-                                        <strong>Hết đấu giá</strong>
+                                        <strong style="color: #F90716">Hết đấu giá</strong>
                                     </div>
                                 {{/if}}
                             </td>
-                            <td><i class="far fa-trash-alt"></i></td>
+                            <form method="post" id="cancel-favorite">
+                                <input name="ProID" value="{{this.ProID}}" type="hidden">
+                            </form>
+                            <td><i id="cancel" class="far fa-trash-alt" style="cursor: pointer"></i></td>
                         </tr>
                     {{/each}}
                     </tbody>
                 </table>
             </div>
         </div>
-
     </div>
 </div>
+
+{{#section 'footer'}}
+    <script>
+        $('#cancel').on('click', function (e) {
+            $('#cancel-favorite').submit();
+        });
+    </script>
+{{/section}}
