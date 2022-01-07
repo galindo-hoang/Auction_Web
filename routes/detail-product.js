@@ -104,8 +104,8 @@ router.get('/detail/:id', async (req, res) => {
 
 router.post('/bid', auth.beforeLogin, async (req, res) => {
     const accepted = await accepted_list.find(req.session.account.UserID, req.query.ProID);
-    req.session.account.UserRating = (await Users.findRatingByUserID(req.session.account.UserID)).UserRating;
-    if (req.session.account.UserRating >= 0.8 || accepted.length !== 0) {
+    const pending = await pending_list.find(req.session.account.UserID, req.query.ProID);
+    if ((req.session.account.UserRating >= 0.8 && pending.length === 0) || accepted.length !== 0) {
         const array = moment().format().split("T");
         const hour = array[1].split("+");
 
@@ -145,7 +145,6 @@ router.post('/bid', auth.beforeLogin, async (req, res) => {
 
         res.redirect('/detail/' + object.ProID);
     } else {
-        const pending = await pending_list.find(req.session.account.UserID, req.query.ProID);
         if (pending.length === 0) {
             pending_list.add({UserID: req.session.account.UserID, ProID: req.query.ProID});
             req.session.account["" + req.query.ProID] = 1;

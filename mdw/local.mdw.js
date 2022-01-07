@@ -22,7 +22,9 @@ export default function (app) {
             req.session.isLogin = false;
         }
         if (req.session.account) {
-            req.session.account = await Users.findByID(req.session.account.UserID);
+            const model = await Users.findByID(req.session.account.UserID);
+            req.session.account.UserRating = model.UserRating;
+            req.session.account.UserRole = model.UserRole;
             delete req.session.account.UserPassword;
             res.locals.seller = (+req.session.account.UserRole === 1);
         }
