@@ -2,6 +2,7 @@ import session from "express-session";
 import Category from "../models/category.js";
 import CategoriesDetail from '../models/categories_detail.js';
 import fnMySQLStore from 'express-mysql-session';
+import Users from '../models/user.js'
 import {ConnectInfor} from "../utils/db.js";
 
 export default function (app) {
@@ -20,7 +21,11 @@ export default function (app) {
         if (typeof (req.session.isLogin) === 'undefined') {
             req.session.isLogin = false;
         }
-        if (req.session.account) res.locals.seller = (+req.session.account.UserRole === 1);
+        if (req.session.account) {
+            req.session.account = await Users.findByID(req.session.account.UserID);
+            delete req.session.account.UserPassword;
+            res.locals.seller = (+req.session.account.UserRole === 1);
+        }
         res.locals.account = req.session.account;
         res.locals.isLogin = req.session.isLogin;
         next();
