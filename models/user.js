@@ -1,5 +1,6 @@
 import knex from "../utils/db.js";
 import bcrypt from "bcryptjs";
+import products_history from "./products_history.js";
 
 const entity = {
     addUser: function(object){
@@ -59,10 +60,21 @@ const entity = {
     },
     async del(ID){
         const role = await knex.select('UserRole').from('users').where('UserID', ID);
-        console.log(role[0].UserRole);
         if(+role[0].UserRole === 1) {
-            await knex('products').where("SellerID", ID).del();
+            await knex('products').where("SellerID", +ID).del();
         }
+        const biddingProID = (await knex.raw(`select distinct ProID
+                                        from products_history
+                                        where BidderID = ?`, +ID))[0];
+        await knex('products_history').where('BidderID', ID).del();
+        if(biddingProID.length > 0)
+            for(let proId of biddingProID) {
+                const maxPrice = (await knex.raw(`select Price
+                                                  from products_history
+                                                  where BidID >= all (select BidID from products_history where ProID = ?)
+                                                    and ProID = ?`, [+proId.ProID, +proId.ProID]))[0][0];
+                await knex.raw(`update products set CurPrice = ? where ProID = ?`, [maxPrice.Price, +proId.ProID]);
+            }
         return knex('users').where('UserID', ID).del();
     },
     updateRating(UserID,UserRating) {
