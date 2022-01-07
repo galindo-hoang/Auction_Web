@@ -132,9 +132,11 @@ router.post('/bid', auth.beforeLogin, async (req, res) => {
             viewByProduct.updateStatusEndBidding(object.ProID);
             sendEmail(seller[0].UserEmail, "Sản phẩm của bạn", "Sản phẩm của bạn đã được mua ngay <div>" + req.headers.referer + "</div>");
         } else {
-            const now = moment();
-            const endDate = moment(product.EndDate);
-            if(now.diff(endDate,'minutes') < 5) viewByProduct.updateMinute(req.query.ProID);
+            if(product.AutoExtend){
+                const now = moment();
+                const endDate = moment(product.EndDate);
+                if(now.diff(endDate,'minutes') < 5) viewByProduct.updateMinute(req.query.ProID);
+            }
             sendEmail(seller[0].UserEmail, "Sản phẩm của bạn", "Sản phẩm của bạn đã được đặt với mức giá: <b>" + req.body.Price + "</b><div>" + req.headers.referer + "</div>");
         }
 
