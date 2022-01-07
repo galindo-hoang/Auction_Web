@@ -26,7 +26,7 @@ export default function (app) {
             req.session.account.UserRating = model.UserRating;
             req.session.account.UserRole = model.UserRole;
             delete req.session.account.UserPassword;
-            res.locals.seller = (+req.session.account.UserRole === 1);
+            res.locals.seller = (+req.session.account.UserRole === 1 || +req.session.account.UserRole === 3);
         }
         res.locals.account = req.session.account;
         res.locals.isLogin = req.session.isLogin;

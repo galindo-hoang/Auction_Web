@@ -22,7 +22,7 @@ router.get('/seller/bidding',auth.beforeLogin,auth.isSeller,async (req, res) => 
     for (let i = 0; i < products.length;++i){
         if(moment(products[i].EndDate) >= moment()) bidding.push(products[i]);
     }
-    res.render('seller/bidding',{bidding,bid:true});
+    res.render('seller/bidding',{bidding,bid:true, sellerToBidder: +req.session.account.UserRole === 3});
 })
 
 router.get('/seller/add',auth.beforeLogin,auth.isSeller,async (req, res) => {

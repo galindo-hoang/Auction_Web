@@ -20,7 +20,7 @@ router.get("/account/profile",auth.beforeLogin,async (req, res) => {
     res.render("account/profile", {
         profile: true,
         user: req.session.account,
-        isBidder: +req.session.account.UserRole === 2,
+        isBidder: +req.session.account.UserRole >= 2,
         isAdmin: +req.session.account.UserRole === 0,
         isRequested: upgradeReq.length !== 0
     });

@@ -13,7 +13,7 @@ const auth = {
         next();
     },
     isSeller: function (req,res,next){
-        if(+req.session.account.UserRole !== 1){
+        if(+req.session.account.UserRole !== 1 && +req.session.account.UserRole !== 3){
             return res.redirect('/account/profile');
         }
         next();

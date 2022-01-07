@@ -5,6 +5,7 @@ import viewByProduct from '../models/product.js';
 import viewByCategories from '../models/category.js';
 import viewByCategoriesDetail from '../models/categories_detail.js'
 import sendEmail from '../utils/mail.js'
+import Product from "../models/product.js";
 
 const router = express.Router();
 
@@ -246,7 +247,11 @@ router.post("/admin/editAcc/downgrade", auth.beforeLogin, async function (req, r
     else {
         const email = await viewByProduct.findUserEmail(req.body.UserID);
         sendEmail((email[0].UserEmail), 'THÔNG BÁO HẠ CẤP TÀI KHOẢN', 'Tài khoản của bạn đã bị hạ cấp bởi ban quản trị');
-        await users.changeRole(req.body.UserID, 2);
+        const proList = await Product.findBySeller(req.body.UserID);
+        if (proList.length > 0)
+            await users.changeRole(req.body.UserID, 3);
+        else
+            await users.changeRole(req.body.UserID, 2);
         res.redirect('/admin/editSeller/');
     }
 });
