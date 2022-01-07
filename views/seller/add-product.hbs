@@ -15,10 +15,10 @@
 
 <div class="container-fluid">
     <form enctype="multipart/form-data" method="post" id="formProduct">
-        <div class="row">
+        <div class="row mt-4">
             <div class="col-sm-4">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header text-white bg-secondary">
                         Thông tin sản phẩm
                     </div>
                     <div class="card-body">
@@ -26,7 +26,7 @@
                             <label for="ProName" class="form-label">Tên sản phẩm</label>
                             <input type="text" class="form-control" id="ProName" name="ProName" required>
                         </div>
-                        <div class="mb-3">
+                        <div class="my-3">
                             <label for="cars" class="form-label">Loại sản phẩm:</label>
                             <select id="cars" name="CatDeID" class="form-control">
                                 {{#each cateDetail}}
@@ -35,28 +35,28 @@
                             </select>
                         </div>
 
-                        <div class="mb-3">
+                        <div class="my-3">
                             <label for="TinyDes" class="form-label">Mô tả khát quát</label>
                             <input type="text" class="form-control" id="TinyDes" name="TinyDes" required>
                         </div>
 
-                        <div class="mb-3">
+                        <div class="my-3">
                             <label for="CurPrice" class="form-label">Giá khởi động</label>
                             <input type="number" class="form-control" id="CurPrice" name="CurPrice" required>
                         </div>
 
-                        <div class="mb-3">
+                        <div class="my-3">
                             <label for="BuyNowPrice" class="form-label">Giá mua ngay</label>
                             <input type="number" class="form-control" id="BuyNowPrice" name="BuyNowPrice" required>
                         </div>
 
-                        <div class="mb-3">
+                        <div class="my-3">
                             <label for="StepPrice" class="form-label">Bước giá tối thiểu</label>
                             <input type="number" class="form-control" id="StepPrice" name="StepPrice" required>
                         </div>
 
 
-                        <div class="mb-3">
+                        <div class="my-3">
                             <label for="cars" class="form-label">Trạng thái sản phẩm:</label>
                             <select id="cars" name="AutoExtend" class="form-control">
                                 <option value="1">Tự động gia hạn</option>
@@ -64,47 +64,38 @@
                             </select>
                         </div>
 
-                        <div class="mb-3">
+                        <div class="my-3">
                             <label for="EndDate" class="form-label">Ngày giờ kết thúc</label>
                             <input type="text" class="form-control" id="EndDate" name="EndDate" required>
                         </div>
-                    </div>
-                    <div class="card-footer text-muted">
-                        Footer
                     </div>
                 </div>
             </div>
             
             <div class="col-sm-8">
                 <div class="card">
-                    <div class="card-header">
-                        Header
+                    <div class="card-header text-white bg-secondary">
+                        Thông tin chi tiết
                     </div>
                     <div class="card-body">
-
-                        <label for="thumbImg">Hình ảnh đại diện</label>
+                        <label for="thumbImg" class="mb-3"><b>Hình ảnh đại diện</b></label>
                         <div class="file-loading">
                             <input id="thumbImg" name="thumbImg" type="file" required>
                         </div>
 
-                        <label for="detailImg">Hình ảnh chi tiết</label>
+                        <label for="detailImg" class="my-3"><b>Hình ảnh chi tiết</b></label>
                         <div class="file-loading">
                             <input id="detailImg" name="detailImg" type="file" multiple required>
                         </div>
 
-                        <label for="accountImg">Hình ảnh khái quát</label>
+                        <label for="accountImg" class="my-3"><b>Hình ảnh khái quát</b></label>
                         <div class="file-loading">
                             <input id="accountImg" name="accountImg" type="file" required>
                         </div>
-
-
-                        <div class="mb-3">
-                            <label for="FullDes" class="form-label">Mô tả chi tiết</label>
-                            <textarea id="FullDes" name="FullDes">Hello</textarea>
+                        <div class="my-3">
+                            <label for="FullDes" class="form-label mb-3"><b>Mô tả chi tiết</b></label>
+                            <textarea id="FullDes" name="FullDes"></textarea>
                         </div>
-                    </div>
-                    <div class="card-footer text-muted">
-                        Footer
                     </div>
                 </div>
             </div>

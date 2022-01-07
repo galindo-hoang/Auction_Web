@@ -33,12 +33,12 @@
             </div>
             <div class="card-body">
                 <div class="list-group">
-                    <a href="/admin/editCat" class="list-group-item list-group-item-action">Quản lý danh mục cấp 1</a>
-                    <a href="/admin/editCatDe" class="list-group-item list-group-item-action">Quản lý danh mục cấp 2</a>
-                    <a href="/admin/editPro" class="list-group-item list-group-item-action">Quản lý sản phẩm</a>
-                    <a href="/admin/editAcc" class="list-group-item list-group-item-action">Quản lý tài khoản</a>
-                    <a href="/admin/editSeller" class="list-group-item list-group-item-action">Quản lý Seller</a>
-                    <a href="/admin/editBidder" class="list-group-item list-group-item-action">Duyệt nâng cấp của Bidder</a>
+                    <a href="/admin/editCat" class="list-group-item list-group-item-action {{#if editCat}} active{{/if}}">Quản lý danh mục cấp 1</a>
+                    <a href="/admin/editCatDe" class="list-group-item list-group-item-action {{#if editCatDe}} active{{/if}}">Quản lý danh mục cấp 2</a>
+                    <a href="/admin/editPro" class="list-group-item list-group-item-action {{#if editPro}} active{{/if}}">Quản lý sản phẩm</a>
+                    <a href="/admin/editAcc" class="list-group-item list-group-item-action {{#if editAcc}} active{{/if}}">Quản lý tài khoản</a>
+                    <a href="/admin/editSeller" class="list-group-item list-group-item-action {{#if editSeller}} active{{/if}}">Quản lý Seller</a>
+                    <a href="/admin/editBidder" class="list-group-item list-group-item-action {{#if editBidder}} active{{/if}}">Duyệt nâng cấp của Bidder</a>
                 </div>
             </div>
         </div>

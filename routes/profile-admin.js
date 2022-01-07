@@ -14,7 +14,8 @@ router.get("/admin/editCat", auth.beforeLogin, function (req, res) {
     else {
         res.render("admin/adminViewCat", {
             user: req.session.account,
-            isAdmin: req.session.account.UserRole === 0
+            isAdmin: req.session.account.UserRole === 0,
+            editCat: true
         });
     }
 });
@@ -29,7 +30,8 @@ router.get("/admin/editCat/edit/:id", auth.beforeLogin, async function (req, res
             user: req.session.account,
             isAdmin: req.session.account.UserRole === 0,
             category: category[0],
-            mess
+            mess,
+            editCat: true
         });
     }
 });
@@ -60,7 +62,7 @@ router.get("/admin/editCat/add", auth.beforeLogin, function (req, res) {
     if (req.session.account.UserRole !== 0)
         res.redirect('/');
     else
-        res.render("admin/addCat", {isAdmin: true});
+        res.render("admin/addCat", {isAdmin: true, editCat: true});
 });
 
 router.post("/admin/editCat/add", auth.beforeLogin, function (req, res) {
@@ -69,7 +71,7 @@ router.post("/admin/editCat/add", auth.beforeLogin, function (req, res) {
     else {
         viewByCategories.add(req.body);
         res.render("admin/addCat", {
-            mess: 'Thêm thành công!', isAdmin: true
+            mess: 'Thêm thành công!', isAdmin: true, editCat: true
         });
     }
 });
@@ -80,7 +82,8 @@ router.get("/admin/editCatDe", auth.beforeLogin, function (req, res) {
     else {
         res.render("admin/adminViewCatDe", {
             user: req.session.account,
-            isAdmin: req.session.account.UserRole === 0
+            isAdmin: req.session.account.UserRole === 0,
+            editCatDe: true
         });
     }
 });
@@ -95,7 +98,8 @@ router.get("/admin/editCatDe/edit/:id", auth.beforeLogin, async function (req, r
             user: req.session.account,
             isAdmin: req.session.account.UserRole === 0,
             categories_detail: categories_detail[0],
-            mess
+            mess,
+            editCatDe: true
         });
     }
 });
@@ -126,7 +130,7 @@ router.get("/admin/editCatDe/add", auth.beforeLogin, function (req, res) {
     if (req.session.account.UserRole !== 0)
         res.redirect('/');
     else
-        res.render("admin/addCatDe", {isAdmin: true});
+        res.render("admin/addCatDe", {isAdmin: true, editCatDe: true});
 });
 
 router.post("/admin/editCatDe/add", auth.beforeLogin, function (req, res) {
@@ -135,7 +139,7 @@ router.post("/admin/editCatDe/add", auth.beforeLogin, function (req, res) {
     else {
         viewByCategoriesDetail.add(req.body);
         res.render("admin/addCatDe", {
-            mess: 'Thêm thành công!', isAdmin: true
+            mess: 'Thêm thành công!', isAdmin: true, editCatDe: true
         });
     }
 });
@@ -148,7 +152,8 @@ router.get("/admin/editPro", auth.beforeLogin, async function (req, res) {
         res.render("admin/adminViewPro", {
             user: req.session.account,
             isAdmin: req.session.account.UserRole === 0,
-            product
+            product,
+            editPro: true
         });
     }
 });
@@ -180,6 +185,7 @@ router.get("/admin/editAcc", auth.beforeLogin, async function (req, res) {
             user: req.session.account,
             isAdmin: req.session.account.UserRole === 0,
             userList,
+            editAcc: true
         });
     }
 });
@@ -193,6 +199,7 @@ router.get("/admin/editSeller", auth.beforeLogin, async function (req, res) {
             user: req.session.account,
             isAdmin: req.session.account.UserRole === 0,
             sellerList,
+            editSeller: true
         });
     }
 });
@@ -206,6 +213,7 @@ router.get("/admin/editBidder", auth.beforeLogin, async function (req, res) {
             user: req.session.account,
             isAdmin: req.session.account.UserRole === 0,
             userList,
+            editBidder: true
         });
     }
 });

@@ -25,7 +25,7 @@
                             <td class="text-center"><img style="width: 120px;height: 120px;" src="/public/imgs/products/{{this.ProID}}/account.jpg"></td>
                             <td>{{this.TinyDes}}</td>
                             <td>
-                                <div>{{this.CurPrice}}</div>
+                                <div>{{format_number this.CurPrice}} đ</div>
                                 {{#if this.Status}}
                                     <div>
                                         <strong style="color: mediumseagreen">Đang đấu giá</strong>
@@ -39,7 +39,11 @@
                             <form method="post" id="cancel-favorite">
                                 <input name="ProID" value="{{this.ProID}}" type="hidden">
                             </form>
-                            <td><i id="cancel" class="far fa-trash-alt" style="cursor: pointer"></i></td>
+                            <td>
+                                <div class="btn btn-danger">
+                                    <i id="cancel" class="far fa-trash-alt" style="cursor: pointer"></i>
+                                </div>
+                            </td>
                         </tr>
                     {{/each}}
                     </tbody>
