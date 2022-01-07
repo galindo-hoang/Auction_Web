@@ -94,8 +94,7 @@ router.get('/detail/:id', async (req, res) => {
             similarProduct: similarProduct,
             isLogin: req.session.isLogin,
             topBidder: topBidder[0],
-            isBid: topBidder.length,
-            productHistory, imgs,
+            imgs,
             Seller: proSeller[0],
             prevPage,
             expire
@@ -105,6 +104,7 @@ router.get('/detail/:id', async (req, res) => {
 
 router.post('/bid', auth.beforeLogin, async (req, res) => {
     const accepted = await accepted_list.find(req.session.account.UserID, req.query.ProID);
+    req.session.account.UserRating = (await Users.findRatingByUserID(req.session.account.UserID)).UserRating;
     if (req.session.account.UserRating >= 0.8 || accepted.length !== 0) {
         const array = moment().format().split("T");
         const hour = array[1].split("+");
@@ -131,7 +131,12 @@ router.post('/bid', auth.beforeLogin, async (req, res) => {
             win_list.add(object.ProID, object.BidderID);
             viewByProduct.updateStatusEndBidding(object.ProID);
             sendEmail(seller[0].UserEmail, "Sản phẩm của bạn", "Sản phẩm của bạn đã được mua ngay <div>" + req.headers.referer + "</div>");
-        } else sendEmail(seller[0].UserEmail, "Sản phẩm của bạn", "Sản phẩm của bạn đã được đặt với mức giá: <b>" + req.body.Price + "</b><div>" + req.headers.referer + "</div>");
+        } else {
+            const now = moment();
+            const endDate = moment(product.EndDate);
+            if(now.diff(endDate,'minutes') < 5) viewByProduct.updateMinute(req.query.ProID);
+            sendEmail(seller[0].UserEmail, "Sản phẩm của bạn", "Sản phẩm của bạn đã được đặt với mức giá: <b>" + req.body.Price + "</b><div>" + req.headers.referer + "</div>");
+        }
 
         sendEmail(req.session.account.UserEmail, "chúc mừng", "bạn đã ra giá thành công món hàng<div>" + req.headers.referer + "</div>");
 

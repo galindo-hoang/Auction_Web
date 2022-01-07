@@ -125,7 +125,7 @@ export default {
     },
 
     async findProductHistory(ID) {
-        return (await knex.raw(`select BidDate, Price, UserName, BidderID
+        return (await knex.raw(`select BidDate, Price, UserName, BidderID, UserID
                                 from products_history,
                                      users
                                 where BidderID = UserID
