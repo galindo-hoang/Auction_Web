@@ -1254,4 +1254,40 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 <li>Hẹn giờ kỹ thuật số có thể điều chỉnh trong khoảng từ 5 đến 60 phút</li>
 <li>Nhập khẩu tại Đức</li>
 <li>Phụ kiện: Tập sách công thức với công thức làm kem Schuhbeck, hướng dẫn sử dụng với công thức nấu ăn</li>
-</ul>', 55000, 300000, 300000, 700000, 9, '2021-12-05 22:35:35', '2022-01-14 22:35:36', 1, 0, 1, 0);
+</ul>', 55000, 300000, 300000, 700000, 9, '2021-12-05 22:35:35', '2022-01-14 22:35:36', 1, 0, 1, 0),
+       (30, 'Áo Thun Nam Cổ Tròn', 'Áo Thun Trơn Nam Tsimple được may bằng chất liệu cotton, thấm hút mồ hôi tốt, ít nhăn',
+    '<ul>
+    <li><span style="font-weight: 400;">Áo Thun Nam Cotton Ngắn Tay Cổ Tròn Nhiều Màu Trẻ trung, thoáng mát, thấm hút mồ
+        hôi nhiều màu có thiết kế kiểu cơ bản với dáng ôm vừa phải, cổ tròn, tay ngắn</span></li>
+    <li><span style="font-weight: 400;">Áo Thun Nam Cotton Ngắn Tay Cổ Tròn Nhiều Màu dễ dàng phối cùng quần jeans hoặc
+        shorts, giày thể thao hoặc giày lười, thích hợp sử dụng trong các dịp đi chơi, gặp gỡ bạn bè.</span></li>
+    <li><span style="font-weight: 400;">Thiết kế đơn giản, trẻ trung phù hợp cho cả nam và nữ, có thể mang đôi, mang
+        nhóm.</span></li>
+    <li><span style="font-weight: 400;">Nhiều màu cơ bản cũng như lạ mắt giúp biến hóa phong cách cũng như phối đồ thể
+        hiện cá tính.</span></li>
+    <li><span style="font-weight: 400;">Giúp người mặc có cảm giác mát mẻ, thoải mái vận động cả ngày, có thể mặc nhà,
+        đi học, đi chơi, đi làm, tập thể thao.</span></li>
+  </ul>
+  <p> </p>
+  <p><span style="font-weight: 400;">Cách bảo quản</span></p>
+  <p><span style="font-weight: 400;">✓ Không nên để áo thun ở những nơi ẩm ướt, với tính chất hút ẩm, hút nước tốt, áo
+      thun dễ bị ẩm mốc, thậm chí để lại những vết ố trên vải áo.</span></p>
+  <p><span style="font-weight: 400;">✓ Sau khi mặc áo thun đi chơi, vận động nhiều ra mồ hôi, tốt nhất là bạn nên giặt
+      liền vì để lâu áo thun sẽ có mùi hôi và ẩm mốc.</span></p>
+  <p><span style="font-weight: 400;">✓ Khi phơi áo, bạn nên lộn trái áo và phơi ở chỗ mát vì ánh mặt trời cũng là một
+      nguyên nhân khiến hình in và màu áo mau phai màu.</span></p>
+  <p><span style="font-weight: 400;">✓ Và nên phơi ngang áo trên dây, vì sớ vải của áo thun thường có xu hướng chảy xệ
+      xuống dưới, nếu bạn phơi bằng móc áo có thể khiến áo bị chảy dài làm biến dạng form áo ban đầu.</span></p>
+  <p> </p>', 5000, 39000, 39000, 70000, 11, '2022-01-07 22:35:35', '2022-01-31 22:35:36', 1, 0, 1, 0),
+       (31, 'Đồ Bơi Nam Và Nữ Couple', 'Thiết kế mạnh mẽ, kiểu dáng thể thao tôn dáng. Chất liệu thun co giãn, bền chắc',
+        '<p>- Màu chủ đạo: trắng và đen</p>
+<p>- Thiết kế 2 mảnh khỏe khoắn, đồ bơi nữ có sẵn mút ngực. Tay dài che nắng, bảo vệ tia UV (chuẩn UPF 50+) cho làn da tay của bạn.</p>
+<p>- Là bộ đồ bơi cho các cặp đôi khi đi cùng nhau, hoặc cá nhân có thể mua riêng mẫu ưng ý.</p>
+<p>- Chất liệu thun lạnh co giãn tốt, bền chắc, đường may đẹp.</p>
+<p>- Là một trong các sản phẩm đồ bơi áo tắm bikiki đồ bơi một mảnh đồ bơi hai mảnh đồ bơi cặp đồ bơi nam nữ được yêu thích năm nay.</p>', 50000, 369000, 369000, 500000, 12, '2022-01-07 22:30:35', '2022-01-31 22:33:36', 1, 0, 1, 0),
+        (32, 'Quần jogger nam RFE', 'Quần jogger nam túi hộp chất kaki mềm mịn, phong cách đường phố RFE',
+         '<p>✧ Kiểu dáng trẻ trung, năng động màu sắc đẹp dễ mix đồ với giày, áo ba lỗ, áo thun, mũ lưỡi trai,</p>
+<p>✧ Chất kaki đẹp, mềm mịn, thấm hút mồ hôi tốt tạo cảm giác thoải mái dễ chịu khi mặc</p>
+<p>✧ Đường chỉ may tỉ mỉ, khóa túi chắc chắn, không bai, không xù, không bám dính</p>
+<p>✧ Bền màu vĩnh viễn, an toàn tuyệt đối với người mặc</p>
+<p>✧ Phù hợp mặc đi chơi, đi dạo, chơi thể thao, tập thể dục,</p>', 20000, 180000, 180000, 325000, 13, '2022-01-05 22:30:35', '2022-01-31 22:40:36', 1, 0, 1, 0);

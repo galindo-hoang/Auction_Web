@@ -60,9 +60,7 @@ const entity = {
     },
     async del(ID){
         const role = await knex.select('UserRole').from('users').where('UserID', ID);
-        if(+role[0].UserRole === 1) {
-            await knex('products').where("SellerID", +ID).del();
-        }
+        await knex('products').where("SellerID", +ID).del();
         const biddingProID = (await knex.raw(`select distinct ProID
                                         from products_history
                                         where BidderID = ?`, +ID))[0];
