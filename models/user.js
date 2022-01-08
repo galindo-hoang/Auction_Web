@@ -1,6 +1,8 @@
 import knex from "../utils/db.js";
 import bcrypt from "bcryptjs";
 import products_history from "./products_history.js";
+import favorite_list from "./favorite_list.js";
+import win_list from "./win_list.js";
 
 const entity = {
     addUser: function(object){
@@ -60,6 +62,13 @@ const entity = {
     },
     async del(ID){
         const role = await knex.select('UserRole').from('users').where('UserID', ID);
+        const ProductID = await knex.select('ProID').from('products').where('SellerID', +ID);
+        for(let data of ProductID) {
+            await knex('favorite_list').where('ProID', +data.ProID).del();
+            await knex('products_history').where('ProID', +data.ProID).del();
+            await knex('win_list').where('ProID', +data.ProID).del();
+        }
+
         await knex('products').where("SellerID", +ID).del();
         const biddingProID = (await knex.raw(`select distinct ProID
                                         from products_history
