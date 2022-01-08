@@ -43,14 +43,14 @@ router.get('/detail/:id', async (req, res) => {
         let tmp = topBidder[0].UserName;
         tmp = tmp.split("");
         topBidder[0].UserName = "";
-        for (let i = 0; i / tmp.length < 0.6; i++)
+        for (let i = 0; i / tmp.length < 0.5; i++)
             tmp[i] = '*';
         for (let i = 0; i < tmp.length; i++)
             topBidder[0].UserName += tmp[i];
 
         for (let i = 0; i < productHistory.length; i++) {
             tmp = productHistory[i].UserName.split("");
-            for (let j = 0; j / tmp.length < 0.6; j++)
+            for (let j = 0; j / tmp.length < 0.5; j++)
                 tmp[j] = '*';
             productHistory[i].UserName = '';
             for (let k = 0; k < tmp.length; k++)

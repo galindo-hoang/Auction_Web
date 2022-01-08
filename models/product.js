@@ -129,7 +129,8 @@ export default {
                                 from products_history,
                                      users
                                 where BidderID = UserID
-                                  and ProID = ?`, +ID))[0];
+                                  and ProID = ?
+                                  ORDER BY BidID`, +ID))[0];
     },
 
     findBySeller(userID) {
