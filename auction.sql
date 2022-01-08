@@ -286,7 +286,7 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 </tr>
 </tbody>
 </table>
-</div>', 100000, 5000000, 5000000, 10000000, 2, '2021-12-05 21:23:34', '2022-01-07 01:09:38', 1, 0, 1, 0),
+</div>', 100000, 5000000, 5000000, 10000000, 2, '2021-12-05 21:23:34', '2022-01-10 01:09:38', 1, 0, 1, 0),
         (4, 'Laptop HP Probook 430 G8 2H0N6PA', 'Chiếc laptop HP Probook 430 G8 2H0N6PA hỗ trợ đa dạng công việc văn phòng học tập. ', '<div class="box-content">
 <table id="tskt">
 <tbody>
@@ -386,8 +386,8 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 </tr>
 </tbody>
 </table>
-</div>', 200000, 13000000, 13000000, 17000000, 2, '2021-12-06 21:28:29', '2021-12-25 21:28:33', 1, 0, 1, 0),
-        (6, 'iPhone 13 | Chính hãng VN/A', ' Sau đó, mọi sự quan tâm lại đổ dồn vào iPhone 13.', '<div class="box-content">
+</div>', 200000, 13000000, 13000000, 17000000, 2, '2021-12-06 21:28:29', '2022-01-25 21:28:33', 1, 0, 1, 0),
+        (6, 'iPhone 13 | Chính hãng VN/A', 'Sau đó, mọi sự quan tâm lại đổ dồn vào iPhone 13.', '<div class="box-content">
 <table id="tskt">
 <tbody>
 <tr>
@@ -494,7 +494,7 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 </tr>
 </tbody>
 </table>
-</div>', 190000, 19000000, 19000000, 22000000, 1, '2021-12-05 21:33:38', '2021-12-06 18:33:41', 1, 0, 1, 0),
+</div>', 190000, 19000000, 19000000, 22000000, 1, '2021-12-05 21:33:38', '2021-12-06 18:33:41', 1, 0, 0, 1),
         (8, 'Xiaomi Mi 11 Lite 5G', 'Mi 11 Lite 5G và 4G là bộ đôi vừa được Xiaomi trình làng.', '<div class="box-content">
 <table id="tskt">
 <tbody>
@@ -723,540 +723,120 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 </tbody>
 </table>
 </div>', 70000, 3000000, 3000000, 6000000, 1, '2021-12-05 21:38:57', '2022-01-31 21:39:02', 1, 0, 1, 0),
-        (12, 'Lò Vi Sóng Có Nướng Hafele HW-F23B', ' có kích thước nhỏ gọn với dung tích 23 lít. Công suất nướng 1.000W.', '<div class="box-content">
-<table id="tskt">
-<tbody>
-<tr>
-<th>Kích thước màn hình</th>
-<th>6.5 inches</th>
-</tr>
-<tr>
-<th>Camera sau</th>
-<th>Chính 64 MP &amp; Phụ 8 MP, 2 MP, 2 MP</th>
-</tr>
-<tr>
-<th>Camera trước</th>
-<th>16 MP</th>
-</tr>
-<tr>
-<th>Chipset</th>
-<th>Mediatek Helio G90T</th>
-</tr>
-<tr>
-<th>Dung lượng RAM</th>
-<th>4 GB</th>
-</tr>
-<tr>
-<th>Bộ nhớ trong</th>
-<th>128 GB</th>
-</tr>
-<tr>
-<th>Pin</th>
-<th>4300 mAh, Sạc nhanh VOOC 4.0(30W)</th>
-</tr>
-<tr>
-<th>Thẻ SIM</th>
-<th>2 SIM (Nano-SIM)</th>
-</tr>
-<tr>
-<th>Hệ điều hành</th>
-<th>Android v10 (Q)</th>
-</tr>
-<tr>
-<th>Độ phân giải màn hình</th>
-<th>1080 x 2400 pixels (FullHD+)</th>
-</tr>
-<tr>
-<th>Loại CPU</th>
-<th>2.05 GHz</th>
-</tr>
-<tr>
-<th>Kích thước</th>
-<th>162.1 x 74.8 x 8.9 mm</th>
-</tr>
-</tbody>
-</table>
-</div>', 50000, 1500000, 1500000, 4000000, 3, '2021-12-05 21:42:36', '2022-01-11 15:42:39', 1, 0, 1, 0),
-        (13, 'Lò Vi Sóng Electrolux EMM2026MX', 'tông màu đen chủ đạo kết hợp viền thép không gỉ, tạo nên nét sang trọng.', '<div class="box-content">
-<table id="tskt">
-<tbody>
-<tr>
-<th>Kích thước màn hình</th>
-<th>6.5 inches</th>
-</tr>
-<tr>
-<th>Camera sau</th>
-<th>Chính 64 MP &amp; Phụ 8 MP, 2 MP, 2 MP</th>
-</tr>
-<tr>
-<th>Camera trước</th>
-<th>16 MP</th>
-</tr>
-<tr>
-<th>Chipset</th>
-<th>Mediatek Helio G90T</th>
-</tr>
-<tr>
-<th>Dung lượng RAM</th>
-<th>4 GB</th>
-</tr>
-<tr>
-<th>Bộ nhớ trong</th>
-<th>128 GB</th>
-</tr>
-<tr>
-<th>Pin</th>
-<th>4300 mAh, Sạc nhanh VOOC 4.0(30W)</th>
-</tr>
-<tr>
-<th>Thẻ SIM</th>
-<th>2 SIM (Nano-SIM)</th>
-</tr>
-<tr>
-<th>Hệ điều hành</th>
-<th>Android v10 (Q)</th>
-</tr>
-<tr>
-<th>Độ phân giải màn hình</th>
-<th>1080 x 2400 pixels (FullHD+)</th>
-</tr>
-<tr>
-<th>Loại CPU</th>
-<th>2.05 GHz</th>
-</tr>
-<tr>
-<th>Kích thước</th>
-<th>162.1 x 74.8 x 8.9 mm</th>
-</tr>
-</tbody>
-</table>
-</div>', 30000, 800000, 800000, 3000000, 3, '2021-12-05 21:43:54', '2021-12-29 21:43:58', 1, 0, 1, 0),
-        (14, 'Sharp R-205VN', 'Thiết kế nhỏ gọn với những đường nét tính tế và hiện đại.', '<div class="box-content">
-<table id="tskt">
-<tbody>
-<tr>
-<th>Kích thước màn hình</th>
-<th>6.5 inches</th>
-</tr>
-<tr>
-<th>Camera sau</th>
-<th>Chính 64 MP &amp; Phụ 8 MP, 2 MP, 2 MP</th>
-</tr>
-<tr>
-<th>Camera trước</th>
-<th>16 MP</th>
-</tr>
-<tr>
-<th>Chipset</th>
-<th>Mediatek Helio G90T</th>
-</tr>
-<tr>
-<th>Dung lượng RAM</th>
-<th>4 GB</th>
-</tr>
-<tr>
-<th>Bộ nhớ trong</th>
-<th>128 GB</th>
-</tr>
-<tr>
-<th>Pin</th>
-<th>4300 mAh, Sạc nhanh VOOC 4.0(30W)</th>
-</tr>
-<tr>
-<th>Thẻ SIM</th>
-<th>2 SIM (Nano-SIM)</th>
-</tr>
-<tr>
-<th>Hệ điều hành</th>
-<th>Android v10 (Q)</th>
-</tr>
-<tr>
-<th>Độ phân giải màn hình</th>
-<th>1080 x 2400 pixels (FullHD+)</th>
-</tr>
-<tr>
-<th>Loại CPU</th>
-<th>2.05 GHz</th>
-</tr>
-<tr>
-<th>Kích thước</th>
-<th>162.1 x 74.8 x 8.9 mm</th>
-</tr>
-</tbody>
-</table>
+        (12, 'Lò Vi Sóng Có Nướng Hafele HW-F23B', 'Có kích thước nhỏ gọn với dung tích 23 lít. Công suất nướng 1.000W.', '<table><tbody><tr><td>Bảng điều khiển</td><td>Nút nhấn kết hợp nút vặn</td></tr><tr><td>Thương hiệu</td><td>HAFELE</td></tr><tr><td>Dung tích</td><td>28L</td></tr><tr><td>Công suất</td><td>Đầu vào: 1450W; Đầu ra: 900W; Nướng: 1100W</td></tr><tr><td>Kích thước</td><td>520 x 500 x 326 mm</td></tr><tr><td>Trọng lượng</td><td>208kg</td></tr></tbody></table>', 50000, 1500000, 1500000, 4000000, 3, '2021-12-05 21:42:36', '2022-01-11 15:42:39', 1, 0, 1, 0),
+        (13, 'Lò Vi Sóng Electrolux EMM2026MX', 'tông màu đen chủ đạo kết hợp viền thép không gỉ, tạo nên nét sang trọng.', '<table><tbody><tr><td>Bảng điều khiển</td><td>Nút vặn</td></tr><tr><td>Thương hiệu</td><td>Electrolux</td></tr><tr><td>Dung tích</td><td>20L</td></tr><tr><td>Công suất</td><td>1000W</td></tr><tr><td>Kích thước</td><td><p>(R x D x C) 43.95 x 33 x 25.82 cm</p></td></tr><tr><td>Trọng lượng</td><td>5.5kg</td></tr></tbody></table>', 30000, 800000, 800000, 3000000, 3, '2021-12-05 21:43:54', '2022-01-29 21:43:58', 1, 0, 1, 0),
+        (14, 'Sharp R-205VN', 'Thiết kế nhỏ gọn với những đường nét tính tế và hiện đại.', '<div>
+<p><span style="font-size: medium; color: #008ab7;"><strong>Lò Vi Sóng Cơ Sharp R-G302VN-S - 23 Lít</strong></span></p>
+<p><strong>Thông số kỹ thuật</strong></p>
+<p>- Dòng nướng cơ</p>
+<p>- Dung tích (L): 23</p>
+<p>- Kiểu mở cửa lò: Nhấn</p>
+<p>- Kiểu thanh nướng: Thạch anh</p>
+<p>- Mức công suất vi sóng: 5</p>
+<p>- Trọng lượng (Kg): 14kg</p>
+<p>- Kích thước đĩa xoay (mm): 270</p>
+<p>- Công suất tiêu thụ: 1270W</p>
+<p>- Công suất vi sóng: 800W</p>
+<p>- Nướng trên: 1000W</p>
+<p>- Chế độ hẹn giờ (phút): 35</p>
+<p><strong>Dung tích lò 23 lít</strong></p>
 </div>', 20000, 800000, 800000, 2000000, 3, '2021-12-05 21:44:57', '2022-03-05 21:44:59', 1, 0, 1, 0),
-        (15, 'Máy Làm Bánh BIYI BM1513F', 'Sản phẩm không tiết ra các chất độc hại trong quá trình sử dụng, ngoài ra khuôn nướng.', '<div class="box-content">
-<table id="tskt">
-<tbody>
-<tr>
-<th>Kích thước màn hình</th>
-<th>6.5 inches</th>
-</tr>
-<tr>
-<th>Camera sau</th>
-<th>Chính 64 MP &amp; Phụ 8 MP, 2 MP, 2 MP</th>
-</tr>
-<tr>
-<th>Camera trước</th>
-<th>16 MP</th>
-</tr>
-<tr>
-<th>Chipset</th>
-<th>Mediatek Helio G90T</th>
-</tr>
-<tr>
-<th>Dung lượng RAM</th>
-<th>4 GB</th>
-</tr>
-<tr>
-<th>Bộ nhớ trong</th>
-<th>128 GB</th>
-</tr>
-<tr>
-<th>Pin</th>
-<th>4300 mAh, Sạc nhanh VOOC 4.0(30W)</th>
-</tr>
-<tr>
-<th>Thẻ SIM</th>
-<th>2 SIM (Nano-SIM)</th>
-</tr>
-<tr>
-<th>Hệ điều hành</th>
-<th>Android v10 (Q)</th>
-</tr>
-<tr>
-<th>Độ phân giải màn hình</th>
-<th>1080 x 2400 pixels (FullHD+)</th>
-</tr>
-<tr>
-<th>Loại CPU</th>
-<th>2.05 GHz</th>
-</tr>
-<tr>
-<th>Kích thước</th>
-<th>162.1 x 74.8 x 8.9 mm</th>
-</tr>
-</tbody>
-</table>
-</div>', 10000, 200000, 200000, 1000000, 4, '2021-12-05 21:47:39', '2022-02-08 21:47:43', 1, 0, 1, 0),
-        (16, 'Máy làm bánh nướng hình thú ngộ nghĩnh.', 'Máy có kiểu dáng nhỏ gọn, trọng lượng chỉ 1.6kg để bạn có thể dễ dàng chi chuyển.', '<div class="box-content">
-<table id="tskt">
-<tbody>
-<tr>
-<th>Kích thước màn hình</th>
-<th>6.5 inches</th>
-</tr>
-<tr>
-<th>Camera sau</th>
-<th>Chính 64 MP &amp; Phụ 8 MP, 2 MP, 2 MP</th>
-</tr>
-<tr>
-<th>Camera trước</th>
-<th>16 MP</th>
-</tr>
-<tr>
-<th>Chipset</th>
-<th>Mediatek Helio G90T</th>
-</tr>
-<tr>
-<th>Dung lượng RAM</th>
-<th>4 GB</th>
-</tr>
-<tr>
-<th>Bộ nhớ trong</th>
-<th>128 GB</th>
-</tr>
-<tr>
-<th>Pin</th>
-<th>4300 mAh, Sạc nhanh VOOC 4.0(30W)</th>
-</tr>
-<tr>
-<th>Thẻ SIM</th>
-<th>2 SIM (Nano-SIM)</th>
-</tr>
-<tr>
-<th>Hệ điều hành</th>
-<th>Android v10 (Q)</th>
-</tr>
-<tr>
-<th>Độ phân giải màn hình</th>
-<th>1080 x 2400 pixels (FullHD+)</th>
-</tr>
-<tr>
-<th>Loại CPU</th>
-<th>2.05 GHz</th>
-</tr>
-<tr>
-<th>Kích thước</th>
-<th>162.1 x 74.8 x 8.9 mm</th>
-</tr>
-</tbody>
-</table>
-</div>', 10000, 200000, 200000, 400000, 4, '2021-12-05 21:48:37', '2022-01-12 11:48:38', 1, 0, 1, 0),
-        (17, '3 Trong 1 Tiross TS513', 'Máy làm bánh Tiross TS513 với 3 loại vỉ nướng đi kèm, bạn có thể làm các loại bánh.', '<div class="box-content">
-<table id="tskt">
-<tbody>
-<tr>
-<th>Kích thước màn hình</th>
-<th>6.5 inches</th>
-</tr>
-<tr>
-<th>Camera sau</th>
-<th>Chính 64 MP &amp; Phụ 8 MP, 2 MP, 2 MP</th>
-</tr>
-<tr>
-<th>Camera trước</th>
-<th>16 MP</th>
-</tr>
-<tr>
-<th>Chipset</th>
-<th>Mediatek Helio G90T</th>
-</tr>
-<tr>
-<th>Dung lượng RAM</th>
-<th>4 GB</th>
-</tr>
-<tr>
-<th>Bộ nhớ trong</th>
-<th>128 GB</th>
-</tr>
-<tr>
-<th>Pin</th>
-<th>4300 mAh, Sạc nhanh VOOC 4.0(30W)</th>
-</tr>
-<tr>
-<th>Thẻ SIM</th>
-<th>2 SIM (Nano-SIM)</th>
-</tr>
-<tr>
-<th>Hệ điều hành</th>
-<th>Android v10 (Q)</th>
-</tr>
-<tr>
-<th>Độ phân giải màn hình</th>
-<th>1080 x 2400 pixels (FullHD+)</th>
-</tr>
-<tr>
-<th>Loại CPU</th>
-<th>2.05 GHz</th>
-</tr>
-<tr>
-<th>Kích thước</th>
-<th>162.1 x 74.8 x 8.9 mm</th>
-</tr>
-</tbody>
-</table>
-</div>', 15000, 400000, 400000, 700000, 4, '2021-12-05 21:49:39', '2022-01-13 21:49:40', 1, 0, 1, 0),
-        (18, 'Máy Bào Đá Kahchan EP5178_Đ', 'nhỏ gọn dễ sử dụng. Công suất máy hoạt động chỉ với 300W không lo điện năng.', '<div class="box-content">
-<table id="tskt">
-<tbody>
-<tr>
-<th>Kích thước màn hình</th>
-<th>6.5 inches</th>
-</tr>
-<tr>
-<th>Camera sau</th>
-<th>Chính 64 MP &amp; Phụ 8 MP, 2 MP, 2 MP</th>
-</tr>
-<tr>
-<th>Camera trước</th>
-<th>16 MP</th>
-</tr>
-<tr>
-<th>Chipset</th>
-<th>Mediatek Helio G90T</th>
-</tr>
-<tr>
-<th>Dung lượng RAM</th>
-<th>4 GB</th>
-</tr>
-<tr>
-<th>Bộ nhớ trong</th>
-<th>128 GB</th>
-</tr>
-<tr>
-<th>Pin</th>
-<th>4300 mAh, Sạc nhanh VOOC 4.0(30W)</th>
-</tr>
-<tr>
-<th>Thẻ SIM</th>
-<th>2 SIM (Nano-SIM)</th>
-</tr>
-<tr>
-<th>Hệ điều hành</th>
-<th>Android v10 (Q)</th>
-</tr>
-<tr>
-<th>Độ phân giải màn hình</th>
-<th>1080 x 2400 pixels (FullHD+)</th>
-</tr>
-<tr>
-<th>Loại CPU</th>
-<th>2.05 GHz</th>
-</tr>
-<tr>
-<th>Kích thước</th>
-<th>162.1 x 74.8 x 8.9 mm</th>
-</tr>
-</tbody>
-</table>
-</div>', 200000, 1400000, 1400000, 1700000, 5, '2021-12-05 21:51:18', '2022-01-14 21:51:19', 1, 0, 1, 0),
-        (19, 'Tự Động Tiross TS9090 (Xanh) - Hàng Chính Hãng', 'màu sắc đẹp mắt và sở hữu tính năng hiện đại, giúp bạn tự làm món kem thơm ngon. ', '<div class="box-content">
-<table id="tskt">
-<tbody>
-<tr>
-<th>Kích thước màn hình</th>
-<th>6.5 inches</th>
-</tr>
-<tr>
-<th>Camera sau</th>
-<th>Chính 64 MP &amp; Phụ 8 MP, 2 MP, 2 MP</th>
-</tr>
-<tr>
-<th>Camera trước</th>
-<th>16 MP</th>
-</tr>
-<tr>
-<th>Chipset</th>
-<th>Mediatek Helio G90T</th>
-</tr>
-<tr>
-<th>Dung lượng RAM</th>
-<th>4 GB</th>
-</tr>
-<tr>
-<th>Bộ nhớ trong</th>
-<th>128 GB</th>
-</tr>
-<tr>
-<th>Pin</th>
-<th>4300 mAh, Sạc nhanh VOOC 4.0(30W)</th>
-</tr>
-<tr>
-<th>Thẻ SIM</th>
-<th>2 SIM (Nano-SIM)</th>
-</tr>
-<tr>
-<th>Hệ điều hành</th>
-<th>Android v10 (Q)</th>
-</tr>
-<tr>
-<th>Độ phân giải màn hình</th>
-<th>1080 x 2400 pixels (FullHD+)</th>
-</tr>
-<tr>
-<th>Loại CPU</th>
-<th>2.05 GHz</th>
-</tr>
-<tr>
-<th>Kích thước</th>
-<th>162.1 x 74.8 x 8.9 mm</th>
-</tr>
-</tbody>
-</table>
-</div>', 250000, 2000000, 2000000, 2500000, 5, '2021-12-05 21:52:34', '2022-01-19 06:52:35', 1, 0, 1, 0),
-        (20, 'UNOLD 48895 Dung Tích 1.5 Lít', 'Công nghệ được đóng gói trong một vỏ thép không gỉ thanh lịch, bền.', '<ul>
-<li>Công suất định mức: 150 W, 220-240 V ~, 50 Hz</li>
-<li>Kích thước (LxWxH): 42.5 x 28.5 x 26.2 cm</li>
-<li>Dung tích ca kem: 1.4L~1.5L</li>
-<li>Chất liệu: Inox cao cấp không gỉ, sáng bóng</li>
-<li>Phạm vi làm mát: ± -18 ° C đến ± -35 ° C</li>
-<li>Hẹn giờ kỹ thuật số có thể điều chỉnh trong khoảng từ 5 đến 60 phút</li>
-<li>Nhập khẩu tại Đức</li>
-<li>Phụ kiện: Tập sách công thức với công thức làm kem Schuhbeck, hướng dẫn sử dụng với công thức nấu ăn</li>
-</ul>', 300000, 7000000, 7000000, 9000000, 5, '2021-12-05 21:55:05', '2022-01-15 21:55:06', 1, 0, 1, 0),
+        (15, 'Máy Làm Bánh BIYI BM1513F', 'Sản phẩm không tiết ra các chất độc hại trong quá trình sử dụng, ngoài ra khuôn nướng.', '<table><tbody><tr><td>Thương hiệu</td><td>BIYI</td></tr><tr><td>Xuất xứ thương hiệu</td><td>Hong Kong</td></tr><tr><td>Chất liệu</td><td><p>Khay bằng nhôm đúc</p></td></tr><tr><td>Công suất</td><td>600 W</td></tr><tr><td>Kích thước</td><td><p>130 x 149 x 110 mm</p></td></tr><tr><td>Model</td><td>BM1513F </td></tr><tr><td>Xuất xứ</td><td>Trung Quốc</td></tr><tr><td>Trọng lượng</td><td>1,35 kg</td></tr></tbody></table>', 10000, 200000, 200000, 1000000, 4, '2021-12-05 21:47:39', '2022-02-08 21:47:43', 1, 0, 1, 0),
+        (16, 'Máy làm bánh nướng hình thú ngộ nghĩnh.', 'Máy có kiểu dáng nhỏ gọn, trọng lượng chỉ 1.6kg để bạn có thể dễ dàng chi chuyển.', '<ul>
+   <li>Chất liệu: chống dính</li>
+   <li>Màu sắc: Vàng</li>
+   <li>Điện áp: 220V- 50Hz</li>
+   <li>Kích thước: 26 x 22 x 13 cm</li>
+   <li>Bạn có thể tự tay làm những chiếc bánh xinh xinh cho bé yêu và một bữa sáng ngon lành, bổ dưỡng cho cả nhà.</li>
+   <li>Khuôn bánh với 7 hình thú ngộ nghỉnh, dễ thương: chó, mèo, thỏ, hươu, …</li>
+   <li>Máy nướng tự động, hệ thống chốt an toàn. Có chế độ điều khiển nhiệt độ tự động.</li>
+   <li>Vỏ máy bằng nhựa chịu nhiệt bền, chân đế cao su chống trơn trượt.</li>
+   <li>Có đèn cảnh báo giúp bạn dễ dàng làm những việc khác trong quá trình nướng.</li>
+  </ul>', 10000, 200000, 200000, 400000, 4, '2021-12-05 21:48:37', '2022-01-12 11:48:38', 1, 0, 1, 0),
+        (17, '3 Trong 1 Tiross TS513', 'Máy làm bánh Tiross TS513 với 3 loại vỉ nướng đi kèm, bạn có thể làm các loại bánh.', '<table><tbody><tr><td>Thương hiệu</td><td>DSP</td></tr><tr><td>Xuất xứ thương hiệu</td><td>Trung Quốc</td></tr><tr><td>Chất liệu</td><td><p>Chất liệu: Inox,&nbsp;Nhựa</p></td></tr><tr><td>Công suất</td><td>750W</td></tr><tr><td>Điện áp</td><td>20-240V 50/60Hz</td></tr><tr><td>Xuất xứ</td><td>Trung Quốc</td></tr><tr><td>Trọng lượng</td><td>2.75kg</td></tr></tbody></table>', 15000, 400000, 400000, 700000, 4, '2021-12-05 21:49:39', '2022-01-13 21:49:40', 1, 0, 1, 0),
+        (18, 'Máy Bào Đá Kahchan EP5178_Đ', 'nhỏ gọn dễ sử dụng. Công suất máy hoạt động chỉ với 300W không lo điện năng.', '<table><tbody><tr><td>Thương hiệu</td><td>KAHCHAN</td></tr><tr><td>Xuất xứ thương hiệu</td><td>Trung Quốc</td></tr><tr><td>Chất liệu</td><td>Inox</td></tr><tr><td>Công suất</td><td>300W</td></tr><tr><td>Kích thước</td><td>42 x 21 x 44 cm</td></tr><tr><td>Model</td><td>EP5178_Đ</td></tr><tr><td>Xuất xứ</td><td>Trung Quốc</td></tr><tr><td>Trọng lượng</td><td>6kg</td></tr></tbody></table>', 200000, 1400000, 1400000, 1700000, 5, '2021-12-05 21:51:18', '2022-01-14 21:51:19', 1, 0, 1, 0),
+        (19, 'Tự Động Tiross TS9090 (Xanh) - Hàng Chính Hãng', 'màu sắc đẹp mắt và sở hữu tính năng hiện đại, giúp bạn tự làm món kem thơm ngon. ', '<table><tbody><tr><td>Thương hiệu</td><td>Tiross</td></tr><tr><td>Xuất xứ thương hiệu</td><td>Ba Lan</td></tr><tr><td>Dung tích</td><td>700 ml</td></tr><tr><td>Công suất</td><td>90W</td></tr><tr><td>Điện áp</td><td>220V/50Hz</td></tr><tr><td>Kích thước</td><td>28 x 31 x 29.5 cm</td></tr><tr><td>Model</td><td>TS9090 (Xanh)</td></tr><tr><td>Xuất xứ</td><td>Trung Quốc</td></tr><tr><td>Trọng lượng</td><td>3.63 kg</td></tr></tbody></table>', 250000, 2000000, 2000000, 2500000, 5, '2021-12-05 21:52:34', '2022-01-19 06:52:35', 1, 0, 1, 0),
+        (20, 'UNOLD 48895 Dung Tích 1.5 Lít', 'Công nghệ được đóng gói trong một vỏ thép không gỉ thanh lịch, bền.', '<h3>THÔNG SỐ SẢN PHẨM</h3><ul>
+                          <li>Công suất định mức: 150 W, 220-240 V ~, 50 Hz</li>
+                          <li>Kích thước (LxWxH): 42.5 x 28.5 x 26.2 cm</li>
+                          <li>Dung tích ca kem: 1.4L~1.5L</li>
+                          <li>Chất liệu: Inox cao cấp không gỉ, sáng bóng</li>
+                          <li>Phạm vi làm mát: ± -18 ° C đến ± -35 ° C</li>
+                          <li>Hẹn giờ kỹ thuật số có thể điều chỉnh trong khoảng từ 5 đến 60 phút</li>
+                          <li>Nhập khẩu tại Đức</li>
+                          <li>Phụ kiện: Tập sách công thức với công thức làm kem Schuhbeck, hướng dẫn sử dụng với công thức nấu ăn</li>
+                          </ul>', 300000, 7000000, 7000000, 9000000, 5, '2021-12-05 21:55:05', '2022-01-15 21:55:06', 1, 0, 1, 0),
         (21, 'Bear JA02N1 240ml', 'Máy Cafe Gia Đình Bear JA02N1 240ml có ngăn chứa dung tích 240ml', '<ul>
-<li>Công suất định mức: 150 W, 220-240 V ~, 50 Hz</li>
-<li>Kích thước (LxWxH): 42.5 x 28.5 x 26.2 cm</li>
-<li>Dung tích ca kem: 1.4L~1.5L</li>
-<li>Chất liệu: Inox cao cấp không gỉ, sáng bóng</li>
-<li>Phạm vi làm mát: ± -18 ° C đến ± -35 ° C</li>
-<li>Hẹn giờ kỹ thuật số có thể điều chỉnh trong khoảng từ 5 đến 60 phút</li>
-<li>Nhập khẩu tại Đức</li>
-<li>Phụ kiện: Tập sách công thức với công thức làm kem Schuhbeck, hướng dẫn sử dụng với công thức nấu ăn</li>
+<li>Thiết kế thông minh giúp tay cầm không bị mỏi, đường viền tròn, tinh tế và sang trọng</li>
+<li>Có thể điều chỉnh năm tốc độ đánh nhanh - chậm</li>
+<li>Công suất 125W, đánh nhanh hơn mà tiết kiệm thời gian</li>
+<li>Thân máy làm bằng nhựa ABS, an toàn và dẻo dai, khó nứt, vỡ, không mùi</li>
+<li>Hệ thống tản nhiệt đa hướng, cách nhiệt và phân tán không khí, tản nhiệt nhanh giúp máy không bị nóng trong quá trình sử dụng</li>
+<li>Hộp sản phẩm gồm:&nbsp;Máy đánh trứng x 1, tay đánh trứng x 2, dụng cụ tách lòng trắng trứng x 1, hướng dẫn sử dụng x 1</li>
 </ul>', 50000, 800000, 800000, 1500000, 6, '2021-12-05 21:56:59', '2022-01-18 15:17:00', 1, 0, 1, 0),
-        (22, 'L-Beans 900A công suất 360W', 'Máy xay cafe chuyên nghiệp của L-Beans luôn được đánh giá cao vì sự bền bỉ.', '<ul>
-<li>Công suất định mức: 150 W, 220-240 V ~, 50 Hz</li>
-<li>Kích thước (LxWxH): 42.5 x 28.5 x 26.2 cm</li>
-<li>Dung tích ca kem: 1.4L~1.5L</li>
-<li>Chất liệu: Inox cao cấp không gỉ, sáng bóng</li>
-<li>Phạm vi làm mát: ± -18 ° C đến ± -35 ° C</li>
-<li>Hẹn giờ kỹ thuật số có thể điều chỉnh trong khoảng từ 5 đến 60 phút</li>
-<li>Nhập khẩu tại Đức</li>
-<li>Phụ kiện: Tập sách công thức với công thức làm kem Schuhbeck, hướng dẫn sử dụng với công thức nấu ăn</li>
-</ul>', 200000, 9000000, 9000000, 12000000, 6, '2021-12-05 21:57:58', '2022-02-13 13:57:59', 1, 0, 1, 0),
+        (22, 'L-Beans 900A công suất 360W', 'Máy xay cafe chuyên nghiệp của L-Beans luôn được đánh giá cao vì sự bền bỉ.', '<table><tbody><tr><td>Thương hiệu</td><td>L-Beans</td></tr><tr><td>Chất liệu</td><td><p>Hợp kim nhôm</p></td></tr><tr><td>Công suất</td><td>350W</td></tr><tr><td>Điện áp</td><td>AC 220V-50Hz</td></tr><tr><td>Kích thước</td><td><p>300*190*500MM</p></td></tr><tr><td>Trọng lượng</td><td>11.8kg</td></tr></tbody></table>', 200000, 9000000, 9000000, 12000000, 6, '2021-12-05 21:57:58', '2022-02-13 13:57:59', 1, 0, 1, 0),
         (23, 'Espresso Tiross TS-621', 'Chế độ đánh bọt giúp pha chế cà phê Cappuccino theo phong cách Ý.', '<ul>
-<li>Công suất định mức: 150 W, 220-240 V ~, 50 Hz</li>
-<li>Kích thước (LxWxH): 42.5 x 28.5 x 26.2 cm</li>
-<li>Dung tích ca kem: 1.4L~1.5L</li>
-<li>Chất liệu: Inox cao cấp không gỉ, sáng bóng</li>
-<li>Phạm vi làm mát: ± -18 ° C đến ± -35 ° C</li>
-<li>Hẹn giờ kỹ thuật số có thể điều chỉnh trong khoảng từ 5 đến 60 phút</li>
-<li>Nhập khẩu tại Đức</li>
-<li>Phụ kiện: Tập sách công thức với công thức làm kem Schuhbeck, hướng dẫn sử dụng với công thức nấu ăn</li>
+<li>Máy có công tắc tắt mở riêng, núm điều khiển hiện thị dễ dàng với đèn LED xanh</li>
+<li>Công suất: 220-240V /800W</li>
+<li>Dung tích bình đun (boiler) 240ml/ Áp suất 3.5bar (50psi)</li>
+<li>Filter bằng inox (chứa khoảng 20gram cafe), tay phin bằng nhôm.</li>
+<li>Vòi đánh sữa inox, có thể tháo rời</li>
+<li>Ly thủy tinh hứng cafe 50-200ml</li>
+<li>Khay hứng nhỏ giọt bằng inox dễ dàng tháo rời vệ sinh</li>
 </ul>', 30000, 700000, 700000, 1200000, 6, '2021-12-05 21:59:04', '2022-02-05 21:59:05', 1, 0, 1, 0),
-        (24, 'Máy xay tích điện mini', ' hình thức và địa chỉ giao hàng mà có thể phát sinh thêm chi phí khác như phí vận chuyển', '<ul>
-<li>Công suất định mức: 150 W, 220-240 V ~, 50 Hz</li>
-<li>Kích thước (LxWxH): 42.5 x 28.5 x 26.2 cm</li>
-<li>Dung tích ca kem: 1.4L~1.5L</li>
-<li>Chất liệu: Inox cao cấp không gỉ, sáng bóng</li>
-<li>Phạm vi làm mát: ± -18 ° C đến ± -35 ° C</li>
-<li>Hẹn giờ kỹ thuật số có thể điều chỉnh trong khoảng từ 5 đến 60 phút</li>
-<li>Nhập khẩu tại Đức</li>
-<li>Phụ kiện: Tập sách công thức với công thức làm kem Schuhbeck, hướng dẫn sử dụng với công thức nấu ăn</li>
-</ul>', 10000, 70000, 70000, 200000, 7, '2021-12-05 22:05:24', '2021-12-28 15:05:25', 1, 0, 1, 0),
+        (24, 'Máy xay tích điện mini', 'Hình thức và địa chỉ giao hàng mà có thể phát sinh thêm chi phí khác như phí vận chuyển', '<div><p>MÁY XAY ĐA NĂNG MINI CẦM TAY ĐA NĂNG</p>
+<p>️NHỎ GỌN</p>
+<p>️TIỆN LỢI</p>
+<p>️AN TOÀN -------------------------------------</p>
+<p>️ Công dụng: Xay các loại thực phẩm: Thịt, tôm, cua, cá nhuyễn như giò; xay rau, củ, quả, sinh tố, gia vị tỏi ớt và đá viên chỉ trong 30s.</p>
+<p>Dung tích cối: 250ml</p>
+<p>Công suất: 30w-45w, điện áp 220v</p>
+<p>Tốc độ 9500 vòng/phút</p>
+<p>Lưỡi dao bằng inox không gỉ.</p>
+<p>Dễ dàng vệ sinh</p>
+</div>', 10000, 70000, 70000, 200000, 7, '2021-12-05 22:05:24', '2022-01-12 15:05:25', 1, 0, 1, 0),
         (25, 'Máy Xay Thịt 2 Lưỡi Kép Nonostyle', 'Máy xay thịt Nonostyle với nhiều công dụng và tính năng ưu việt, là trợ thủ đắc lực.', '<ul>
-<li>Công suất định mức: 150 W, 220-240 V ~, 50 Hz</li>
-<li>Kích thước (LxWxH): 42.5 x 28.5 x 26.2 cm</li>
-<li>Dung tích ca kem: 1.4L~1.5L</li>
-<li>Chất liệu: Inox cao cấp không gỉ, sáng bóng</li>
-<li>Phạm vi làm mát: ± -18 ° C đến ± -35 ° C</li>
-<li>Hẹn giờ kỹ thuật số có thể điều chỉnh trong khoảng từ 5 đến 60 phút</li>
-<li>Nhập khẩu tại Đức</li>
-<li>Phụ kiện: Tập sách công thức với công thức làm kem Schuhbeck, hướng dẫn sử dụng với công thức nấu ăn</li>
-</ul>', 10000, 200000, 200000, 400000, 7, '2021-12-05 22:13:40', '2022-01-16 05:13:41', 1, 0, 1, 0),
+<li><span style="font-weight: 400;">Thân máy với chất liệu thép cao cấp an toàn sử dụng.<br><br></span></li>
+<li><span style="font-weight: 400;">Lõi bọc thép chắc chắn, lớp thép chịu lực tốt, lớp thép bọc ngoài chống trơn trượt.</span></li>
+<li><span style="font-weight: 400;">Khớp nối chắc chắn và chống mài mòn.<br><br></span></li>
+<li><span style="font-weight: 400;">Vận hành êm ái, tuổi thọ bền.<br><br></span></li>
+<li><span style="font-weight: 400;">Các khớp cố định trục xoay chắc chắn.</span></li>
+<li><span style="font-weight: 400;">Lưỡi dao kép cấu trúc chữ S bằng thép không gỉ.<br><br></span></li>
+<li><span style="font-weight: 400;">Thân máy xay thiết kế thông minh, bề mặt vệ sinh dễ dàng.<br><br></span></li>
+</ul>
+', 10000, 200000, 200000, 400000, 7, '2021-12-05 22:13:40', '2022-01-16 05:13:41', 1, 0, 1, 0),
         (26, 'Some By Mi Super Matcha Pore Clean Clay Mask 100g', 'Mặt Nạ Đất Sét Some By Mi Super Matcha Pore Clean Clay Mask với thành phần đất sét và trà xanh', '<ul>
-<li>Công suất định mức: 150 W, 220-240 V ~, 50 Hz</li>
-<li>Kích thước (LxWxH): 42.5 x 28.5 x 26.2 cm</li>
-<li>Dung tích ca kem: 1.4L~1.5L</li>
-<li>Chất liệu: Inox cao cấp không gỉ, sáng bóng</li>
-<li>Phạm vi làm mát: ± -18 ° C đến ± -35 ° C</li>
-<li>Hẹn giờ kỹ thuật số có thể điều chỉnh trong khoảng từ 5 đến 60 phút</li>
-<li>Nhập khẩu tại Đức</li>
-<li>Phụ kiện: Tập sách công thức với công thức làm kem Schuhbeck, hướng dẫn sử dụng với công thức nấu ăn</li>
+<li>Nước tẩy trang innisfree Green Tea Cleansing Water 300ml</li>
+<li>Sữa rửa mặt trà xanh innisfree Green Tea Foam Cleanser 15ml</li>
+<li>Tinh chất dưỡng ẩm trà xanh innisfree Green Tea Seed Serum 8ml</li>
+<li>Nước cân bằng dưỡng ẩm trà xanh innisfree Green Tea Seed Skin 15ml</li>
+<li>Kem dưỡng ẩm vùng da quanh mắt trà xanh innisfree Green Tea Seed Eye Cream 5ml</li>
 </ul>', 10000, 200000, 200000, 400000, 8, '2021-12-05 22:32:26', '2022-02-05 22:32:27', 1, 0, 1, 0),
-        (27, 'Vitamin C SAP Neogen Dermalogy Real Vita Serum 32g', 'Tinh chất sở hữu bộ đôi vàng Vitamin C dạng SAP + niacinamide hàm lượng cao giúp giảm thâm.', '<ul>
-<li>Công suất định mức: 150 W, 220-240 V ~, 50 Hz</li>
-<li>Kích thước (LxWxH): 42.5 x 28.5 x 26.2 cm</li>
-<li>Dung tích ca kem: 1.4L~1.5L</li>
-<li>Chất liệu: Inox cao cấp không gỉ, sáng bóng</li>
-<li>Phạm vi làm mát: ± -18 ° C đến ± -35 ° C</li>
-<li>Hẹn giờ kỹ thuật số có thể điều chỉnh trong khoảng từ 5 đến 60 phút</li>
-<li>Nhập khẩu tại Đức</li>
-<li>Phụ kiện: Tập sách công thức với công thức làm kem Schuhbeck, hướng dẫn sử dụng với công thức nấu ăn</li>
+        (27, 'Vitamin C SAP Neogen Dermalogy Real Vita Serum 32g', 'Tinh chất sở hữu bộ đôi vàng Vitamin C dạng SAP + niacinamide hàm lượng cao giúp giảm thâm.', '<p><strong><span style="margin: 0px; padding: 0px;">Cách sử dụng:</span></strong></p>
+<ul>
+<li><span style="margin: 0px; padding: 0px;" data-spm-anchor-id="a2o4n.pdp.product_">Do sản phẩm chứa chủ yếu là thành phần tự nhiên nên thời hạn sử dụng cũng bị rút ngắn, vì vậy nên bảo quản trong ngăn mát tủ lạnh sẽ tốt hơn nhé. Và mỗi khi sử dụng thì lôi ra, cảm giác sau khi giọt serum rơi trên da rất mát dịu, thư giãn. Hai giọt cho mỗi lần sử dụng, và nhớ là cho dù bao nhiêu bước dưỡng thì serum dùng sau bước toner, và trước dưỡng ẩm nhé!</span></li>
+<li><span style="margin: 0px; padding: 0px;">Dùng em nó vào buổi sáng cũng rất thích, giúp da hạn chế đổ dầu, nhưng nhớ phải dùng kem chống nắng nha vì Vitamin C rất bắt nắng!</span></li>
+<li>
+<p style="margin: 0px; padding: 8px 0px; font-family: Roboto, -apple-system, system-ui, ''Helvetica Neue'', Helvetica, sans-serif; white-space: pre-wrap;"><span style="margin: 0px; padding: 0px;" data-spm-anchor-id="a2o4n.pdp.product_">Sau khi rửa mặt và toner , chỉ cần dùng vài giọt Serum Vitamin C lên khắp mặt, có thể thoa nhiều hơn chỗ vùng bị thâm , nám , sạm nâu hay sẹo. Sau khi dùng serum Vitamin C nên dùng thêm một loại kem dưỡng ẩm ban đêm sẽ tăng hiệu quả sử dụng.</span></p>
+</li>
+<li>
+<p style="margin: 0px; padding: 8px 0px; font-family: Roboto, -apple-system, system-ui, ''Helvetica Neue'', Helvetica, sans-serif; white-space: pre-wrap;"><span style="margin: 0px; padding: 0px;">Ban đầu sau khi thoa sẽ có một chút châm chích, đây là hiện tượng bình thường khi C bắt đầu tác động lên da. Những lần sau khi dùng da không còn thấy hiện tượng này. ( tránh bôi lan vùng mắt nha ) tất cả các loại Vitamin C đều như thế và hiện tượng này sẽ nhanh chóng qua.</span></p>
+</li>
+<li>
+<p style="margin: 0px; padding: 8px 0px; font-family: Roboto, -apple-system, system-ui, ''Helvetica Neue'', Helvetica, sans-serif; white-space: pre-wrap;"><span style="margin: 0px; padding: 0px;"><strong>Chú ý</strong> : Vì là Pure Vitamin (hoàn toàn tinh khiết) nên các Nàng cần phải bảo quản thật kỹ ! Luôn giữ Serum ở nhiệt độ mát.</span></p>
+</li>
 </ul>', 50000, 460000, 460000, 860000, 8, '2021-12-05 22:33:22', '2022-02-01 17:33:22', 1, 0, 1, 0),
-        (28, 'Kem Dưỡng Ẩm Hỗ Trợ Trị Nám', 'Được đặc chế hòa nhịp với quá trình thay đổi sinh học của làn da.', '<ul>
-<li>Công suất định mức: 150 W, 220-240 V ~, 50 Hz</li>
-<li>Kích thước (LxWxH): 42.5 x 28.5 x 26.2 cm</li>
-<li>Dung tích ca kem: 1.4L~1.5L</li>
-<li>Chất liệu: Inox cao cấp không gỉ, sáng bóng</li>
-<li>Phạm vi làm mát: ± -18 ° C đến ± -35 ° C</li>
-<li>Hẹn giờ kỹ thuật số có thể điều chỉnh trong khoảng từ 5 đến 60 phút</li>
-<li>Nhập khẩu tại Đức</li>
-<li>Phụ kiện: Tập sách công thức với công thức làm kem Schuhbeck, hướng dẫn sử dụng với công thức nấu ăn</li>
+        (28, 'Kem Dưỡng Ẩm Hỗ Trợ Trị Nám', 'Được đặc chế hòa nhịp với quá trình thay đổi sinh học của làn da.', '<p><strong>Công Dụng</strong></p>
+<ul>
+<li>Làm mờ các đốm nâu, vết thâm sạm.</li>
+<li>Hỗ trợ kiểm soát chất nhờn, giảm dầu thừa trên da.</li>
+<li>Ngăn ngừa bụi bẩn và vi khuẩn từ môi trường bên ngoài nhất là trong mùa hè, mùa của bụi bẩn và nắng nóng.</li>
+<li>Cải thiện và làm mờ các vết<em class="Highlight">&nbsp;sẹo&nbsp;</em>thâm do<em class="Highlight">&nbsp;mụn&nbsp;</em>để lại nhờ chiết xuất cam thảo.</li>
+<li>Thu nhỏ lỗ chân lông và giúp da sáng khoẻ nhờ chiết xuất dâu tằm.</li>
+<li>Cung cấp vitamin A, B, và C giúp nhăn ngừa lão hoá và nếp nhăn trên da.</li>
 </ul>', 60000, 700000, 700000, 900000, 8, '2021-12-05 22:34:33', '2022-02-02 22:34:33', 1, 0, 1, 0),
-        (29, 'Nước hoa nam Dynik hương biển sành điệu 50ml', 'Bên cạnh đó, tuỳ vào loại sản phẩm, hình thức và địa chỉ giao hàng mà có thể phát sinh', '<ul>
-<li>Công suất định mức: 150 W, 220-240 V ~, 50 Hz</li>
-<li>Kích thước (LxWxH): 42.5 x 28.5 x 26.2 cm</li>
-<li>Dung tích ca kem: 1.4L~1.5L</li>
-<li>Chất liệu: Inox cao cấp không gỉ, sáng bóng</li>
-<li>Phạm vi làm mát: ± -18 ° C đến ± -35 ° C</li>
-<li>Hẹn giờ kỹ thuật số có thể điều chỉnh trong khoảng từ 5 đến 60 phút</li>
-<li>Nhập khẩu tại Đức</li>
-<li>Phụ kiện: Tập sách công thức với công thức làm kem Schuhbeck, hướng dẫn sử dụng với công thức nấu ăn</li>
-</ul>', 55000, 300000, 300000, 700000, 9, '2021-12-05 22:35:35', '2022-01-14 22:35:36', 1, 0, 1, 0),
-       (30, 'Áo Thun Nam Cổ Tròn', 'Áo Thun Trơn Nam Tsimple được may bằng chất liệu cotton, thấm hút mồ hôi tốt, ít nhăn',
-    '<ul>
+        (29, 'Nước hoa nam Dynik hương biển sành điệu 50ml', 'Bên cạnh đó, tuỳ vào loại sản phẩm, hình thức và địa chỉ giao hàng mà có thể phát sinh', '<p style="box-sizing: border-box; margin: 0px 0px 10px; padding: 0px; color: #333333; font-family: ''Open Sans''; font-size: 13px;"><span style="box-sizing: border-box; margin: 0px; padding: 0px; font-size: 14px;"><span style="box-sizing: border-box; margin: 0px; padding: 0px;">Thương hiệu:&nbsp;Nước hoa Charme</span><br style="box-sizing: border-box; margin: 0px; padding: 0px;"><span style="box-sizing: border-box; margin: 0px; padding: 0px;">Loại:&nbsp;</span>Nước hoa nam<br style="box-sizing: border-box; margin: 0px; padding: 0px;"><span style="box-sizing: border-box; margin: 0px; padding: 0px;">Dung tích:</span>&nbsp;10ml<br style="box-sizing: border-box; margin: 0px; padding: 0px;"><span style="box-sizing: border-box; margin: 0px; padding: 0px;">Độ tuổi khuyên dùng:</span>&nbsp;Trên 25<br style="box-sizing: border-box; margin: 0px; padding: 0px;"><span style="box-sizing: border-box; margin: 0px; padding: 0px;">Nồng độ:</span>&nbsp;EDP<br style="box-sizing: border-box; margin: 0px; padding: 0px;"><span style="box-sizing: border-box; margin: 0px; padding: 0px;">Độ lưu hương:</span>&nbsp;Lâu - 10 giờ đến 12 giờ<br style="box-sizing: border-box; margin: 0px; padding: 0px;"><span style="box-sizing: border-box; margin: 0px; padding: 0px;">Thời điểm khuyên dùng:</span>&nbsp;Ngày, Đêm, Thu, Đông<br style="box-sizing: border-box; margin: 0px; padding: 0px;"><span style="box-sizing: border-box; margin: 0px; padding: 0px;">Mùi hương đặc trưng:</span><br style="box-sizing: border-box; margin: 0px; padding: 0px;">&nbsp; &nbsp;+ Hương đầu: Hương vị cam bergamot, hương bưởi<br style="box-sizing: border-box; margin: 0px; padding: 0px;">&nbsp; &nbsp;+ Hương giữa: Hương bạc hà<br style="box-sizing: border-box; margin: 0px; padding: 0px;">&nbsp; &nbsp;+ Hương cuối: Hạt bạch đậu khấu, gừng, hồ tiêu, cỏ hương bài, hoa nhài<br style="box-sizing: border-box; margin: 0px; padding: 0px;"><span style="box-sizing: border-box; margin: 0px; padding: 0px;">Nhóm nước hoa:&nbsp;</span>Woody Aromatic<br style="box-sizing: border-box; margin: 0px; padding: 0px;"><span style="box-sizing: border-box; margin: 0px; padding: 0px;">Phong cách:</span>&nbsp;Nam tính, lịch lãm, bí ẩn</span></p>', 55000, 300000, 300000, 700000, 9, '2021-12-05 22:35:35', '2022-01-14 22:35:36', 1, 0, 1, 0),
+        (30, 'Áo Thun Nam Cổ Tròn', 'Áo Thun Trơn Nam Tsimple được may bằng chất liệu cotton, thấm hút mồ hôi tốt, ít nhăn', '<ul>
     <li><span style="font-weight: 400;">Áo Thun Nam Cotton Ngắn Tay Cổ Tròn Nhiều Màu Trẻ trung, thoáng mát, thấm hút mồ
         hôi nhiều màu có thiết kế kiểu cơ bản với dáng ôm vừa phải, cổ tròn, tay ngắn</span></li>
     <li><span style="font-weight: 400;">Áo Thun Nam Cotton Ngắn Tay Cổ Tròn Nhiều Màu dễ dàng phối cùng quần jeans hoặc
@@ -1279,14 +859,12 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
   <p><span style="font-weight: 400;">✓ Và nên phơi ngang áo trên dây, vì sớ vải của áo thun thường có xu hướng chảy xệ
       xuống dưới, nếu bạn phơi bằng móc áo có thể khiến áo bị chảy dài làm biến dạng form áo ban đầu.</span></p>
   <p> </p>', 5000, 39000, 39000, 70000, 11, '2022-01-07 22:35:35', '2022-01-31 22:35:36', 1, 0, 1, 0),
-       (31, 'Đồ Bơi Nam Và Nữ Couple', 'Thiết kế mạnh mẽ, kiểu dáng thể thao tôn dáng. Chất liệu thun co giãn, bền chắc',
-        '<p>- Màu chủ đạo: trắng và đen</p>
+        (31, 'Đồ Bơi Nam Và Nữ Couple', 'Thiết kế mạnh mẽ, kiểu dáng thể thao tôn dáng. Chất liệu thun co giãn, bền chắc', '<p>- Màu chủ đạo: trắng và đen</p>
 <p>- Thiết kế 2 mảnh khỏe khoắn, đồ bơi nữ có sẵn mút ngực. Tay dài che nắng, bảo vệ tia UV (chuẩn UPF 50+) cho làn da tay của bạn.</p>
 <p>- Là bộ đồ bơi cho các cặp đôi khi đi cùng nhau, hoặc cá nhân có thể mua riêng mẫu ưng ý.</p>
 <p>- Chất liệu thun lạnh co giãn tốt, bền chắc, đường may đẹp.</p>
 <p>- Là một trong các sản phẩm đồ bơi áo tắm bikiki đồ bơi một mảnh đồ bơi hai mảnh đồ bơi cặp đồ bơi nam nữ được yêu thích năm nay.</p>', 50000, 369000, 369000, 500000, 12, '2022-01-07 22:30:35', '2022-01-31 22:33:36', 1, 0, 1, 0),
-        (32, 'Quần jogger nam RFE', 'Quần jogger nam túi hộp chất kaki mềm mịn, phong cách đường phố RFE',
-         '<p>✧ Kiểu dáng trẻ trung, năng động màu sắc đẹp dễ mix đồ với giày, áo ba lỗ, áo thun, mũ lưỡi trai,</p>
+        (32, 'Quần jogger nam RFE', 'Quần jogger nam túi hộp chất kaki mềm mịn, phong cách đường phố RFE', '<p>✧ Kiểu dáng trẻ trung, năng động màu sắc đẹp dễ mix đồ với giày, áo ba lỗ, áo thun, mũ lưỡi trai,</p>
 <p>✧ Chất kaki đẹp, mềm mịn, thấm hút mồ hôi tốt tạo cảm giác thoải mái dễ chịu khi mặc</p>
 <p>✧ Đường chỉ may tỉ mỉ, khóa túi chắc chắn, không bai, không xù, không bám dính</p>
 <p>✧ Bền màu vĩnh viễn, an toàn tuyệt đối với người mặc</p>
