@@ -146,8 +146,13 @@ export default {
     findAll() {
         return knex('products');
     },
-    del(ID) {
-        return knex('products').where('ProID', ID).del();
+    async del(ID) {
+        await knex('win_list').where('ProID', +ID).del();
+        await knex('favorite_list').where('ProID', +ID).del();
+        await knex('products_history').where('ProID', +ID).del();
+        await knex('pending_list').where('ProID', +ID).del();
+        // await knex.raw(`update rating_list set ProID = null where ProID = ?`, +ID);
+        return knex('products').where('ProID', +ID).del();
     },
     updateMinute(ID) {
         knex.raw('update products set products.EndDate = addtime(products.EndDate,\'00:10:00\') where products.ProID = ?', ID).then(() => {

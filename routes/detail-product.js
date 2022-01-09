@@ -120,7 +120,7 @@ router.post('/bid', auth.beforeLogin, async (req, res) => {
         viewByProduct.updatePrice(object.Price, object.ProID);
         //
         const product = await viewByProduct.findByID(req.query.ProID);
-        const promptPrice = product.CurPrice === product.BuyNowPrice;
+        const promptPrice = +object.Price === +product.BuyNowPrice;
         const seller = await Users.findByProID(object.ProID);
         if (preBidder.length !== 0 && preBidder[0].UserID !== req.session.account.UserID) {
             if (promptPrice) sendEmail(preBidder[0].UserEmail, "Đấu giá", "Món hàng bạn đặt đã được mua ngay bởi người khác<div>" + req.headers.referer + "</div>");

@@ -24,7 +24,7 @@
                             <th><img style="width: 120px;height: 120px;"
                                      src="/public/imgs/products/{{this.ProID}}/account.jpg"></th>
                             <td><a href="/detail/{{this.ProID}}" style="color: black">{{this.TinyDes}}</a></td>
-                            <td class="text-center text-danger">{{this.CurPrice}}</td>
+                            <td class="text-center text-danger">{{format_number this.CurPrice}}</td>
                             <td class="text-center">{{format_date this.EndDate}}</td>
                             {{#if this.rating}}
                                 <td class="text-center"><i class="fas fa-check-circle text-success"></i></td>

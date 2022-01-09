@@ -61,7 +61,6 @@ const entity = {
         await knex('update_users').where('UserID', ID).del();
     },
     async del(ID){
-        const role = await knex.select('UserRole').from('users').where('UserID', ID);
         const ProductID = await knex.select('ProID').from('products').where('SellerID', +ID);
         if(ProductID.length > 0) {
             for (let data of ProductID) {
