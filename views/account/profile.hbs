@@ -85,7 +85,11 @@
             {{#if isBidder}}
                 <div class="text-center">
                     <form method="post" id="upgrade">
-                        <button type="submit" class="btn btn-outline-success mt-3" formaction="/account/profile/upgrade" name="UserID" value="{{user.UserID}}" {{#if isRequested}}disabled{{/if}}>Gửi yêu cầu nâng cấp thành seller</button>
+                        {{#if isRequested}}
+                            <button type="submit" class="btn btn-outline-success mt-3" formaction="/account/profile/upgrade" name="UserID" value="{{user.UserID}}" disabled>Yêu cầu của bạn đang chờ phê duyệt</button>
+                        {{else}}
+                            <button type="submit" class="btn btn-outline-success mt-3" formaction="/account/profile/upgrade" name="UserID" value="{{user.UserID}}">Gửi yêu cầu nâng cấp thành seller</button>
+                        {{/if}}
                     </form>
                 </div>
             {{/if}}

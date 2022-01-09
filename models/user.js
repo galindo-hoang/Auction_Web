@@ -63,10 +63,12 @@ const entity = {
     async del(ID){
         const role = await knex.select('UserRole').from('users').where('UserID', ID);
         const ProductID = await knex.select('ProID').from('products').where('SellerID', +ID);
-        for(let data of ProductID) {
-            await knex('favorite_list').where('ProID', +data.ProID).del();
-            await knex('products_history').where('ProID', +data.ProID).del();
-            await knex('win_list').where('ProID', +data.ProID).del();
+        if(ProductID.length > 0) {
+            for (let data of ProductID) {
+                await knex('favorite_list').where('ProID', +data.ProID).del();
+                await knex('products_history').where('ProID', +data.ProID).del();
+                await knex('win_list').where('ProID', +data.ProID).del();
+            }
         }
 
         await knex('products').where("SellerID", +ID).del();
@@ -80,7 +82,10 @@ const entity = {
                                                   from products_history
                                                   where BidID >= all (select BidID from products_history where ProID = ?)
                                                     and ProID = ?`, [+proId.ProID, +proId.ProID]))[0][0];
-                await knex.raw(`update products set CurPrice = ? where ProID = ?`, [maxPrice.Price, +proId.ProID]);
+                if(maxPrice === undefined)
+                    await knex.raw(`update products set CurPrice = StartPrice where ProID = ?`, +proId.ProID);
+                else
+                    await knex.raw(`update products set CurPrice = ? where ProID = ?`, [maxPrice.Price, +proId.ProID]);
             }
         return knex('users').where('UserID', ID).del();
     },

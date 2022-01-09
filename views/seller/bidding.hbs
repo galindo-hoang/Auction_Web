@@ -37,7 +37,11 @@
                     </tbody>
                 </table>
                 <div class="text-center mb-3">
-                    <a class="btn btn-outline-primary {{#if sellerToBidder}}disabled{{/if}}" href="/seller/add">Thêm sản phẩm</a>
+                    {{#if sellerToBidder}}
+                        <a class="btn btn-outline-primary disabled" href="/seller/add">Không thể thêm sản phẩm</a>
+                    {{else}}
+                        <a class="btn btn-outline-primary" href="/seller/add">Thêm sản phẩm</a>
+                    {{/if}}
                 </div>
             </div>
         </div>
