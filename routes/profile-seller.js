@@ -64,6 +64,7 @@ router.post('/seller/add', (req, res) => {
         object.EndDate = req.body.EndDate;
         object.SellerID = req.session.account.UserID;
         object.Status = 1;
+        object.Mail = 0;
         object.AutoExtend = parseInt(req.body.AutoExtend);
         const ID = await Product.addProducts(object);
         fs.rename(path, './public/imgs/products/'+ID[0], async function (err) {
