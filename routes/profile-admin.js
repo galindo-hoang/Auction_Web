@@ -6,6 +6,7 @@ import viewByCategories from '../models/category.js';
 import viewByCategoriesDetail from '../models/categories_detail.js'
 import sendEmail from '../utils/mail.js'
 import Product from "../models/product.js";
+import upgrade_list from "../models/upgrade_list.js";
 
 const router = express.Router();
 
@@ -236,6 +237,7 @@ router.post("/admin/editAcc/notUpgrade", auth.beforeLogin, async function (req, 
     else {
         const email = await viewByProduct.findUserEmail(req.body.UserID);
         sendEmail((email[0].UserEmail), 'THÔNG BÁO PHÊ DUYỆT NÂNG CẤP', 'Yêu cầu nâng cấp tài khoản của bạn đã bị từ chối');
+        await upgrade_list.del(req.body.UserID);
         res.redirect('/admin/editBidder');
     }
 });
@@ -255,15 +257,15 @@ router.post("/admin/editAcc/downgrade", auth.beforeLogin, async function (req, r
     }
 });
 
-// router.post("/admin/editAcc/del", auth.beforeLogin, async function (req, res) {
-//     if (req.session.account.UserRole !== 0)
-//         res.redirect('/');
-//     else {
-//         const email = await viewByProduct.findUserEmail(req.body.UserID);
-//         sendEmail((email[0].UserEmail), 'THÔNG BÁO VÔ HIỆU HOÁ TÀI KHOẢN', 'Tài khoản của bạn đã bị vô hiệu hoá bởi ban quản trị');
-//         await users.del(req.body.UserID);
-//         res.redirect('/admin/editAcc/');
-//     }
-// });
+router.post("/admin/editAcc/del", auth.beforeLogin, async function (req, res) {
+    if (req.session.account.UserRole !== 0)
+        res.redirect('/');
+    else {
+        const email = await viewByProduct.findUserEmail(req.body.UserID);
+        sendEmail((email[0].UserEmail), 'THÔNG BÁO VÔ HIỆU HOÁ TÀI KHOẢN', 'Tài khoản của bạn đã bị vô hiệu hoá bởi ban quản trị');
+        await users.del(req.body.UserID);
+        res.redirect('/admin/editAcc/');
+    }
+});
 
 export default router;

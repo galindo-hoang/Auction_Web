@@ -1,8 +1,5 @@
 import knex from "../utils/db.js";
 import bcrypt from "bcryptjs";
-import products_history from "./products_history.js";
-import favorite_list from "./favorite_list.js";
-import win_list from "./win_list.js";
 
 const entity = {
     addUser: function(object){
@@ -82,7 +79,7 @@ const entity = {
                                                   where BidID >= all (select BidID from products_history where ProID = ?)
                                                     and ProID = ?`, [+proId.ProID, +proId.ProID]))[0][0];
                 if(maxPrice === undefined)
-                    await knex.raw(`update products set CurPrice = StartPrice where ProID = ?`, +proId.ProID);
+                    await knex.raw(`update products set CurPrice = StartPrice where ProID = ? and Status = 1`, +proId.ProID);
                 else
                     await knex.raw(`update products set CurPrice = ? where ProID = ?`, [maxPrice.Price, +proId.ProID]);
             }
