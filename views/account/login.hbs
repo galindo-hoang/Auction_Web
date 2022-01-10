@@ -63,14 +63,14 @@
 
             const email = $('#email').val();
             if (email.length === 0) {
-                alert('email invalid!');
+                alert('Email đã được đăng ký');
                 return;
             }
             $.getJSON(`/account/login/check?email=${email}&password=${$('#password').val()}`, function (data) {
                 if (data === true) {
                     $('#formLogin').off('submit').submit();
                 } else {
-                    alert('email or password invalid');
+                    alert('Sai email hoặc password');
                 }
             });
         });

@@ -8,10 +8,10 @@ const entity = {
         return (await knex('rating_list').select('*').where({ProID, UserRateID}))[0];
     },
     async findByUserID(UserID) {
-        return knex.select('*').from('rating_list').join('users', 'users.UserID', 'rating_list.UserID').where('users.UserID', UserID);
+        return knex.select('*').from('rating_list').join('users', 'users.UserID', 'rating_list.UserID').where('users.UserID', +UserID);
     },
     async findByUserRateID(UserRateID) {
-        return knex.select('*').from('rating_list').join('users', 'users.UserID', 'rating_list.UserRateID').where('rating_list.UserID', UserRateID);
+        return knex.select('*').from('rating_list').join('users', 'users.UserID', 'rating_list.UserRateID').where('rating_list.UserID', +UserRateID);
     }
 }
 

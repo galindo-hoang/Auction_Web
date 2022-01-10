@@ -6,6 +6,9 @@ const entity = {
     },
     getUserID(ID){
         return knex('update_users').where('UserID', ID);
+    },
+    async del(ID) {
+        await knex('update_users').where('UserID', ID).del();
     }
 }
 
