@@ -7,6 +7,8 @@ import viewByCategoriesDetail from '../models/categories_detail.js'
 import sendEmail from '../utils/mail.js'
 import Product from "../models/product.js";
 import upgrade_list from "../models/upgrade_list.js";
+import bcrypt from 'bcryptjs';
+import randomstring from 'randomstring'
 
 const router = express.Router();
 
@@ -264,6 +266,20 @@ router.post("/admin/editAcc/del", auth.beforeLogin, async function (req, res) {
         const email = await viewByProduct.findUserEmail(req.body.UserID);
         sendEmail((email[0].UserEmail), 'THÔNG BÁO VÔ HIỆU HOÁ TÀI KHOẢN', 'Tài khoản của bạn đã bị vô hiệu hoá bởi ban quản trị');
         await users.del(req.body.UserID);
+        res.redirect('/admin/editAcc/');
+    }
+});
+
+router.post("/admin/editAcc/reset", auth.beforeLogin, async function (req, res) {
+    if (req.session.account.UserRole !== 0)
+        res.redirect('/');
+    else {
+        const newPass = randomstring.generate(8);
+        let salt = bcrypt.genSaltSync(10);
+        const password = bcrypt.hashSync(newPass, salt);
+        const email = await viewByProduct.findUserEmail(req.body.UserID);
+        sendEmail((email[0].UserEmail), 'THÔNG BÁO RESET MẬT KHẨU', 'Tài khoản của bạn đã được reset mật khẩu: ' + newPass);
+        users.changePassword(email[0].UserEmail, password);
         res.redirect('/admin/editAcc/');
     }
 });

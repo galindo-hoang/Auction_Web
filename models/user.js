@@ -81,7 +81,7 @@ const entity = {
                 if(maxPrice === undefined)
                     await knex.raw(`update products set CurPrice = StartPrice where ProID = ? and Status = 1`, +proId.ProID);
                 else
-                    await knex.raw(`update products set CurPrice = ? where ProID = ?`, [maxPrice.Price, +proId.ProID]);
+                    await knex.raw(`update products set CurPrice = ? where ProID = ? and Status = 1`, [maxPrice.Price, +proId.ProID]);
             }
         return knex('users').where('UserID', ID).del();
     },
