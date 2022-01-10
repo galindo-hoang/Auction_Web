@@ -3,7 +3,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css" integrity="sha512-bYPO5jmStZ9WI2602V2zaivdAnbAhtfzmxnEGh9RwtlI00I9s8ulGe4oBa5XxiC6tCITJH/QG70jswBhbLkxPw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 {{/section}}
 
-<div class="container-fluid mt-4 mb-5">
+<div class="container-fluid" id="profile-view">
 
     {{#if error}}
     <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -106,5 +106,13 @@
             timepicker: false,
             format: 'Y-m-d'
         });
+    </script>
+
+
+    <script>
+        const ele =  document.getElementById("profile-view");
+        let height = Math.max(window.innerHeight - (142 + 18),ele.offsetHeight);
+        ele.style.height = height+"px";
+        console.log(height);
     </script>
 {{/section}}

@@ -17,12 +17,25 @@ import User from "../models/user.js";
 const router = express.Router();
 
 router.get('/seller/bidding',auth.beforeLogin,auth.isSeller,async (req, res) => {
-    const products = await Product.findBySeller(req.session.account.UserID);
+    const currentPage = req.query.page || 1;
+    const nextPage = (+currentPage)+1;
+    const check = await Product.countFindBySeller(req.session.account.UserID);
+    const haveNextPage = check.total > (currentPage*5)
+    const products = await Product.findBySeller(req.session.account.UserID,currentPage*5);
     const bidding = [];
     for (let i = 0; i < products.length;++i){
         if(moment(products[i].EndDate) >= moment()) bidding.push(products[i]);
     }
-    res.render('seller/bidding',{bidding,bid:true, sellerToBidder: +req.session.account.UserRole === 3});
+    res.render('seller/bidding',{
+        bidding,
+        nextPage,haveNextPage,
+        bid:true,
+        sellerToBidder: +req.session.account.UserRole === 3
+    });
+})
+
+router.post("/seller/bidding/loading",auth.beforeLogin,auth.isSeller,(req,res)=>{
+    res.redirect("/seller/bidding?page="+ req.body.page);
 })
 
 router.get('/seller/add',auth.beforeLogin,auth.isSeller,async (req, res) => {

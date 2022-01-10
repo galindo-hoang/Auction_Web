@@ -60,19 +60,37 @@ router.get("/account/review",auth.beforeLogin,async (req, res) => {
 });
 
 router.get("/account/tracking",auth.beforeLogin,async (req, res) => {
-    const products = await products_history.findByTracking(req.session.account.UserID);
+    const currentPage = req.query.page || 1;
+    const nextPage = (+currentPage)+1;
+    const check = await products_history.conutFindByTracking(req.session.account.UserID);
+    const products = await products_history.findByTracking(req.session.account.UserID,currentPage*4);
+    const haveNextPage = check.total > (currentPage*4)
+
+    for(let i = 0;i<products.length;++i){
+        products[i].top = products[i].CurPrice === products[i].Price;
+    }
     res.render("account/tracking", {
         tracking: true,
+        nextPage,haveNextPage,
         products,
         user: req.session.account,
         isAdmin: req.session.account.UserRole === 0
     });
 });
 
+router.post("/account/tracking/loading",auth.beforeLogin,(req,res)=>{
+    res.redirect("/account/tracking?page="+req.body.page);
+})
+
 router.get("/account/favorite",auth.beforeLogin,async (req, res) => {
-    const products = await viewByProduct.findByFavorite(req.session.account.UserID);
+    const currentPage = req.query.page || 1;
+    const nextPage = (+currentPage)+1;
+    const check = await viewByProduct.countFindByFavorite(req.session.account.UserID);
+    const products = await viewByProduct.findByFavorite(req.session.account.UserID,currentPage*4);
+    const haveNextPage = check.total > (currentPage*4)
     res.render("account/favorite", {
         favorite: true,
+        nextPage,haveNextPage,
         products,
         user: req.session.account,
         isAdmin: req.session.account.UserRole === 0
@@ -84,6 +102,10 @@ router.post("/account/favorite",auth.beforeLogin,async (req, res) => {
     favorite_list.remove(req.session.account.UserID,req.body.ProID);
     res.redirect("/account/favorite");
 });
+
+router.post("/account/favorite/loading",auth.beforeLogin,(req,res)=>{
+    res.redirect("/account/favorite?page="+req.body.page);
+})
 
 router.get("/account/win",auth.beforeLogin,async (req, res) => {
     const products = await viewByProduct.findByWinList(req.session.account.UserID);

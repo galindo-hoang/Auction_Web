@@ -1,5 +1,5 @@
-<div class="container-fluid mt-4 mb-5">
-    <div class="row profile-view">
+<div class="container-fluid" id="profile-view">
+    <div class="row">
 
         {{> account-layout}}
 
@@ -38,16 +38,26 @@
                             </td>
                             <form method="post" id="cancel-favorite">
                                 <input name="ProID" value="{{this.ProID}}" type="hidden">
+                                <td>
+                                    <input type="submit" value="xóa" class="btn btn-danger">
+                                </td>
                             </form>
-                            <td>
-                                <div class="btn btn-danger">
-                                    <i id="cancel" class="far fa-trash-alt" style="cursor: pointer"></i>
-                                </div>
-                            </td>
                         </tr>
                     {{/each}}
                     </tbody>
                 </table>
+                {{#if this.haveNextPage}}
+                    <div class="card-footer">
+                        <div class="d-flex justify-content-center">
+                            <form method="post">
+                                <input name="page" value="{{this.nextPage}}" type="hidden">
+                                <button type="submit" class="btn btn-outline-primary" formaction="/account/favorite/loading">
+                                    Tải thêm
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                {{/if}}
             </div>
         </div>
     </div>
@@ -55,8 +65,9 @@
 
 {{#section 'footer'}}
     <script>
-        $('#cancel').on('click', function (e) {
-            $('#cancel-favorite').submit();
-        });
+        const ele =  document.getElementById("profile-view");
+        let height = Math.max(window.innerHeight - (142 + 18),ele.offsetHeight);
+        ele.style.height = height+"px";
+        console.log(height);
     </script>
 {{/section}}

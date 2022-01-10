@@ -1,4 +1,4 @@
-<div class="container-fluid mt-4 seller-bidding">
+<div class="container-fluid" id="profile-view">
     <div class="row">
 
         {{> account-layout}}
@@ -9,8 +9,12 @@
                     <h4 class="text-center">
                         Danh sách sản phẩm đang được đấu giá
                     </h4>
+
                 </div>
 
+                {{#unless sellerToBidder}}
+                    <a class="btn btn-outline-primary" href="/seller/add">Thêm sản phẩm</a>
+                {{/unless}}
 
                 <table class="table table-hover">
                     <thead>
@@ -36,13 +40,32 @@
                     {{/each}}
                     </tbody>
                 </table>
-                <div class="text-center mb-3">
-                    {{#unless sellerToBidder}}
-                        <a class="btn btn-outline-primary" href="/seller/add">Thêm sản phẩm</a>
-                    {{/unless}}
-                </div>
+
+                {{#if this.haveNextPage}}
+                    <div class="card-footer">
+                        <div class="d-flex justify-content-center">
+                            <form method="post">
+                                <input name="page" value="{{this.nextPage}}" type="hidden">
+                                <button type="submit" class="btn btn-outline-primary" formaction="/seller/bidding/loading">
+                                    Tải thêm
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                {{/if}}
             </div>
         </div>
 
     </div>
 </div>
+
+
+
+
+{{#section 'footer'}}
+    <script>
+        const ele =  document.getElementById("profile-view");
+        let height = Math.max(window.innerHeight - (142 + 18),ele.offsetHeight);
+        ele.style.height = height+"px";
+    </script>
+{{/section}}

@@ -1,4 +1,4 @@
-<div class="container-fluid mt-4 profile-view">
+<div class="container-fluid" id="profile-view">
     <div class="row">
 
         {{> account-layout}}
@@ -25,15 +25,39 @@
                             <td><img style="width: 120px;height: 120px;"
                                      src="/public/imgs/products/{{this.ProID}}/account.jpg"></td>
                             <td><a href="/detail/{{this.ProID}}" style="color: black">{{this.TinyDes}}</a></td>
-                            <td class="text-center">{{format_number this.Price}} đ</td>
+                            <td class="text-center {{#if this.top}}text-success{{else}}text-danger{{/if}}"><strong>{{format_number this.Price}}đ</strong></td>
                             <td class="text-center">{{format_date this.BidDate}}</td>
                         </tr>
 
                     {{/each}}
                     </tbody>
                 </table>
+
+                {{#if this.haveNextPage}}
+                    <div class="card-footer">
+                        <div class="d-flex justify-content-center">
+                            <form method="post">
+                                <input name="page" value="{{this.nextPage}}" type="hidden">
+                                <button type="submit" class="btn btn-outline-primary" formaction="/account/tracking/loading">
+                                    Tải thêm
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                {{/if}}
             </div>
         </div>
 
     </div>
 </div>
+
+
+
+{{#section 'footer'}}
+    <script>
+        const ele =  document.getElementById("profile-view");
+        let height = Math.max(window.innerHeight - (142 + 18),ele.offsetHeight);
+        ele.style.height = height+"px";
+        console.log(height)
+    </script>
+{{/section}}

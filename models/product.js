@@ -99,8 +99,11 @@ export default {
         return res[0];
     },
 
-    findByFavorite(ID) {
-        return knex.select('products.*').from('favorite_list').leftJoin('products', 'products.ProID', 'favorite_list.ProID').where('favorite_list.UserID', ID);
+    findByFavorite(ID,range) {
+        return knex.select('products.*').from('favorite_list').leftJoin('products', 'products.ProID', 'favorite_list.ProID').where('favorite_list.UserID', ID).limit(range);
+    },
+    async countFindByFavorite(ID) {
+        return (await knex.count('favorite_list.ProID as total').from('favorite_list').leftJoin('products', 'products.ProID', 'favorite_list.ProID').where('favorite_list.UserID', ID))[0];
     },
     updatePrice(Price, ID) {
         knex('products').where({ProID: ID}).update({CurPrice: Price}).then(() => {
@@ -133,8 +136,12 @@ export default {
                                   ORDER BY BidID`, +ID))[0];
     },
 
-    findBySeller(userID) {
-        return knex.select('products.*').from('products').join('users', 'products.SellerID', 'users.UserID').where('users.UserID', userID);
+    findBySeller(userID,range) {
+        return knex.select('products.*').from('products').join('users', 'products.SellerID', 'users.UserID').where('users.UserID', userID).limit(range);
+    },
+
+    async countFindBySeller(userID) {
+        return (await knex.count('products.ProID as total').from('products').join('users', 'products.SellerID', 'users.UserID').where('users.UserID', userID))[0];
     },
     addProducts(object) {
         return knex('products').insert(object);

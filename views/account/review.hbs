@@ -1,4 +1,4 @@
-<div class="container-fluid mt-4 profile-view">
+<div class="container-fluid" id="profile-view">
     <div class="row">
 
         {{> account-layout}}
@@ -39,3 +39,13 @@
 
     </div>
 </div>
+
+
+{{#section 'footer'}}
+    <script>
+        const ele =  document.getElementById("profile-view");
+        let height = Math.max(window.innerHeight - (142 + 18),ele.offsetHeight);
+        ele.style.height = height+"px";
+        console.log(height);
+    </script>
+{{/section}}

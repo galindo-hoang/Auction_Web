@@ -153,14 +153,11 @@ a.sort-btn:hover{
     background-color: #d6d6d6;
 }
 
-.profile-view{
-    margin-bottom: 270px;
+#profile-view{
+    /*height: calc(100vh - (142px + 18px));*/
+    margin-top: 18px;
 }
 
 .seller-bidding{
     margin-bottom: 112px;
-}
-
-.ratting{
-    margin-bottom: 150px;
 }
