@@ -9,7 +9,7 @@ import sendEmail from "../utils/mail.js";
 
 const router = express.Router();
 
-let object = {
+const object = {
     UserRole: 2,
     UserRating: 0,
     DOB: null
@@ -17,6 +17,9 @@ let object = {
 const check = {}
 
 router.get("/account/register", auth.afterLogin,(req,res)=>{
+    delete object.UserEmail
+    delete object.UserName
+    delete object.UserPassword
     res.render('account/register');
 })
 
@@ -55,7 +58,6 @@ router.get("/account/register/check/verify",auth.afterLogin, (req, res) => {
 router.post("/account/register/check/verify",(req,res)=>{
     if((check.otp === +req.body.otp)){
         Users.addUser(object);
-        object = {}
         res.redirect('/account/login');
     }else{
         res.render("account/verify", {email: object.UserEmail,error: "OTP không hợp lệ"});

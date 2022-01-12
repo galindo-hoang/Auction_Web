@@ -9,7 +9,7 @@
             </div>
         {{/if}}
         {{> account-layout}}
-        <div class="col-sm-9">
+        <div class="col-sm-9" id="addCat-view">
             <form id="editForm" method="post">
                 <div class="card">
                     <h4 class="card-header text-white bg-secondary">
@@ -36,3 +36,11 @@
         </div>
     </div>
 </div>
+
+{{#section 'footer'}}
+    <script>
+        const register_view = document.getElementById("addCat-view")
+        const height = Math.max(register_view.offsetHeight,window.innerHeight)-(document.getElementById("header-main").offsetHeight + document.getElementById("footer-main").offsetHeight)
+        register_view.style.height = (height - 24) + "px";
+    </script>
+{{/section}}

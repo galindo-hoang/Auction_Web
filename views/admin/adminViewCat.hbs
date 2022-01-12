@@ -3,7 +3,7 @@
 
         {{> account-layout}}
 
-        <div class="col-sm-9">
+        <div class="col-sm-9" id="adminViewCat-view">
             <div class="card">
                 <h4 class="card-header d-flex justify-content-between container-fluid text-white bg-secondary">
                     Danh mục cấp 1
@@ -41,3 +41,11 @@
         </div>
     </div>
 </div>
+
+{{#section 'footer'}}
+    <script>
+        const register_view = document.getElementById("adminViewCat-view")
+        const height = Math.max(register_view.offsetHeight,window.innerHeight)-(document.getElementById("header-main").offsetHeight + document.getElementById("footer-main").offsetHeight)
+        register_view.style.height = (height - 24) + "px";
+    </script>
+{{/section}}

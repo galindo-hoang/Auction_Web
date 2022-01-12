@@ -10,7 +10,7 @@
         {{/if}}
         {{> account-layout}}
 
-        <div class="col-sm-9">
+        <div class="col-sm-9" id="editCat-view">
             <form id="editForm" method="post" action="/admin/editCat/del">
                 <div class="card">
                     <h4 class="card-header text-white bg-secondary">
@@ -71,6 +71,9 @@
 
 {{#section 'footer'}}
     <script>
+        const register_view = document.getElementById("editCat-view")
+        const height = Math.max(register_view.offsetHeight,window.innerHeight)-(document.getElementById("header-main").offsetHeight + document.getElementById("footer-main").offsetHeight)
+        register_view.style.height = (height - 24) + "px";
         $('#cfmButton').on('click', function (e){
             $('#editForm').submit();
         });

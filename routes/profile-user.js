@@ -35,17 +35,45 @@ router.post('/account/profile/upgrade', auth.beforeLogin, async function (req, r
 router.post("/account/profile",auth.beforeLogin,async (req, res) => {
     req.session.account.UserName = req.body.name;
     req.session.account.DOB = req.body.birthday;
+    const upgradeReq = await upgradeList.getUserID(req.session.account.UserID);
+    req.session.account.UserRating = (await User.findRatingByUserID(req.session.account.UserID)).UserRating;
     const account = await Users.findByEmail(req.session.account.UserEmail);
     if(req.body.CurPassword === "" && req.body.NewPassword === "" && req.body.ConPassword === ""){
         Users.updateUserWithoutPass(req.session.account.DOB,req.session.account.UserName,req.session.account.UserEmail);
-        res.render("account/profile",{user: req.session.account});
+        res.render("account/profile",{
+            user: req.session.account,
+            profile: true,
+            isBidder: +req.session.account.UserRole >= 2,
+            isAdmin: +req.session.account.UserRole === 0,
+            isRequested: upgradeReq.length !== 0
+        });
     }else if(!bcrypt.compareSync(req.body.CurPassword,account[0].UserPassword)){
-        res.render("account/profile",{user: req.session.account,error: "Mật khẩu hiện tại không đúng"});
+        res.render("account/profile",{
+            user: req.session.account,
+            error: "Mật khẩu hiện tại không đúng",
+            profile: true,
+            isBidder: +req.session.account.UserRole >= 2,
+            isAdmin: +req.session.account.UserRole === 0,
+            isRequested: upgradeReq.length !== 0
+        });
     }else if(req.body.NewPassword !==  req.body.ConPassword){
-        res.render("account/profile",{user: req.session.account,error: "Mật khẩu hiện không trùng khớp"});
+        res.render("account/profile",{
+            user: req.session.account,
+            error: "Mật khẩu hiện không trùng khớp",
+            profile: true,
+            isBidder: +req.session.account.UserRole >= 2,
+            isAdmin: +req.session.account.UserRole === 0,
+            isRequested: upgradeReq.length !== 0
+        });
     }else{
         Users.updateUser(req.body.NewPassword,req.session.account.DOB,req.session.account.UserName,req.session.account.UserEmail);
-        res.render("account/profile",{user: req.session.account});
+        res.render("account/profile",{
+            user: req.session.account,
+            profile: true,
+            isBidder: +req.session.account.UserRole >= 2,
+            isAdmin: +req.session.account.UserRole === 0,
+            isRequested: upgradeReq.length !== 0
+        });
     }
 });
 

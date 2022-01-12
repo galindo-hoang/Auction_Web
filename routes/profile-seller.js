@@ -111,7 +111,6 @@ router.get("/seller/end",auth.beforeLogin,auth.isSeller,async (req,res)=>{
 
 router.get("/end/loadMore",auth.beforeLogin,auth.isSeller,async (req,res)=>{
     const products = await Product.findByEnd(req.session.account.UserID,4, req.query.nextPage);
-    console.log(products);
     for(let i=0;i<products.length;++i){
         products[i].noWin = (products[i].CurPrice === products[i].StartPrice);
         if(!products[i].noWin){

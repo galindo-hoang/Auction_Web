@@ -3,7 +3,7 @@
 
         {{> account-layout}}
 
-        <div class="col-sm-9">
+        <div class="col-sm-9" id="adminViewBidder-view">
             <div class="card">
                 <h4 class="card-header d-flex justify-content-between container-fluid text-white bg-secondary">
                     Danh sách tài khoản bidder xin nâng cấp
@@ -47,6 +47,11 @@
 </div>
 
 {{#section 'footer'}}
+    <script>
+        const register_view = document.getElementById("adminViewBidder-view")
+        const height = Math.max(register_view.offsetHeight,window.innerHeight)-(document.getElementById("header-main").offsetHeight + document.getElementById("footer-main").offsetHeight)
+        register_view.style.height = (height - 24) + "px";
+    </script>
     <!--    <script>-->
     <!--        $('#deleteForm').submit(function() {-->
     <!--            const c = confirm("Xoá sản phẩm này?");-->
