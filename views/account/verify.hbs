@@ -3,7 +3,7 @@
 {{/section}}
 
 <form id="formVerify" method="post">
-    <div class="body-register forgot-align">
+    <div class="body-register forgot-align" id="verify-view">
         <div class="container-register" style="padding-top: 112px; padding-bottom: 131px;">
             {{#if error}}
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -39,3 +39,11 @@
         </div>
     </div>
 </form>
+
+{{#section 'footer'}}
+    <script>
+        const register_view = document.getElementById("verify-view")
+        const height = Math.max(register_view.offsetHeight,window.innerHeight)-(document.getElementById("header-main").offsetHeight + document.getElementById("footer-main").offsetHeight)
+        register_view.style.height = height + "px";
+    </script>
+{{/section}}

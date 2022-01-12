@@ -2,9 +2,8 @@
     <link rel="stylesheet" href="/public/register.css">
 {{/section}}
 
-<div class="py-xxl-1"></div>
 <form id="formLogin" method="post">
-    <div class="body-register" style="padding-top: 133px; padding-bottom: 142px;">
+    <div class="body-register" style="padding-top: 133px; padding-bottom: 142px;" id="login-view">
         <div class="container-register mb-2">
             <div class="content-register">
                 <div class="title">
@@ -53,11 +52,15 @@
         </div>
     </div>
 </form>
-<div class="py-xxl-1"></div>
 
 
 {{#section 'footer'}}
     <script>
+        const register_view = document.getElementById("login-view")
+        const height = Math.max(register_view.offsetHeight,window.innerHeight)-(document.getElementById("header-main").offsetHeight + document.getElementById("footer-main").offsetHeight)
+        register_view.style.height = height + "px";
+
+
         $('#formLogin').on('submit', function (e) {
             e.preventDefault();
 
