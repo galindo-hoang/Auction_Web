@@ -11,7 +11,16 @@ const entity = {
         return knex.select('*').from('rating_list').join('users', 'users.UserID', 'rating_list.UserID').where('users.UserID', +UserID);
     },
     async findByUserRateID(UserRateID) {
-        return knex.select('*').from('rating_list').join('users', 'users.UserID', 'rating_list.UserRateID').where('rating_list.UserID', +UserRateID);
+        const rateList = await knex('rating_list').where('UserID', +UserRateID);
+        for(let data of rateList){
+            const findUserRate = await knex('users').where('UserID', +data.UserRateID);
+            if(findUserRate.length > 0)
+                data.UserName = findUserRate[0].UserName;
+            else
+                data.UserName = 'null';
+        }
+        return rateList;
+        // return knex.select('*').from('rating_list').join('users', 'users.UserID', 'rating_list.UserRateID').where('rating_list.UserID', +UserRateID);
     }
 }
 
