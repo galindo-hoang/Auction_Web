@@ -18,7 +18,7 @@
                         <th scope="col" class="text-center">Ngày đấu giá</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tracking-view">
                     {{#each products}}
                         <tr class="align-middle">
                             <th scope="row" class="text-center"><a href="/detail/{{this.ProID}}">{{this.BidID}}</a></th>
@@ -33,18 +33,20 @@
                     </tbody>
                 </table>
 
-                {{#if this.haveNextPage}}
-                    <div class="card-footer">
-                        <div class="d-flex justify-content-center">
-                            <form method="post">
-                                <input name="page" value="{{this.nextPage}}" type="hidden">
-                                <button type="submit" class="btn btn-outline-primary" formaction="/account/tracking/loading">
-                                    Tải thêm
-                                </button>
-                            </form>
-                        </div>
+<!--                {{#if this.haveNextPage}}-->
+<!--                {{/if}}-->
+
+                <div class="card-footer">
+                    <div class="d-flex justify-content-center">
+                        <!--                            <form method="post">-->
+                        <!--                                <input name="page" value="{{this.nextPage}}" type="hidden">-->
+                        <!--                            </form>-->
+
+                        <button class="btn btn-outline-primary" id="load-more" data-offset="1">
+                            Tải thêm
+                        </button>
                     </div>
-                {{/if}}
+                </div>
             </div>
         </div>
 
@@ -54,10 +56,71 @@
 
 
 {{#section 'footer'}}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
+
         const ele =  document.getElementById("profile-view");
         let height = Math.max(window.innerHeight - (142 + 18),ele.offsetHeight);
         ele.style.height = height+"px";
-        console.log(height)
+
+        const loadMore = document.getElementById("load-more")
+        loadMore.addEventListener("click",function (){
+            const page = +loadMore.getAttribute("data-offset");
+            loadMore.setAttribute("data-offset",(page+1)+"");
+            console.log()
+            $.getJSON(`/tracking/loadMore?nextPage=`+page,function (e){
+                if(e.length === 0) loadMore.remove();
+                for(let i = 0 ;i<e.length;++i){
+                    const th = document.createElement("th");
+                    th.scope = "row"
+                    th.classList.add("text-center")
+                    const a_one = document.createElement("a");
+                    a_one.href = "/detail/"+e[i].ProID;
+                    a_one.innerHTML = e[i].BidID;
+                    th.appendChild(a_one);
+
+                    const td_one = document.createElement("td");
+                    const img = document.createElement("img");
+                    img.style.width = "120px";
+                    img.style.height = "120px";
+                    img.src = "/public/imgs/products/"+e[i].ProID+"/account.jpg"
+                    td_one.appendChild(img);
+
+                    const td_two = document.createElement("td");
+                    const a_two = document.createElement("a");
+                    a_two.style.color = "black"
+                    a_two.href = "/detail/" + e[i].ProID;
+                    a_two.innerHTML = e[i].TinyDes;
+                    td_two.appendChild(a_two);
+
+                    const td_three = document.createElement("td");
+                    td_three.classList.add("text-center")
+                    if(e[i].top) td_three.classList.add("text-success")
+                    else td_three.classList.add("text-danger")
+                    const strong = document.createElement("strong");
+                    strong.innerHTML = numeral(e[i].Price).format('0,0')+"đ"
+                    td_three.appendChild(strong);
+
+                    const td_four = document.createElement("td");
+                    td_four.classList.add("text-center")
+                    td_four.innerHTML = moment(e[i].BidDate).format("DD/MM/YYYY, h:mm:ss A");
+
+                    const tr = document.createElement("tr");
+                    tr.appendChild(th);
+                    tr.appendChild(td_one);
+                    tr.appendChild(td_two);
+                    tr.appendChild(td_three);
+                    tr.appendChild(td_four);
+
+                    document.getElementById("tracking-view").appendChild(tr);
+                }
+                const ele =  document.getElementById("profile-view");
+                ele.style.height = null
+                let height = Math.max(window.innerHeight - (142 + 18),ele.offsetHeight);
+                ele.style.height = height+"px";
+            });
+
+        })
     </script>
 {{/section}}

@@ -18,56 +18,121 @@
                         <th scope="col" class="text-center">&nbsp;</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="favorite-view">
                     {{#each products}}
                         <tr class="align-middle">
                             <th scope="row" class="text-center"><a href="/detail/{{this.ProID}}">{{this.ProID}}</a></th>
                             <td class="text-center"><img style="width: 120px;height: 120px;" src="/public/imgs/products/{{this.ProID}}/account.jpg"></td>
                             <td>{{this.TinyDes}}</td>
                             <td>
-                                <div>{{format_number this.CurPrice}} đ</div>
+                                <div>{{format_number this.CurPrice}}đ</div>
                                 {{#if this.Status}}
-                                    <div>
-                                        <strong style="color: mediumseagreen">Đang đấu giá</strong>
-                                    </div>
+                                    <div><strong style="color: mediumseagreen">Đang đấu giá</strong></div>
                                 {{else}}
-                                    <div>
-                                        <strong style="color: #F90716">Hết đấu giá</strong>
-                                    </div>
+                                    <div><strong style="color: #F90716">Hết đấu giá</strong></div>
                                 {{/if}}
                             </td>
-                            <form method="post" id="cancel-favorite">
-                                <input name="ProID" value="{{this.ProID}}" type="hidden">
-                                <td>
+                            <td>
+                                <form method="post" id="cancel-favorite">
+                                    <input name="ProID" value="{{this.ProID}}" type="hidden">
                                     <input type="submit" value="xóa" class="btn btn-danger">
-                                </td>
-                            </form>
+                                </form>
+                            </td>
                         </tr>
                     {{/each}}
                     </tbody>
                 </table>
-                {{#if this.haveNextPage}}
-                    <div class="card-footer">
-                        <div class="d-flex justify-content-center">
-                            <form method="post">
-                                <input name="page" value="{{this.nextPage}}" type="hidden">
-                                <button type="submit" class="btn btn-outline-primary" formaction="/account/favorite/loading">
-                                    Tải thêm
-                                </button>
-                            </form>
-                        </div>
+
+                    <!--                {{#if this.haveNextPage}}-->
+                    <!--                {{/if}}-->
+
+                <div class="card-footer">
+                    <div class="d-flex justify-content-center">
+                        <!--                            <form method="post">-->
+                        <!--                                <input name="page" value="{{this.nextPage}}" type="hidden">-->
+                        <!--                            </form>-->
+
+                        <button class="btn btn-outline-primary" id="load-more" data-offset="1">
+                            Tải thêm
+                        </button>
                     </div>
-                {{/if}}
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 {{#section 'footer'}}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
     <script>
         const ele =  document.getElementById("profile-view");
         let height = Math.max(window.innerHeight - (142 + 18),ele.offsetHeight);
         ele.style.height = height+"px";
-        console.log(height);
+
+        const loadMore = document.getElementById("load-more")
+        loadMore.addEventListener("click",function (){
+            const page = +loadMore.getAttribute("data-offset");
+            loadMore.setAttribute("data-offset",(page+1)+"");
+            console.log()
+            $.getJSON(`/favorite/loadMore?nextPage=`+page,function (e){
+                if(e.length === 0) loadMore.remove();
+                console.log(e);
+                for(let i = 0 ;i<e.length;++i){
+                    const th = document.createElement("th");
+                    th.scope = "row"
+                    th.classList.add("text-center")
+                    const a_one = document.createElement("a");
+                    a_one.href = "/detail/"+e[i].ProID;
+                    a_one.innerHTML = e[i].ProID;
+                    th.appendChild(a_one);
+
+
+                    const td_one = document.createElement("td");
+                    const img = document.createElement("img");
+                    img.style.width = "120px";
+                    img.style.height = "120px";
+                    img.src = "/public/imgs/products/"+e[i].ProID+"/account.jpg"
+                    td_one.appendChild(img);
+
+
+                    const td_two = document.createElement("td");
+                    td_two.innerHTML = e[i].TinyDes;
+
+
+                    const td_three = document.createElement("td");
+                    td_three.innerHTML = numeral(e[i].CurPrice).format('0,0')+"đ"
+                    if(e[i].Status) td_three.innerHTML += '"<div><strong style="color: mediumseagreen">Đang đấu giá</strong></div>"'
+                    else td_three.innerHTML += '<div><strong style="color: #F90716">Hết đấu giá</strong></div>'
+
+
+                    const td_four = document.createElement("td");
+                    const form = document.createElement("form");
+                    form.method = "post"
+                    form.id = "cancel-favorite"
+                    const input_one = document.createElement("input")
+                    input_one.name = "ProID"
+                    input_one.value = e[i].ProID;
+                    input_one.type = "hidden"
+                    form.appendChild(input_one);
+                    form.innerHTML = '<input type="submit" value="xóa" class="btn btn-danger">'
+                    td_four.appendChild(form)
+
+                    const tr = document.createElement("tr");
+                    tr.classList.add("align-middle")
+                    tr.appendChild(th);
+                    tr.appendChild(td_one);
+                    tr.appendChild(td_two);
+                    tr.appendChild(td_three);
+                    tr.appendChild(td_four);
+
+                    document.getElementById("favorite-view").appendChild(tr);
+                }
+                const ele =  document.getElementById("profile-view");
+                ele.style.height = null
+                let height = Math.max(window.innerHeight - (142 + 18),ele.offsetHeight);
+                ele.style.height = height+"px";
+            });
+
+        })
     </script>
 {{/section}}

@@ -99,11 +99,8 @@ export default {
         return res[0];
     },
 
-    findByFavorite(ID,range) {
-        return knex.select('products.*').from('favorite_list').leftJoin('products', 'products.ProID', 'favorite_list.ProID').where('favorite_list.UserID', ID).limit(range);
-    },
-    async countFindByFavorite(ID) {
-        return (await knex.count('favorite_list.ProID as total').from('favorite_list').leftJoin('products', 'products.ProID', 'favorite_list.ProID').where('favorite_list.UserID', ID))[0];
+    findByFavorite(ID,range,offset) {
+        return knex.select('products.*').from('favorite_list').leftJoin('products', 'products.ProID', 'favorite_list.ProID').where('favorite_list.UserID', ID).limit(range).offset(offset*range);
     },
     updatePrice(Price, ID) {
         knex('products').where({ProID: ID}).update({CurPrice: Price}).then(() => {

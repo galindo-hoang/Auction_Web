@@ -7,11 +7,8 @@ const entity = {
     // findByBidderID: function (BidderID){
     //     return knex('products_history').select('*').where('BidderID',BidderID);
     // },
-    findByTracking(UserID,range) {
-        return knex.select('products_history.*','products.EndDate','products.TinyDes','products.CurPrice').from('products_history').leftJoin('products','products.ProID','products_history.ProID').where('products_history.BidderID',UserID).limit(range);
-    },
-    async conutFindByTracking(UserID) {
-        return (await knex.count('products_history.ProID as total').from('products_history').leftJoin('products', 'products.ProID', 'products_history.ProID').where('products_history.BidderID', UserID))[0];
+    findByTracking(UserID,range,offset) {
+        return knex.select('products_history.*','products.EndDate','products.TinyDes','products.CurPrice').from('products_history').leftJoin('products','products.ProID','products_history.ProID').where('products_history.BidderID',UserID).limit(range).offset(offset*range);
     },
     findByProID(ProID) {
         return knex('products_history').select('*').where('ProID',ProID).orderBy('Price',"desc");
