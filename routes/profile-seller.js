@@ -21,11 +21,11 @@ router.get('/seller/bidding',auth.beforeLogin,auth.isSeller,async (req, res) => 
     const nextPage = (+currentPage)+1;
     const check = await Product.countFindBySeller(req.session.account.UserID);
     const haveNextPage = check.total > (currentPage*5)
-    const products = await Product.findBySeller(req.session.account.UserID,currentPage*5);
-    const bidding = [];
-    for (let i = 0; i < products.length;++i){
-        if(moment(products[i].EndDate) >= moment()) bidding.push(products[i]);
-    }
+    const bidding = await Product.findBySeller(req.session.account.UserID,currentPage * 4);
+    // const bidding = [];
+    // for (let i = 0; i < products.length;++i){
+    //     if(moment(products[i].EndDate) >= moment()) bidding.push(products[i]);
+    // }
     res.render('seller/bidding',{
         bidding,
         nextPage,haveNextPage,
@@ -34,8 +34,11 @@ router.get('/seller/bidding',auth.beforeLogin,auth.isSeller,async (req, res) => 
     });
 })
 
-router.post("/seller/bidding/loading",auth.beforeLogin,auth.isSeller,(req,res)=>{
-    res.redirect("/seller/bidding?page="+ req.body.page);
+router.get("/bidding/loadMore",auth.beforeLogin,auth.isSeller,async (req,res)=>{
+    // res.redirect("/seller/bidding?page="+ req.body.page);
+    const products = await Product.findByBidding(req.session.account.UserID,4, req.query.nextPage);
+    // console.log(products);
+    res.json(products);
 })
 
 router.get('/seller/add',auth.beforeLogin,auth.isSeller,async (req, res) => {
@@ -105,6 +108,20 @@ router.get("/seller/end",auth.beforeLogin,auth.isSeller,async (req,res)=>{
     res.render("seller/endBidding",{products,end:true});
 
 });
+
+router.get("/end/loadMore",auth.beforeLogin,auth.isSeller,async (req,res)=>{
+    const products = await Product.findByEnd(req.session.account.UserID,4, req.query.nextPage);
+    console.log(products);
+    for(let i=0;i<products.length;++i){
+        products[i].noWin = (products[i].CurPrice === products[i].StartPrice);
+        if(!products[i].noWin){
+            products[i].bidder = await win_list.findByProID(products[i].ProID);
+            products[i].rating = await rating_list.findByProIDUserRateID(products[i].ProID,req.session.account.UserID);
+        }
+        else products[i].bidder = undefined;
+    }
+    res.json(products);
+})
 
 router.get("/account/ratingUser/:id",auth.beforeLogin,auth.isSeller,async (req,res)=>{
     const data = await User.findByID(req.params.id);
