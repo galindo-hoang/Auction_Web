@@ -66,7 +66,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
     <script>
         const ele =  document.getElementById("profile-view");
-        let height = Math.max(window.innerHeight - (142 + 18),ele.offsetHeight);
+        let height = Math.max(window.innerHeight - (document.getElementById("header-main").offsetHeight + document.getElementById("footer-main").offsetHeight + 18),ele.offsetHeight);
         ele.style.height = height+"px";
 
         const loadMore = document.getElementById("load-more")
@@ -114,7 +114,7 @@
                     input_one.value = e[i].ProID;
                     input_one.type = "hidden"
                     form.appendChild(input_one);
-                    form.innerHTML = '<input type="submit" value="xóa" class="btn btn-danger">'
+                    form.innerHTML += '<input type="submit" value="xóa" class="btn btn-danger">'
                     td_four.appendChild(form)
 
                     const tr = document.createElement("tr");
@@ -129,7 +129,7 @@
                 }
                 const ele =  document.getElementById("profile-view");
                 ele.style.height = null
-                let height = Math.max(window.innerHeight - (142 + 18),ele.offsetHeight);
+                let height = Math.max(window.innerHeight - (document.getElementById("header-main").offsetHeight + document.getElementById("footer-main").offsetHeight + 18),ele.offsetHeight);
                 ele.style.height = height+"px";
             });
 

@@ -3,7 +3,7 @@
 {{/section}}
 
 <form id="formRegister" method="post">
-    <div class="body-register" style="padding-top: 36px;padding-bottom: 35px;">
+    <div class="body-register" id="register-view">
         <div class="container-register">
             <div class="content-register">
                 <div class="title text-center">
@@ -68,6 +68,10 @@
 {{#section 'footer'}}
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script>
+        const register_view = document.getElementById("register-view")
+        const height = Math.max(register_view.offsetHeight,window.innerHeight)-(document.getElementById("header-main").offsetHeight + document.getElementById("footer-main").offsetHeight)
+        register_view.style.height = height + "px";
+
         $('#formRegister').on('submit',function (e){
             e.preventDefault();
 
