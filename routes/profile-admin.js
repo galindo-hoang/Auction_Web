@@ -162,6 +162,11 @@ router.get("/admin/editPro", auth.beforeLogin, async function (req, res) {
     }
 });
 
+router.get("/editPro/loadMore", auth.beforeLogin, async function (req, res) {
+    const product = await viewByProduct.findByAdmin(5, req.query.nextPage);
+    res.json(product);
+});
+
 router.post("/admin/editPro", auth.beforeLogin, async function (req, res) {
     if (req.session.account.UserRole !== 0)
         res.redirect('/');

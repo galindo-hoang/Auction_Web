@@ -148,7 +148,7 @@ export default {
         });
     },
     findAll() {
-        return knex('products');
+        return knex('products').limit(5);
     },
     async del(ID) {
         await knex('win_list').where('ProID', +ID).del();
@@ -163,8 +163,8 @@ export default {
         });
     },
 
-    findByWinList(UserID) {
-        return knex.select('*').from('win_list').leftJoin('products', 'products.ProID', 'win_list.ProID').where('win_list.UserID', UserID);
+    findByWinList(UserID,range,offset) {
+        return knex.select('*').from('win_list').leftJoin('products', 'products.ProID', 'win_list.ProID').where('win_list.UserID', UserID).limit(range).offset(range*offset);
     },
     async findToRating(ProID) {
         return (await knex.select('*').from('products').join('users', 'users.UserID', 'products.SellerID').where('products.ProID', ProID))[0];
@@ -197,5 +197,8 @@ export default {
     },
     findByEnd(ID,range,offset){
         return knex.select('products.*').from('users').leftJoin('products', 'products.SellerID', 'users.UserID').whereRaw(`users.UserID = ? and products.Status = ?`, [+ID, 0]).limit(range).offset(offset*range);
+    },
+    findByAdmin(range, offset){
+        return knex('products').limit(range).offset(range * offset);
     }
 }

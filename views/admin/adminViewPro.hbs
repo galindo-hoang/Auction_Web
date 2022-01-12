@@ -1,4 +1,4 @@
-<div class="container-fluid mt-4 mb-3">
+<div class="container-fluid mt-4 mb-3" id="profile-view">
     <div class="row">
 
         {{> account-layout}}
@@ -17,7 +17,7 @@
                         <th scope="col">&nbsp;</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="admin-view-pro">
                     {{#each this.product}}
                         <tr class="align-middle">
                             <th scope="row" class="text-center">{{ProID}}</th>
@@ -29,7 +29,7 @@
                                         <input value="{{SellerID}}" name="SellerID" hidden>
                                         <input value="{{ProName}}" name="ProName" hidden>
                                     </label>
-                                    <button type="submit" class="btn btn-danger" formaction="/admin/editPro" value="{{ProID}}" name="ProID" onclick="clickedDelete(event)">
+                                    <button type="submit" class="btn btn-danger" value="{{ProID}}" name="ProID" onclick="clickedDelete(event)">
                                         Xoá&nbsp;
                                         <i class="fa fa-trash-can" aria-hidden="true"></i>
                                     </button>
@@ -39,6 +39,9 @@
                     {{/each}}
                     </tbody>
                 </table>
+                <button class="btn btn-outline-primary" id="load-more" data-offset="1">
+                    Tải thêm
+                </button>
             </div>
         </div>
     </div>
@@ -51,5 +54,97 @@
                 e.preventDefault();
             }
         }
+    </script>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+    <script>
+        const ele =  document.getElementById("profile-view");
+        let height = Math.max(window.innerHeight - (document.getElementById("header-main").offsetHeight + document.getElementById("footer-main").offsetHeight + 18),ele.offsetHeight);
+        ele.style.height = height+"px";
+
+        const loadMore = document.getElementById("load-more")
+        loadMore.addEventListener("click",function (){
+            const page = +loadMore.getAttribute("data-offset");
+            loadMore.setAttribute("data-offset",(page+1)+"");
+            console.log()
+            $.getJSON(`/editPro/loadMore?nextPage=`+page,function (e){
+                if(e.length === 0) loadMore.remove();
+                for(let i = 0 ;i<e.length;++i){
+                    const th = document.createElement("th");
+                    th.scope = "row"
+                    th.classList.add("text-center")
+                    th.innerHTML = e[i].ProID;
+
+                    const td_one = document.createElement("th");
+                    const img = document.createElement("img");
+                    img.style.width = "120px";
+                    img.style.height = "120px";
+                    img.src = "/public/imgs/products/"+e[i].ProID+"/thumb.jpg"
+                    td_one.appendChild(img);
+
+                    const td_two = document.createElement("td");
+                    const a_two = document.createElement("a");
+                    a_two.href = "/detail/" + e[i].ProID;
+                    a_two.classList.add('ProTittle');
+                    a_two.innerHTML = e[i].ProName;
+                    td_two.appendChild(a_two);
+
+                    const td_three = document.createElement("td");
+                    td_three.classList.add("text-sm-end");
+                    const form = document.createElement('form');
+                    form.method = 'post';
+                    form.id = 'deleteForm';
+
+                    const label = document.createElement('label');
+                    const ip_1 = document.createElement('input');
+                    const ip_2 = document.createElement('input');
+                    ip_1.value = e[i].SellerID;
+                    ip_1.name = 'SellerID';
+                    ip_1.hidden = true;
+
+                    ip_2.value = e[i].ProName;
+                    ip_2.name = 'ProName';
+                    ip_2.hidden = true;
+
+                    label.appendChild(ip_1);
+                    label.appendChild(ip_2);
+
+                    const button = document.createElement('button');
+                    button.type = 'submit';
+                    button.classList.add('btn');
+                    button.classList.add('btn-danger');
+                    button.value = e[i].ProID;
+                    button.name = 'ProID';
+                    button.addEventListener('click',function clickedDelete(e) {
+                        if (!confirm('Xác nhận xoá sản phẩm?')) {
+                            e.preventDefault();
+                        }
+                    });
+                    button.innerHTML = 'Xoá&nbsp;';
+                    const i_tag = document.createElement('i');
+                    i_tag.classList.add('fa');
+                    i_tag.classList.add('fa-trash-can');
+                    button.appendChild(i_tag);
+
+                    form.appendChild(label);
+                    form.appendChild(button);
+                    td_three.appendChild(form);
+
+                    const tr = document.createElement("tr");
+                    tr.classList.add('align-middle')
+                    tr.appendChild(th);
+                    tr.appendChild(td_one);
+                    tr.appendChild(td_two);
+                    tr.appendChild(td_three);
+
+                    document.getElementById("admin-view-pro").appendChild(tr);
+                }
+                const ele =  document.getElementById("profile-view");
+                ele.style.height = null
+                let height = Math.max(window.innerHeight - (document.getElementById("header-main").offsetHeight + document.getElementById("footer-main").offsetHeight + 18),ele.offsetHeight);
+                ele.style.height = height+"px";
+            });
+
+        })
     </script>
 {{/section}}
