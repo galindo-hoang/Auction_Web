@@ -6,6 +6,11 @@
         <div class="cards">
             {{#each this.product}}
                 <div class="card">
+                    {{#if isNew}}
+                        <div class="ribbon-wrapper">
+                            <div class="ribbon">Mới</div>
+                        </div>
+                    {{/if}}
                     <a href="/detail/{{this.ProID}}"><img src="/public/imgs/products/{{this.ProID}}/thumb.jpg"
                                                           class="card-image" alt="{{this.ProName}}"></a>
                     <div class="card-content">

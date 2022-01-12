@@ -18,7 +18,7 @@ export default {
         if (sort === "1") {
             return (await knex.raw(`select *,
                                            HOUR(timediff(p.EndDate, now()))        remaining,
-                                           TIMESTAMPDIFF(second, now(), p.EndDate) diff
+                                           TIMESTAMPDIFF(second, now(), p.EndDate) diff, TIMESTAMPDIFF(second, StartDate, now()) processing
                                     FROM products p,
                                          categories_detail cd,
                                          categories c
@@ -30,7 +30,7 @@ export default {
         } else if (sort === "2") {
             return (await knex.raw(`select *,
                                            HOUR(timediff(p.EndDate, now()))        remaining,
-                                           TIMESTAMPDIFF(second, now(), p.EndDate) diff
+                                           TIMESTAMPDIFF(second, now(), p.EndDate) diff, TIMESTAMPDIFF(second, StartDate, now()) processing
                                     FROM products p,
                                          categories_detail cd,
                                          categories c
@@ -42,7 +42,7 @@ export default {
         } else if (sort === "3") {
             return (await knex.raw(`select *,
                                            HOUR(timediff(p.EndDate, now()))        remaining,
-                                           TIMESTAMPDIFF(second, now(), p.EndDate) diff
+                                           TIMESTAMPDIFF(second, now(), p.EndDate) diff, TIMESTAMPDIFF(second, StartDate, now()) processing
                                     FROM products p,
                                          categories_detail cd,
                                          categories c
@@ -54,7 +54,7 @@ export default {
         } else if (sort === "4") {
             return (await knex.raw(`select *,
                                            HOUR(timediff(p.EndDate, now()))        remaining,
-                                           TIMESTAMPDIFF(second, now(), p.EndDate) diff
+                                           TIMESTAMPDIFF(second, now(), p.EndDate) diff, TIMESTAMPDIFF(second, StartDate, now()) processing
                                     FROM products p,
                                          categories_detail cd,
                                          categories c
@@ -66,7 +66,7 @@ export default {
         } else {
             return (await knex.raw(`select *,
                                            HOUR(timediff(p.EndDate, now()))        remaining,
-                                           TIMESTAMPDIFF(second, now(), p.EndDate) diff
+                                           TIMESTAMPDIFF(second, now(), p.EndDate) diff, TIMESTAMPDIFF(second, StartDate, now()) processing
                                     FROM products p,
                                          categories_detail cd,
                                          categories c

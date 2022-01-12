@@ -11,6 +11,7 @@ import viewByProduct from './models/product.js';
 import detail_product from "./routes/detail-product.js";
 import products_history from "./models/products_history.js";
 import cronJob from "./utils/cron.js";
+import moment from "moment";
 
 const app = express();
 
@@ -57,6 +58,7 @@ app.get('/', async (req, res) => {
             pro.exp = pro.remaining < 0;
             addBidAndUserMaxBid(pro).then(() => {
             });
+            pro.isNew = +pro.processing >= 0 && +pro.processing <= 3600;
         }
     }
     res.render('home', {data});
@@ -87,7 +89,7 @@ app.get('/views/byCat/:id', async (req, res) => {
     const products = await viewByCategories.findPageByCatId(CatID, limit, offset, sort);
     for (let i = 0; i < products.length; i++) {
         products[i].exp = products[i].diff < 0;
-
+        products[i].isNew = +products[i].processing >= 0 && +products[i].processing <= 3600;
         addBidAndUserMaxBid(products[i]).then(() => {
         });
     }
@@ -133,6 +135,7 @@ app.get('/views/byCatDe/:id', async (req, res) => {
     const products = await viewByProduct.findPageByCatDeId(CatDeID, limit, offset, sort);
     for (let i = 0; i < products.length; i++) {
         products[i].exp = products[i].diff < 0;
+        products[i].isNew = +products[i].processing >= 0 && +products[i].processing <= 3600;
         addBidAndUserMaxBid(products[i]).then(() => {
         });
     }
@@ -168,7 +171,7 @@ app.get('/views/:query', async (req, res) => {
     for (let pro of data) {
         pro.remaining = await viewByProduct.findRemaining(pro.ProID);
         pro.exp = pro.remaining.diff < 0;
-
+        pro.isNew = +pro.remaining.processing >= 0 && +pro.remaining.processing <= 3600;
         const raw = await products_history.findBidderAndCount(pro.ProID);
         let data = {}
         if (raw.length > 0) {

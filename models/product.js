@@ -10,7 +10,7 @@ export default {
         if (sort === "1") {
             return (await knex.raw(`select *,
                                            HOUR(timediff(EndDate, now()))        remaining,
-                                           TIMESTAMPDIFF(second, now(), EndDate) diff
+                                           TIMESTAMPDIFF(second, now(), EndDate) diff, TIMESTAMPDIFF(second, StartDate, now()) processing
                                     FROM products
                                     where CatDeID = ?
                                     order by CurPrice DESC
@@ -18,7 +18,7 @@ export default {
         } else if (sort === "2") {
             return (await knex.raw(`select *,
                                            HOUR(timediff(EndDate, now()))        remaining,
-                                           TIMESTAMPDIFF(second, now(), EndDate) diff
+                                           TIMESTAMPDIFF(second, now(), EndDate) diff, TIMESTAMPDIFF(second, StartDate, now()) processing
                                     FROM products
                                     where CatDeID = ?
                                     order by CurPrice
@@ -26,7 +26,7 @@ export default {
         } else if (sort === "3") {
             return (await knex.raw(`select *,
                                            HOUR(timediff(EndDate, now()))        remaining,
-                                           TIMESTAMPDIFF(second, now(), EndDate) diff
+                                           TIMESTAMPDIFF(second, now(), EndDate) diff, TIMESTAMPDIFF(second, StartDate, now()) processing
                                     FROM products
                                     where CatDeID = ?
                                     order by diff DESC
@@ -34,7 +34,7 @@ export default {
         } else if (sort === "4") {
             return (await knex.raw(`select *,
                                            HOUR(timediff(EndDate, now()))        remaining,
-                                           TIMESTAMPDIFF(second, now(), EndDate) diff
+                                           TIMESTAMPDIFF(second, now(), EndDate) diff, TIMESTAMPDIFF(second, StartDate, now()) processing
                                     FROM products
                                     where CatDeID = ?
                                     order by diff
@@ -42,7 +42,7 @@ export default {
         } else {
             return (await knex.raw(`select *,
                                            HOUR(timediff(EndDate, now()))        remaining,
-                                           TIMESTAMPDIFF(second, now(), EndDate) diff
+                                           TIMESTAMPDIFF(second, now(), EndDate) diff, TIMESTAMPDIFF(second, StartDate, now()) processing
                                     FROM products
                                     where CatDeID = ?
                                     LIMIT ?, ?`, [ID, offset, limit]))[0];
@@ -61,15 +61,15 @@ export default {
     },
 
     findTop5Price: async function () {
-        return (await knex.raw('select products.*,count(ph.ProID) bid,TIMESTAMPDIFF(second, now(), EndDate) remaining from products left join products_history ph on products.ProID = ph.ProID group by ph.ProID,products.CurPrice order by products.CurPrice desc limit 5'))[0];
+        return (await knex.raw('select products.*,count(ph.ProID) bid,TIMESTAMPDIFF(second, now(), EndDate) remaining, TIMESTAMPDIFF(second, StartDate, now()) processing from products left join products_history ph on products.ProID = ph.ProID group by ph.ProID,products.CurPrice order by products.CurPrice desc limit 5'))[0];
     },
 
     findTop5Exp: async function () {
-        return (await knex.raw(`select products.*,count(ph.ProID) bid, TIMESTAMPDIFF(second , now(), EndDate) remaining from products left join products_history ph on products.ProID = ph.ProID where TIMESTAMPDIFF(second , now(), EndDate) > 0 group by products.ProID order by remaining limit 5`))[0];
+        return (await knex.raw(`select products.*,count(ph.ProID) bid, TIMESTAMPDIFF(second, now(), EndDate) remaining, TIMESTAMPDIFF(second, StartDate, now()) processing from products left join products_history ph on products.ProID = ph.ProID where TIMESTAMPDIFF(second , now(), EndDate) > 0 group by products.ProID order by remaining limit 5`))[0];
     },
 
     async findTop5Bid() {
-        return (await knex.raw('select products.*,count(ph.ProID) bid, TIMESTAMPDIFF(second , now(), EndDate) remaining from products join products_history ph on products.ProID = ph.ProID group by ph.ProID order by bid desc limit 5'))[0];
+        return (await knex.raw('select products.*,count(ph.ProID) bid, TIMESTAMPDIFF(second, now(), EndDate) remaining, TIMESTAMPDIFF(second, StartDate, now()) processing from products join products_history ph on products.ProID = ph.ProID group by ph.ProID order by bid desc limit 5'))[0];
     },
 
     async countFTS(query) {
@@ -93,7 +93,7 @@ export default {
 
     async findRemaining(ID) {
         const res = (await knex.raw(`select HOUR(timediff(products.EndDate, now())) remaining,
-                                            TIMESTAMPDIFF(second, now(), EndDate)   diff
+                                            TIMESTAMPDIFF(second, now(), EndDate)   diff, TIMESTAMPDIFF(second, StartDate, now()) processing
                                      from products
                                      where ProID = ?`, ID))[0];
         return res[0];
