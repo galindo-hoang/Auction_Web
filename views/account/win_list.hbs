@@ -19,26 +19,36 @@
                         <th scope="col" class="text-center" style="width: 90px">Đánh giá</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="win-view">
                     {{#each products}}
                         <tr class="align-middle">
-                            <th class="text-center"><a href="/detail/15">{{this.ProID}}</a></th>
+                            <th class="text-center"><a href="/detail/{{this.ProID}}">{{this.ProID}}</a></th>
                             <th><img style="width: 120px;height: 120px;"
                                      src="/public/imgs/products/{{this.ProID}}/account.jpg"></th>
-                            <td><a href="/detail/{{this.ProID}}" style="color: black">{{this.TinyDes}}</a></td>
+                            <td>{{this.TinyDes}}</td>
                             <td class="text-center text-danger">{{format_number this.CurPrice}}</td>
                             <td class="text-center">{{format_date this.EndDate}}</td>
                             {{#if this.rating}}
                                 <td class="text-center"><i class="fas fa-check-circle text-success"></i></td>
                             {{else}}
-                                <td class="text-center"><a href="/account/ratingProduct/{{this.ProID}}"><i
-                                        class="fas fa-hourglass-end text-primary"></i></a></td>
+                                <td class="text-center">
+                                    <a href="/account/ratingProduct/{{this.ProID}}">
+                                        <i class="fas fa-hourglass-end text-primary"></i>
+                                    </a>
+                                </td>
                             {{/if}}
-                            <td></td>
                         </tr>
                     {{/each}}
                     </tbody>
                 </table>
+
+                <div class="card-footer">
+                    <div class="d-flex justify-content-center">
+                        <button class="btn btn-outline-primary" id="load-more" data-offset="1">
+                            Tải thêm
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -48,9 +58,72 @@
 
 
 {{#section 'footer'}}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         const ele =  document.getElementById("profile-view");
         let height = Math.max(window.innerHeight - (document.getElementById("header-main").offsetHeight + document.getElementById("footer-main").offsetHeight + 18),ele.offsetHeight);
         ele.style.height = height+"px";
+
+        const loadMore = document.getElementById("load-more")
+        loadMore.addEventListener("click",function (){
+            const page = +loadMore.getAttribute("data-offset");
+            loadMore.setAttribute("data-offset",(page+1)+"");
+            $.getJSON(`/winList/loadMore?nextPage=`+page,function (e){
+                if(e.length === 0) loadMore.remove();
+                for(let i=0;i<e.length;++i){
+                    const th = document.createElement("th");
+                    th.scope = "row"
+                    th.classList.add("text-center")
+                    const a_one = document.createElement("a");
+                    a_one.href = "/detail/"+e[i].ProID;
+                    a_one.innerHTML = e[i].ProID;
+                    th.appendChild(a_one);
+
+                    const td_one = document.createElement("td");
+                    const img = document.createElement("img");
+                    img.style.width = "120px";
+                    img.style.height = "120px";
+                    img.src = "/public/imgs/products/"+e[i].ProID+"/account.jpg"
+                    td_one.appendChild(img);
+
+                    const td_two = document.createElement("td");
+                    td_two.innerHTML = e[i].TinyDes;
+
+                    const td_three = document.createElement("td");
+                    td_three.classList.add("text-center");
+                    td_three.classList.add("text-danger");
+                    td_three.innerHTML = numeral(e[i].CurPrice).format('0,0')
+
+                    const td_four = document.createElement("td");
+                    td_four.classList.add("text-center");
+                    td_four.innerHTML = moment(e[i].EndDate).format("DD/MM/YYYY, h:mm:ss A");
+
+                    const td_five = document.createElement("td");
+                    td_five.classList.add("text-center");
+                    if(e[i].rating) td_five.innerHTML = '<i class="fas fa-check-circle text-success"></i>'
+                    else{
+                        const a = document.createElement("a");
+                        a.href = "/account/ratingProduct/"+ e[i].ProID;
+                        a.innerHTML = '<i class="fas fa-hourglass-end text-primary"></i>'
+                        td_five.appendChild(a);
+                    }
+
+                    const tr = document.createElement("tr");
+                    tr.classList.add("align-middle");
+                    tr.appendChild(th);
+                    tr.appendChild(td_one);
+                    tr.appendChild(td_two);
+                    tr.appendChild(td_three);
+                    tr.appendChild(td_four);
+                    tr.appendChild(td_five);
+                    document.getElementById("win-view").appendChild(tr);
+                }
+                const ele =  document.getElementById("profile-view");
+                ele.style.height = null
+                let height = Math.max(window.innerHeight - (document.getElementById("header-main").offsetHeight + document.getElementById("footer-main").offsetHeight + 18),ele.offsetHeight);
+                ele.style.height = height+"px";
+            });
+        });
     </script>
 {{/section}}
