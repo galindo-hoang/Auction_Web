@@ -106,7 +106,7 @@ router.post("/account/favorite/loading",auth.beforeLogin,(req,res)=>{
 })
 
 router.get("/account/win",auth.beforeLogin,async (req, res) => {
-    const products = await viewByProduct.findByWinList(req.session.account.UserID);
+    const products = await viewByProduct.findByWinList(req.session.account.UserID,4,0);
     for (let i=0;i<products.length;++i){
         const rating = await win_list.findByRating(products[i].ProID,products[i].UserID);
         products[i].rating = rating.length !== 0;
@@ -119,6 +119,16 @@ router.get("/account/win",auth.beforeLogin,async (req, res) => {
         isAdmin: req.session.account.UserRole === 0
     });
 });
+
+
+router.get("/winList/loadMore",auth.beforeLogin,async (req, res) => {
+    const products = await viewByProduct.findByWinList(req.session.account.UserID,4,req.query.nextPage);
+    for (let i=0;i<products.length;++i){
+        const rating = await win_list.findByRating(products[i].ProID,products[i].UserID);
+        products[i].rating = rating.length !== 0;
+    }
+    res.json(products);
+})
 
 router.get("/account/ratingProduct/:id",auth.beforeLogin,async (req, res) => {
     const data = await viewByProduct.findToRating(req.params.id);

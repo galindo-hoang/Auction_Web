@@ -73,10 +73,8 @@
         loadMore.addEventListener("click",function (){
             const page = +loadMore.getAttribute("data-offset");
             loadMore.setAttribute("data-offset",(page+1)+"");
-            console.log()
             $.getJSON(`/favorite/loadMore?nextPage=`+page,function (e){
                 if(e.length === 0) loadMore.remove();
-                console.log(e);
                 for(let i = 0 ;i<e.length;++i){
                     const th = document.createElement("th");
                     th.scope = "row"

@@ -163,8 +163,8 @@ export default {
         });
     },
 
-    findByWinList(UserID) {
-        return knex.select('*').from('win_list').leftJoin('products', 'products.ProID', 'win_list.ProID').where('win_list.UserID', UserID);
+    findByWinList(UserID,range,offset) {
+        return knex.select('*').from('win_list').leftJoin('products', 'products.ProID', 'win_list.ProID').where('win_list.UserID', UserID).limit(range).offset(range*offset);
     },
     async findToRating(ProID) {
         return (await knex.select('*').from('products').join('users', 'users.UserID', 'products.SellerID').where('products.ProID', ProID))[0];
