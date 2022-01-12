@@ -23,14 +23,14 @@
                         <th scope="col" class="text-center">&nbsp;</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="end-bidding">
                     {{#each products}}
                         <tr class="align-middle">
                             <th class="text-center"><a href="/detail/{{this.ProID}}">{{this.ProID}}</a></th>
                             <th scope="row" class="text-center"><img style="width: 120px;height: 120px;" src="/public/imgs/products/{{this.ProID}}/account.jpg"></th>
                             <td>{{this.TinyDes}}</td>
                             {{#if this.bidder}}
-                                <td class="text-center text-danger">{{format_number this.CurPrice}}</td>
+                                <td class="text-center text-danger">{{format_number this.CurPrice}}đ</td>
                                 <td class="text-center">{{this.bidder.UserName}}</td>
                                 {{#if this.rating}}
                                     <td class="text-center"><i class="fas fa-check-circle text-success"></i></td>
@@ -46,6 +46,15 @@
                     {{/each}}
                     </tbody>
                 </table>
+
+                <div class="card-footer">
+                    <div class="d-flex justify-content-center">
+                        <input name="page" value="{{this.nextPage}}" type="hidden">
+                        <button type="submit" class="btn btn-outline-primary" id="load-more" data-offset="1">
+                            Tải thêm
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -54,9 +63,96 @@
 
 
 {{#section 'footer'}}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
     <script>
         const ele =  document.getElementById("profile-view");
         let height = Math.max(window.innerHeight - (142 + 18),ele.offsetHeight);
         ele.style.height = height+"px";
+
+        const loadMore = document.getElementById("load-more")
+        loadMore.addEventListener("click",function (){
+            const page = +loadMore.getAttribute("data-offset");
+            loadMore.setAttribute("data-offset",(page+1)+"");
+            console.log()
+            $.getJSON(`/end/loadMore?nextPage=`+page,function (e){
+                if(e.length === 0) loadMore.remove();
+                console.log(e);
+                for(let i = 0 ;i<e.length;++i){
+                    const th = document.createElement("th");
+                    th.scope = "row"
+                    th.classList.add("text-center")
+                    const a_one = document.createElement("a");
+                    a_one.href = "/detail/"+e[i].ProID;
+                    a_one.innerHTML = e[i].ProID;
+                    th.appendChild(a_one);
+
+
+                    const td_one = document.createElement("td");
+                    const img = document.createElement("img");
+                    img.style.width = "120px";
+                    img.style.height = "120px";
+                    img.src = "/public/imgs/products/"+e[i].ProID+"/account.jpg"
+                    td_one.appendChild(img);
+
+
+                    const td_two = document.createElement("td");
+                    td_two.innerHTML = e[i].TinyDes;
+
+                    const td_three = document.createElement("td");
+                    const td_four = document.createElement("td");
+                    const td_five = document.createElement("td");
+                    td_three.classList.add("text-center");
+                    td_four.classList.add("text-center");
+                    td_five.classList.add('text-center');
+
+
+                    if(e[i].bidder){
+                        td_three.classList.add("text-danger");
+                        td_three.innerHTML = numeral(e[i].CurPrice).format('0,0')+"đ"
+
+                        td_four.innerHTML = e[i].bidder.UserName;
+                        if(e[i].rating) {
+                            const i_tag = document.createElement('i');
+                            i_tag.classList.add('fas');
+                            i_tag.classList.add('fa-check-circle');
+                            i_tag.classList.add('text-success');
+                            td_five.appendChild(i_tag);
+                        } else{
+                            const a_tag = document.createElement("a");
+                            const i_tag = document.createElement('i');
+                            i_tag.classList.add('fas')
+                            i_tag.classList.add('fa-hourglass-end');
+                            i_tag.classList.add('text-primary');
+                            a_tag.href = "/account/ratingUser/" + e[i].bidder.UserID + "?ProID=" + e[i].ProID;
+                            a_tag.appendChild(i_tag);
+                            td_five.appendChild(a_tag);
+                        }
+                    }
+                    else{
+                        const strong = document.createElement('strong');
+                        strong.innerHTML = 'NaN';
+                        td_three.appendChild(strong);
+                        td_four.innerHTML = '&nbsp;';
+                        td_five.innerHTML = '&nbsp;';
+                    }
+
+                    const tr = document.createElement("tr");
+                    tr.classList.add("align-middle")
+                    tr.appendChild(th);
+                    tr.appendChild(td_one);
+                    tr.appendChild(td_two);
+                    tr.appendChild(td_three);
+                    tr.appendChild(td_four);
+                    tr.appendChild(td_five);
+
+                    document.getElementById("end-bidding").appendChild(tr);
+                }
+                const ele =  document.getElementById("profile-view");
+                ele.style.height = null
+                let height = Math.max(window.innerHeight - (142 + 18),ele.offsetHeight);
+                ele.style.height = height+"px";
+            });
+
+        })
     </script>
 {{/section}}

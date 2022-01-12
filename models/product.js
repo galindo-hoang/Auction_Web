@@ -134,7 +134,7 @@ export default {
     },
 
     findBySeller(userID,range) {
-        return knex.select('products.*').from('products').join('users', 'products.SellerID', 'users.UserID').where('users.UserID', userID).limit(range);
+        return knex.select('products.*').from('products').join('users', 'products.SellerID', 'users.UserID').whereRaw(`users.UserID = ? and products.Status = ?`, [userID, 1]).limit(range);
     },
 
     async countFindBySeller(userID) {
@@ -170,7 +170,7 @@ export default {
         return (await knex.select('*').from('products').join('users', 'users.UserID', 'products.SellerID').where('products.ProID', ProID))[0];
     },
     async findEndBidding(SellerID) {
-        return (await knex.raw('select * from products where (now() > products.EndDate or products.CurPrice = products.BuyNowPrice) and products.SellerID = ?', [SellerID]))[0];
+        return (await knex.raw('select * from products where (now() > products.EndDate or products.CurPrice = products.BuyNowPrice) and products.SellerID = ? limit 4 offset 0', [SellerID]))[0];
 
     },
     findUserEmail(ID) {
@@ -191,5 +191,11 @@ export default {
             this.updateStatusEndBidding(productExpire[i].ProID);
         }
         return productExpire;
+    },
+    findByBidding(ID,range,offset) {
+        return knex.select('products.*').from('users').leftJoin('products', 'products.SellerID', 'users.UserID').whereRaw(`users.UserID = ? and products.Status = ?`, [+ID, 1]).limit(range).offset(offset*range);
+    },
+    findByEnd(ID,range,offset){
+        return knex.select('products.*').from('users').leftJoin('products', 'products.SellerID', 'users.UserID').whereRaw(`users.UserID = ? and products.Status = ?`, [+ID, 0]).limit(range).offset(offset*range);
     }
 }
