@@ -6,6 +6,45 @@
 {{/if}}
 
 
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-title-name"></h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Đánh giá</th>
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
+                            <th class="text-center">nội dung</th>
+                            <th>&nbsp;</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody id="modal-review">
+
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="button" class="btn btn-danger d-flex justify-content-center" data-bs-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
 <div id="modal-sm" class="modal fade" data-backdrop="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
@@ -102,6 +141,12 @@
                             <p><i>Bước giá</i></p>
                             <p><i>{{format_number this.product.StepPrice}}</i></p>
                         </div>
+                        {{#unless expire}}
+                            <div class="d-flex StepPrice">
+                                <p>Giá đề xuất</p>
+                                <p class="text-success">{{format_number this.product.SuggestPrice}}</p>
+                            </div>
+                        {{/unless}}
                         <p class="TinyDes">
                             {{this.product.TinyDes}}
                         </p>
@@ -192,6 +237,13 @@
                 <span class="rating-seller">
                     ({{format_rating this.Seller.UserRating}}%&nbsp;<i class="fas fa-thumbs-up" style="color: blue"></i>)
                 </span>
+                {{#if isLogin}}
+                    {{#unless seller}}
+                        <button type="button" class="btn btn-primary view-review" data-name="{{this.Seller.UserName}}" data-id="{{this.product.SellerID}}" data-bs-toggle="modal" data-bs-target="#myModal">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    {{/unless}}
+                {{/if}}
             </p>
             <p class="card mt-auto">
             <h4 class="card-header mt-2 bg-secondary text-white">Mô tả chi tiết</h4>
@@ -229,10 +281,10 @@
                                     <th>Người mua</th>
                                     <th>Giá</th>
                                     {{#if seller}}
-                                        {{#if expire}}
-                                        {{else}}
+                                        {{#unless expire}}
                                             <th></th>
-                                        {{/if}}
+                                        {{/unless}}
+                                        <th></th>
                                     {{/if}}
                                 </tr>
                                 </thead>
@@ -243,8 +295,7 @@
                                         <td>{{this.UserName}} {{#if ../seller}}({{this.UserID}}){{/if}}</td>
                                         <td>{{format_number this.Price}}</td>
                                         {{#if ../seller}}
-                                            {{#if ../expire}}
-                                            {{else}}
+                                            {{#unless ../expire}}
                                                 <td>
                                                     <form method="post">
                                                         <input name="ProID" value="{{../product.ProID}}" type="hidden">
@@ -255,7 +306,12 @@
                                                         </button>
                                                     </form>
                                                 </td>
-                                            {{/if}}
+                                            {{/unless}}
+                                            <td>
+                                                <button type="button" class="btn btn-primary view-review" data-name="{{this.UserName}}" data-id="{{this.BidderID}}" data-bs-toggle="modal" data-bs-target="#myModal">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                            </td>
                                         {{/if}}
                                     </tr>
                                 {{/each}}
@@ -375,11 +431,52 @@
 {{#section 'footer'}}
     <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
-            integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script>
+        // ajax view review
+        const elements_review = document.getElementsByClassName("view-review");
+        for(let i = 0 ;i<elements_review.length;++i){
+            elements_review[i].addEventListener("click", function(){
+                const tb = document.getElementById("modal-review");
+                while (tb.firstChild) {
+                    tb.firstChild.remove()
+                }
+                const id = elements_review[i].getAttribute("data-id");
+                document.getElementById("modal-title-name").innerHTML = elements_review[i].getAttribute("data-name")
+                $.getJSON(`/getReview/detail?id=`+id,function (data){
+                    if(data.length === 0){
+                        const th = document.createElement("th");
+                        th.classList.add("text-center");
+                        th.innerHTML = "Nothing";
+                        th.colSpan = 6;
+                        const tr = document.createElement("tr");
+                        tr.appendChild(th);
+                        document.getElementById("modal-review").appendChild(tr);
+                    }else{
+                        for(let i = 0 ;i<data.length;++i){
+                            const thRate = document.createElement("th");
+                            thRate.colSpan = 1;
+                            if(data[i].Rate === 1) thRate.innerHTML = `<div class="text-center"><i class="fas fa-thumbs-up" style="color: blue"></i></div>`
+                            else thRate.innerHTML = `<div class="text-center"><i class="fas fa-thumbs-down text-center" style="color: red"></i></div>`
+
+                            const tdComment = document.createElement("td");
+                            tdComment.colSpan = 5;
+                            tdComment.innerHTML = data[i].Comment;
+
+                            const tr = document.createElement("tr");
+                            tr.appendChild(thRate);
+                            tr.appendChild(tdComment);
+
+                            document.getElementById("modal-review").appendChild(tr);
+
+                        }
+                    }
+                });
+            });
+        }
+
+
         $('#text').on('click', function (e) {
             $('#favorite').submit();
         });

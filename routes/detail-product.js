@@ -15,6 +15,7 @@ import win_list from "../models/win_list.js";
 const router = express.Router();
 
 import {addBidAndUserMaxBid} from "../app.js"
+import rating_list from "../models/rating_list.js";
 
 router.get('/detail/:id', async (req, res) => {
     const proID = req.params.id || 1;
@@ -76,6 +77,7 @@ router.get('/detail/:id', async (req, res) => {
         if (seller) {
             pending_bidder = await Users.findUserPendingByProID(req.params.id);
         }
+        if(!expire) product.SuggestPrice = product.CurPrice + product.StepPrice;
         res.render('product/detail', {
             product: product,
             similarProduct: similarProduct,
@@ -218,5 +220,10 @@ router.post('/favorite', auth.beforeLogin, async (req, res) => {
     }
     res.redirect(("/detail/" + req.query.ProID).trim());
 });
+
+router.get('/getReview/detail',async (req,res)=>{
+    const data = await rating_list.findByUserID(req.query.id);
+    res.json(data);
+})
 
 export default router;
