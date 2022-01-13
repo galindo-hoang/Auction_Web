@@ -66,7 +66,7 @@ router.get("/admin/editCat/add", auth.beforeLogin, function (req, res) {
     if (req.session.account.UserRole !== 0)
         res.redirect('/');
     else
-        res.render("admin/addCat", {isAdmin: true, editCat: true});
+        res.render("admin/addCat", {isAdmin: true, editCat: true, mess: req.query.mess || false});
 });
 
 router.post("/admin/editCat/add", auth.beforeLogin, function (req, res) {
@@ -74,9 +74,10 @@ router.post("/admin/editCat/add", auth.beforeLogin, function (req, res) {
         res.redirect('/');
     else {
         viewByCategories.add(req.body);
-        res.render("admin/addCat", {
-            mess: 'Thêm thành công!', isAdmin: true, editCat: true
-        });
+        res.redirect('/admin/editCat/add?mess=true');
+        // res.render("admin/addCat", {
+        //     mess: 'Thêm thành công!', isAdmin: true, editCat: true
+        // });
     }
 });
 
@@ -134,7 +135,7 @@ router.get("/admin/editCatDe/add", auth.beforeLogin, function (req, res) {
     if (req.session.account.UserRole !== 0)
         res.redirect('/');
     else
-        res.render("admin/addCatDe", {isAdmin: true, editCatDe: true});
+        res.render("admin/addCatDe", {isAdmin: true, editCatDe: true, mess: req.query.mess || false});
 });
 
 router.post("/admin/editCatDe/add", auth.beforeLogin, function (req, res) {
@@ -142,9 +143,10 @@ router.post("/admin/editCatDe/add", auth.beforeLogin, function (req, res) {
         res.redirect('/');
     else {
         viewByCategoriesDetail.add(req.body);
-        res.render("admin/addCatDe", {
-            mess: 'Thêm thành công!', isAdmin: true, editCatDe: true
-        });
+        res.redirect('/admin/editCatDe/add?mess=true');
+        // res.render("admin/addCatDe", {
+        //     mess: 'Thêm thành công!', isAdmin: true, editCatDe: true
+        // });
     }
 });
 
