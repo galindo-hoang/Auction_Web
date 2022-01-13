@@ -57,7 +57,7 @@ export default {
     },
 
     async findTop5ByCatDeID(ID, exID) {
-        return (await knex.raw('select *, HOUR(timediff(products.EndDate,now())) remaining, TIMESTAMPDIFF(second, now(), EndDate) diff from products where CatDeID = ? and ProID <> ? limit 0,5', [ID, exID]))[0];
+        return (await knex.raw('select *, HOUR(timediff(products.EndDate,now())) remaining, TIMESTAMPDIFF(second, now(), EndDate) diff, TIMESTAMPDIFF(second, StartDate, now()) processing from products where CatDeID = ? and ProID <> ? limit 0,5', [ID, exID]))[0];
     },
 
     findTop5Price: async function () {

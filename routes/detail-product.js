@@ -24,6 +24,7 @@ router.get('/detail/:id', async (req, res) => {
     const similarProduct = await viewByProduct.findTop5ByCatDeID(product.CatDeID, proID);
     for (let i = 0; i < similarProduct.length; i++){
         similarProduct[i].exp = similarProduct[i].diff < 0;
+        similarProduct[i].isNew = +similarProduct[i].processing >= 0 && +similarProduct[i].processing <= 3600;
         addBidAndUserMaxBid(similarProduct[i]).then(()=>{});
     }
 
