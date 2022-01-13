@@ -21,87 +21,92 @@ router.get('/detail/:id', async (req, res) => {
     const proID = req.params.id || 1;
 
     const product = await viewByProduct.findByID(proID);
-    const similarProduct = await viewByProduct.findTop5ByCatDeID(product.CatDeID, proID);
-    for (let i = 0; i < similarProduct.length; i++){
-        similarProduct[i].exp = similarProduct[i].diff < 0;
-        similarProduct[i].isNew = +similarProduct[i].processing >= 0 && +similarProduct[i].processing <= 3600;
-        addBidAndUserMaxBid(similarProduct[i]).then(()=>{});
-    }
-
-    const topBidder = await viewByProduct.findTopBidder(proID);
-    const productHistory = await viewByProduct.findProductHistory(proID);
-
-    // get img in detail
-    let imgs = [];
-    let active = true;
-    fs.readdirSync('./public/imgs/products/' + proID + '/detail/').forEach(file => {
-        if (active) {
-            imgs.push({name: file, first: active});
-            active = false;
-        } else imgs.push({name: file, first: active});
-    })
-
-    if (topBidder.length) {
-        let tmp = topBidder[0].UserName;
-        tmp = tmp.split("");
-        topBidder[0].UserName = "";
-        for (let i = 0; i / tmp.length < 0.5; i++)
-            tmp[i] = '*';
-        for (let i = 0; i < tmp.length; i++)
-            topBidder[0].UserName += tmp[i];
-
-        for (let i = 0; i < productHistory.length; i++) {
-            tmp = productHistory[i].UserName.split("");
-            for (let j = 0; j / tmp.length < 0.5; j++)
-                tmp[j] = '*';
-            productHistory[i].UserName = '';
-            for (let k = 0; k < tmp.length; k++)
-                productHistory[i].UserName += tmp[k];
+    if(product === undefined) res.redirect("/");
+    else{
+        const similarProduct = await viewByProduct.findTop5ByCatDeID(product.CatDeID, proID);
+        for (let i = 0; i < similarProduct.length; i++){
+            similarProduct[i].exp = similarProduct[i].diff < 0;
+            similarProduct[i].isNew = +similarProduct[i].processing >= 0 && +similarProduct[i].processing <= 3600;
+            addBidAndUserMaxBid(similarProduct[i]).then(()=>{});
         }
-    }
-    const proSeller = await viewByProduct.findSeller(product.SellerID);
-    const prevPage = req.headers.referer;
-    if (req.session.isLogin) {
-        let mess = "";
-        const banned = ((await banned_list.find(req.session.account.UserID, req.params.id)).length === 1);
-        if (+req.session.account[req.params.id] === 1) {
-            mess = "Chúng tôi đã thêm bạn vào hàng chờ";
-            delete req.session.account[req.params.id];
-        } else if (+req.session.account[req.params.id] === 0) {
-            mess = "Bạn đang chờ quyết định của người bán";
-            delete req.session.account[req.params.id];
+
+        const topBidder = await viewByProduct.findTopBidder(proID);
+        const productHistory = await viewByProduct.findProductHistory(proID);
+
+        // get img in detail
+        let imgs = [];
+        let active = true;
+        fs.readdirSync('./public/imgs/products/' + proID + '/detail/').forEach(file => {
+            if (active) {
+                imgs.push({name: file, first: active});
+                active = false;
+            } else imgs.push({name: file, first: active});
+        })
+
+        if (topBidder.length) {
+            let tmp = topBidder[0].UserName;
+            tmp = tmp.split("");
+            topBidder[0].UserName = "";
+            for (let i = 0; i / tmp.length < 0.5; i++)
+                tmp[i] = '*';
+            for (let i = 0; i < tmp.length; i++)
+                topBidder[0].UserName += tmp[i];
+
+            for (let i = 0; i < productHistory.length; i++) {
+                tmp = productHistory[i].UserName.split("");
+                for (let j = 0; j / tmp.length < 0.5; j++)
+                    tmp[j] = '*';
+                productHistory[i].UserName = '';
+                for (let k = 0; k < tmp.length; k++)
+                    productHistory[i].UserName += tmp[k];
+            }
         }
-        const favorite = await favorite_list.find(req.session.account.UserID, req.params.id);
-        const expire = moment(product.EndDate) < moment() || product.CurPrice === product.BuyNowPrice || banned || !product.Status;
-        const seller = product.SellerID === req.session.account.UserID;
-        let pending_bidder = [];
-        if (seller) {
-            pending_bidder = await Users.findUserPendingByProID(req.params.id);
+        const proSeller = await viewByProduct.findSeller(product.SellerID);
+        const prevPage = req.headers.referer;
+        if (req.session.isLogin) {
+            let mess = "";
+            const banned = ((await banned_list.find(req.session.account.UserID, req.params.id)).length === 1);
+            if (+req.session.account[req.params.id] === 1) {
+                mess = "Chúng tôi đã thêm bạn vào hàng chờ";
+                delete req.session.account[req.params.id];
+            } else if (+req.session.account[req.params.id] === 0) {
+                mess = "Bạn đang chờ quyết định của người bán";
+                delete req.session.account[req.params.id];
+            }
+            const favorite = await favorite_list.find(req.session.account.UserID, req.params.id);
+            const expire = moment(product.EndDate) < moment() || product.CurPrice === product.BuyNowPrice || banned || !product.Status;
+            const seller = product.SellerID === req.session.account.UserID;
+            let pending_bidder = [];
+            if (seller) {
+                pending_bidder = await Users.findUserPendingByProID(req.params.id);
+            }
+            if(!expire) product.SuggestPrice = product.CurPrice + product.StepPrice;
+            res.render('product/detail', {
+                product: product,
+                similarProduct: similarProduct,
+                favorite, expire, seller, pending_bidder, mess, imgs,
+                isLogin: req.session.isLogin,
+                topBidder: topBidder[0],
+                isBid: topBidder.length,
+                productHistory,
+                Seller: proSeller[0],
+                prevPage
+            });
+        } else {
+            const expire = moment(product.EndDate) < moment() || product.CurPrice === product.BuyNowPrice || !product.Status;
+            res.render('product/detail', {
+                product: product,
+                similarProduct: similarProduct,
+                isLogin: req.session.isLogin,
+                isBid: topBidder.length,
+                topBidder: topBidder[0],
+                imgs,
+                Seller: proSeller[0],
+                prevPage,
+                expire
+            });
         }
-        if(!expire) product.SuggestPrice = product.CurPrice + product.StepPrice;
-        res.render('product/detail', {
-            product: product,
-            similarProduct: similarProduct,
-            favorite, expire, seller, pending_bidder, mess, imgs,
-            isLogin: req.session.isLogin,
-            topBidder: topBidder[0],
-            isBid: topBidder.length,
-            productHistory,
-            Seller: proSeller[0],
-            prevPage
-        });
-    } else {
-        const expire = moment(product.EndDate) < moment() || product.CurPrice === product.BuyNowPrice || !product.Status;
-        res.render('product/detail', {
-            product: product,
-            similarProduct: similarProduct,
-            isLogin: req.session.isLogin,
-            topBidder: topBidder[0],
-            imgs,
-            Seller: proSeller[0],
-            prevPage,
-            expire
-        });
+
     }
 });
 

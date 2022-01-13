@@ -95,20 +95,22 @@ app.get('/views/byCat/:id', async (req, res) => {
     }
 
     const name = await viewByCategories.findCatName(CatID);
-
-    res.render('product/viewByCat', {
-        CatID: CatID,
-        products: products,
-        empty: products.length === 0,
-        pageNumbers,
-        CatName: name[0].CatName,
-        isEnd: +page === nPages,
-        isStart: +page === 1,
-        nextPage: +page + 1,
-        previousPage: +page - 1,
-        isOnePage: pageNumbers.length === 1,
-        sort
-    });
+    if(name.length === 0) res.redirect("/")
+    else{
+        res.render('product/viewByCat', {
+            CatID: CatID,
+            products: products,
+            empty: products.length === 0,
+            pageNumbers,
+            CatName: name[0].CatName,
+            isEnd: +page === nPages,
+            isStart: +page === 1,
+            nextPage: +page + 1,
+            previousPage: +page - 1,
+            isOnePage: pageNumbers.length === 1,
+            sort
+        });
+    }
 });
 
 app.get('/views/byCatDe/:id', async (req, res) => {
@@ -140,20 +142,22 @@ app.get('/views/byCatDe/:id', async (req, res) => {
         });
     }
     const name = await viewByProduct.findCatDeName(CatDeID);
-
-    res.render('product/viewByCatDetail', {
-        CatDeID: CatDeID,
-        products: products,
-        empty: products.length === 0,
-        pageNumbers,
-        CatDeName: name[0].CatDeName,
-        isEnd: +page === nPages,
-        isStart: +page === 1,
-        nextPage: +page + 1,
-        previousPage: +page - 1,
-        isOnePage: pageNumbers.length === 1,
-        sort
-    });
+    if(name.length === 0) res.redirect("/");
+    else{
+        res.render('product/viewByCatDetail', {
+            CatDeID: CatDeID,
+            products: products,
+            empty: products.length === 0,
+            pageNumbers,
+            CatDeName: name[0].CatDeName,
+            isEnd: +page === nPages,
+            isStart: +page === 1,
+            nextPage: +page + 1,
+            previousPage: +page - 1,
+            isOnePage: pageNumbers.length === 1,
+            sort
+        });
+    }
 });
 
 app.post('/views', async (req, res) => {

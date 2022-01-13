@@ -2,7 +2,7 @@
     <h4 class="card-header text-white bg-secondary">
         {{this.CatName}}
     </h4>
-    <div class="card-body">
+    <div class="card-body" id="byCat-view">
         {{#if this.empty}}
             <div class="d-flex justify-content-center mt-5">
                 <img src="/public/assets/empty.png" alt="Empty">
@@ -114,6 +114,10 @@
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script>
+        const ele =  document.getElementById("byCat-view");
+        let height = Math.max(window.innerHeight - (document.getElementById("header-main").offsetHeight + document.getElementById("footer-main").offsetHeight + 18),ele.offsetHeight);
+        ele.style.height = height - 24 +"px";
+
         const elements = document.getElementsByClassName("card-remaining");
         for (let i = 0; i < elements.length; i++) {
             const check = elements[i].getAttribute("data-date");

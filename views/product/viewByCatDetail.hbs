@@ -2,7 +2,7 @@
     <h4 class="card-header text-white bg-secondary">
         {{this.CatDeName}}
     </h4>
-    <div class="card-body">
+    <div class="card-body" id="byCatDe-view">
         {{#if this.empty}}
             <div class="d-flex justify-content-center mt-5">
                 <img src="/public/assets/empty.png" alt="Empty">
@@ -111,6 +111,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script>
+        const ele =  document.getElementById("byCatDe-view");
+        let height = Math.max(window.innerHeight - (document.getElementById("header-main").offsetHeight + document.getElementById("footer-main").offsetHeight + 18),ele.offsetHeight);
+        ele.style.height = height - 24 +"px";
+
+
         const elements = document.getElementsByClassName("card-remaining");
         for(let i=0; i<elements.length; i++) {
             const check = elements[i].getAttribute("data-date");
