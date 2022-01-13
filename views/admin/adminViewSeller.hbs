@@ -3,7 +3,7 @@
 
         {{> account-layout}}
 
-        <div class="col-sm-9">
+        <div class="col-sm-9" id="adminViewSeller-view">
             <div class="card">
                 <h4 class="card-header d-flex justify-content-between container-fluid text-white bg-secondary">
                     Danh sách tài khoản seller
@@ -42,6 +42,10 @@
 
 {{#section 'footer'}}
     <script>
+        const register_view = document.getElementById("adminViewSeller-view")
+        const height = Math.max(register_view.offsetHeight,window.innerHeight)-(document.getElementById("header-main").offsetHeight + document.getElementById("footer-main").offsetHeight)
+        register_view.style.height = (height - 24) + "px";
+
         function clickedDelete(e) {
             if (!confirm('Xác nhận hạ cấp tài khoản?')) {
                 e.preventDefault();
