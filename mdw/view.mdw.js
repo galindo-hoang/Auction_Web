@@ -15,6 +15,9 @@ export default function (app){
             format_date(date){
                 return moment(date).format("DD/MM/YYYY, h:mm:ss A");
             },
+            birth_date(date){
+                return moment(date).format("YYYY-MM-DD");
+            },
             format_rating(rating){
                 return (parseFloat(rating)).toFixed(2)*100;
             }
