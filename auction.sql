@@ -236,7 +236,7 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 </tr>
 </tbody>
 </table>
-</div>', 200000, 14000000, 14000000, 18000000, 2, '2021-12-01 21:20:27', '2022-01-11 21:20:35', 1, 0, 1, 0),
+</div>', 200000, 14000000, 14000000, 18000000, 2, '2021-12-01 21:20:27', '2022-01-16 21:20:35', 1, 0, 1, 0),
         (3, 'Laptop HP 15-DW1001WN 4J238UA', 'hiệu năng ổn định cùng một mức giá hợp lý.', '<div class="box-content">
 <table id="tskt">
 <tbody>
@@ -286,7 +286,7 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 </tr>
 </tbody>
 </table>
-</div>', 100000, 5000000, 5000000, 10000000, 2, '2021-12-05 21:23:34', '2022-01-10 01:09:38', 1, 0, 1, 0),
+</div>', 100000, 5000000, 5000000, 10000000, 2, '2021-12-05 21:23:34', '2022-01-14 09:50:38', 1, 0, 1, 0),
         (4, 'Laptop HP Probook 430 G8 2H0N6PA', 'Chiếc laptop HP Probook 430 G8 2H0N6PA hỗ trợ đa dạng công việc văn phòng học tập. ', '<div class="box-content">
 <table id="tskt">
 <tbody>
@@ -610,7 +610,7 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 </tr>
 </tbody>
 </table>
-</div>', 150000, 9000000, 9000000, 12000000, 1, '2021-12-05 21:36:03', '2022-01-12 21:36:05', 1, 0, 1, 0),
+</div>', 150000, 9000000, 9000000, 12000000, 1, '2021-12-05 21:36:03', '2022-01-16 21:36:05', 1, 0, 1, 0),
         (10, 'Nokia 5.4', 'Nokia chắc chắn là một trong những thương hiệu không còn xa lạ với người dùng', '<div class="box-content">
 <table id="tskt">
 <tbody>
@@ -668,7 +668,7 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 </tr>
 </tbody>
 </table>
-</div>', 50000, 2000000, 2000000, 5000000, 1, '2021-12-05 21:37:18', '2022-01-11 15:37:19', 1, 0, 1, 0),
+</div>', 50000, 2000000, 2000000, 5000000, 1, '2021-12-05 21:37:18', '2022-01-14 15:37:19', 1, 0, 1, 0),
         (11, 'Realme 6', 'Realme 6 ra mắt mới đây cùng với Realme 6 Pro tiếp nối sự thành công', '<div class="box-content">
 <table id="tskt">
 <tbody>
@@ -723,7 +723,7 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 </tbody>
 </table>
 </div>', 70000, 3000000, 3000000, 6000000, 1, '2021-12-05 21:38:57', '2022-01-31 21:39:02', 1, 0, 1, 0),
-        (12, 'Lò Vi Sóng Có Nướng Hafele HW-F23B', 'Có kích thước nhỏ gọn với dung tích 23 lít. Công suất nướng 1.000W.', '<table><tbody><tr><td>Bảng điều khiển</td><td>Nút nhấn kết hợp nút vặn</td></tr><tr><td>Thương hiệu</td><td>HAFELE</td></tr><tr><td>Dung tích</td><td>28L</td></tr><tr><td>Công suất</td><td>Đầu vào: 1450W; Đầu ra: 900W; Nướng: 1100W</td></tr><tr><td>Kích thước</td><td>520 x 500 x 326 mm</td></tr><tr><td>Trọng lượng</td><td>208kg</td></tr></tbody></table>', 50000, 1500000, 1500000, 4000000, 3, '2021-12-05 21:42:36', '2022-01-11 15:42:39', 1, 0, 1, 0),
+        (12, 'Lò Vi Sóng Có Nướng Hafele HW-F23B', 'Có kích thước nhỏ gọn với dung tích 23 lít. Công suất nướng 1.000W.', '<table><tbody><tr><td>Bảng điều khiển</td><td>Nút nhấn kết hợp nút vặn</td></tr><tr><td>Thương hiệu</td><td>HAFELE</td></tr><tr><td>Dung tích</td><td>28L</td></tr><tr><td>Công suất</td><td>Đầu vào: 1450W; Đầu ra: 900W; Nướng: 1100W</td></tr><tr><td>Kích thước</td><td>520 x 500 x 326 mm</td></tr><tr><td>Trọng lượng</td><td>208kg</td></tr></tbody></table>', 50000, 1500000, 1500000, 4000000, 3, '2021-12-05 21:42:36', '2022-01-17 15:42:39', 1, 0, 1, 0),
         (13, 'Lò Vi Sóng Electrolux EMM2026MX', 'tông màu đen chủ đạo kết hợp viền thép không gỉ, tạo nên nét sang trọng.', '<table><tbody><tr><td>Bảng điều khiển</td><td>Nút vặn</td></tr><tr><td>Thương hiệu</td><td>Electrolux</td></tr><tr><td>Dung tích</td><td>20L</td></tr><tr><td>Công suất</td><td>1000W</td></tr><tr><td>Kích thước</td><td><p>(R x D x C) 43.95 x 33 x 25.82 cm</p></td></tr><tr><td>Trọng lượng</td><td>5.5kg</td></tr></tbody></table>', 30000, 800000, 800000, 3000000, 3, '2021-12-05 21:43:54', '2022-01-29 21:43:58', 1, 0, 1, 0),
         (14, 'Sharp R-205VN', 'Thiết kế nhỏ gọn với những đường nét tính tế và hiện đại.', '<div>
 <p><span style="font-size: medium; color: #008ab7;"><strong>Lò Vi Sóng Cơ Sharp R-G302VN-S - 23 Lít</strong></span></p>
@@ -752,8 +752,8 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
    <li>Máy nướng tự động, hệ thống chốt an toàn. Có chế độ điều khiển nhiệt độ tự động.</li>
    <li>Vỏ máy bằng nhựa chịu nhiệt bền, chân đế cao su chống trơn trượt.</li>
    <li>Có đèn cảnh báo giúp bạn dễ dàng làm những việc khác trong quá trình nướng.</li>
-  </ul>', 10000, 200000, 200000, 400000, 4, '2021-12-05 21:48:37', '2022-01-12 11:48:38', 1, 0, 1, 0),
-        (17, '3 Trong 1 Tiross TS513', 'Máy làm bánh Tiross TS513 với 3 loại vỉ nướng đi kèm, bạn có thể làm các loại bánh.', '<table><tbody><tr><td>Thương hiệu</td><td>DSP</td></tr><tr><td>Xuất xứ thương hiệu</td><td>Trung Quốc</td></tr><tr><td>Chất liệu</td><td><p>Chất liệu: Inox,&nbsp;Nhựa</p></td></tr><tr><td>Công suất</td><td>750W</td></tr><tr><td>Điện áp</td><td>20-240V 50/60Hz</td></tr><tr><td>Xuất xứ</td><td>Trung Quốc</td></tr><tr><td>Trọng lượng</td><td>2.75kg</td></tr></tbody></table>', 15000, 400000, 400000, 700000, 4, '2021-12-05 21:49:39', '2022-01-13 21:49:40', 1, 0, 1, 0),
+  </ul>', 10000, 200000, 200000, 400000, 4, '2021-12-05 21:48:37', '2022-01-20 11:48:38', 1, 0, 1, 0),
+        (17, '3 Trong 1 Tiross TS513', 'Máy làm bánh Tiross TS513 với 3 loại vỉ nướng đi kèm, bạn có thể làm các loại bánh.', '<table><tbody><tr><td>Thương hiệu</td><td>DSP</td></tr><tr><td>Xuất xứ thương hiệu</td><td>Trung Quốc</td></tr><tr><td>Chất liệu</td><td><p>Chất liệu: Inox,&nbsp;Nhựa</p></td></tr><tr><td>Công suất</td><td>750W</td></tr><tr><td>Điện áp</td><td>20-240V 50/60Hz</td></tr><tr><td>Xuất xứ</td><td>Trung Quốc</td></tr><tr><td>Trọng lượng</td><td>2.75kg</td></tr></tbody></table>', 15000, 400000, 400000, 700000, 4, '2021-12-05 21:49:39', '2022-01-19 21:49:40', 1, 0, 1, 0),
         (18, 'Máy Bào Đá Kahchan EP5178_Đ', 'nhỏ gọn dễ sử dụng. Công suất máy hoạt động chỉ với 300W không lo điện năng.', '<table><tbody><tr><td>Thương hiệu</td><td>KAHCHAN</td></tr><tr><td>Xuất xứ thương hiệu</td><td>Trung Quốc</td></tr><tr><td>Chất liệu</td><td>Inox</td></tr><tr><td>Công suất</td><td>300W</td></tr><tr><td>Kích thước</td><td>42 x 21 x 44 cm</td></tr><tr><td>Model</td><td>EP5178_Đ</td></tr><tr><td>Xuất xứ</td><td>Trung Quốc</td></tr><tr><td>Trọng lượng</td><td>6kg</td></tr></tbody></table>', 200000, 1400000, 1400000, 1700000, 5, '2021-12-05 21:51:18', '2022-01-14 21:51:19', 1, 0, 1, 0),
         (19, 'Tự Động Tiross TS9090 (Xanh) - Hàng Chính Hãng', 'màu sắc đẹp mắt và sở hữu tính năng hiện đại, giúp bạn tự làm món kem thơm ngon. ', '<table><tbody><tr><td>Thương hiệu</td><td>Tiross</td></tr><tr><td>Xuất xứ thương hiệu</td><td>Ba Lan</td></tr><tr><td>Dung tích</td><td>700 ml</td></tr><tr><td>Công suất</td><td>90W</td></tr><tr><td>Điện áp</td><td>220V/50Hz</td></tr><tr><td>Kích thước</td><td>28 x 31 x 29.5 cm</td></tr><tr><td>Model</td><td>TS9090 (Xanh)</td></tr><tr><td>Xuất xứ</td><td>Trung Quốc</td></tr><tr><td>Trọng lượng</td><td>3.63 kg</td></tr></tbody></table>', 250000, 2000000, 2000000, 2500000, 5, '2021-12-05 21:52:34', '2022-01-19 06:52:35', 1, 0, 1, 0),
         (20, 'UNOLD 48895 Dung Tích 1.5 Lít', 'Công nghệ được đóng gói trong một vỏ thép không gỉ thanh lịch, bền.', '<h3>THÔNG SỐ SẢN PHẨM</h3><ul>
@@ -794,7 +794,7 @@ values  (1, 'Laptop HP Pavilion x360 14-DW1018TU 2H3N6PA', 'Đây là mẫu lapt
 <p>Tốc độ 9500 vòng/phút</p>
 <p>Lưỡi dao bằng inox không gỉ.</p>
 <p>Dễ dàng vệ sinh</p>
-</div>', 10000, 70000, 70000, 200000, 7, '2021-12-05 22:05:24', '2022-01-12 15:05:25', 1, 0, 1, 0),
+</div>', 10000, 70000, 70000, 200000, 7, '2021-12-05 22:05:24', '2022-01-14 10:05:25', 1, 0, 1, 0),
         (25, 'Máy Xay Thịt 2 Lưỡi Kép Nonostyle', 'Máy xay thịt Nonostyle với nhiều công dụng và tính năng ưu việt, là trợ thủ đắc lực.', '<ul>
 <li><span style="font-weight: 400;">Thân máy với chất liệu thép cao cấp an toàn sử dụng.<br><br></span></li>
 <li><span style="font-weight: 400;">Lõi bọc thép chắc chắn, lớp thép chịu lực tốt, lớp thép bọc ngoài chống trơn trượt.</span></li>
