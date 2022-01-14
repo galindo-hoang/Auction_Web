@@ -99,7 +99,7 @@
 
                     const td_three = document.createElement("td");
                     td_three.innerHTML = numeral(e[i].CurPrice).format('0,0')+"đ"
-                    if(e[i].Status) td_three.innerHTML += '"<div><strong style="color: mediumseagreen">Đang đấu giá</strong></div>"'
+                    if(e[i].Status) td_three.innerHTML += '<div><strong style="color: mediumseagreen">Đang đấu giá</strong></div>'
                     else td_three.innerHTML += '<div><strong style="color: #F90716">Hết đấu giá</strong></div>'
 
 
@@ -112,7 +112,7 @@
                     input_one.value = e[i].ProID;
                     input_one.type = "hidden"
                     form.appendChild(input_one);
-                    form.innerHTML = '<input type="submit" value="xóa" class="btn btn-danger">'
+                    form.innerHTML += '<input type="submit" value="xóa" class="btn btn-danger">'
                     td_four.appendChild(form)
 
                     const tr = document.createElement("tr");
