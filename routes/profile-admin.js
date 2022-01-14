@@ -257,7 +257,7 @@ router.post("/admin/editAcc/downgrade", auth.beforeLogin, async function (req, r
     else {
         const email = await viewByProduct.findUserEmail(req.body.UserID);
         sendEmail((email[0].UserEmail), 'THÔNG BÁO HẠ CẤP TÀI KHOẢN', 'Tài khoản của bạn đã bị hạ cấp bởi ban quản trị');
-        const proList = await Product.findBySeller(req.body.UserID);
+        const proList = await Product.findBySeller(req.body.UserID,100);
         if (proList.length > 0)
             await users.changeRole(req.body.UserID, 3);
         else
