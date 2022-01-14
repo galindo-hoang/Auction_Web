@@ -89,7 +89,11 @@
             const pass = $('#password').val();
             const conpass = $('#Conpassword').val();
             if(pass !== conpass){
+<<<<<<< HEAD
                 alert('Mật khẩu không trùng khớp!');
+=======
+                alert('Mật khẩu không trùng khớp');
+>>>>>>> 96c199f9ed8d583b9556c2177f6a7413f42727e9
                 location.reload();
                 return;
             }
@@ -97,10 +101,17 @@
                 if(data === true){
                     $('#formRegister').off('submit').submit();
                 }else if(data === 1){
+<<<<<<< HEAD
                     alert('Xác nhận ReCaptcha!');
                     location.reload();
                 }else{
                     alert('Email đã được đăng ký!');
+=======
+                    alert('Xác nhận ReCaptcha');
+                    location.reload();
+                }else{
+                    alert('Email đã tồn tại');
+>>>>>>> 96c199f9ed8d583b9556c2177f6a7413f42727e9
                     location.reload();
                 }
             });
